@@ -21,7 +21,6 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
    Width           =   1200
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Reset_Button
       AllowAutoDisable=   False
@@ -949,7 +948,6 @@ End
 		  Planner_PopupMenu.Visible = False
 		  POPULATE_Physician_POPUPMENU
 		  Is_replan_Checkbox.Value = False
-		  selected_user_id = Points_WEBCONTAINER.GET_Random_Planner
 		  ENABLE_ASSIGN_Button
 		  
 		End Sub
@@ -1121,6 +1119,7 @@ End
 	#tag Event
 		Sub SelectionChanged(item as WebMenuItem)
 		  Planner_RadioGroup.RemoveAllRows
+		  selected_user_id = Points_WEBCONTAINER.GET_Random_Planner
 		  
 		  Var sql As String = "SELECT physics_tasking.users.user_id as user_id, " _
 		  + "physics_tasking.users.first_name As first_name, " _
@@ -1156,6 +1155,7 @@ End
 		    
 		    
 		    If rs.Column("lastest_plan").DateTimeValue <> Nil Then
+		      
 		      s = rs.Column("first_name").StringValue.Trim.Titlecase + " "_
 		      + rs.Column("family_name").StringValue.Trim.Uppercase + " (" _
 		      + rs.Column("previous_plans_done").IntegerValue.ToString + ")" + " " _

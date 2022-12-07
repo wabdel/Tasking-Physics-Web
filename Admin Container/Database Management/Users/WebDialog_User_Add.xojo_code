@@ -21,7 +21,6 @@ Begin WebDialog WebDialog_User_Add
    Width           =   533
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebLabel Login_Label
       Bold            =   False
@@ -731,7 +730,7 @@ End
 #tag Events Login_TextField
 	#tag Event
 		Sub TextChanged()
-		  Me.Text = Me.Text.Lowercase
+		  'Me.Text = Me.Text.Lowercase
 		  ENABLE_Add_Button
 		End Sub
 	#tag EndEvent

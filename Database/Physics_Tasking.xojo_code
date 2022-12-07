@@ -809,6 +809,7 @@ Protected Module Physics_Tasking
 		  UPDATE_General_Information
 		  UPDATE_Groups
 		  UPDATE_Users
+		  UPDATE_Machines
 		  
 		  UPDATE_Task_Groups
 		  UPDATE_Task_Types
@@ -821,7 +822,7 @@ Protected Module Physics_Tasking
 		  UPDATE_Patients
 		  UPDATE_Plans
 		  
-		  UPDATE_Machines
+		  
 		  
 		  
 		  UPDATE_TimeLogs
@@ -1196,6 +1197,13 @@ Protected Module Physics_Tasking
 		  Physics_Tasking.DB_EXECUTE_Statement( sql)
 		  
 		  
+		  sql = "INSERT INTO physics_tasking.sites (name) " _
+		  +"SELECT * FROM (SELECT 'Brain') AS tmp " _
+		  +"WHERE NOT EXISTS (SELECT name FROM physics_tasking.sites " _
+		  +"WHERE name = 'Brain') LIMIT 1"
+		  
+		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  
 		  
 		  
 		  
@@ -1248,6 +1256,13 @@ Protected Module Physics_Tasking
 		  
 		  Physics_Tasking.DB_EXECUTE_Statement( sql)
 		  
+		  sql = "INSERT INTO physics_tasking.task_groups (name) " _
+		  +"SELECT * FROM (SELECT 'Administration') AS tmp " _
+		  +"WHERE NOT EXISTS (SELECT name FROM physics_tasking.task_groups " _
+		  +"WHERE name = 'Administration') LIMIT 1"
+		  
+		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  
 		  
 		  
 		  
@@ -1290,10 +1305,19 @@ Protected Module Physics_Tasking
 		  End If
 		  
 		  
+		  sql = "SELECT * FROM physics_tasking.task_types WHERE task_type_id = 1;"
 		  
+		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
-		  
-		  
+		  If rs.Column("task_type_id").Value = Nil Then
+		    
+		    
+		    sql = "INSERT INTO physics_tasking.task_types (name, task_group_id, weight, has_multiplier, instructions) " _
+		    + "VALUES ('Assign task/plan', 1, 0.08, TRUE, 'Assigning a plan or task. ***Countable [number of plans and tasks]')"
+		    Physics_Tasking.DB_EXECUTE_Statement( sql)
+		    
+		    
+		  End If
 		End Sub
 	#tag EndMethod
 

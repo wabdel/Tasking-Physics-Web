@@ -21,7 +21,6 @@ Begin WebDialog WebDialog_Reset_Password
    Width           =   600
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Cancel_Button
       AllowAutoDisable=   False
@@ -344,7 +343,7 @@ End
 #tag Events Password_TextField
 	#tag Event
 		Sub TextChanged()
-		  Me.Text = Me.Text.Trim
+		  'Me.Text = Me.Text.Trim
 		  ENABLE_Save
 		End Sub
 	#tag EndEvent
@@ -352,7 +351,7 @@ End
 #tag Events Password2_TextField
 	#tag Event
 		Sub TextChanged()
-		  Me.Text = Me.Text.Trim
+		  'Me.Text = Me.Text.Trim
 		  ENABLE_Save
 		End Sub
 	#tag EndEvent

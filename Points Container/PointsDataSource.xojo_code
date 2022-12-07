@@ -2,54 +2,9 @@
 Protected Class PointsDataSource
 Implements WebDataSource
 	#tag Method, Flags = &h21
-		Private Sub Calculate_parameters()
-		  Var sql As String = "SELECT COUNT(user_id) as count, AVG(total) as average, STDDEV_SAMP(total) as std " _
-		  + "FROM physics_tasking.points " _
-		  + "WHERE is_active = TRUE;"
+		Private Sub Calculate_Avg()
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
-		  
-		  avg = rs.Column("average").DoubleValue
-		  std = rs.Column("std").DoubleValue
-		  
-		  If rs = Nil Then 
-		    avg = 0
-		    std = 0
-		    Return
-		    
-		  End If
-		  
-		  
-		  Var p11 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(2.0)
-		  Var p1 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(1.0)
-		  
-		  Var p2 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(0)
-		  Var p3 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(-1.0)
-		  Var p4 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(-2.0)
-		  
-		  normalization = 0
-		  
-		  
-		  sql = "SELECT user_id, total " _
-		  + "FROM physics_tasking.points " _
-		  + "WHERE is_active = TRUE;"
-		  
-		  Var rs_planners As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
-		  Var id_probability As Double = 0
-		  
-		  While Not rs_planners.AfterLastRow
-		    
-		    Var z As Double = (rs_planners.Column("total").DoubleValue - avg) / std
-		    Var p As Double = 1 - Numerical_Recipies.Cummulative_Normal_Distribution(z)
-		    normalization = normalization + p
-		    
-		    
-		    rs_planners.MoveToNextRow
-		    
-		  Wend
-		  
-		  
-		  
+		  Calculate_normalization
 		  
 		  
 		  
@@ -61,7 +16,17 @@ Implements WebDataSource
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub Calculate_normalization()
+		  
+		  
+		  Break
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Function Calculate_probability(id as integer) As double
+		  If std = 0 Then Return 0
+		  
 		  Var sql As String = "SELECT total " _
 		  + "FROM physics_tasking.points " _
 		  + "WHERE is_active = TRUE " _
@@ -152,10 +117,63 @@ Implements WebDataSource
 		Private Function RowData(RowCount as Integer, RowOffset as Integer, SortColumns as String) As WebListboxRowData()
 		  // Part of the WebDataSource interface.
 		  
-		  Calculate_parameters
+		  //----------------------
+		  Var sql As String = "SELECT COUNT(user_id) as count, AVG(total) as average, STDDEV_SAMP(total) as std " _
+		  + "FROM physics_tasking.points " _
+		  + "WHERE is_active = TRUE;"
+		  
+		  Var rs_avg As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  
+		  
+		  If rs_avg = Nil Then 
+		    avg = 0
+		    std = 0
+		  Else
+		    
+		    avg = rs_avg.Column("average").DoubleValue
+		    std = rs_avg.Column("std").DoubleValue
+		    
+		  End If
+		  
+		  normalization = 0
+		  
+		  Var p11 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(2.0)
+		  Var p1 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(1.0)
+		  
+		  Var p2 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(0)
+		  Var p3 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(-1.0)
+		  Var p4 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(-2.0)
+		  
+		  
+		  
+		  
+		  sql = "SELECT user_id, total " _
+		  + "FROM physics_tasking.points " _
+		  + "WHERE is_active = TRUE;"
+		  
+		  Var rs_planners As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  
+		  Var i As Integer = rs_planners.RowCount
+		  Var j As Integer = 0
+		  
+		  While Not rs_planners.AfterLastRow
+		    
+		    Var z As Double = (rs_planners.Column("total").DoubleValue - avg) / std
+		    Var p As Double = 1 - Numerical_Recipies.Cummulative_Normal_Distribution(z)
+		    normalization = normalization + p
+		    j = j +1
+		    
+		    rs_planners.MoveToNextRow
+		    
+		  Wend
+		  
+		  //----------------------
+		  
 		  
 		  Var rows() As WebListboxRowData
-		  Var sql As String = "SELECT physics_tasking.points.user_id As user_id, " _
+		  sql = "SELECT physics_tasking.points.user_id As user_id, " _
 		  + "physics_tasking.points.tasks_total As tasks_total, " _
 		  + "physics_tasking.points.plans_total As plans_total, " _
 		  + "physics_tasking.points.total As total, " _
