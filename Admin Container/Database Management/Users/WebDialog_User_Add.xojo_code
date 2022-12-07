@@ -1,0 +1,1111 @@
+#tag WebPage
+Begin WebDialog WebDialog_User_Add
+   Compatibility   =   ""
+   ControlID       =   ""
+   Enabled         =   True
+   Height          =   696
+   Index           =   -2147483648
+   Indicator       =   0
+   LayoutDirection =   0
+   LayoutType      =   0
+   Left            =   0
+   LockBottom      =   False
+   LockHorizontal  =   False
+   LockLeft        =   False
+   LockRight       =   False
+   LockTop         =   False
+   LockVertical    =   False
+   TabIndex        =   0
+   Top             =   0
+   Visible         =   True
+   Width           =   533
+   _mDesignHeight  =   0
+   _mDesignWidth   =   0
+   _mName          =   ""
+   _mPanelIndex    =   -1
+   Begin WebLabel Login_Label
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   0
+      Italic          =   False
+      Left            =   37
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      Scope           =   0
+      TabIndex        =   1
+      Text            =   "Login :"
+      TextAlignment   =   3
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   106
+      Underline       =   False
+      Visible         =   True
+      Width           =   130
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel First_Name_Label
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   0
+      Italic          =   False
+      Left            =   37
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      Scope           =   0
+      TabIndex        =   2
+      Text            =   "First Name :"
+      TextAlignment   =   3
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   152
+      Underline       =   False
+      Visible         =   True
+      Width           =   130
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Family_Name_Label
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   0
+      Italic          =   False
+      Left            =   37
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      Scope           =   0
+      TabIndex        =   3
+      Text            =   "Family Name :"
+      TextAlignment   =   3
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   209
+      Underline       =   False
+      Visible         =   True
+      Width           =   130
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Initials_Name_Label
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   0
+      Italic          =   False
+      Left            =   37
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      Scope           =   0
+      TabIndex        =   4
+      Text            =   "Initials :"
+      TextAlignment   =   3
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   339
+      Underline       =   False
+      Visible         =   True
+      Width           =   130
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Mobile_Label
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   0
+      Italic          =   False
+      Left            =   37
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      Scope           =   0
+      TabIndex        =   6
+      Text            =   "Mobile :"
+      TextAlignment   =   3
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   431
+      Underline       =   False
+      Visible         =   True
+      Width           =   130
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Email_Label
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   0
+      Italic          =   False
+      Left            =   37
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      Scope           =   0
+      TabIndex        =   7
+      Text            =   "Email :"
+      TextAlignment   =   3
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   477
+      Underline       =   False
+      Visible         =   True
+      Width           =   130
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Extension_Label
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   0
+      Italic          =   False
+      Left            =   37
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      Scope           =   0
+      TabIndex        =   8
+      Text            =   "Extension :"
+      TextAlignment   =   3
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   523
+      Underline       =   False
+      Visible         =   True
+      Width           =   130
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Hospital_ID_Label
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   0
+      Italic          =   False
+      Left            =   37
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      Scope           =   0
+      TabIndex        =   5
+      Text            =   "Hospital ID :"
+      TextAlignment   =   3
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   385
+      Underline       =   False
+      Visible         =   True
+      Width           =   130
+      _mPanelIndex    =   -1
+   End
+   Begin WebTextField Login_TextField
+      AllowAutoComplete=   False
+      AllowSpellChecking=   False
+      Caption         =   ""
+      ControlID       =   ""
+      Enabled         =   True
+      FieldType       =   0
+      Height          =   38
+      Hint            =   ""
+      Index           =   -2147483648
+      Indicator       =   0
+      Left            =   175
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      MaximumCharactersAllowed=   0
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   9
+      Text            =   ""
+      TextAlignment   =   0
+      Tooltip         =   ""
+      Top             =   106
+      Visible         =   True
+      Width           =   166
+      _mPanelIndex    =   -1
+   End
+   Begin WebTextField First_Name_TextField
+      AllowAutoComplete=   False
+      AllowSpellChecking=   False
+      Caption         =   ""
+      ControlID       =   ""
+      Enabled         =   True
+      FieldType       =   0
+      Height          =   38
+      Hint            =   ""
+      Index           =   -2147483648
+      Indicator       =   0
+      Left            =   175
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      MaximumCharactersAllowed=   0
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   10
+      Text            =   ""
+      TextAlignment   =   0
+      Tooltip         =   ""
+      Top             =   152
+      Visible         =   True
+      Width           =   230
+      _mPanelIndex    =   -1
+   End
+   Begin WebTextField Family_Name_TextField
+      AllowAutoComplete=   False
+      AllowSpellChecking=   False
+      Caption         =   ""
+      ControlID       =   ""
+      Enabled         =   True
+      FieldType       =   0
+      Height          =   38
+      Hint            =   ""
+      Index           =   -2147483648
+      Indicator       =   0
+      Left            =   175
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      MaximumCharactersAllowed=   0
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   11
+      Text            =   ""
+      TextAlignment   =   0
+      Tooltip         =   ""
+      Top             =   209
+      Visible         =   True
+      Width           =   230
+      _mPanelIndex    =   -1
+   End
+   Begin WebTextField Initials_TextField
+      AllowAutoComplete=   False
+      AllowSpellChecking=   False
+      Caption         =   ""
+      ControlID       =   ""
+      Enabled         =   True
+      FieldType       =   0
+      Height          =   38
+      Hint            =   ""
+      Index           =   -2147483648
+      Indicator       =   0
+      Left            =   175
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      MaximumCharactersAllowed=   0
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   12
+      Text            =   ""
+      TextAlignment   =   0
+      Tooltip         =   ""
+      Top             =   339
+      Visible         =   True
+      Width           =   71
+      _mPanelIndex    =   -1
+   End
+   Begin WebTextField Hospital_ID_TextField
+      AllowAutoComplete=   False
+      AllowSpellChecking=   False
+      Caption         =   ""
+      ControlID       =   ""
+      Enabled         =   True
+      FieldType       =   3
+      Height          =   38
+      Hint            =   ""
+      Index           =   -2147483648
+      Indicator       =   0
+      Left            =   175
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      MaximumCharactersAllowed=   0
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   13
+      Text            =   ""
+      TextAlignment   =   0
+      Tooltip         =   ""
+      Top             =   385
+      Visible         =   True
+      Width           =   126
+      _mPanelIndex    =   -1
+   End
+   Begin WebTextField Mobile_TextField
+      AllowAutoComplete=   False
+      AllowSpellChecking=   False
+      Caption         =   ""
+      ControlID       =   ""
+      Enabled         =   True
+      FieldType       =   4
+      Height          =   38
+      Hint            =   ""
+      Index           =   -2147483648
+      Indicator       =   0
+      Left            =   175
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      MaximumCharactersAllowed=   0
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   14
+      Text            =   ""
+      TextAlignment   =   0
+      Tooltip         =   ""
+      Top             =   431
+      Visible         =   True
+      Width           =   230
+      _mPanelIndex    =   -1
+   End
+   Begin WebTextField Email_TextField
+      AllowAutoComplete=   False
+      AllowSpellChecking=   False
+      Caption         =   ""
+      ControlID       =   ""
+      Enabled         =   True
+      FieldType       =   2
+      Height          =   38
+      Hint            =   ""
+      Index           =   -2147483648
+      Indicator       =   0
+      Left            =   175
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      MaximumCharactersAllowed=   0
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   15
+      Text            =   ""
+      TextAlignment   =   0
+      Tooltip         =   ""
+      Top             =   477
+      Visible         =   True
+      Width           =   230
+      _mPanelIndex    =   -1
+   End
+   Begin WebTextField Extension_TextField
+      AllowAutoComplete=   False
+      AllowSpellChecking=   False
+      Caption         =   ""
+      ControlID       =   ""
+      Enabled         =   True
+      FieldType       =   4
+      Height          =   38
+      Hint            =   ""
+      Index           =   -2147483648
+      Indicator       =   0
+      Left            =   175
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      MaximumCharactersAllowed=   0
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   16
+      Text            =   ""
+      TextAlignment   =   0
+      Tooltip         =   ""
+      Top             =   523
+      Visible         =   True
+      Width           =   126
+      _mPanelIndex    =   -1
+   End
+   Begin WebButton Close_Button
+      AllowAutoDisable=   False
+      Cancel          =   True
+      Caption         =   "Close"
+      ControlID       =   ""
+      Default         =   False
+      Enabled         =   True
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   0
+      Left            =   413
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Scope           =   0
+      TabIndex        =   18
+      Tooltip         =   ""
+      Top             =   590
+      Visible         =   True
+      Width           =   100
+      _mPanelIndex    =   -1
+   End
+   Begin WebButton Add_Button
+      AllowAutoDisable=   False
+      Cancel          =   False
+      Caption         =   "Add"
+      ControlID       =   ""
+      Default         =   True
+      Enabled         =   False
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   7
+      Left            =   218
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Scope           =   0
+      TabIndex        =   17
+      Tooltip         =   ""
+      Top             =   590
+      Visible         =   True
+      Width           =   100
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Title_Label
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   28.0
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   0
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      Scope           =   0
+      TabIndex        =   0
+      Text            =   "Add User"
+      TextAlignment   =   2
+      TextColor       =   &cFF7E7900
+      Tooltip         =   ""
+      Top             =   20
+      Underline       =   False
+      Visible         =   True
+      Width           =   493
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Notes_Label
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   False
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   0
+      Italic          =   False
+      Left            =   349
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      Scope           =   2
+      TabIndex        =   19
+      Text            =   "Untitled"
+      TextAlignment   =   0
+      TextColor       =   &cFF260000
+      Tooltip         =   ""
+      Top             =   106
+      Underline       =   False
+      Visible         =   False
+      Width           =   100
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Group_Name_Label
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   0
+      Italic          =   False
+      Left            =   37
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      Scope           =   0
+      TabIndex        =   20
+      Text            =   "Group :"
+      TextAlignment   =   3
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   282
+      Underline       =   False
+      Visible         =   True
+      Width           =   130
+      _mPanelIndex    =   -1
+   End
+   Begin WebPopupMenu Group_PopupMenu
+      ControlID       =   ""
+      Enabled         =   True
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   0
+      InitialValue    =   ""
+      LastAddedRowIndex=   0
+      LastRowIndex    =   0
+      Left            =   175
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      RowCount        =   0
+      Scope           =   0
+      SelectedRowIndex=   0
+      SelectedRowValue=   ""
+      TabIndex        =   21
+      Tooltip         =   ""
+      Top             =   282
+      Visible         =   True
+      Width           =   258
+      _mPanelIndex    =   -1
+   End
+End
+#tag EndWebPage
+
+#tag WindowCode
+	#tag Method, Flags = &h0
+		Sub ENABLE_Add_Button()
+		  Add_Button.Enabled = False
+		  Add_Button.Indicator = WebUIControl.Indicators.Light
+		  Notes_Label.Visible = False
+		  
+		  Var sql as String = "SELECT user_id FROM physics_tasking.users " _
+		  + "WHERE LOWER(login) = '" + Login_TextField.Text.Lowercase + "'"
+		  
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  
+		  If rs.RowCount > 0 Then
+		    
+		    Notes_Label.Text = "User exists !!!"
+		    Notes_Label.Visible = True
+		    
+		    Return
+		    
+		  End If
+		  
+		  If Group_PopupMenu.SelectedRowIndex < 0 Then Return
+		  
+		  
+		  Add_Button.Enabled = True
+		  Add_Button.Indicator = WebUIControl.Indicators.Primary
+		  
+		End Sub
+	#tag EndMethod
+
+
+#tag EndWindowCode
+
+#tag Events Login_TextField
+	#tag Event
+		Sub TextChanged()
+		  Me.Text = Me.Text.Lowercase
+		  ENABLE_Add_Button
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events First_Name_TextField
+	#tag Event
+		Sub TextChanged()
+		  ENABLE_Add_Button
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Family_Name_TextField
+	#tag Event
+		Sub TextChanged()
+		  ENABLE_Add_Button
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Initials_TextField
+	#tag Event
+		Sub TextChanged()
+		  Me.Text = Me.Text.Uppercase
+		  ENABLE_Add_Button
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Hospital_ID_TextField
+	#tag Event
+		Sub TextChanged()
+		  ENABLE_Add_Button
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Mobile_TextField
+	#tag Event
+		Sub TextChanged()
+		  ENABLE_Add_Button
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Email_TextField
+	#tag Event
+		Sub TextChanged()
+		  ENABLE_Add_Button
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Extension_TextField
+	#tag Event
+		Sub TextChanged()
+		  ENABLE_Add_Button
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Close_Button
+	#tag Event
+		Sub Pressed()
+		  Self.Close
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Add_Button
+	#tag Event
+		Sub Shown()
+		  Me.Enabled = False
+		  Me.Indicator = WebUIControl.Indicators.Light
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Pressed()
+		  
+		  
+		  
+		  Var db As New MySQLCommunityServer
+		  
+		  db.Host = Physics_Tasking.DB_Host
+		  db.Port = Physics_Tasking.DB_Port
+		  db.DatabaseName = Physics_Tasking.DB_DatabaseName
+		  db.UserName = Physics_Tasking.DB_UserName
+		  db.Password = Physics_Tasking.DB_Password
+		  
+		  Try
+		    
+		    If db.Connect Then
+		      
+		      Var row As New DatabaseRow
+		      
+		      row.Column("login").StringValue = Login_TextField.Text.Trim.Lowercase
+		      row.Column("first_name").StringValue = First_Name_TextField.Text.Trim.Titlecase
+		      row.Column("family_name").StringValue = Family_Name_TextField.Text.Trim.Uppercase
+		      row.Column("hospital_id").StringValue = Hospital_ID_TextField.Text.Trim.Lowercase
+		      row.Column("initials").StringValue = Initials_TextField.Text.Trim.Uppercase
+		      row.Column("email").StringValue = Email_TextField.Text.Trim.Lowercase
+		      row.Column("mobile").StringValue = Mobile_TextField.Text.Trim.Lowercase
+		      row.Column("extension").StringValue = Extension_TextField.Text.Trim.Lowercase
+		      row.Column("email").StringValue = Email_TextField.Text.Trim.Lowercase
+		      row.Column("is_active").BooleanValue = True
+		      row.Column("is_retired").BooleanValue = False
+		      row.Column("reset_password").BooleanValue = True
+		      row.Column("category_id").IntegerValue = _
+		      Group_PopupMenu.RowTagAt( Group_PopupMenu.SelectedRowIndex)
+		      
+		      row.Column("password").BlobValue = _
+		      Crypto.Hash("12345678", Crypto.Algorithm.SHA512) 
+		      
+		      db.AddRow("users", row)
+		      
+		      App.last_database_update = DateTime.Now
+		      
+		    End If
+		    
+		    Self.Close
+		    
+		  Catch de As DatabaseException
+		    
+		    Var theDialog As New MessageWebDialog
+		    theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
+		    theDialog.Show
+		    
+		  Catch noe As NilObjectException
+		    
+		    Var theDialog As New MessageWebDialog
+		    theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
+		    theDialog.Show
+		    
+		  End Try
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Group_PopupMenu
+	#tag Event
+		Sub Shown()
+		  Me.RemoveAllRows
+		  
+		  Var sql as String = "SELECT category_id, name FROM " _
+		  + "physics_tasking.categories " _
+		  + "ORDER BY name ASC"
+		  
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  While Not rs.AfterLastRow
+		    
+		    If rs.Column("category_id").IntegerValue <> 1 Then
+		      
+		      Me.AddRow( rs.Column("name").StringValue.Trim.Titlecase )
+		      Me.RowTagAt( Me.LastAddedRowIndex) = rs.Column("category_id").IntegerValue
+		      
+		    End If
+		    
+		    rs.MoveToNextRow
+		    
+		  Wend
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub SelectionChanged(item as WebMenuItem)
+		  ENABLE_Add_Button
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag ViewBehavior
+	#tag ViewProperty
+		Name="_mPanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue="-1"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Index"
+		Visible=false
+		Group="ID"
+		InitialValue="-2147483648"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Name"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Super"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Left"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Top"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlID"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Enabled"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Height"
+		Visible=true
+		Group="Behavior"
+		InitialValue="400"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LayoutType"
+		Visible=true
+		Group="Behavior"
+		InitialValue="LayoutTypes.Fixed"
+		Type="LayoutTypes"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Fixed"
+			"1 - Flex"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LockBottom"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LockHorizontal"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LockLeft"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LockRight"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LockTop"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LockVertical"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Visible"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Width"
+		Visible=true
+		Group="Behavior"
+		InitialValue="600"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="_mDesignHeight"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="_mDesignWidth"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="_mName"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="TabIndex"
+		Visible=true
+		Group="Visual Controls"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Indicator"
+		Visible=false
+		Group="Visual Controls"
+		InitialValue=""
+		Type="WebUIControl.Indicators"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Default"
+			"1 - Primary"
+			"2 - Secondary"
+			"3 - Success"
+			"4 - Danger"
+			"5 - Warning"
+			"6 - Info"
+			"7 - Light"
+			"8 - Dark"
+			"9 - Link"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LayoutDirection"
+		Visible=true
+		Group="WebView"
+		InitialValue="LayoutDirections.LeftToRight"
+		Type="LayoutDirections"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - LeftToRight"
+			"1 - RightToLeft"
+			"2 - TopToBottom"
+			"3 - BottomToTop"
+		#tag EndEnumValues
+	#tag EndViewProperty
+#tag EndViewBehavior
