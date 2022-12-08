@@ -21,7 +21,6 @@ Begin WebContainer WEBCONTAINER_Statistics_Sites
    Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebRadioGroup Plot_Options_RadioGroup
       ControlID       =   ""
@@ -173,7 +172,7 @@ End
 		      
 		    Wend
 		    
-		    Total_Label.Text = "Total plan = " + c.ToString
+		    Total_Label.Text = "Total plans = " + c.ToString
 		    
 		  Case 1
 		    
@@ -328,6 +327,13 @@ End
 		  options.value("scaleShowValues") = True
 		  'System.DebugLog(Options.ToString)
 		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Total_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = App.Colour_Note
 		End Sub
 	#tag EndEvent
 #tag EndEvents

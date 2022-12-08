@@ -2,54 +2,6 @@
 Protected Class PointsDataSource
 Implements WebDataSource
 	#tag Method, Flags = &h21
-		Private Sub Calculate_Avg()
-		  
-		  Calculate_normalization
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Sub Calculate_normalization()
-		  
-		  
-		  Break
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function Calculate_probability(id as integer) As double
-		  If std = 0 Then Return 0
-		  
-		  Var sql As String = "SELECT total " _
-		  + "FROM physics_tasking.points " _
-		  + "WHERE is_active = TRUE " _
-		  + "AND user_id = " + id.ToString + ";"
-		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
-		  
-		  Var z As Double = (rs.Column("total").DoubleValue - avg) / std
-		  Var p As Double = 1 - Numerical_Recipies.Cummulative_Normal_Distribution(z)
-		  
-		  
-		  Return p / normalization
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
 		Private Function ColumnData() As WebListboxColumnData()
 		  // Part of the WebDataSource interface.
 		  
@@ -117,26 +69,34 @@ Implements WebDataSource
 		Private Function RowData(RowCount as Integer, RowOffset as Integer, SortColumns as String) As WebListboxRowData()
 		  // Part of the WebDataSource interface.
 		  
-		  //----------------------
 		  Var sql As String = "SELECT COUNT(user_id) as count, AVG(total) as average, STDDEV_SAMP(total) as std " _
 		  + "FROM physics_tasking.points " _
 		  + "WHERE is_active = TRUE;"
 		  
-		  Var rs_avg As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
 		  
 		  
-		  If rs_avg = Nil Then 
-		    avg = 0
-		    std = 0
+		  If rs = Nil Then 
+		    
+		    Points_Average = 0
+		    Points_stdev = 0
+		    
 		  Else
 		    
-		    avg = rs_avg.Column("average").DoubleValue
-		    std = rs_avg.Column("std").DoubleValue
+		    Points_Average = rs.Column("average").DoubleValue
+		    Points_stdev = rs.Column("std").DoubleValue
 		    
 		  End If
 		  
-		  normalization = 0
+		  'Points_Avg_Label.Text = "Average points = " + Format( Points_Average, "0.0") + " +/- " + Format( Points_stdev, "0.0")
+		  
+		  
+		  
+		  
+		  //----------------------
+		  
+		  //----------------------
 		  
 		  Var p11 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(2.0)
 		  Var p1 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(1.0)
@@ -145,29 +105,24 @@ Implements WebDataSource
 		  Var p3 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(-1.0)
 		  Var p4 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(-2.0)
 		  
-		  
-		  
-		  
 		  sql = "SELECT user_id, total " _
 		  + "FROM physics_tasking.points " _
 		  + "WHERE is_active = TRUE;"
 		  
-		  Var rs_planners As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
+		  normalization = 0
 		  
-		  Var i As Integer = rs_planners.RowCount
-		  Var j As Integer = 0
-		  
-		  While Not rs_planners.AfterLastRow
+		  While Not rs.AfterLastRow
 		    
-		    Var z As Double = (rs_planners.Column("total").DoubleValue - avg) / std
+		    Var z As Double = (rs.Column("total").DoubleValue - Points_Average) / Points_stdev
 		    Var p As Double = 1 - Numerical_Recipies.Cummulative_Normal_Distribution(z)
 		    normalization = normalization + p
-		    j = j +1
 		    
-		    rs_planners.MoveToNextRow
+		    rs.MoveToNextRow
 		    
 		  Wend
+		  
 		  
 		  //----------------------
 		  
@@ -183,7 +138,7 @@ Implements WebDataSource
 		  + "INNER JOIN physics_tasking.users USING (user_id) " _
 		  + "ORDER BY total DESC"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
 		  
 		  
@@ -226,15 +181,25 @@ Implements WebDataSource
 		    Format(rs.Column("total").DoubleValue, "0.0"))
 		    row.Value("total_points") = cellRenderer
 		    
-		    If rs.Column("is_active").BooleanValue Then
-		      cellRenderer = New WebListBoxStyleRenderer(s, _
-		      Format(Calculate_probability(rs.Column("user_id").IntegerValue), "%0.0"))
+		    
+		    If Not rs.Column("is_active").BooleanValue Or Points_stdev = 0 Then
+		      
+		      cellRenderer = New WebListBoxStyleRenderer(s, "---")
+		      
+		      
 		    Else
 		      
-		      cellRenderer = New WebListBoxStyleRenderer(s, _
-		      "---")
+		      Var z As Double = (rs.Column("total").DoubleValue - Points_Average) / Points_stdev
+		      Var p As Double = 1 - Numerical_Recipies.Cummulative_Normal_Distribution(z)
+		      
+		      
+		      p = p / normalization
+		      
+		      cellRenderer = New WebListBoxStyleRenderer(s, Format( p, "%0.0"))
+		      
 		      
 		    End If
+		    
 		    
 		    row.Value("probability") = cellRenderer
 		    
@@ -302,15 +267,15 @@ Implements WebDataSource
 
 
 	#tag Property, Flags = &h21
-		Private avg As double
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
 		Private normalization As double
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private std As double
+		Private Points_Average As double
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private Points_stdev As double
 	#tag EndProperty
 
 

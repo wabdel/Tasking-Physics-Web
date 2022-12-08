@@ -21,7 +21,6 @@ Begin WebDialog WebDialog_Plan_Type_Edit
    Width           =   600
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebLabel Plan_Type_Name_Label
       Bold            =   False
@@ -48,7 +47,7 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   83
+      Top             =   134
       Underline       =   False
       Visible         =   True
       Width           =   120
@@ -80,7 +79,7 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
-      Top             =   83
+      Top             =   134
       Visible         =   True
       Width           =   343
       _mPanelIndex    =   -1
@@ -106,7 +105,7 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       Scope           =   2
       TabIndex        =   2
       Tooltip         =   ""
-      Top             =   282
+      Top             =   297
       Visible         =   True
       Width           =   100
       _mPanelIndex    =   -1
@@ -132,7 +131,7 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       Scope           =   2
       TabIndex        =   3
       Tooltip         =   ""
-      Top             =   282
+      Top             =   297
       Visible         =   True
       Width           =   100
       _mPanelIndex    =   -1
@@ -193,7 +192,7 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   139
+      Top             =   190
       Underline       =   False
       Visible         =   True
       Width           =   120
@@ -225,7 +224,7 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
-      Top             =   139
+      Top             =   190
       Visible         =   True
       Width           =   91
       _mPanelIndex    =   -1
@@ -255,7 +254,7 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   185
+      Top             =   236
       Underline       =   False
       Visible         =   True
       Width           =   120
@@ -287,9 +286,72 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
-      Top             =   185
+      Top             =   236
       Visible         =   True
       Width           =   91
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Site_Name_Label
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   0
+      Italic          =   False
+      Left            =   71
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      PanelIndex      =   0
+      Scope           =   2
+      TabIndex        =   10
+      TabStop         =   True
+      Text            =   "Site:"
+      TextAlignment   =   3
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   77
+      Underline       =   False
+      Visible         =   True
+      Width           =   120
+      _mPanelIndex    =   -1
+   End
+   Begin WebPopupMenu Site_PopupMenu
+      ControlID       =   ""
+      Enabled         =   True
+      Height          =   38
+      Index           =   -2147483648
+      indicator       =   0
+      InitialValue    =   ""
+      LastAddedRowIndex=   0
+      LastRowIndex    =   0
+      Left            =   207
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      PanelIndex      =   0
+      RowCount        =   0
+      Scope           =   0
+      SelectedRowIndex=   0
+      SelectedRowValue=   ""
+      TabIndex        =   11
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   77
+      Visible         =   True
+      Width           =   303
       _mPanelIndex    =   -1
    End
 End
@@ -308,6 +370,7 @@ End
 		  
 		  If Weight_TextField.Text.IsEmpty Then Return
 		  If Not Weight_TextField.Text.IsNumeric Then Return
+		  If Site_PopupMenu.SelectedRowIndex = -1 Then Return
 		  
 		  Modify_Button.Indicator = WebUIControl.Indicators.Primary
 		  Modify_Button.Enabled = True
@@ -339,6 +402,7 @@ End
 			  Weight_TextField.Text = Format(rs.column("weight").DoubleValue, "#0.0" )
 			  No_Of_Plans_TextField.Text = rs.Column("no_of_plans").IntegerValue.ToString
 			  
+			  Site_PopupMenu.SelectRowWithTag( rs.Column("site_id").IntegerValue)
 			  Modify_Button.Enabled = False
 			  Modify_Button.Indicator = WebUIControl.Indicators.Light
 			End Set
@@ -382,18 +446,21 @@ End
 		      Var ps As  PreparedSQLStatement = _
 		      db.Prepare("UPDATE plan_types SET name = ?, " _
 		      + "weight = ?, " _
-		      + "no_of_plans = ? " _
+		      + "no_of_plans = ?, " _
+		      + "site_id = ? " _
 		      + "WHERE plan_type_id = ?")
 		      
 		      ps.BindType(0, MySQLPreparedStatement.MYSQL_TYPE_STRING)
 		      ps.BindType(1, MySQLPreparedStatement.MYSQL_TYPE_DOUBLE)
 		      ps.BindType(2, MySQLPreparedStatement.MYSQL_TYPE_LONG)
 		      ps.BindType(3, MySQLPreparedStatement.MYSQL_TYPE_LONG)
+		      ps.BindType(4, MySQLPreparedStatement.MYSQL_TYPE_LONG)
 		      
 		      ps.ExecuteSQL( _
 		      Plan_Type_Name_TextField.Text.Trim, _
 		      Weight_TextField.Text.ToDouble, _
 		      No_Of_Plans_TextField.Text.ToInteger, _
+		      Site_PopupMenu.RowTagAt( Site_PopupMenu.SelectedRowIndex), _
 		      plan_type_id )
 		      
 		      App.last_database_update = DateTime.Now
@@ -432,6 +499,46 @@ End
 #tag Events No_Of_Plans_TextField
 	#tag Event
 		Sub TextChanged()
+		  ENABLE_Modify_Button
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Site_PopupMenu
+	#tag Event
+		Sub Opening()
+		  Var sql As String = "SELECT * FROM physics_tasking.sites " _
+		  + "ORDER BY name"
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  While Not rs.AfterLastRow
+		    
+		    
+		    If rs.Column("is_uppercase").BooleanValue Then
+		      
+		      Me.AddRow( rs.Column("name").StringValue.Trim.Uppercase)
+		      
+		    Else
+		      
+		      Me.AddRow( rs.Column("name").StringValue.Trim.Titlecase)
+		      
+		    End If
+		    
+		    Me.RowTagAt( Me.LastAddedRowIndex) = rs.Column("site_id").IntegerValue
+		    
+		    
+		    
+		    
+		    
+		    rs.MoveToNextRow
+		    
+		  Wend
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub SelectionChanged(item as WebMenuItem)
+		  Plan_Type_Name_TextField.Enabled = True
+		  No_Of_Plans_TextField.Enabled = True
+		  Weight_TextField.Enabled = True
 		  ENABLE_Modify_Button
 		End Sub
 	#tag EndEvent
