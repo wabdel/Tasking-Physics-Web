@@ -8,6 +8,7 @@ Inherits WebApplication
 		  Physics_Tasking.POPULATE_Main_Data
 		  'Points_Container = New WEBCONTAINER_Points
 		  last_database_update = DateTime.Now
+		  POPULATE_Color_Set
 		  
 		  
 		  
@@ -188,9 +189,37 @@ Inherits WebApplication
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub POPULATE_Color_Set()
+		  Color_Set.Add( &c267278)
+		  Color_Set.Add( &c653380)
+		  Color_Set.Add( &c4770b3)
+		  Color_Set.Add( &cD21F75)
+		  Color_Set.Add( &c3b3689)
+		  Color_Set.Add( &c50AED3)
+		  //----------------------------
+		  Color_Set.Add( &c48b24f)
+		  Color_Set.Add( &cE57438)
+		  Color_Set.Add( &c569DD2)
+		  Color_Set.Add( &c569D79)
+		  Color_Set.Add( &c58595b)
+		  Color_Set.Add( &cE4B031)
+		  //----------------------------
+		  'Color_Set.Add( &c84D2F4)
+		  Color_Set.Add( &cCAD93F)
+		  Color_Set.Add( &cF5C8AF)
+		  Color_Set.Add( &c9AC4B3)
+		  Color_Set.Add( &c9E9EA2)
+		End Sub
+	#tag EndMethod
+
 
 	#tag Property, Flags = &h0
 		ananomize As Boolean = false
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		Color_Set() As Color
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

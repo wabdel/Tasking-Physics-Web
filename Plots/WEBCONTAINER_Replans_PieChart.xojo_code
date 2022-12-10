@@ -21,7 +21,6 @@ Begin WebContainer WEBCONTAINER_Replans_PieChart
    Width           =   500
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebChart Replan_WebChart
       ControlID       =   ""
@@ -133,11 +132,11 @@ End
 		  Replan_WebChart.RemoveAllLabels
 		  
 		  data.Add( rs.Column("total").IntegerValue - rs.Column("condition_true").IntegerValue)
-		  Colors.Add( Color.Red)
+		  Colors.Add( App.Color_Set(0))
 		  labels.Add( "regular")
 		  data.Add( rs.Column("condition_true").IntegerValue)
 		  labels.Add( "replan")
-		  Colors.Add( Color.Blue)
+		  Colors.Add( App.Color_Set(1))
 		  
 		  Var mySet As New WebChartCircularDataset("Replans", data, colors)
 		  Replan_WebChart.AddDataset(mySet)

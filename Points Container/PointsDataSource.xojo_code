@@ -15,33 +15,33 @@ Implements WebDataSource
 		  col = New WebListboxColumnData
 		  col.DatabaseColumnName = "initials" // the name of the field in your database or data source
 		  col.Heading = "Initials" // the name that appears above the column
-		  col.Sortable = False // Whether or not the column is sortable
+		  col.Sortable = True // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
 		  col.Width = "75"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
 		  col.DatabaseColumnName = "plan_points" // the name of the field in your database or data source
-		  col.Heading = "Plan points" // the name that appears above the column
-		  col.Sortable = False // Whether or not the column is sortable
+		  col.Heading = "Plans" // the name that appears above the column
+		  col.Sortable = True // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "100"
+		  col.Width = "80"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
 		  col.DatabaseColumnName = "task_points" // the name of the field in your database or data source
-		  col.Heading = "Task points" // the name that appears above the column
-		  col.Sortable = False // Whether or not the column is sortable
+		  col.Heading = "Tasks" // the name that appears above the column
+		  col.Sortable = True // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "100"
+		  col.Width = "80"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
 		  col.DatabaseColumnName = "total_points" // the name of the field in your database or data source
 		  col.Heading = "Total" // the name that appears above the column
-		  col.Sortable = False // Whether or not the column is sortable
+		  col.Sortable = True // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "75"
+		  col.Width = "80"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
@@ -49,7 +49,7 @@ Implements WebDataSource
 		  col.Heading = "Prob." // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "75"
+		  col.Width = "80"
 		  cols.Add(col)
 		  
 		  
@@ -136,7 +136,46 @@ Implements WebDataSource
 		  + "physics_tasking.users.is_active As is_active " _
 		  + "FROM physics_tasking.points " _
 		  + "INNER JOIN physics_tasking.users USING (user_id) " _
-		  + "ORDER BY total DESC"
+		  + "ORDER BY "
+		  
+		  Select Case sortColumns
+		  Case ""
+		    
+		    sql = sql + "total DESC"
+		    
+		  Case "initials desc"
+		    
+		    sql = sql + "initials DESC"
+		    
+		  Case "initials asc"
+		    
+		    sql = sql + "initials ASC"
+		    
+		  Case "plan_points asc"
+		    
+		    sql = sql + "plans_total ASC"
+		    
+		  Case "plan_points desc"
+		    
+		    sql = sql + "plans_total DESC"
+		    
+		  Case "task_points asc"
+		    
+		    sql = sql + "tasks_total ASC"
+		    
+		  Case "task_points desc"
+		    
+		    sql = sql + "tasks_total DESC"
+		    
+		  Case "total_points asc"
+		    
+		    sql = sql + "total ASC"
+		    
+		  Case "total_points desc"
+		    
+		    sql = sql + "total DESC"
+		    
+		  End Select
 		  
 		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
@@ -223,21 +262,78 @@ Implements WebDataSource
 		Private Function SortedPrimaryKeys(sortColumns as String) As Integer()
 		  // Part of the WebDataSource interface.
 		  
-		  Var keys() As Integer 
+		  // This method is used for maintaining the selected rows list on the client
 		  
-		  Var sql As String = "SELECT physics_tasking.points.user_id As user_id " _
-		  + "FROM physics_tasking.points " _
-		  + "INNER JOIN physics_tasking.users USING (user_id) " _
-		  + "ORDER BY total DESC"
+		  Static lastSortOrder As String = ""
+		  Static lastFilter As String = ""
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
-		  
-		  While Not rs.AfterLastRow
-		    keys.Append( rs.Column("user_id").IntegerValue)
+		  // If the sort order has changed, reset the array so the data is re-pulled
+		  If lastSortOrder <> sortColumns Then
+		    lastSortOrder = sortColumns
 		    
-		    rs.MoveToNextRow
-		  Wend
-		  Return keys// Part of the WebDataSource interface.
+		    Redim mSortedKeys(-1)
+		  End If
+		  
+		  If mSortedKeys = Nil Or UBound(mSortedKeys) = -1 Then
+		    
+		    Var keys() As Integer
+		    
+		    Var sql As String = "SELECT physics_tasking.points.user_id As user_id " _
+		    + "FROM physics_tasking.points " _
+		    + "INNER JOIN physics_tasking.users USING (user_id) " _
+		    + "ORDER BY "
+		    
+		    Select Case sortColumns
+		    Case "initials asc"
+		      
+		      sql = sql + "initials ASC"
+		      
+		    Case "initials desc"
+		      
+		      sql = sql + "initials DESC"
+		      
+		    Case "plan_points asc"
+		      
+		      sql = sql + "plans_total ASC"
+		      
+		    Case "plan_points desc"
+		      
+		      sql = sql + "plans_total DESC"
+		      
+		    Case "task_points asc"
+		      
+		      sql = sql + "tasks_total ASC"
+		      
+		    Case "task_points desc"
+		      
+		      sql = sql + "tasks_total DESC"
+		      
+		    Case "total_points asc"
+		      
+		      sql = sql + "total ASC"
+		      
+		    Case "total_points desc"
+		      
+		      sql =  sql + "total DESC"
+		      
+		    End Select
+		    
+		    Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		    
+		    While Not rs.AfterLastRow
+		      keys.Append( rs.Column("user_id").IntegerValue)
+		      
+		      rs.MoveToNextRow
+		    Wend
+		    
+		    rs.Close
+		    
+		    mSortedKeys = keys
+		  End If
+		  
+		  Return mSortedKeys
+		  
+		  
 		  
 		  
 		End Function
@@ -265,6 +361,10 @@ Implements WebDataSource
 		End Function
 	#tag EndMethod
 
+
+	#tag Property, Flags = &h21
+		Private mSortedKeys() As Integer
+	#tag EndProperty
 
 	#tag Property, Flags = &h21
 		Private normalization As double

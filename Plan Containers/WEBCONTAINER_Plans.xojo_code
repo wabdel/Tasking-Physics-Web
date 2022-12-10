@@ -21,7 +21,6 @@ Begin WebContainer WEBCONTAINER_Plans
    Width           =   1300
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebTabPanel Plans_TabPanel
       ControlID       =   ""

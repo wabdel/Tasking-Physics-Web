@@ -21,7 +21,6 @@ Begin WebContainer WEBCONTAINER_Statistics_Planners_Points
    Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebListBox Planner_Total_Points_ListBox
       ColumnCount     =   1
@@ -253,19 +252,6 @@ End
 		  
 		  Var Today As New DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day)
 		  
-		  Var c() As Color
-		  c.Add( Color.RGB(255,0,0))
-		  c.Add( Color.RGB(0,255,0))
-		  c.Add( Color.RGB(0, 0, 255))
-		  c.Add( Color.RGB(255,0,255))
-		  c.Add( Color.RGB(0,255, 255))
-		  c.Add( Color.RGB(128,0,0))
-		  c.Add( Color.RGB(0, 128,0))
-		  c.Add( Color.RGB(0, 0, 128))
-		  c.Add( Color.RGB(128, 0, 128))
-		  c.Add( Color.RGB(0, 128, 128))
-		  c.Add( Color.RGB(0, 128, 50))
-		  
 		  Series.ResizeTo(-1)
 		  Var c_index As Integer = 0
 		  For Each item As Physics_Tasking.CLASS_User_Record In Planner
@@ -274,7 +260,7 @@ End
 		      'Var r As Integer = System.Random.InRange(0,255)
 		      'Var g As Integer = System.Random.InRange(0,255)
 		      'Var b As Integer = System.Random.InRange(0,255)
-		      Series.Add( New CLASS_WebChartLinear(item.initials, c(c_index)))
+		      Series.Add( New CLASS_WebChartLinear(item.initials, App.Color_Set(c_index)))
 		      Series( Series.LastIndex).myset.ChartType = WebChartLinearDataset.ChartTypes.Line
 		      
 		      

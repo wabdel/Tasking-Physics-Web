@@ -1,5 +1,5 @@
 #tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Points
+Begin WebContainer WEBCONTAINER_Points_old2
    Compatibility   =   ""
    ControlID       =   ""
    Enabled         =   True
@@ -116,98 +116,174 @@ End
 		Function GET_Random_Planner() As Integer
 		  If App.last_database_update <> Latest_UPDATE Then
 		    
-		    Points_ListBox.ReloadData
-		    Points_Avg_Label.Text = "Average points = " + Format( Points_Average, "0.0") + " +/- " + Format( Points_stdev, "0.0")
+		    POPULATE_Points_listbox
 		    Latest_UPDATE = App.last_database_update
 		    
 		  End If
 		  
 		  
+		  Var r As Double = System.Random.Number
+		  Var cumulative_probability As Double = 0
 		  
-		  Var sql As String = "SELECT physics_tasking.points.user_id As user_id, " _
-		  + "physics_tasking.points.total As total_points " _
+		  For i As Integer = 0 To Points_ListBox.LastRowIndex
+		    
+		    cumulative_probability = cumulative_probability + Points_ListBox.CellTagAt(i,4)
+		    
+		    If r <= cumulative_probability Then Return Points_ListBox.RowTagAt(i) 
+		    
+		  Next i
+		  
+		  Var i As Integer = System.Random.InRange(0, Points_ListBox.LastRowIndex)
+		  
+		  Return Points_ListBox.RowTagAt(i) 
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub POPULATE_Points_listbox()
+		  Points_ListBox.RemoveAllRows
+		  
+		  //----------------------
+		  Var sql As String = "SELECT COUNT(user_id) as count, AVG(total) as average, STDDEV_SAMP(total) as std " _
 		  + "FROM physics_tasking.points " _
-		  + "WHERE is_active = TRUE " _
-		  + "ORDER BY total DESC;"
+		  + "WHERE is_active = TRUE;"
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
-		  Select Case rs.RowCount
-		  Case 0
-		    
-		    Return -1
-		    
-		  Case 1
-		    
-		    Return rs.Column("user_id").IntegerValue
-		    
-		  End Select
 		  
 		  
-		  Var user_id() As Integer
-		  Var total() As Double
-		  Var prob() As Double
+		  If rs = Nil Then 
+		    
+		    Points_Average = 0
+		    Points_stdev = 0
+		    
+		  Else
+		    
+		    Points_Average = rs.Column("average").DoubleValue
+		    Points_stdev = rs.Column("std").DoubleValue
+		    
+		  End If
+		  
+		  Points_Avg_Label.Text = "Average points = " + Format( Points_Average, "0.0") + " +/- " + Format( Points_stdev, "0.0")
+		  
+		  
+		  
+		  
+		  //----------------------
+		  
+		  Var p11 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(2.0)
+		  Var p1 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(1.0)
+		  
+		  Var p2 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(0)
+		  Var p3 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(-1.0)
+		  Var p4 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(-2.0)
+		  
+		  sql = "SELECT user_id, total " _
+		  + "FROM physics_tasking.points " _
+		  + "WHERE is_active = TRUE;"
+		  
+		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  Var normalization As Double = 0
 		  
 		  While Not rs.AfterLastRow
 		    
-		    user_id.Add( rs.Column("user_id").IntegerValue)
-		    total.add( rs.Column("total_points").DoubleValue)
+		    Var z As Double = (rs.Column("total").DoubleValue - Points_Average) / Points_stdev
+		    Var p As Double = 1 - Numerical_Recipies.Cummulative_Normal_Distribution(z)
+		    normalization = normalization + p
 		    
 		    rs.MoveToNextRow
 		    
 		  Wend
 		  
 		  
+		  //----------------------
+		  
+		  
+		  sql = "SELECT physics_tasking.points.user_id As user_id, " _
+		  + "physics_tasking.points.tasks_total As tasks_total, " _
+		  + "physics_tasking.points.plans_total As plans_total, " _
+		  + "physics_tasking.points.total As total, " _
+		  + "physics_tasking.users.initials As initials, " _
+		  + "physics_tasking.users.is_active As is_active " _
+		  + "FROM physics_tasking.points " _
+		  + "INNER JOIN physics_tasking.users USING (user_id) " _
+		  + "ORDER BY total DESC"
+		  
+		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  
+		  While Not rs.AfterLastRow
+		    
+		    Var s As New WebStyle
+		    
+		    s.FontSize = 15
+		    
+		    Select Case rs.Column("is_active").BooleanValue
+		    Case False
+		      
+		      s.BackgroundColor = App.Colour_Warn //Color.Red
+		      
+		      
+		    Case False
+		      
+		      
+		    End Select
+		    
+		    
+		    
+		    Points_ListBox.AddRow()
+		    Points_ListBox.RowTagAt( Points_ListBox.LastAddedRowIndex) = rs.Column("user_id").IntegerValue
+		    
+		    Var cellRenderer As New WebListBoxStyleRenderer(s, rs.Column("initials").StringValue.Trim.Uppercase)
+		    Points_ListBox.CellTextAt(Points_ListBox.LastAddedRowIndex, 0) = cellRenderer
+		    Points_ListBox.CellTagAt(Points_ListBox.LastAddedRowIndex, 0) = rs.Column("initials").StringValue
+		    
+		    cellRenderer = New WebListBoxStyleRenderer(s, Format( rs.Column("plans_total").DoubleValue, "0.0"))
+		    Points_ListBox.CellTextAt(Points_ListBox.LastAddedRowIndex, 1) = cellRenderer
+		    Points_ListBox.CellTagAt(Points_ListBox.LastAddedRowIndex, 1) = rs.Column("plans_total").DoubleValue
+		    
+		    cellRenderer = New WebListBoxStyleRenderer(s, Format( rs.Column("tasks_total").DoubleValue, "0.0"))
+		    Points_ListBox.CellTextAt(Points_ListBox.LastAddedRowIndex, 2) = cellRenderer
+		    Points_ListBox.CellTagAt(Points_ListBox.LastAddedRowIndex, 2) = rs.Column("tasks_total").DoubleValue
+		    
+		    cellRenderer = New WebListBoxStyleRenderer(s, Format( rs.Column("total").DoubleValue, "0.0"))
+		    Points_ListBox.CellTextAt(Points_ListBox.LastAddedRowIndex, 3) = cellRenderer
+		    Points_ListBox.CellTagAt(Points_ListBox.LastAddedRowIndex, 3) = rs.Column("total").DoubleValue
+		    
+		    
+		    If Not rs.Column("is_active").BooleanValue Or Points_stdev = 0 Then
+		      
+		      cellRenderer = New WebListBoxStyleRenderer(s, "---")
+		      Points_ListBox.CellTextAt(Points_ListBox.LastAddedRowIndex, 4) = cellRenderer
+		      Points_ListBox.CellTagAt(Points_ListBox.LastAddedRowIndex, 4) = 0
+		      
+		    Else
+		      
+		      Var z As Double = (rs.Column("total").DoubleValue - Points_Average) / Points_stdev
+		      Var p As Double = 1 - Numerical_Recipies.Cummulative_Normal_Distribution(z)
+		      
+		      
+		      p = p / normalization
+		      
+		      cellRenderer = New WebListBoxStyleRenderer(s, Format( p, "%0.0"))
+		      Points_ListBox.CellTextAt(Points_ListBox.LastAddedRowIndex, 4) = cellRenderer
+		      Points_ListBox.CellTagAt(Points_ListBox.LastAddedRowIndex, 4) = p
+		      
+		    End If
+		    
+		    
+		    
+		    rs.MoveToNextRow
+		  Wend
 		  
 		  
 		  
-		  If Points_Stdev = 0 Then
-		    
-		    Var r As Integer = System.Random.InRange(0, user_id.LastIndex)
-		    
-		    Return user_id(r)
-		    
-		    
-		  End
-		  
-		  Var normalization As Double = 0
-		  
-		  Var p11 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(2.0)
-		  Var p1 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(1.0)
-		  Var p2 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(0)
-		  Var p3 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(-1.0)
-		  Var p4 As Double = Numerical_Recipies.Cummulative_Normal_Distribution(-2.0)
-		  
-		  For i As Integer = 0 To user_id.LastIndex
-		    
-		    Var z As Double = (total(i) - Points_Average)/Points_Stdev
-		    Var p As Double = 1 - Numerical_Recipies.Cummulative_Normal_Distribution(z)
-		    normalization = normalization + p
-		    
-		    
-		  Next
-		  
-		  Var cum_prob As Double = 0
-		  
-		  For i As Integer = 0 To user_id.LastIndex
-		    
-		    Var z As Double = (total(i) - Points_Average)/Points_Stdev
-		    Var p As Double = Numerical_Recipies.Cummulative_Normal_Distribution(z)
-		    
-		    cum_prob = cum_prob + (1- p) / normalization 
-		    prob.Add( cum_prob)
-		    
-		  Next
 		  
 		  
-		  Var r As Double = System.Random.Number
-		  
-		  For i As Integer = 0 To user_id.LastIndex
-		    
-		    If r <= prob(i) Then Return user_id(i)
-		    
-		  Next i
-		End Function
+		End Sub
 	#tag EndMethod
 
 
@@ -216,59 +292,12 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private mPoints_Average As Double
+		Private Points_Average As Double
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private mPoints_Stdev As Double
+		Private Points_stdev As Double
 	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		Planners() As Physics_Tasking.CLASS_User_Record
-	#tag EndProperty
-
-	#tag ComputedProperty, Flags = &h21
-		#tag Getter
-			Get
-			  Var sql As String = "SELECT AVG(physics_tasking.points.total) As average " _
-			  + "FROM physics_tasking.points " _
-			  + "WHERE is_active = TRUE;"
-			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
-			  
-			  mPoints_Average = rs.Column("average").DoubleValue
-			  Return mPoints_Average
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mPoints_Average = value
-			End Set
-		#tag EndSetter
-		Private Points_Average As Double
-	#tag EndComputedProperty
-
-	#tag ComputedProperty, Flags = &h21
-		#tag Getter
-			Get
-			  Var sql As String = "SELECT STDDEV_SAMP(physics_tasking.points.total) As standard_deviation " _
-			  + "FROM physics_tasking.points " _
-			  + "WHERE is_active = TRUE;"
-			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
-			  
-			  mPoints_Stdev = rs.Column("standard_deviation").DoubleValue
-			  
-			  Return mPoints_Stdev
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mPoints_Stdev = value
-			End Set
-		#tag EndSetter
-		Private Points_Stdev As Double
-	#tag EndComputedProperty
 
 	#tag Property, Flags = &h0
 		Random_Planner_ID As Integer
@@ -282,10 +311,15 @@ End
 		Sub Opening()
 		  Me.HasHeader = True
 		  Me.RowSelectionType = WebListBox.RowSelectionTypes.None
-		  Me.DataSource = New PointsDataSource
-		  Me.ReloadData
-		  Points_Avg_Label.Text = "Average points = " + Format( Points_Average, "0.0") + " +/- " + Format( Points_stdev, "0.0")
+		  Me.ColumnCount = 5
+		  Me.HeaderAt(0) = "Initials"
+		  Me.HeaderAt(1) = "Plans"
+		  Me.HeaderAt(2) = "Tasks"
+		  Me.HeaderAt(3) ="Total"
+		  Me.HeaderAt(4) = "Prob."
 		  
+		  
+		  POPULATE_Points_listbox
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -301,9 +335,7 @@ End
 		Sub Run()
 		  If App.last_database_update <> Latest_UPDATE Then
 		    
-		    Points_ListBox.DataSource = New PointsDataSource
-		    Points_ListBox.ReloadData
-		    Points_Avg_Label.Text = "Average points = " + Format( Points_Average, "0.0") + " +/- " + Format( Points_stdev, "0.0")
+		    POPULATE_Points_listbox
 		    Latest_UPDATE = App.last_database_update
 		    
 		  End If
