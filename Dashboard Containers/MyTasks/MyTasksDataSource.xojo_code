@@ -14,31 +14,39 @@ Implements WebDataSource
 		  
 		  col = New WebListboxColumnData
 		  col.DatabaseColumnName = "task_type" // the name of the field in your database or data source
-		  col.Heading = "Task" // the name that appears above the column
+		  col.Heading = "Task (multiplier) {points}" // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
 		  col.Width = "40%"
 		  cols.Add(col)
 		  
-		  col = New WebListboxColumnData
-		  col.DatabaseColumnName = "multiplier" // the name of the field in your database or data source
-		  col.Heading = "Multiplier" // the name that appears above the column
-		  col.Sortable = False // Whether or not the column is sortable
-		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "15%"
-		  cols.Add(col)
-		  
-		  col = New WebListboxColumnData
-		  col.DatabaseColumnName = "points" // the name of the field in your database or data source
-		  col.Heading = "Points" // the name that appears above the column
-		  col.Sortable = False // Whether or not the column is sortable
-		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "15%"
-		  cols.Add(col)
+		  'col = New WebListboxColumnData
+		  'col.DatabaseColumnName = "multiplier" // the name of the field in your database or data source
+		  'col.Heading = "Multiplier" // the name that appears above the column
+		  'col.Sortable = False // Whether or not the column is sortable
+		  ''col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
+		  'col.Width = "15%"
+		  'cols.Add(col)
+		  '
+		  'col = New WebListboxColumnData
+		  'col.DatabaseColumnName = "points" // the name of the field in your database or data source
+		  'col.Heading = "Points" // the name that appears above the column
+		  'col.Sortable = False // Whether or not the column is sortable
+		  ''col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
+		  'col.Width = "15%"
+		  'cols.Add(col)
 		  
 		  col = New WebListboxColumnData
 		  col.DatabaseColumnName = "completion_date" // the name of the field in your database or data source
 		  col.Heading = "Completed on" // the name that appears above the column
+		  col.Sortable = False // Whether or not the column is sortable
+		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
+		  col.Width = "20%"
+		  cols.Add(col)
+		  
+		  col = New WebListboxColumnData
+		  col.DatabaseColumnName = "notes" // the name of the field in your database or data source
+		  col.Heading = "Notes" // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
 		  col.Width = "20%"
@@ -97,7 +105,8 @@ Implements WebDataSource
 		  + "physics_tasking.task_groups.name As task_group_name, " _
 		  + "physics_tasking.tasks.multiplier As multiplier, " _
 		  + "physics_tasking.task_types.weight As weight, " _
-		  + "DATE(physics_tasking.tasks.completion_date) As completion_date " _
+		  + "DATE(physics_tasking.tasks.completion_date) As completion_date, " _
+		  + "physics_tasking.tasks.notes As notes " _
 		  + "FROM physics_tasking.tasks " _
 		  + "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
 		  + "INNER JOIN physics_tasking.task_groups USING(task_group_id) " _
@@ -115,14 +124,6 @@ Implements WebDataSource
 		    
 		    Var row As New WebListBoxRowData
 		    row.PrimaryKey = rs.Column("task_id").IntegerValue
-		    row.tag = rs.Column("task_id").IntegerValue
-		    row.Value("task_type") = rs.Column("task_group_name").StringValue.Trim.Uppercase + " / " _
-		    + rs.Column("task_type_name").StringValue.Trim
-		    
-		    row.Value("multiplier") =  rs.Column("multiplier").IntegerValue.ToString
-		    
-		    
-		    
 		    
 		    Var task_date As New DateTime( rs.Column("completion_date").DateTimeValue.Year, _
 		    rs.Column("completion_date").DateTimeValue.Month, _
@@ -132,13 +133,26 @@ Implements WebDataSource
 		    86400
 		    Var decay As Double = Exp(-Log(2) * No_days / Physics_Tasking.Half_life_In_Days)
 		    
-		    row.Value("points") = Format( rs.Column("multiplier").IntegerValue * rs.Column("weight").DoubleValue * decay, "0.00") 
+		    
+		    row.tag = rs.Column("task_id").IntegerValue
+		    row.Value("task_type") = rs.Column("task_group_name").StringValue.Trim.Uppercase + " / " _
+		    + rs.Column("task_type_name").StringValue.Trim + " (" _
+		    + rs.Column("multiplier").IntegerValue.ToString + " ) {" _
+		    + Format( rs.Column("multiplier").IntegerValue * rs.Column("weight").DoubleValue * decay, "0.00")  +"}"
+		    
+		    
+		    
+		    
+		    
+		    
 		    
 		    Var completion_date As DateTime = rs.Column("completion_date").DateValue
 		    Var cellRenderer As New WebListBoxStyleRenderer(s, _
 		    completion_date.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None))
 		    
 		    row.Value("completion_date") = cellRenderer
+		    
+		    row.Value("notes") = rs.Column("notes").stringvalue
 		    
 		    rows.Add(row)
 		    

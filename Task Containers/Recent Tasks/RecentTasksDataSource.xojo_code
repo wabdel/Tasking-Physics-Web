@@ -14,7 +14,7 @@ Implements WebDataSource
 		  
 		  col = New WebListboxColumnData
 		  col.DatabaseColumnName = "task_type" // the name of the field in your database or data source
-		  col.Heading = "Task" // the name that appears above the column
+		  col.Heading = "Task (multiplier) {points}" // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
 		  col.Width = "550"
@@ -33,7 +33,7 @@ Implements WebDataSource
 		  col.Heading = "By" // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "50"
+		  col.Width = "70"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
