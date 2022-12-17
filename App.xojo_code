@@ -235,6 +235,10 @@ Inherits WebApplication
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		Colour_Title As Color = &cFEACA700
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		Colour_Warn As Color = &cFE922700
 	#tag EndProperty
 

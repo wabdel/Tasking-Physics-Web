@@ -1,5 +1,5 @@
 #tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Statistics_Physicians
+Begin WebContainer WEBCONTAINER_Statistics_Physicians_Monthly
    Compatibility   =   ""
    ControlID       =   ""
    Enabled         =   True
@@ -29,7 +29,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Physicians
       Enabled         =   True
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   0
+      Indicator       =   ""
       InitialValue    =   ""
       LatestDate      =   ""
       Left            =   20
@@ -54,7 +54,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Physicians
       Height          =   60
       Horizontal      =   False
       Index           =   -2147483648
-      Indicator       =   0
+      Indicator       =   ""
       InitialValue    =   "Patients\nPlans"
       Left            =   1052
       LockBottom      =   False
@@ -80,7 +80,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Physicians
       Enabled         =   True
       HasAnimation    =   False
       HasLegend       =   False
-      Height          =   468
+      Height          =   492
       Index           =   -2147483648
       Indicator       =   0
       Left            =   20
@@ -96,7 +96,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Physicians
       TabIndex        =   2
       Title           =   ""
       Tooltip         =   ""
-      Top             =   112
+      Top             =   88
       Visible         =   True
       Width           =   1200
       _mMode          =   0
@@ -127,42 +127,10 @@ Begin WebContainer WEBCONTAINER_Statistics_Physicians
       TextAlignment   =   2
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   66
+      Top             =   42
       Underline       =   False
       Visible         =   True
       Width           =   227
-      _mPanelIndex    =   -1
-   End
-   Begin WebLabel Title_Label
-      Bold            =   False
-      ControlID       =   ""
-      Enabled         =   True
-      FontName        =   ""
-      FontSize        =   0.0
-      Height          =   38
-      Index           =   -2147483648
-      Indicator       =   ""
-      Italic          =   False
-      Left            =   320
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Multiline       =   False
-      Scope           =   2
-      TabIndex        =   4
-      TabStop         =   True
-      Text            =   "Untitled"
-      TextAlignment   =   2
-      TextColor       =   &c00000000
-      Tooltip         =   ""
-      Top             =   11
-      Underline       =   False
-      Visible         =   True
-      Width           =   600
       _mPanelIndex    =   -1
    End
 End
@@ -184,29 +152,6 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub POPULATE_Chart()
-		  Var Quarter As String
-		  Select Case Month_DatePicker.SelectedDate.Month
-		  Case 1 To 3
-		    
-		    Title_Label.Text = "Q1 " + Month_DatePicker.SelectedDate.Year.ToString
-		    Quarter = "1,2,3"
-		  Case 4 To 6
-		    
-		    Title_Label.Text = "Q2 " + Month_DatePicker.SelectedDate.Year.ToString
-		    Quarter = "4,5,6"
-		    
-		  Case 6 To 9
-		    
-		    Title_Label.Text = "Q3 " + Month_DatePicker.SelectedDate.Year.ToString
-		    Quarter = "7,8,9"
-		  Case 10 To 12
-		    
-		    Title_Label.Text = "Q4 " + Month_DatePicker.SelectedDate.Year.ToString
-		    Quarter = "10,11,12"
-		    
-		  End Select
-		  
-		  
 		  Var sql As String = "SELECT physician_id, initials, COUNT(DISTINCT(patient_id)) as count_patients, " _
 		  + "SUM(physics_tasking.plan_types.no_of_plans) AS count_plans " _
 		  + "FROM physics_tasking.plans " _
@@ -216,7 +161,7 @@ End
 		  + "WHERE physician_id IS NOT NULL " _
 		  + "AND is_completed = TRUE " _
 		  + "AND is_retired = FALSE " _
-		  + "AND MONTH(due_date) IN (" +Quarter + ") " _
+		  + "AND MONTH(due_date) = " + Month_DatePicker.SelectedDate.Month.ToString + " " _
 		  + "AND YEAR(due_date) = " + Month_DatePicker.SelectedDate.Year.ToString + " " _
 		  + "GROUP BY physician_id " _
 		  + "ORDER BY initials;"
@@ -228,8 +173,6 @@ End
 		  Physician_Statistics_WebChart.RemoveAllDatasets
 		  Physician_Statistics_WebChart.RemoveAllLabels
 		  
-		  data.Add( 0)
-		  labels.Add( "")
 		  Select Case Data_RadioGroup.SelectedIndex
 		  Case 0
 		    
@@ -274,8 +217,7 @@ End
 		    
 		  End Select
 		  
-		  data.Add( 0)
-		  labels.Add( "")
+		  
 		  
 		  Var mySet As New WebChartLinearDataset("Bar Data", &cFF0000, True, data)
 		  mySet.ChartType = WebChartLinearDataset.ChartTypes.Bar
@@ -299,11 +241,6 @@ End
 	#tag Event
 		Sub SelectionChanged(button as WebRadioButton)
 		  POPULATE_Chart
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub Opening()
-		  Me.Style.ForegroundColor = Color.White
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -383,22 +320,6 @@ End
 		  options.value("scaleShowValues") = True
 		  'System.DebugLog(Options.ToString)
 		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Total_Label
-	#tag Event
-		Sub Opening()
-		  Me.Style.ForegroundColor = App.Colour_Note
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Title_Label
-	#tag Event
-		Sub Opening()
-		  Me.Style.FontSize = 28
-		  Me.Style.ForegroundColor = Color.White
-		  Me.Style.Underline = True
 		End Sub
 	#tag EndEvent
 #tag EndEvents
