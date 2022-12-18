@@ -154,7 +154,6 @@ Begin WebContainer WEBCONTAINER_Statistics_Physicians
       Multiline       =   False
       Scope           =   2
       TabIndex        =   4
-      TabStop         =   True
       Text            =   "Untitled"
       TextAlignment   =   2
       TextColor       =   &c00000000
@@ -373,9 +372,11 @@ End
 		  Var injectionxScaleLabel As New JSONItem
 		  Var injectionxAxes As New JSONItem
 		  
-		  
-		  injectionxValue.Value("autoSkip") = False
-		  injectionxTicks.value("ticks") = injectionxValue 
+		  injectionxTitle.Value("display") = True
+		  injectionxTitle.Value("fontSize") = 20
+		  injectionxTitle.Value("labelString") = "Physician"
+		  'injectionxValue.Value("autoSkip") = False
+		  injectionxTicks.value("scaleLabel") = injectionxTitle 
 		  injectionxAxes.add( injectionxTicks)
 		  injectionScales.value("xAxes") = injectionxAxes
 		  

@@ -318,8 +318,12 @@ End
 		  Var injectionxAxes As New JSONItem
 		  
 		  
+		  injectionxTitle.Value("display") = True
+		  injectionxTitle.Value("fontSize") = 20
+		  injectionxTitle.Value("labelString") = "Site"
 		  injectionxValue.Value("autoSkip") = False
-		  injectionxTicks.value("ticks") = injectionxValue 
+		  injectionxTicks.value("scaleLabel") = injectionxTitle
+		  injectionxTicks.value("ticks") = injectionxValue  
 		  injectionxAxes.add( injectionxTicks)
 		  injectionScales.value("xAxes") = injectionxAxes
 		  

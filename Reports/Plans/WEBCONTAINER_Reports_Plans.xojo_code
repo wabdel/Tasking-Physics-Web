@@ -21,7 +21,6 @@ Begin WebContainer WEBCONTAINER_Reports_Plans
    Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebChart Plans_Chart
       ControlID       =   ""
