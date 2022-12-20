@@ -59,6 +59,22 @@ Implements WebDataSource
 		Private Function RowCount() As Integer
 		  // Part of the WebDataSource interface.
 		  
+		  Var sql As String = "SELECT COUNT(*) as c " _
+		  + "FROM physics_tasking.scheduled_tasks " _
+		  + "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
+		  + "INNER JOIN physics_tasking.machines USING(machine_id) " _
+		  + "INNER Join physics_tasking.task_groups Using(task_group_id) " _
+		  + "INNER Join physics_tasking.users Using(user_id) " _
+		  + "WHERE physics_tasking.scheduled_tasks.is_completed = FALSE " _
+		  + "AND physics_tasking.scheduled_tasks.user_id = " + Session.Logged_in_User.id.ToString + "  " _
+		  + "ORDER BY DATE(physics_tasking.scheduled_tasks.due_date) ASC, " _
+		  + "physics_tasking.scheduled_tasks.scheduled_task_id DESC;"
+		  
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  
+		  Return  rs.Column("c").IntegerValue
+		  
 		  
 		End Function
 	#tag EndMethod

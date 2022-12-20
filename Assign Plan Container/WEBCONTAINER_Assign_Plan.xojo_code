@@ -948,6 +948,7 @@ End
 		  Planner_PopupMenu.Visible = False
 		  POPULATE_Physician_POPUPMENU
 		  Is_replan_Checkbox.Value = False
+		  selected_user_id = Points_WEBCONTAINER.GET_Random_Planner
 		  ENABLE_ASSIGN_Button
 		  
 		End Sub
@@ -968,12 +969,7 @@ End
 #tag Events Reset_Button
 	#tag Event
 		Sub Pressed()
-		  MRN_TextField.Text = ""
-		  First_Name_TextField.Text = ""
-		  Family_Name_TextField.Text = ""
-		  Site_PopupMenu.SelectedRowIndex = -1
-		  Plan_Type_PopupMenu.SelectedRowIndex = -1
-		  'selected_user_id = Points_Container.GET_Random_Planner
+		  RESET_Assign_Plan
 		  
 		End Sub
 	#tag EndEvent
