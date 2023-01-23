@@ -21,7 +21,6 @@ Begin WebDialog Modify_Plan_WebDialog
    Width           =   876
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Cancel_Button
       AllowAutoDisable=   False
@@ -32,7 +31,7 @@ Begin WebDialog Modify_Plan_WebDialog
       Enabled         =   True
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   0
+      Indicator       =   1
       Left            =   756
       LockBottom      =   False
       LockedInPosition=   False
@@ -52,13 +51,13 @@ Begin WebDialog Modify_Plan_WebDialog
    Begin WebButton Modify_Button
       AllowAutoDisable=   False
       Cancel          =   False
-      Caption         =   "OK"
+      Caption         =   "Modify"
       ControlID       =   ""
       Default         =   True
       Enabled         =   True
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   1
+      Indicator       =   3
       Left            =   388
       LockBottom      =   False
       LockedInPosition=   False
@@ -795,6 +794,11 @@ End
 		  Self.Close
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Shown()
+		  Me.Indicator = WebUIControl.Indicators.Primary
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Modify_Button
 	#tag Event
@@ -848,6 +852,11 @@ End
 		  
 		  
 		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  me.Indicator = WebUIControl.Indicators.Success
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -966,6 +975,8 @@ End
 #tag Events Delete_Button
 	#tag Event
 		Sub Opening()
+		  me.Indicator = WebUIControl.Indicators.Danger
+		  
 		  If Session.Logged_in_User.Group.id = 1 Then
 		    
 		    Me.Visible = True

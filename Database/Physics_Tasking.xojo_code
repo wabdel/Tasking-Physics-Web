@@ -1478,6 +1478,7 @@ Protected Module Physics_Tasking
 	#tag Note, Name = Create User and Database
 		
 		DROP USER IF EXISTS 'physics_tasking_user'@'%';
+		DROP USER IF EXISTS 'physics_tasking_user'@'localhost';
 		DROP DATABASE IF EXISTS physics_tasking;
 		CREATE DATABASE physics_tasking;   
 		CREATE USER 'physics_tasking_user'@'%' IDENTIFIED WITH mysql_native_password BY 'physics_tasking_user';

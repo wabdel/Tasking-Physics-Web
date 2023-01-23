@@ -21,7 +21,6 @@ Begin WebContainer WEBCONTAINER_Reports
    Width           =   1300
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebTabPanel Reports_TabPanel
       ControlID       =   ""
@@ -81,7 +80,7 @@ End
 		    
 		    Panel_Container = New WEBCONTAINER_Reports_Plans
 		    
-		  Case 1
+		  Case 2
 		    
 		    
 		    Panel_Container = New WEBCONTAINER_Reports_Patients_Monthly
