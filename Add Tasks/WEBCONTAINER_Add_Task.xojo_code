@@ -21,7 +21,6 @@ Begin WebContainer WEBCONTAINER_Add_Task Implements WebDataSource
    Width           =   1300
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebLabel Search_Label
       Bold            =   False
@@ -283,7 +282,7 @@ End
 #tag Events Search_Label
 	#tag Event
 		Sub Opening()
-		  Style.ForegroundColor = Color.White
+		  Me.Style.ForegroundColor = App.Colour_Title
 		End Sub
 	#tag EndEvent
 #tag EndEvents

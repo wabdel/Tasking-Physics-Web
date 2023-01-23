@@ -3,7 +3,7 @@ Protected Class App
 Inherits WebApplication
 	#tag Event
 		Sub Opening(args() as String)
-		  
+		  Call Daemonize
 		  Var db_status As Boolean = Physics_Tasking.isDatabase_Online
 		  Physics_Tasking.POPULATE_Main_Data
 		  'Points_Container = New WEBCONTAINER_Points
@@ -345,6 +345,14 @@ Inherits WebApplication
 			Visible=false
 			Group="Behavior"
 			InitialValue="&c05e17700"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Colour_Title"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&cFEACA700"
 			Type="Color"
 			EditorType=""
 		#tag EndViewProperty
