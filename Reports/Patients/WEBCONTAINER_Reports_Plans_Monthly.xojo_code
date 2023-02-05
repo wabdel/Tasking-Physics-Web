@@ -1,5 +1,5 @@
 #tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Reports_Patients_Monthly Implements WebDataSource
+Begin WebContainer WEBCONTAINER_Reports_Plans_Monthly Implements WebDataSource
    Compatibility   =   ""
    ControlID       =   ""
    Enabled         =   True
@@ -29,7 +29,7 @@ Begin WebContainer WEBCONTAINER_Reports_Patients_Monthly Implements WebDataSourc
       Enabled         =   True
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   ""
+      Indicator       =   0
       InitialValue    =   ""
       LatestDate      =   ""
       Left            =   72
@@ -83,7 +83,7 @@ Begin WebContainer WEBCONTAINER_Reports_Patients_Monthly Implements WebDataSourc
       Height          =   436
       HighlightSortedColumn=   True
       Index           =   -2147483648
-      Indicator       =   ""
+      Indicator       =   0
       InitialValue    =   ""
       LastAddedRowIndex=   0
       LastRowIndex    =   0
@@ -160,7 +160,7 @@ Begin WebContainer WEBCONTAINER_Reports_Patients_Monthly Implements WebDataSourc
       FontSize        =   0.0
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   ""
+      Indicator       =   0
       Italic          =   False
       Left            =   240
       LockBottom      =   False
@@ -214,7 +214,45 @@ End
 		  col.Width = "180"
 		  cols.Add(col)
 		  
+		  col = New WebListboxColumnData
+		  col.DatabaseColumnName = "site" // the name of the field in your database or data source
+		  col.Heading = "Site" // the name that appears above the column
+		  col.Sortable = False // Whether or not the column is sortable
+		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
+		  col.Width = "120"
+		  cols.Add(col)
 		  
+		  col = New WebListboxColumnData
+		  col.DatabaseColumnName = "plan_type" // the name of the field in your database or data source
+		  col.Heading = "Plan Type" // the name that appears above the column
+		  col.Sortable = False // Whether or not the column is sortable
+		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
+		  col.Width = "320"
+		  cols.Add(col)
+		  
+		  col = New WebListboxColumnData
+		  col.DatabaseColumnName = "due_date" // the name of the field in your database or data source
+		  col.Heading = "Due Date" // the name that appears above the column
+		  col.Sortable = False // Whether or not the column is sortable
+		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
+		  col.Width = "220"
+		  cols.Add(col)
+		  
+		  col = New WebListboxColumnData
+		  col.DatabaseColumnName = "planner_initials" // the name of the field in your database or data source
+		  col.Heading = "Planner" // the name that appears above the column
+		  col.Sortable = False // Whether or not the column is sortable
+		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
+		  col.Width = "80"
+		  cols.Add(col)
+		  
+		  col = New WebListboxColumnData
+		  col.DatabaseColumnName = "physician_initials" // the name of the field in your database or data source
+		  col.Heading = "Physician" // the name that appears above the column
+		  col.Sortable = False // Whether or not the column is sortable
+		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
+		  col.Width = "80"
+		  cols.Add(col)
 		  
 		  Return cols// Part of the WebDataSource interface.
 		  
@@ -225,14 +263,15 @@ End
 	#tag Method, Flags = &h21
 		Private Function RowCount() As Integer
 		  
-		  Var sql As String = "SELECT COUNT(DISTINCT physics_tasking.patients.patient_id) as c " _
+		  Var sql As String = "SELECT COUNT(*) as c " _
 		  + "FROM physics_tasking.plans " _
 		  + "INNER JOIN physics_tasking.patients USING (patient_id) " _
+		  + "INNER JOIN physics_tasking.plan_types USING (plan_type_id) " _
+		  + "INNER JOIN physics_tasking.sites USING (site_id) " _
 		  + "WHERE physics_tasking.plans.is_completed = 1 " _
 		  + "AND MONTH(due_date)  = " + Month_DatePicker.SelectedDate.Month.ToString  + " " _
-		  + "AND YEAR(due_date) = " + Month_DatePicker.SelectedDate.Year.ToString + "; " _
-		  
-		  
+		  + "AND YEAR(due_date) = " + Month_DatePicker.SelectedDate.Year.ToString + " " _
+		  + "ORDER BY physics_tasking.plans.due_date ASC"
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
@@ -246,16 +285,28 @@ End
 		  // Part of the WebDataSource interface.
 		  
 		  Var rows() As WebListboxRowData
-		  Var sql As String = "SELECT physics_tasking.patients.patient_id, " _
-		  + "physics_tasking.patients.mrn As mrn, " _
-		  + "physics_tasking.patients.first_name As first_name, " _
-		  + "physics_tasking.patients.family_name As family_name " _
+		  Var sql As String = "SELECT physics_tasking.plans.plan_id AS plan_id, " _
+		  + "physics_tasking.patients.mrn AS mrn, " _
+		  + "physics_tasking.patients.first_name AS first_name, " _
+		  + "physics_tasking.patients.family_name AS family_name, " _
+		  + "physics_tasking.plan_types.name AS plan_type_name, " _
+		  + "physics_tasking.sites.name As site, " _
+		  + "physics_tasking.sites.is_uppercase AS is_uppercase, " _
+		  + "physics_tasking.plans.due_date AS due_date, " _
+		  + "(SELECT initials " _
+		  + "FROM physics_tasking.users " _
+		  + "WHERE physics_tasking.plans.user_id = physics_tasking.users.user_id) As planner_initials, " _
+		  + "(SELECT initials " _
+		  + "FROM physics_tasking.users " _
+		  + "WHERE physics_tasking.plans.physician_id = physics_tasking.users.user_id) As physician_initials " _
 		  + "FROM physics_tasking.plans " _
 		  + "INNER JOIN physics_tasking.patients USING (patient_id) " _
+		  + "INNER JOIN physics_tasking.plan_types USING (plan_type_id) " _
+		  + "INNER JOIN physics_tasking.sites USING (site_id) " _
 		  + "WHERE physics_tasking.plans.is_completed = 1 " _
 		  + "AND MONTH(due_date)  = " + Month_DatePicker.SelectedDate.Month.ToString  + " " _
 		  + "AND YEAR(due_date) = " + Month_DatePicker.SelectedDate.Year.ToString + " " _
-		  + "GROUP BY physics_tasking.plans.patient_id; "
+		  + "ORDER BY physics_tasking.plans.due_date ASC"
 		  
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
@@ -266,8 +317,8 @@ End
 		    
 		    
 		    Var row As New WebListBoxRowData
-		    row.PrimaryKey = rs.Column("patient_id").IntegerValue
-		    row.tag = rs.Column("patient_id").IntegerValue
+		    row.PrimaryKey = rs.Column("plan_id").IntegerValue
+		    row.tag = rs.Column("plan_id").IntegerValue
 		    
 		    Var cellRenderer As New WebListBoxStyleRenderer(s, rs.Column("mrn").StringValue.Trim)
 		    row.Value("mrn") = cellRenderer
@@ -276,6 +327,134 @@ End
 		    rs.Column("first_name").StringValue.Trim.Titlecase + " " _
 		    + rs.Column("family_name").StringValue.Trim.Uppercase)
 		    row.Value("full_name") = cellRenderer
+		    
+		    If rs.Column("is_uppercase").BooleanValue Then
+		      
+		      cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("site").StringValue.Trim.Uppercase)
+		      
+		    Else
+		      
+		      cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("site").StringValue.Trim.Titlecase)
+		      
+		    End If
+		    
+		    row.Value("site") = cellRenderer
+		    
+		    cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("plan_type_name").StringValue.Trim)
+		    row.Value("plan_type") = cellRenderer
+		    
+		    Var due_date As DateTime = rs.Column("due_date").DateTimeValue
+		    cellRenderer = New WebListBoxStyleRenderer(s, _
+		    due_date.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None))
+		    
+		    row.Value("due_date") = cellRenderer
+		    
+		    
+		    row.Value("planner_initials") = rs.Column("planner_initials").StringValue.Trim.Uppercase
+		    
+		    
+		    If rs.Column("physician_initials").Value = Nil Then
+		      cellRenderer = New WebListBoxStyleRenderer(s, "NULL")
+		      
+		    Else
+		      cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("physician_initials").StringValue.Trim)
+		      
+		      
+		    End If
+		    row.Value("physician_initials") = cellRenderer
+		    
+		    
+		    rows.Add(row)
+		    
+		    rs.MoveToNextRow
+		  Wend
+		  rs.Close
+		  
+		  Plans_Label.Text = "Plans = " + Plans_ListBox.DataSource.RowCount.ToString
+		  
+		  Return rows
+		  
+		  
+		  
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function RowData1(RowCount as Integer, RowOffset as Integer, SortColumns as String) As WebListboxRowData()
+		  // Part of the WebDataSource interface.
+		  
+		  Var rows() As WebListboxRowData
+		  Var sql As String = "SELECT physics_tasking.plans.plan_id AS plan_id, " _
+		  + "physics_tasking.patients.mrn AS mrn, " _
+		  + "physics_tasking.patients.first_name AS first_name, " _
+		  + "physics_tasking.patients.family_name AS family_name, " _
+		  + "physics_tasking.plan_types.name AS plan_type_name, " _
+		  + "physics_tasking.sites.name As site, " _
+		  + "physics_tasking.sites.is_uppercase AS is_uppercase, " _
+		  + "physics_tasking.plans.due_date AS due_date, " _
+		  + "physics_tasking.users.initials AS physician_initials " _
+		  + "FROM physics_tasking.plans " _
+		  + "INNER JOIN physics_tasking.patients USING (patient_id) " _
+		  + "INNER JOIN physics_tasking.plan_types USING (plan_type_id) " _
+		  + "INNER JOIN physics_tasking.sites USING (site_id) " _
+		  + "LEFT OUTER JOIN physics_tasking.users ON physics_tasking.plans.physician_id = physics_tasking.users.user_id " _
+		  + "WHERE physics_tasking.plans.is_completed = 1 " _
+		  + "AND MONTH(due_date)  = " + Month_DatePicker.SelectedDate.Month.ToString  + " " _
+		  + "AND YEAR(due_date) = " + Month_DatePicker.SelectedDate.Year.ToString + " " _
+		  + "ORDER BY physics_tasking.plans.due_date ASC"
+		  
+		  
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  While Not rs.AfterLastRow
+		    
+		    Var s As New WebStyle
+		    
+		    
+		    Var row As New WebListBoxRowData
+		    row.PrimaryKey = rs.Column("plan_id").IntegerValue
+		    row.tag = rs.Column("plan_id").IntegerValue
+		    
+		    Var cellRenderer As New WebListBoxStyleRenderer(s, rs.Column("mrn").StringValue.Trim)
+		    row.Value("mrn") = cellRenderer
+		    
+		    cellRenderer = New WebListBoxStyleRenderer(s, _
+		    rs.Column("first_name").StringValue.Trim.Titlecase + " " _
+		    + rs.Column("family_name").StringValue.Trim.Uppercase)
+		    row.Value("full_name") = cellRenderer
+		    
+		    If rs.Column("is_uppercase").BooleanValue Then
+		      
+		      cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("site").StringValue.Trim.Uppercase)
+		      
+		    Else
+		      
+		      cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("site").StringValue.Trim.Titlecase)
+		      
+		    End If
+		    
+		    row.Value("site") = cellRenderer
+		    
+		    cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("plan_type_name").StringValue.Trim)
+		    row.Value("plan_type") = cellRenderer
+		    
+		    Var due_date As DateTime = rs.Column("due_date").DateTimeValue
+		    cellRenderer = New WebListBoxStyleRenderer(s, _
+		    due_date.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None))
+		    
+		    row.Value("due_date") = cellRenderer
+		    
+		    If rs.Column("physician_initials").Value = Nil Then
+		      cellRenderer = New WebListBoxStyleRenderer(s, "NULL")
+		      
+		    Else
+		      cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("physician_initials").StringValue.Trim)
+		      
+		      
+		    End If
+		    row.Value("physician_initials") = cellRenderer
 		    
 		    
 		    rows.Add(row)
@@ -312,22 +491,20 @@ End
 		  
 		  Var d As DateTime = DateTime.Now
 		  Var d_min As DateTime = New DateTime( d.Year, d.Month, d.Day)
-		  Var sql As String = "SELECT physics_tasking.patients.patient_id, " _
-		  + "physics_tasking.patients.mrn As mrn, " _
-		  + "physics_tasking.patients.first_name As first_name, " _
-		  + "physics_tasking.patients.family_name As family_name " _
+		  Var sql As String = "SELECT physics_tasking.plans.plan_id AS plan_id " _
 		  + "FROM physics_tasking.plans " _
 		  + "INNER JOIN physics_tasking.patients USING (patient_id) " _
+		  + "INNER JOIN physics_tasking.plan_types USING (plan_type_id) " _
+		  + "INNER JOIN physics_tasking.sites USING (site_id) " _
 		  + "WHERE physics_tasking.plans.is_completed = 1 " _
 		  + "AND MONTH(due_date)  = " + Month_DatePicker.SelectedDate.Month.ToString  + " " _
 		  + "AND YEAR(due_date) = " + Month_DatePicker.SelectedDate.Year.ToString + " " _
-		  + "GROUP BY physics_tasking.plans.patient_id; "
-		  
+		  + "ORDER BY physics_tasking.plans.due_date ASC"
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
-		    keys.Append( rs.Column("patient_id").IntegerValue)
+		    keys.Append( rs.Column("plan_id").IntegerValue)
 		    
 		    rs.MoveToNextRow
 		  Wend
@@ -376,17 +553,24 @@ End
 		  + "_" + Month_DatePicker.SelectedDate.Year.ToString _
 		  + "_Plans_due_date.csv"
 		  
-		  Patient_List_File.Data = "mrn, Full Name"
+		  Patient_List_File.Data = "mrn,Full Name,Site, Plan, Due date"
 		  
-		  Var sql As String = "SELECT physics_tasking.patients.mrn As mrn, " _
-		  + "physics_tasking.patients.first_name As first_name, " _
-		  + "physics_tasking.patients.family_name As family_name " _
+		  Var sql As String = "SELECT physics_tasking.plans.plan_id AS plan_id, " _
+		  + "physics_tasking.patients.mrn AS mrn, " _
+		  + "physics_tasking.patients.first_name AS first_name, " _
+		  + "physics_tasking.patients.family_name AS family_name, " _
+		  + "physics_tasking.plan_types.name AS plan_type_name, " _
+		  + "physics_tasking.sites.name As site, " _
+		  + "physics_tasking.sites.is_uppercase AS is_uppercase, " _
+		  + "physics_tasking.plans.due_date AS due_date " _
 		  + "FROM physics_tasking.plans " _
 		  + "INNER JOIN physics_tasking.patients USING (patient_id) " _
+		  + "INNER JOIN physics_tasking.plan_types USING (plan_type_id) " _
+		  + "INNER JOIN physics_tasking.sites USING (site_id) " _
 		  + "WHERE physics_tasking.plans.is_completed = 1 " _
 		  + "AND MONTH(due_date)  = " + Month_DatePicker.SelectedDate.Month.ToString  + " " _
 		  + "AND YEAR(due_date) = " + Month_DatePicker.SelectedDate.Year.ToString + " " _
-		  + "GROUP BY physics_tasking.plans.patient_id; "
+		  + "ORDER BY physics_tasking.plans.due_date ASC"
 		  
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
@@ -397,6 +581,25 @@ End
 		    
 		    s = s + rs.Column("first_name").StringValue.Trim.Titlecase + " " _
 		    + rs.Column("family_name").StringValue.Trim.Uppercase + ","
+		    
+		    If rs.Column("is_uppercase").BooleanValue Then
+		      
+		      s = s + rs.Column("site").StringValue.Trim.Uppercase + ","
+		      
+		    Else
+		      
+		      s = s + rs.Column("site").StringValue.Trim.Titlecase + ","
+		      
+		    End If
+		    
+		    s = s + rs.Column("plan_type_name").StringValue.Trim
+		    
+		    Var due_date As DateTime = rs.Column("due_date").DateTimeValue
+		    s = s + due_date.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None)
+		    
+		    
+		    
+		    
 		    
 		    Patient_List_File.Data = Patient_List_File.Data.Operator_Add(Chr(13))
 		    Patient_List_File.Data = Patient_List_File.Data.Operator_Add(s)
@@ -460,7 +663,7 @@ End
 	#tag Event
 		Sub Opening()
 		  Me.Style = Session.WEBSTYLE_Label
-		  Me.Text = "Patients = " + Self.RowCount.ToString
+		  Me.Text = "Plans = " + Self.RowCount.ToString
 		End Sub
 	#tag EndEvent
 #tag EndEvents

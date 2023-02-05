@@ -3,7 +3,10 @@ Protected Class App
 Inherits WebApplication
 	#tag Event
 		Sub Opening(args() as String)
-		  Call Daemonize
+		  #If Not DebugBuild Then
+		    Call Daemonize
+		  #EndIf
+		  
 		  Var db_status As Boolean = Physics_Tasking.isDatabase_Online
 		  Physics_Tasking.POPULATE_Main_Data
 		  'Points_Container = New WEBCONTAINER_Points

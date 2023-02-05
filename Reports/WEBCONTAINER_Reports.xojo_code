@@ -41,8 +41,8 @@ Begin WebContainer WEBCONTAINER_Reports
       LockVertical    =   False
       PanelCount      =   2
       Scope           =   2
-      SelectedPanelIndex=   0
-      TabDefinition   =   "Plans\rTasks\rPatients Monthly"
+      SelectedPanelIndex=   3
+      TabDefinition   =   "Plans\rTasks\rPlan Monthly\rPatients Monthly"
       TabIndex        =   3
       Tooltip         =   ""
       Top             =   20
@@ -83,8 +83,11 @@ End
 		  Case 2
 		    
 		    
-		    Panel_Container = New WEBCONTAINER_Reports_Patients_Monthly
+		    Panel_Container = New WEBCONTAINER_Reports_Plans_Monthly
 		    
+		  Case 3 
+		    
+		    Panel_Container = New WEBCONTAINER_Reports_Patients_Monthly
 		    
 		    
 		  End

@@ -993,9 +993,10 @@ End
 	#tag Event
 		Sub Pressed()
 		  dialog.Message = "Do you want to delete this plan"
-		  dialog.Explanation = "Caution: Delete in permanent. "
+		  dialog.Explanation = "Caution: Delete is permanent!!! "
 		  
 		  dialog.ActionButton.Caption = "Delete"
+		  
 		  dialog.ActionButton.Default = False
 		  
 		  dialog.CancelButton.Visible = True            
