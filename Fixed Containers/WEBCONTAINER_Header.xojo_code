@@ -21,7 +21,6 @@ Begin WebContainer WEBCONTAINER_Header
    Width           =   870
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebImageViewer ImageViewer_App_Logo
       ControlID       =   ""
@@ -66,7 +65,7 @@ Begin WebContainer WEBCONTAINER_Header
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      Picture         =   265486335
+      Picture         =   2129203199
       Scope           =   0
       SVGData         =   ""
       TabIndex        =   1
@@ -370,12 +369,13 @@ End
 #tag Events ImageViewer_Hospital_Logo
 	#tag Event
 		Sub Opening()
-		  Var p As Picture = New Picture( Me.Width, Me.Height)
-		  p.Graphics.DrawPicture( Me.Picture, _
-		  0, 0, p.Width, p.Height, _
-		  0, 0, Me.Picture.Width, Me.Picture.Height)
+		  Var aPicture As Picture = New Picture(Me.Width,Me.Height)
 		  
-		  Me.Picture = p // Automatically converts Picture to WebPicture
+		  aPicture.graphics.drawpicture( Me.Picture, 0, 0, Me.width, Me.height, _
+		  0, 0, Me.Picture.width, Me.Picture.height)
+		  
+		  Me.Picture =CType(aPicture, WebPicture)
+		  
 		  'Me.Style.Value("border-style") = "double"
 		  Me.Style.BackgroundColor = &cFFFFFF00
 		  

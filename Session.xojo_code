@@ -146,7 +146,7 @@ Inherits WebSession
 	#tag Constant, Name = confirm_idle_Timeout, Type = Double, Dynamic = False, Default = \"30", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = session_Idle_timeout, Type = Double, Dynamic = False, Default = \"300", Scope = Public
+	#tag Constant, Name = session_Idle_timeout, Type = Double, Dynamic = False, Default = \"3600", Scope = Public
 	#tag EndConstant
 
 

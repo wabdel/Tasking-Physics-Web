@@ -21,7 +21,6 @@ Begin WebContainer WEBCONTAINER_Hospital_Logo
    Width           =   480
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebImageViewer Hospital_Logo_ImageViewer
       ControlID       =   ""
@@ -38,7 +37,7 @@ Begin WebContainer WEBCONTAINER_Hospital_Logo
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      Picture         =   265486335
+      Picture         =   2129203199
       Scope           =   2
       SVGData         =   ""
       TabIndex        =   0
@@ -57,6 +56,18 @@ End
 #tag WindowCode
 #tag EndWindowCode
 
+#tag Events Hospital_Logo_ImageViewer
+	#tag Event
+		Sub Opening()
+		  Var aPicture As Picture = New Picture(Me.Width,Me.Height)
+		  
+		  aPicture.graphics.drawpicture( Me.Picture, 0, 0, Me.width, Me.height, _
+		  0, 0, Me.Picture.width, Me.Picture.height)
+		  
+		  Me.Picture =CType(aPicture, WebPicture)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
 		Name="_mPanelIndex"
