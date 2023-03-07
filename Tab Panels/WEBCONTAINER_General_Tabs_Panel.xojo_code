@@ -21,7 +21,6 @@ Begin WebContainer WEBCONTAINER_General_Tabs_Panel
    Width           =   200
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
 End
 #tag EndWebContainerControl
@@ -72,6 +71,10 @@ End
 	#tag Method, Flags = &h0
 		Sub ADD_Tabs_for_General()
 		  Tab_Container.ResizeTo(-1)
+		  
+		  Tab_Container.Append( New WEBCONTAINER_Tab)
+		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
+		  "Calender"
 		  
 		  Tab_Container.Append( New WEBCONTAINER_Tab)
 		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
@@ -188,6 +191,17 @@ End
 		  
 		  
 		  Select Case button_caption
+		  Case "Calender"
+		    
+		    
+		    Central_Container = New WEBCONTAINER_Activity_Calender
+		    Central_Container.LockLeft = True
+		    Central_Container.LockTop = True
+		    Central_Container.EmbedWithin( MainWebPage, _
+		    MainWebPage.General_Tabs_Panel_Container.Width, _
+		    MainWebPage.Header_Container.Top + MainWebPage.Header_Container.Height, _
+		    Central_Container.Width, Central_Container.Height)
+		    
 		  Case "Plans"
 		    
 		    
