@@ -5,6 +5,7 @@ Protected Class CLASS_Plan_Record
 		  Patient_Record = New Physics_Tasking.CLASS_Patient_Record
 		  Plan_Type_Record = New Physics_Tasking.CLASS_Plan_Type_Record
 		  User_Record = New Physics_Tasking.CLASS_User_Record
+		  Physician_Record = New Physics_Tasking.CLASS_User_Record
 		  Assigned_by_User_Record = New Physics_Tasking.CLASS_User_Record
 		  
 		  
@@ -225,6 +226,7 @@ Protected Class CLASS_Plan_Record
 			    Patient_Record.id = rs.Column("patient_id").IntegerValue
 			    Plan_Type_Record.id = rs.Column("plan_type_id").IntegerValue
 			    User_Record.id = rs.Column("user_id").IntegerValue
+			    Physician_Record.id = rs.Column("physician_id").IntegerValue
 			    assignment_date = rs.Column("assignment_date").DateTimeValue
 			    Assigned_by_User_Record.id = rs.Column("assigned_by_id").IntegerValue
 			    due_date = rs.Column("due_date").DateTimeValue
@@ -260,6 +262,10 @@ Protected Class CLASS_Plan_Record
 
 	#tag Property, Flags = &h0
 		Patient_Record As Physics_Tasking.CLASS_Patient_Record
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		Physician_Record As Physics_Tasking.CLASS_User_Record
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

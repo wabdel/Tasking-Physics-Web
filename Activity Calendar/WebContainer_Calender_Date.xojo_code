@@ -84,68 +84,6 @@ Begin WebContainer WebContainer_Calender_Date
       Width           =   30
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Label1
-      Bold            =   False
-      ControlID       =   ""
-      Enabled         =   True
-      FontName        =   ""
-      FontSize        =   0.0
-      Height          =   38
-      Index           =   -2147483648
-      Indicator       =   0
-      Italic          =   False
-      Left            =   20
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Multiline       =   False
-      Scope           =   2
-      TabIndex        =   2
-      Text            =   "Untitled"
-      TextAlignment   =   0
-      TextColor       =   &c00000000
-      Tooltip         =   ""
-      Top             =   38
-      Underline       =   False
-      Visible         =   True
-      Width           =   140
-      _mPanelIndex    =   -1
-   End
-   Begin WebLabel Label2
-      Bold            =   False
-      ControlID       =   ""
-      Enabled         =   True
-      FontName        =   ""
-      FontSize        =   0.0
-      Height          =   38
-      Index           =   -2147483648
-      Indicator       =   0
-      Italic          =   False
-      Left            =   20
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Multiline       =   False
-      Scope           =   2
-      TabIndex        =   3
-      Text            =   "Untitled"
-      TextAlignment   =   0
-      TextColor       =   &c00000000
-      Tooltip         =   ""
-      Top             =   73
-      Underline       =   False
-      Visible         =   True
-      Width           =   140
-      _mPanelIndex    =   -1
-   End
 End
 #tag EndWebContainerControl
 
@@ -194,21 +132,71 @@ End
 		  End If
 		  
 		  
-		  Var sql As String = "SELECT * FROM plans " _
-		  + "INNER JOIN patients USING(patient_id) " _
+		  Var sql As String = "SELECT user_id, initials, COUNT(*) as total, SUM(is_completed) as completed " _
+		  + "FROM plans " _
 		  + "INNER JOIN users USING(user_id) " _
-		  + "WHERE DATE(due_date) = DATE('" + d_calender_date.SQLDate + "');"
+		  + "WHERE DATE(due_date) = '"+ d_calender_date.SQLDate + "' " _
+		  + "GROUP BY user_id"
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
-		  Label1.Text = ""
-		  Label2.Text = ""
-		  If rs.RowCount > 0 Then
+		  
+		  
+		  
+		  For i As Integer = Plan_Status_WEBCONTAINER.LastIndex To 0 Step -1
 		    
-		    Label1.Text  = rs.RowCount.ToString
-		    Label2.Text = ""
+		    Plan_Status_WEBCONTAINER(i).Close
 		    
+		  Next
+		  
+		  Plan_Status_WEBCONTAINER.ResizeTo(-1)
+		  
+		  Var status_left_position As Integer = 5
+		  Var status_top_position As Integer = Date_Label.Height + 5
+		  
+		  While Not rs.AfterLastRow
 		    
-		  End If
+		    Plan_Status_WEBCONTAINER.Add (New WEBCONTAINER_Plan_Status)
+		    
+		    Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).EmbedWithin( Self, _
+		    status_left_position, status_top_position, _
+		    Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Width, _
+		    Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Height)
+		    
+		    Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).user_id = _
+		    rs.Column("user_id").IntegerValue
+		    
+		    status_left_position = status_left_position + _
+		    Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Width + 5
+		    
+		    Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Initials_Label.Text = _
+		    rs.Column("initials").StringValue.Trim.Uppercase
+		    
+		    Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("text-align") = "center;"
+		    Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("font-size") = "12px;"
+		    Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("color") = "white"
+		    
+		    If status_left_position > Self.width - 10 - Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Width Then
+		      
+		      status_left_position = 5
+		      status_top_position = status_top_position + Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Height + 5
+		      
+		    End If
+		    
+		    Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("background") = _
+		     "linear-gradient(to right, #009051 0%, " _
+		    +"#009051 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
+		    +"#941100 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
+		    + "#941100 100%);"
+		     
+		    'If rs.Column("name").StringValue.Lowercase.IndexOf("brachy") > -1 Then
+		    '
+		    'Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Style.Value("border-radius") = "10px;"
+		    '
+		    'End If
+		    
+		    rs.MoveToNextRow
+		    
+		  Wend
 		  
 		  
 		  
@@ -235,28 +223,28 @@ End
 		Sub UPDATE_Theme()
 		  If d_calender_date.DayOfWeek > 5 Then
 		    
-		    Me.Style.BackgroundColor = Color.Yellow
-		    
+		    Me.Style.BackgroundColor = &cD6D6D600
 		  Else
 		    
 		    Me.Style.BackgroundColor = Color.White
 		    
 		  End If
 		  
+		  
+		  
 		  Date_Label.Style = New WebStyle
 		  Month_Label.Style = New WebStyle
 		  If d_calender_date.Month <> calender_month.Month Or d_calender_date.Year <> calender_month.Year Then
 		    
-		    
-		    Date_Label.Style.Value("color") = "#000000;"
-		    Month_Label.Style.Value("color") = "#000000;"
-		    
+		    Date_Label.Style.Value("color") = "#909090;"
+		    Month_Label.Style.Value("color") = "#909090;"
+		    Month_Label.Italic = True
+		    Date_Label.Italic = True
 		    
 		  Else
 		    
-		    Date_Label.Style.Value("color") = "#000000;"
-		    Month_Label.Style.Value("color") = "#000000;"
-		    
+		    Date_Label.Style.Value("color") = "#121212;"
+		    Month_Label.Style.Value("color") = "#121212;"
 		    
 		  End If
 		  
@@ -276,6 +264,10 @@ End
 
 	#tag Property, Flags = &h21
 		Private d_calender_date As DateTime
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private Plan_Status_WEBCONTAINER() As WEBCONTAINER_Plan_Status
 	#tag EndProperty
 
 

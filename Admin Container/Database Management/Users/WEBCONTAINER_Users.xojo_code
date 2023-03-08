@@ -21,7 +21,6 @@ Begin WebContainer WEBCONTAINER_Users Implements WebDataSource
    Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebListBox Users_ListBox
       ColumnCount     =   9

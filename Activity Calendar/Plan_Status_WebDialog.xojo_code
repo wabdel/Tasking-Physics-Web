@@ -1,38 +1,38 @@
-#tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Activity_Calender
+#tag WebPage
+Begin WebDialog Plan_Status_WebDialog
    Compatibility   =   ""
    ControlID       =   ""
    Enabled         =   True
-   Height          =   1000
+   Height          =   392
+   Index           =   -2147483648
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
    Left            =   0
    LockBottom      =   False
    LockHorizontal  =   False
-   LockLeft        =   True
+   LockLeft        =   False
    LockRight       =   False
-   LockTop         =   True
+   LockTop         =   False
    LockVertical    =   False
-   ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1300
+   Width           =   389
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin WebButton Forward_Month_Button
+   Begin WebButton Close_Button
       AllowAutoDisable=   False
       Cancel          =   False
-      Caption         =   ">"
+      Caption         =   "Close"
       ControlID       =   ""
-      Default         =   False
+      Default         =   True
       Enabled         =   True
       Height          =   38
       Index           =   -2147483648
       Indicator       =   1
-      Left            =   719
+      Left            =   145
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -40,93 +40,16 @@ Begin WebContainer WEBCONTAINER_Activity_Calender
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      Scope           =   2
+      Scope           =   0
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
-      Top             =   20
+      Top             =   334
       Visible         =   True
-      Width           =   40
+      Width           =   100
       _mPanelIndex    =   -1
    End
-   Begin WebButton Forward_Year_Button
-      AllowAutoDisable=   False
-      Cancel          =   False
-      Caption         =   ">>"
-      ControlID       =   ""
-      Default         =   False
-      Enabled         =   True
-      Height          =   38
-      Index           =   -2147483648
-      Indicator       =   1
-      Left            =   767
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Scope           =   2
-      TabIndex        =   1
-      Tooltip         =   ""
-      Top             =   20
-      Visible         =   True
-      Width           =   50
-      _mPanelIndex    =   -1
-   End
-   Begin WebButton Backward_Month_Button
-      AllowAutoDisable=   False
-      Cancel          =   False
-      Caption         =   "<"
-      ControlID       =   ""
-      Default         =   False
-      Enabled         =   True
-      Height          =   38
-      Index           =   -2147483648
-      Indicator       =   1
-      Left            =   542
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Scope           =   2
-      TabIndex        =   2
-      Tooltip         =   ""
-      Top             =   20
-      Visible         =   True
-      Width           =   40
-      _mPanelIndex    =   -1
-   End
-   Begin WebButton Backward_Year_Button
-      AllowAutoDisable=   False
-      Cancel          =   False
-      Caption         =   "<<"
-      ControlID       =   ""
-      Default         =   False
-      Enabled         =   True
-      Height          =   38
-      Index           =   -2147483648
-      Indicator       =   1
-      Left            =   484
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Scope           =   2
-      TabIndex        =   3
-      Tooltip         =   ""
-      Top             =   20
-      Visible         =   True
-      Width           =   50
-      _mPanelIndex    =   -1
-   End
-   Begin WebLabel Month_Label
+   Begin WebLabel MRN_Label
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -134,9 +57,9 @@ Begin WebContainer WEBCONTAINER_Activity_Calender
       FontSize        =   0.0
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   0
+      Indicator       =   ""
       Italic          =   False
-      Left            =   599
+      Left            =   49
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -145,19 +68,20 @@ Begin WebContainer WEBCONTAINER_Activity_Calender
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
-      Scope           =   2
-      TabIndex        =   4
-      Text            =   "JAN 2023"
-      TextAlignment   =   2
+      Scope           =   0
+      TabIndex        =   1
+      TabStop         =   True
+      Text            =   "MRN :"
+      TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
       Top             =   20
       Underline       =   False
       Visible         =   True
-      Width           =   112
+      Width           =   100
       _mPanelIndex    =   -1
    End
-   Begin WebLabel SUN_Label
+   Begin WebLabel MRN_Value_Label
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -165,7 +89,40 @@ Begin WebContainer WEBCONTAINER_Activity_Calender
       FontSize        =   0.0
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   0
+      indicator       =   0
+      Italic          =   False
+      Left            =   157
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      PanelIndex      =   0
+      Scope           =   0
+      TabIndex        =   2
+      TabStop         =   True
+      Text            =   "123456"
+      TextAlignment   =   1
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   20
+      Underline       =   False
+      Visible         =   True
+      Width           =   141
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Patient_Name_Label
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      indicator       =   0
       Italic          =   False
       Left            =   20
       LockBottom      =   False
@@ -176,19 +133,87 @@ Begin WebContainer WEBCONTAINER_Activity_Calender
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
+      Scope           =   0
+      TabIndex        =   3
+      TabStop         =   True
+      Text            =   "Patient name :"
+      TextAlignment   =   3
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   58
+      Underline       =   False
+      Visible         =   True
+      Width           =   129
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Patient_Name_Value_Label
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      indicator       =   0
+      Italic          =   False
+      Left            =   157
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      PanelIndex      =   0
+      Scope           =   0
+      TabIndex        =   4
+      TabStop         =   True
+      Text            =   "John SMITH"
+      TextAlignment   =   1
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   58
+      Underline       =   False
+      Visible         =   True
+      Width           =   230
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Planner_Label
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      indicator       =   0
+      Italic          =   False
+      Left            =   48
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   5
-      Text            =   "SUN"
-      TextAlignment   =   2
+      TabStop         =   True
+      Text            =   "Planner :"
+      TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   66
+      Top             =   226
       Underline       =   False
       Visible         =   True
-      Width           =   180
+      Width           =   100
       _mPanelIndex    =   -1
    End
-   Begin WebLabel MON_Label
+   Begin WebLabel Planner_Value_Label
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -196,9 +221,9 @@ Begin WebContainer WEBCONTAINER_Activity_Calender
       FontSize        =   0.0
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   0
+      indicator       =   0
       Italic          =   False
-      Left            =   200
+      Left            =   156
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -207,19 +232,21 @@ Begin WebContainer WEBCONTAINER_Activity_Calender
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   6
-      Text            =   "MON"
-      TextAlignment   =   2
+      TabStop         =   True
+      Text            =   "123456"
+      TextAlignment   =   1
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   66
+      Top             =   226
       Underline       =   False
       Visible         =   True
-      Width           =   180
+      Width           =   213
       _mPanelIndex    =   -1
    End
-   Begin WebLabel TUE_Label
+   Begin WebLabel Physician_Label
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -227,9 +254,9 @@ Begin WebContainer WEBCONTAINER_Activity_Calender
       FontSize        =   0.0
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   0
+      indicator       =   0
       Italic          =   False
-      Left            =   380
+      Left            =   19
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -238,19 +265,21 @@ Begin WebContainer WEBCONTAINER_Activity_Calender
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   7
-      Text            =   "TUE"
-      TextAlignment   =   2
+      TabStop         =   True
+      Text            =   "Physician :"
+      TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   66
+      Top             =   264
       Underline       =   False
       Visible         =   True
-      Width           =   180
+      Width           =   129
       _mPanelIndex    =   -1
    End
-   Begin WebLabel WED_Label
+   Begin WebLabel Physician_Value_Label
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -258,9 +287,9 @@ Begin WebContainer WEBCONTAINER_Activity_Calender
       FontSize        =   0.0
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   0
+      indicator       =   0
       Italic          =   False
-      Left            =   560
+      Left            =   156
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -269,19 +298,21 @@ Begin WebContainer WEBCONTAINER_Activity_Calender
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   8
-      Text            =   "WED"
-      TextAlignment   =   2
+      TabStop         =   True
+      Text            =   "John SMITH"
+      TextAlignment   =   1
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   66
+      Top             =   264
       Underline       =   False
       Visible         =   True
-      Width           =   180
+      Width           =   202
       _mPanelIndex    =   -1
    End
-   Begin WebLabel THU_Label
+   Begin WebLabel Site_Label
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -289,9 +320,9 @@ Begin WebContainer WEBCONTAINER_Activity_Calender
       FontSize        =   0.0
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   0
+      indicator       =   0
       Italic          =   False
-      Left            =   740
+      Left            =   49
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -300,19 +331,21 @@ Begin WebContainer WEBCONTAINER_Activity_Calender
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   9
-      Text            =   "THU"
-      TextAlignment   =   2
+      TabStop         =   True
+      Text            =   "Site :"
+      TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   66
+      Top             =   123
       Underline       =   False
       Visible         =   True
-      Width           =   180
+      Width           =   100
       _mPanelIndex    =   -1
    End
-   Begin WebLabel FRI_Label
+   Begin WebLabel Site_Value_Label
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -320,9 +353,9 @@ Begin WebContainer WEBCONTAINER_Activity_Calender
       FontSize        =   0.0
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   0
+      indicator       =   0
       Italic          =   False
-      Left            =   920
+      Left            =   157
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -331,19 +364,21 @@ Begin WebContainer WEBCONTAINER_Activity_Calender
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   10
-      Text            =   "FRI"
-      TextAlignment   =   2
+      TabStop         =   True
+      Text            =   "123456"
+      TextAlignment   =   1
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   66
+      Top             =   123
       Underline       =   False
       Visible         =   True
-      Width           =   180
+      Width           =   213
       _mPanelIndex    =   -1
    End
-   Begin WebLabel SAT_Label
+   Begin WebLabel Plan_Type_Label
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -351,9 +386,9 @@ Begin WebContainer WEBCONTAINER_Activity_Calender
       FontSize        =   0.0
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   0
+      indicator       =   0
       Italic          =   False
-      Left            =   1100
+      Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -362,240 +397,103 @@ Begin WebContainer WEBCONTAINER_Activity_Calender
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   11
-      Text            =   "SAT"
-      TextAlignment   =   2
+      TabStop         =   True
+      Text            =   "Plan Type :"
+      TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   66
+      Top             =   161
       Underline       =   False
       Visible         =   True
-      Width           =   180
+      Width           =   129
       _mPanelIndex    =   -1
    End
-   Begin WebTimer REFRESH_Timer
+   Begin WebLabel Plan_type_Value_Label
+      Bold            =   False
       ControlID       =   ""
       Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
       Index           =   -2147483648
-      Location        =   0
+      indicator       =   0
+      Italic          =   False
+      Left            =   157
+      LockBottom      =   False
       LockedInPosition=   False
-      Period          =   1000
-      RunMode         =   0
-      Scope           =   2
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      PanelIndex      =   0
+      Scope           =   0
       TabIndex        =   12
       TabStop         =   True
+      Text            =   "John SMITH"
+      TextAlignment   =   1
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   161
+      Underline       =   False
+      Visible         =   True
+      Width           =   202
       _mPanelIndex    =   -1
    End
 End
-#tag EndWebContainerControl
+#tag EndWebPage
 
 #tag WindowCode
-	#tag Event
-		Sub Opening()
-		  Calender_Month = New DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
-		  DRAW_Date_WebContainers
-		  POPULATE_Calender
-		  REFRESH_Timer.RunMode = WebTimer.RunModes.Multiple
-		  UPDATE_Theme
-		End Sub
-	#tag EndEvent
-
-	#tag Event
-		Sub Shown()
-		  
-		End Sub
-	#tag EndEvent
-
-
-	#tag Method, Flags = &h21
-		Private Sub DRAW_Date_WebContainers()
-		  Var left_position_Initial As Integer = 20
-		  Var top_position As Integer = SUN_Label.Top + SUN_Label.Height + 10
-		  
-		  For row As Integer = 0 To 5
-		    
-		    Var left_position As Integer = left_position_Initial
-		    
-		    For column As Integer = 0 To 6
-		      
-		      CALENDER_DATE_WEBCONTAINER.add( New WebContainer_Calender_Date)
-		      
-		      CALENDER_DATE_WEBCONTAINER( CALENDER_DATE_WEBCONTAINER.LastIndex).EmbedWithin( Self, _
-		      left_position + column * CALENDER_DATE_WEBCONTAINER( CALENDER_DATE_WEBCONTAINER.LastIndex).Width, _
-		      top_position + row * CALENDER_DATE_WEBCONTAINER( CALENDER_DATE_WEBCONTAINER.LastIndex).Height, _
-		      CALENDER_DATE_WEBCONTAINER( CALENDER_DATE_WEBCONTAINER.LastIndex).Width, _
-		      CALENDER_DATE_WEBCONTAINER( CALENDER_DATE_WEBCONTAINER.LastIndex).Height)
-		      
-		    Next
-		    
-		  Next
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Sub ENABLE_Arrows()
-		  If Calender_Month.Month = DateTime.Now.Month _
-		    And Calender_Month.Year = DateTime.Now.Year Then
-		    
-		    Forward_Month_Button.Enabled = False
-		    Forward_Month_Button.Visible = False
-		    
-		    Forward_Year_Button.Enabled = False
-		    Forward_Year_Button.Visible = False
-		    
-		  Else
-		    
-		    Forward_Month_Button.Enabled = True
-		    Forward_Month_Button.Visible = True
-		    
-		    Forward_Year_Button.Enabled = True
-		    Forward_Year_Button.Visible = True
-		    
-		  End If
-		  
-		  
-		  Backward_Month_Button.Enabled = True
-		  Backward_Month_Button.Visible = True
-		  
-		  Backward_Year_Button.Enabled = True
-		  Backward_Year_Button.Visible = True
-		  
-		  Me.SetFocus
-		  
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Sub POPULATE_Calender()
-		  Month_Label.Text = Date_Module.Get_Month_Abbr( Calender_Month.Month) + " " + Calender_Month.Year.ToText
-		  
-		  
-		  
-		  Var d As DateTime = Calender_Month
-		  
-		  While d.Day > 1
-		    
-		    d = d.SubtractInterval( 0, 0, 1)
-		    
-		  Wend
-		  
-		  While d.DayOfWeek > 1
-		    
-		    d = d.SubtractInterval( 0, 0, 1)
-		    
-		  Wend
-		  
-		  For i As Integer = 0 To CALENDER_DATE_WEBCONTAINER.LastIndex
-		    
-		    CALENDER_DATE_WEBCONTAINER(i).DRAW( d, Calender_Month)
-		    
-		    d = d.AddInterval(0, 0, 1)
-		    
-		  Next
-		  
-		  ENABLE_Arrows
-		  
-		  For Each item As WebContainer_Calender_Date In CALENDER_DATE_WEBCONTAINER
-		    
-		    Item.UPDATE_Theme
-		    
-		  Next
-		  
-		  Latest_UPDATE = App.last_database_update
-		  
-		End Sub
-	#tag EndMethod
-
 	#tag Method, Flags = &h0
-		Sub UPDATE_Theme()
-		  'Me.Style = Theme_Colors.Material_BaseLine.Surface
-		  'Month_Label.Style = Theme_Colors.Material_BaseLine.On_Surface
+		Sub POPULATE()
+		  MRN_Value_Label.Text = Plan_Record.Patient_Record.mrn
+		  Patient_Name_Value_Label.Text = Plan_Record.Patient_Record.full_name
 		  
-		  Month_Label.Style.ForegroundColor = Color.White
+		  Planner_Value_Label.Text = Plan_Record.User_Record.full_name
+		  Physician_Value_Label.Text = Plan_Record.Physician_Record.full_name
+		  
+		  Select Case Plan_Record.Plan_Type_Record.Site_Record.is_Uppercase
+		  Case True
+		    
+		    Site_Value_Label.Text = Plan_Record.Plan_Type_Record.Site_Record.name.Uppercase
+		    
+		  Case False
+		    
+		    Site_Value_Label.Text = Plan_Record.Plan_Type_Record.Site_Record.name.Titlecase
+		    
+		  End Select
 		  
 		  
-		  SUN_Label.Style.ForegroundColor = Color.White
-		  MON_Label.Style.ForegroundColor = Color.White
-		  TUE_Label.Style.ForegroundColor = Color.White
-		  WED_Label.Style.ForegroundColor = Color.White
-		  THU_Label.Style.ForegroundColor = Color.White
-		  FRI_Label.Style.ForegroundColor = Color.White
-		  SAT_Label.Style.ForegroundColor = Color.White
-		  
-		  
+		  Select Case Plan_Record.Plan_Type_Record.is_Uppercase
+		  Case True
+		    
+		    Plan_type_Value_Label.Text = Plan_Record.Plan_Type_Record.name.Uppercase
+		    
+		  Case False
+		    
+		    Plan_type_Value_Label.Text = Plan_Record.Plan_Type_Record.name.Titlecase
+		    
+		  End Select
 		  
 		End Sub
 	#tag EndMethod
 
 
 	#tag Property, Flags = &h0
-		CALENDER_DATE_WEBCONTAINER() As WebContainer_Calender_Date
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		Calender_Month As DateTime
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private Latest_UPDATE As DateTime
+		Plan_Record As Physics_Tasking.CLASS_Plan_Record
 	#tag EndProperty
 
 
 #tag EndWindowCode
 
-#tag Events Forward_Month_Button
+#tag Events Close_Button
 	#tag Event
 		Sub Pressed()
-		  Calender_Month = Calender_Month.AddInterval(0, 1, 0)
-		  
-		  POPULATE_Calender
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Forward_Year_Button
-	#tag Event
-		Sub Pressed()
-		  Calender_Month = Calender_Month.AddInterval(1, 0, 0)
-		  If Calender_Month.SecondsFrom1970 > DateTime.Now.SecondsFrom1970 Then
-		    
-		    Calender_Month = New DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
-		    
-		  End If
-		  
-		  POPULATE_Calender
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Backward_Month_Button
-	#tag Event
-		Sub Pressed()
-		  Calender_Month = Calender_Month.SubtractInterval(0, 1, 0)
-		  
-		  POPULATE_Calender
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Backward_Year_Button
-	#tag Event
-		Sub Pressed()
-		  Calender_Month = Calender_Month.SubtractInterval(1, 0, 0)
-		  
-		  POPULATE_Calender
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events REFRESH_Timer
-	#tag Event
-		Sub Run()
-		  If App.last_database_update <> Latest_UPDATE Then
-		    
-		    POPULATE_Calender
-		    
-		  End If
-		  
+		  Self.Close
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -605,6 +503,14 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue="-1"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Index"
+		Visible=false
+		Group="ID"
+		InitialValue="-2147483648"
 		Type="Integer"
 		EditorType=""
 	#tag EndViewProperty
@@ -657,59 +563,87 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="LockBottom"
+		Name="Height"
 		Visible=true
 		Group="Behavior"
-		InitialValue="False"
+		InitialValue="400"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LayoutType"
+		Visible=true
+		Group="Behavior"
+		InitialValue="LayoutTypes.Fixed"
+		Type="LayoutTypes"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Fixed"
+			"1 - Flex"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LockBottom"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockHorizontal"
-		Visible=true
+		Visible=false
 		Group="Behavior"
-		InitialValue="False"
+		InitialValue=""
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockLeft"
-		Visible=true
+		Visible=false
 		Group="Behavior"
-		InitialValue="True"
+		InitialValue=""
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockRight"
-		Visible=true
+		Visible=false
 		Group="Behavior"
-		InitialValue="False"
+		InitialValue=""
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockTop"
-		Visible=true
+		Visible=false
 		Group="Behavior"
-		InitialValue="True"
+		InitialValue=""
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockVertical"
-		Visible=true
+		Visible=false
 		Group="Behavior"
-		InitialValue="False"
+		InitialValue=""
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Visible"
-		Visible=true
+		Visible=false
 		Group="Behavior"
 		InitialValue=""
 		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Width"
+		Visible=true
+		Group="Behavior"
+		InitialValue="600"
+		Type="Integer"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -735,20 +669,6 @@ End
 		InitialValue=""
 		Type="String"
 		EditorType="MultiLineEditor"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="ScrollDirection"
-		Visible=true
-		Group="Behavior"
-		InitialValue="ScrollDirections.None"
-		Type="WebContainer.ScrollDirections"
-		EditorType="Enum"
-		#tag EnumValues
-			"0 - None"
-			"1 - Horizontal"
-			"2 - Vertical"
-			"3 - Both"
-		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="TabIndex"
@@ -779,21 +699,9 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="LayoutType"
-		Visible=true
-		Group="View"
-		InitialValue="LayoutTypes.Fixed"
-		Type="LayoutTypes"
-		EditorType="Enum"
-		#tag EnumValues
-			"0 - Fixed"
-			"1 - Flex"
-		#tag EndEnumValues
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="LayoutDirection"
 		Visible=true
-		Group="View"
+		Group="WebView"
 		InitialValue="LayoutDirections.LeftToRight"
 		Type="LayoutDirections"
 		EditorType="Enum"
@@ -803,21 +711,5 @@ End
 			"2 - TopToBottom"
 			"3 - BottomToTop"
 		#tag EndEnumValues
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Width"
-		Visible=false
-		Group=""
-		InitialValue="250"
-		Type="Integer"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Height"
-		Visible=false
-		Group=""
-		InitialValue="250"
-		Type="Integer"
-		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior
