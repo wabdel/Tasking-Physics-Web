@@ -1,9 +1,9 @@
 #tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Date_Header
+Begin WebContainer WEBCONTAINER_Calendar
    Compatibility   =   ""
    ControlID       =   ""
    Enabled         =   True
-   Height          =   30
+   Height          =   700
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -18,19 +18,19 @@ Begin WebContainer WEBCONTAINER_Date_Header
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   150
+   Width           =   1200
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
-   Begin WebCanvas Title_Canvas
+   Begin WEBCONTAINER_Date_Header WEBCONTAINER_Date_Header1
       ControlID       =   ""
-      DiffEngineDisabled=   False
       Enabled         =   True
       Height          =   30
       Index           =   -2147483648
-      Indicator       =   ""
-      Left            =   0
+      Indicator       =   0
+      LayoutDirection =   0
+      LayoutType      =   0
+      Left            =   1050
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -39,11 +39,15 @@ Begin WebContainer WEBCONTAINER_Date_Header
       LockTop         =   True
       LockVertical    =   False
       Scope           =   0
+      ScrollDirection =   0
       TabIndex        =   0
+      title           =   ""
       Tooltip         =   ""
       Top             =   0
       Visible         =   True
       Width           =   150
+      _mDesignHeight  =   0
+      _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
 End
@@ -52,81 +56,80 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Color.Orange
+		  Me.Style.BackgroundColor = Color.Yellow
 		  
-		  
-		  
-		  
+		  Constructt_Dates
 		End Sub
 	#tag EndEvent
 
 
-	#tag Method, Flags = &h0
-		Sub Constructor(id as Integer)
-		  // Calling the overridden superclass constructor.
-		  // Note that this may need modifications if there are multiple constructor choices.
-		  // Possible constructor calls:
-		  // Constructor() -- From WebView
-		  // Constructor() -- From WebUIControl
-		  // Constructor() -- From WebControl
-		  Super.Constructor
+	#tag Method, Flags = &h21
+		Private Sub Constructt_Dates()
+		  Var colums As Integer = 7
+		  Var rows As Integer = 8 
 		  
-		  Select Case id
-		  Case 0
-		    
-		    title = "SUN"
-		  Case 1
-		    title = "MON"
-		  Case 2
-		    title = "TUE"
-		  Case 3
-		    title = "WEB"
-		  Case 4
-		    title = "THU"
-		  Case 5
-		    title = "FRI"
-		  Case 6
-		    title = "SAT"
+		  Date_WebContianer.ResizeTo(-1)
+		  Date_Header_WebContainer.ResizeTo(-1)
+		  
+		  For colum As Integer = 0 To colums - 1
 		    
 		    
-		  End Select
+		    Date_Header_WebContainer.Add( New WEBCONTAINER_Date_Header(colum))
+		    
+		    Date_Header_WebContainer( Date_Header_WebContainer.LastIndex).EmbedWithin( _
+		    Self , _
+		    colum * Date_Header_WebContainer( Date_Header_WebContainer.LastIndex).width, _
+		    0, _
+		    Date_Header_WebContainer( Date_Header_WebContainer.LastIndex).width, _
+		    Date_Header_WebContainer( Date_Header_WebContainer.LastIndex).height)
+		    
+		  Next
+		  
+		  
+		  
+		  '
+		  'For row As Integer = 0 To rows - 1
+		  '
+		  '
+		  '
+		  '
+		  'For colum As Integer = 0 To colums - 1
+		  '
+		  'Date_WebContianer.Add( New WEBCONTAINER_Date)
+		  '
+		  '
+		  'Date_WebContianer( Date_WebContianer.LastIndex).EmbedWithin( _
+		  'Self , _
+		  'colum * Date_WebContianer( Date_WebContianer.LastIndex).width, _
+		  'row * Date_WebContianer( Date_WebContianer.LastIndex).height + Date_Header_WebContainer(0).Height, _
+		  'Date_WebContianer( Date_WebContianer.LastIndex).width, _
+		  'Date_WebContianer( Date_WebContianer.LastIndex).height)
+		  '
+		  '
+		  '
+		  '
+		  '
+		  '
+		  'Next
+		  '
+		  'Next
+		  
+		  
 		End Sub
 	#tag EndMethod
 
 
 	#tag Property, Flags = &h0
-		title As string
+		Date_Header_WebContainer() As WEBCONTAINER_Date_Header
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private Date_WebContianer() As WEBCONTAINER_Date
 	#tag EndProperty
 
 
 #tag EndWindowCode
 
-#tag Events Title_Canvas
-	#tag Event
-		Sub Paint(g as WebGraphics)
-		  Me.Width = Self.Width
-		  Me.Height = Self.Height
-		  
-		  Me.Left = Self.Left
-		  Me.Top = Self.Top
-		  
-		  Var p As New Picture (Me.Width, Me.Height, 32)
-		  p.Graphics.Bold = True
-		  p.Graphics.Italic = True
-		  p.Graphics.FontName = "Helvetica"
-		  p.Graphics.FontSize = 18
-		  p.Graphics.DrawingColor = &cff0000
-		  p.Graphics.DrawText(title, 0, 10)
-		  
-		  g.DrawPicture(p, 0, 0)
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub Opening()
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
 		Name="_mPanelIndex"
@@ -347,13 +350,5 @@ End
 		InitialValue="250"
 		Type="Integer"
 		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="title"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="string"
-		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 #tag EndViewBehavior

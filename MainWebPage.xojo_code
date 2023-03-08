@@ -4,7 +4,7 @@ Begin WebPage MainWebPage
    Compatibility   =   ""
    ControlID       =   ""
    Enabled         =   False
-   Height          =   1600
+   Height          =   1200
    ImplicitInstance=   True
    Index           =   -2147483648
    Indicator       =   0
@@ -18,7 +18,7 @@ Begin WebPage MainWebPage
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
-   MinimumHeight   =   1000
+   MinimumHeight   =   1200
    MinimumWidth    =   1600
    TabIndex        =   0
    Title           =   "Tasking Physics"
@@ -28,7 +28,6 @@ Begin WebPage MainWebPage
    _ImplicitInstance=   False
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
 End
 #tag EndWebPage

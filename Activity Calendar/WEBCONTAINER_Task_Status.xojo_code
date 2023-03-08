@@ -1,9 +1,9 @@
 #tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Calender
+Begin WebContainer WEBCONTAINER_Task_Status
    Compatibility   =   ""
    ControlID       =   ""
    Enabled         =   True
-   Height          =   700
+   Height          =   20
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -18,20 +18,21 @@ Begin WebContainer WEBCONTAINER_Calender
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1200
+   Width           =   25
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
-   Begin WEBCONTAINER_Date_Header WEBCONTAINER_Date_Header1
+   Begin WebLabel Initials_Label
+      Bold            =   False
       ControlID       =   ""
       Enabled         =   True
-      Height          =   30
+      FontName        =   ""
+      FontSize        =   8.0
+      Height          =   20
       Index           =   -2147483648
       Indicator       =   0
-      LayoutDirection =   0
-      LayoutType      =   0
-      Left            =   1050
+      Italic          =   False
+      Left            =   0
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -39,16 +40,17 @@ Begin WebContainer WEBCONTAINER_Calender
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Multiline       =   False
       Scope           =   0
-      ScrollDirection =   0
       TabIndex        =   0
-      title           =   ""
+      Text            =   "Untitled"
+      TextAlignment   =   2
+      TextColor       =   &c00000000
       Tooltip         =   ""
       Top             =   0
+      Underline       =   False
       Visible         =   True
-      Width           =   150
-      _mDesignHeight  =   0
-      _mDesignWidth   =   0
+      Width           =   25
       _mPanelIndex    =   -1
    End
 End
@@ -56,81 +58,31 @@ End
 
 #tag WindowCode
 	#tag Event
-		Sub Opening()
-		  Me.Style.BackgroundColor = Color.Yellow
+		Sub Overflowed(width as integer, height as integer)
 		  
-		  Constructt_Dates
 		End Sub
 	#tag EndEvent
 
 
-	#tag Method, Flags = &h21
-		Private Sub Constructt_Dates()
-		  Var colums As Integer = 7
-		  Var rows As Integer = 8 
-		  
-		  Date_WebContianer.ResizeTo(-1)
-		  Date_Header_WebContainer.ResizeTo(-1)
-		  
-		  For colum As Integer = 0 To colums - 1
-		    
-		    
-		    Date_Header_WebContainer.Add( New WEBCONTAINER_Date_Header(colum))
-		    
-		    Date_Header_WebContainer( Date_Header_WebContainer.LastIndex).EmbedWithin( _
-		    Self , _
-		    colum * Date_Header_WebContainer( Date_Header_WebContainer.LastIndex).width, _
-		    0, _
-		    Date_Header_WebContainer( Date_Header_WebContainer.LastIndex).width, _
-		    Date_Header_WebContainer( Date_Header_WebContainer.LastIndex).height)
-		    
-		  Next
-		  
-		  
-		  
-		  '
-		  'For row As Integer = 0 To rows - 1
-		  '
-		  '
-		  '
-		  '
-		  'For colum As Integer = 0 To colums - 1
-		  '
-		  'Date_WebContianer.Add( New WEBCONTAINER_Date)
-		  '
-		  '
-		  'Date_WebContianer( Date_WebContianer.LastIndex).EmbedWithin( _
-		  'Self , _
-		  'colum * Date_WebContianer( Date_WebContianer.LastIndex).width, _
-		  'row * Date_WebContianer( Date_WebContianer.LastIndex).height + Date_Header_WebContainer(0).Height, _
-		  'Date_WebContianer( Date_WebContianer.LastIndex).width, _
-		  'Date_WebContianer( Date_WebContianer.LastIndex).height)
-		  '
-		  '
-		  '
-		  '
-		  '
-		  '
-		  'Next
-		  '
-		  'Next
-		  
-		  
-		End Sub
-	#tag EndMethod
-
-
 	#tag Property, Flags = &h0
-		Date_Header_WebContainer() As WEBCONTAINER_Date_Header
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private Date_WebContianer() As WEBCONTAINER_Date
+		user_id As Integer
 	#tag EndProperty
 
 
 #tag EndWindowCode
 
+#tag Events Initials_Label
+	#tag Event
+		Sub Pressed()
+		  'Var thedialog As New Plan_Status_WebDialog
+		  'thedialog.show
+		  'thedialog.Plan_Record = New Physics_Tasking.CLASS_Plan_Record
+		  'thedialog.Plan_Record.id = user_id
+		  '
+		  'thedialog.POPULATE
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
 		Name="_mPanelIndex"
@@ -349,6 +301,14 @@ End
 		Visible=false
 		Group=""
 		InitialValue="250"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="user_id"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
 		Type="Integer"
 		EditorType=""
 	#tag EndViewProperty

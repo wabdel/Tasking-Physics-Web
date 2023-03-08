@@ -74,7 +74,7 @@ End
 		  
 		  Tab_Container.Append( New WEBCONTAINER_Tab)
 		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
-		  "Calender"
+		  "Calendar"
 		  
 		  Tab_Container.Append( New WEBCONTAINER_Tab)
 		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
@@ -191,10 +191,10 @@ End
 		  
 		  
 		  Select Case button_caption
-		  Case "Calender"
+		  Case "Calendar"
 		    
 		    
-		    Central_Container = New WEBCONTAINER_Activity_Calender
+		    Central_Container = New WEBCONTAINER_Activity_Calendar
 		    Central_Container.LockLeft = True
 		    Central_Container.LockTop = True
 		    Central_Container.EmbedWithin( MainWebPage, _

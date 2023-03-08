@@ -1,9 +1,9 @@
 #tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Plan_Status
+Begin WebContainer WEBCONTAINER_Date_Header
    Compatibility   =   ""
    ControlID       =   ""
    Enabled         =   True
-   Height          =   20
+   Height          =   30
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -18,20 +18,17 @@ Begin WebContainer WEBCONTAINER_Plan_Status
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   25
+   Width           =   150
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin WebLabel Initials_Label
-      Bold            =   False
+   Begin WebCanvas Title_Canvas
       ControlID       =   ""
+      DiffEngineDisabled=   False
       Enabled         =   True
-      FontName        =   ""
-      FontSize        =   8.0
-      Height          =   20
+      Height          =   30
       Index           =   -2147483648
       Indicator       =   ""
-      Italic          =   False
       Left            =   0
       LockBottom      =   False
       LockedInPosition=   False
@@ -40,17 +37,12 @@ Begin WebContainer WEBCONTAINER_Plan_Status
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      Multiline       =   False
       Scope           =   0
       TabIndex        =   0
-      Text            =   "Untitled"
-      TextAlignment   =   2
-      TextColor       =   &c00000000
       Tooltip         =   ""
       Top             =   0
-      Underline       =   False
       Visible         =   True
-      Width           =   25
+      Width           =   150
       _mPanelIndex    =   -1
    End
 End
@@ -58,28 +50,79 @@ End
 
 #tag WindowCode
 	#tag Event
-		Sub Overflowed(width as integer, height as integer)
+		Sub Opening()
+		  Me.Style.BackgroundColor = Color.Orange
+		  
+		  
+		  
 		  
 		End Sub
 	#tag EndEvent
 
 
+	#tag Method, Flags = &h0
+		Sub Constructor(id as Integer)
+		  // Calling the overridden superclass constructor.
+		  // Note that this may need modifications if there are multiple constructor choices.
+		  // Possible constructor calls:
+		  // Constructor() -- From WebView
+		  // Constructor() -- From WebUIControl
+		  // Constructor() -- From WebControl
+		  Super.Constructor
+		  
+		  Select Case id
+		  Case 0
+		    
+		    title = "SUN"
+		  Case 1
+		    title = "MON"
+		  Case 2
+		    title = "TUE"
+		  Case 3
+		    title = "WEB"
+		  Case 4
+		    title = "THU"
+		  Case 5
+		    title = "FRI"
+		  Case 6
+		    title = "SAT"
+		    
+		    
+		  End Select
+		End Sub
+	#tag EndMethod
+
+
 	#tag Property, Flags = &h0
-		user_id As Integer
+		title As string
 	#tag EndProperty
 
 
 #tag EndWindowCode
 
-#tag Events Initials_Label
+#tag Events Title_Canvas
 	#tag Event
-		Sub Pressed()
-		  'Var thedialog As New Plan_Status_WebDialog
-		  'thedialog.show
-		  'thedialog.Plan_Record = New Physics_Tasking.CLASS_Plan_Record
-		  'thedialog.Plan_Record.id = user_id
-		  '
-		  'thedialog.POPULATE
+		Sub Paint(g as WebGraphics)
+		  Me.Width = Self.Width
+		  Me.Height = Self.Height
+		  
+		  Me.Left = Self.Left
+		  Me.Top = Self.Top
+		  
+		  Var p As New Picture (Me.Width, Me.Height, 32)
+		  p.Graphics.Bold = True
+		  p.Graphics.Italic = True
+		  p.Graphics.FontName = "Helvetica"
+		  p.Graphics.FontSize = 18
+		  p.Graphics.DrawingColor = &cff0000
+		  p.Graphics.DrawText(title, 0, 10)
+		  
+		  g.DrawPicture(p, 0, 0)
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -305,11 +348,11 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="user_id"
+		Name="title"
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Integer"
-		EditorType=""
+		Type="string"
+		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 #tag EndViewBehavior

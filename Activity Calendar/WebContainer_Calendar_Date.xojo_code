@@ -1,5 +1,5 @@
 #tag WebContainerControl
-Begin WebContainer WebContainer_Calender_Date
+Begin WebContainer WebContainer_Calendar_Date
    Compatibility   =   ""
    ControlID       =   ""
    Enabled         =   True
@@ -97,17 +97,17 @@ End
 
 	#tag Event
 		Sub Shown()
-		  DRAW(d_calender_date, calender_month)
+		  DRAW(d_Calendar_date, Calendar_month)
 		End Sub
 	#tag EndEvent
 
 
 	#tag Method, Flags = &h0
 		Sub DRAW(d as DateTime, m as DateTime)
-		  d_calender_date = d
-		  calender_month = m
+		  d_Calendar_date = d
+		  Calendar_month = m
 		  
-		  Date_Label.Text = d_calender_date.Day.ToString
+		  Date_Label.Text = d_Calendar_date.Day.ToString
 		  UPDATE_Theme
 		  'Var top_position As Integer = SUN_Label.Top + SUN_Label.Height + self  + 10
 		  
@@ -119,9 +119,9 @@ End
 		  Date_Label.Left = 180 - 5 - Date_Label.Width
 		  Month_Label.Visible = False
 		  
-		  If d_calender_date.Day = 1 Then
+		  If d_Calendar_date.Day = 1 Then
 		    
-		    Month_Label.Text = Date_Module.Get_Month_Abbr( d_calender_date.Month)
+		    Month_Label.Text = Date_Module.Get_Month_Abbr( d_Calendar_date.Month)
 		    'Month_Label.Left = Self.Left + Self.Width - Month_Label.Width - 5
 		    'Month_Label.Top = Self.Top
 		    Month_Label.Visible = True
@@ -135,7 +135,7 @@ End
 		  Var sql As String = "SELECT user_id, initials, COUNT(*) as total, SUM(is_completed) as completed " _
 		  + "FROM plans " _
 		  + "INNER JOIN users USING(user_id) " _
-		  + "WHERE DATE(due_date) = '"+ d_calender_date.SQLDate + "' " _
+		  + "WHERE DATE(due_date) = '"+ d_Calendar_date.SQLDate + "' " _
 		  + "GROUP BY user_id"
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
@@ -174,6 +174,7 @@ End
 		    Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("text-align") = "center;"
 		    Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("font-size") = "12px;"
 		    Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("color") = "white"
+		    Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("text-shadow") =  "2px 2px 4px #000000;"
 		    
 		    If status_left_position > Self.width - 10 - Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Width Then
 		      
@@ -182,12 +183,14 @@ End
 		      
 		    End If
 		    
-		    Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("background") = _
-		     "linear-gradient(to right, #009051 0%, " _
+		    Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Style.Value("background") = _
+		    "linear-gradient(to right, #009051 0%, " _
 		    +"#009051 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
 		    +"#941100 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
 		    + "#941100 100%);"
-		     
+		    
+		    
+		    Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Style.Value("box-shadow") =  "1px 1px 1px lightblue;"
 		    'If rs.Column("name").StringValue.Lowercase.IndexOf("brachy") > -1 Then
 		    '
 		    'Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Style.Value("border-radius") = "10px;"
@@ -199,7 +202,86 @@ End
 		  Wend
 		  
 		  
+		  status_left_position = 5
+		  If Plan_Status_WEBCONTAINER.LastIndex > -1 Then
+		    
+		    status_top_position = status_top_position + Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Height + 5
+		    
+		  End If
 		  
+		  For i As Integer = Task_Status_WEBCONTAINER.LastIndex To 0 Step -1
+		    
+		    Task_Status_WEBCONTAINER(i).Close
+		    
+		  Next
+		  
+		  Task_Status_WEBCONTAINER.ResizeTo(-1)
+		  
+		  
+		  
+		  sql = "SELECT user_id, initials, COUNT(*) as total, SUM(is_completed) as completed " _
+		  + "FROM scheduled_tasks " _
+		  + "INNER JOIN users USING(user_id) " _
+		  + "WHERE DATE(due_date) = '"+ d_Calendar_date.SQLDate + "' " _
+		  + "GROUP BY user_id;"
+		  
+		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  While Not rs.AfterLastRow
+		    
+		    Task_Status_WEBCONTAINER.Add (New WEBCONTAINER_Task_Status)
+		    
+		    Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).EmbedWithin( Self, _
+		    status_left_position, status_top_position, _
+		    Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Width, _
+		    Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Height)
+		    
+		    Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).user_id = _
+		    rs.Column("user_id").IntegerValue
+		    
+		    status_left_position = status_left_position + _
+		    Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Width + 7
+		    
+		    Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Initials_Label.Text = _
+		    rs.Column("initials").StringValue.Trim.Uppercase
+		    
+		    Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("text-align") = "center;"
+		    Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("font-size") = "12px;"
+		    Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("color") = "white"
+		    Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("text-shadow") =  "2px 2px 4px #000000;"
+		    
+		    
+		    If status_left_position > Self.width - 10 - Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Width Then
+		      
+		      status_left_position = 7
+		      status_top_position = status_top_position + Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Height + 5
+		      
+		    End If
+		    
+		    
+		    'Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Style.Value("background") = _
+		    '"linear-gradient(to right, #002E0B 0%, " _
+		    '+ "#FFFFFF " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
+		    '+ "#FFFFFF " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
+		    '+ "#4A1300 100%);"
+		    
+		    
+		    Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Style.Value("background") = _
+		    "linear-gradient(to right, #009051 0%, " _
+		    +"#009051 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
+		    +"#941100 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
+		    + "#941100 100%);"
+		    Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Style.Value("box-shadow") =  "1px 1px 1px lightblue;"
+		    
+		    Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Style.Value("border-radius") =  "50px 50px;"
+		    'Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Style.Value("border") =  "1px solid #AAAAAA;"
+		    
+		    'Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Style.Value("transform") = "rotate(45deg);"
+		    'Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("transform") = "rotate(-45deg);"
+		    
+		    rs.MoveToNextRow
+		    
+		  Wend
 		  
 		  
 		  
@@ -221,30 +303,28 @@ End
 
 	#tag Method, Flags = &h0
 		Sub UPDATE_Theme()
-		  If d_calender_date.DayOfWeek > 5 Then
+		  If d_Calendar_date.DayOfWeek > 5 Then
 		    
-		    Me.Style.BackgroundColor = &cD6D6D600
+		    Me.Style.BackgroundColor = &c363636
 		  Else
 		    
-		    Me.Style.BackgroundColor = Color.White
+		    Me.Style.BackgroundColor = &c242424
 		    
 		  End If
 		  
-		  
-		  
 		  Date_Label.Style = New WebStyle
 		  Month_Label.Style = New WebStyle
-		  If d_calender_date.Month <> calender_month.Month Or d_calender_date.Year <> calender_month.Year Then
+		  If d_Calendar_date.Month <> Calendar_month.Month Or d_Calendar_date.Year <> Calendar_month.Year Then
 		    
-		    Date_Label.Style.Value("color") = "#909090;"
-		    Month_Label.Style.Value("color") = "#909090;"
+		    Date_Label.Style.Value("color") = "#B7B7B7,"
+		    Month_Label.Style.Value("color") = "#B7B7B7,"
 		    Month_Label.Italic = True
 		    Date_Label.Italic = True
 		    
 		  Else
 		    
-		    Date_Label.Style.Value("color") = "#121212;"
-		    Month_Label.Style.Value("color") = "#121212;"
+		    Date_Label.Style.Value("color") = "#EDEDED;"
+		    Month_Label.Style.Value("color") = "#EDEDED;"
 		    
 		  End If
 		  
@@ -259,15 +339,19 @@ End
 
 
 	#tag Property, Flags = &h21
-		Private calender_month As DateTime
+		Private Calendar_month As DateTime
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private d_calender_date As DateTime
+		Private d_Calendar_date As DateTime
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
 		Private Plan_Status_WEBCONTAINER() As WEBCONTAINER_Plan_Status
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private Task_Status_WEBCONTAINER() As WEBCONTAINER_Task_Status
 	#tag EndProperty
 
 

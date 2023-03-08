@@ -21,7 +21,6 @@ Begin WebContainer WEBCONTAINER_Date
    Width           =   120
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
 End
 #tag EndWebContainerControl

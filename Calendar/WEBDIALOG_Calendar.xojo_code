@@ -1,5 +1,5 @@
 #tag WebPage
-Begin WebDialog WEBDIALOG_Calender
+Begin WebDialog WEBDIALOG_Calendar
    Compatibility   =   ""
    ControlID       =   ""
    Enabled         =   True
@@ -21,7 +21,6 @@ Begin WebDialog WEBDIALOG_Calender
    Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Close_Button
       AllowAutoDisable=   False
@@ -49,7 +48,7 @@ Begin WebDialog WEBDIALOG_Calender
       Width           =   100
       _mPanelIndex    =   -1
    End
-   Begin WEBCONTAINER_Calender WEBCONTAINER_Calender1
+   Begin WEBCONTAINER_Calendar WEBCONTAINER_Calendar1
       ControlID       =   ""
       Enabled         =   True
       Height          =   700

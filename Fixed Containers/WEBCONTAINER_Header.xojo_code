@@ -262,10 +262,10 @@ Begin WebContainer WEBCONTAINER_Header
       Width           =   100
       _mPanelIndex    =   -1
    End
-   Begin WebButton Calender_Button
+   Begin WebButton Calendar_Button
       AllowAutoDisable=   False
       Cancel          =   False
-      Caption         =   "Calender"
+      Caption         =   "Calendar"
       ControlID       =   ""
       Default         =   False
       Enabled         =   False
@@ -512,10 +512,10 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Calender_Button
+#tag Events Calendar_Button
 	#tag Event
 		Sub Pressed()
-		  Var theDialog As New WEBDIALOG_Calender
+		  Var theDialog As New WEBDIALOG_Calendar
 		  theDialog.Show
 		End Sub
 	#tag EndEvent

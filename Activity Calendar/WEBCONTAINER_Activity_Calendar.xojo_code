@@ -1,9 +1,9 @@
 #tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Activity_Calender
+Begin WebContainer WEBCONTAINER_Activity_Calendar
    Compatibility   =   ""
    ControlID       =   ""
    Enabled         =   True
-   Height          =   1000
+   Height          =   900
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -383,8 +383,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calender
       Period          =   1000
       RunMode         =   0
       Scope           =   2
-      TabIndex        =   12
-      TabStop         =   True
+      Top             =   -50.0
       _mPanelIndex    =   -1
    End
 End
@@ -393,9 +392,9 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Calender_Month = New DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
+		  Calendar_Month = New DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
 		  DRAW_Date_WebContainers
-		  POPULATE_Calender
+		  POPULATE_Calendar
 		  REFRESH_Timer.RunMode = WebTimer.RunModes.Multiple
 		  UPDATE_Theme
 		End Sub
@@ -419,13 +418,13 @@ End
 		    
 		    For column As Integer = 0 To 6
 		      
-		      CALENDER_DATE_WEBCONTAINER.add( New WebContainer_Calender_Date)
+		      Calendar_DATE_WEBCONTAINER.add( New WebContainer_Calendar_Date)
 		      
-		      CALENDER_DATE_WEBCONTAINER( CALENDER_DATE_WEBCONTAINER.LastIndex).EmbedWithin( Self, _
-		      left_position + column * CALENDER_DATE_WEBCONTAINER( CALENDER_DATE_WEBCONTAINER.LastIndex).Width, _
-		      top_position + row * CALENDER_DATE_WEBCONTAINER( CALENDER_DATE_WEBCONTAINER.LastIndex).Height, _
-		      CALENDER_DATE_WEBCONTAINER( CALENDER_DATE_WEBCONTAINER.LastIndex).Width, _
-		      CALENDER_DATE_WEBCONTAINER( CALENDER_DATE_WEBCONTAINER.LastIndex).Height)
+		      Calendar_DATE_WEBCONTAINER( Calendar_DATE_WEBCONTAINER.LastIndex).EmbedWithin( Self, _
+		      left_position + column * Calendar_DATE_WEBCONTAINER( Calendar_DATE_WEBCONTAINER.LastIndex).Width, _
+		      top_position + row * Calendar_DATE_WEBCONTAINER( Calendar_DATE_WEBCONTAINER.LastIndex).Height, _
+		      Calendar_DATE_WEBCONTAINER( Calendar_DATE_WEBCONTAINER.LastIndex).Width, _
+		      Calendar_DATE_WEBCONTAINER( Calendar_DATE_WEBCONTAINER.LastIndex).Height)
 		      
 		    Next
 		    
@@ -435,8 +434,8 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub ENABLE_Arrows()
-		  If Calender_Month.Month = DateTime.Now.Month _
-		    And Calender_Month.Year = DateTime.Now.Year Then
+		  If Calendar_Month.Month = DateTime.Now.Month + 1 _
+		    And Calendar_Month.Year = DateTime.Now.Year Then
 		    
 		    Forward_Month_Button.Enabled = False
 		    Forward_Month_Button.Visible = False
@@ -468,12 +467,12 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub POPULATE_Calender()
-		  Month_Label.Text = Date_Module.Get_Month_Abbr( Calender_Month.Month) + " " + Calender_Month.Year.ToText
+		Private Sub POPULATE_Calendar()
+		  Month_Label.Text = Date_Module.Get_Month_Abbr( Calendar_Month.Month) + " " + Calendar_Month.Year.ToText
 		  
 		  
 		  
-		  Var d As DateTime = Calender_Month
+		  Var d As DateTime = Calendar_Month
 		  
 		  While d.Day > 1
 		    
@@ -487,9 +486,9 @@ End
 		    
 		  Wend
 		  
-		  For i As Integer = 0 To CALENDER_DATE_WEBCONTAINER.LastIndex
+		  For i As Integer = 0 To Calendar_DATE_WEBCONTAINER.LastIndex
 		    
-		    CALENDER_DATE_WEBCONTAINER(i).DRAW( d, Calender_Month)
+		    Calendar_DATE_WEBCONTAINER(i).DRAW( d, Calendar_Month)
 		    
 		    d = d.AddInterval(0, 0, 1)
 		    
@@ -497,7 +496,7 @@ End
 		  
 		  ENABLE_Arrows
 		  
-		  For Each item As WebContainer_Calender_Date In CALENDER_DATE_WEBCONTAINER
+		  For Each item As WebContainer_Calendar_Date In Calendar_DATE_WEBCONTAINER
 		    
 		    Item.UPDATE_Theme
 		    
@@ -510,7 +509,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub UPDATE_Theme()
-		  'Me.Style = Theme_Colors.Material_BaseLine.Surface
+		  Me.Style.BackgroundColor = &c121212
 		  'Month_Label.Style = Theme_Colors.Material_BaseLine.On_Surface
 		  
 		  Month_Label.Style.ForegroundColor = Color.White
@@ -531,11 +530,11 @@ End
 
 
 	#tag Property, Flags = &h0
-		CALENDER_DATE_WEBCONTAINER() As WebContainer_Calender_Date
+		Calendar_DATE_WEBCONTAINER() As WebContainer_Calendar_Date
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		Calender_Month As DateTime
+		Calendar_Month As DateTime
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -548,32 +547,32 @@ End
 #tag Events Forward_Month_Button
 	#tag Event
 		Sub Pressed()
-		  Calender_Month = Calender_Month.AddInterval(0, 1, 0)
+		  Calendar_Month = Calendar_Month.AddInterval(0, 1, 0)
 		  
-		  POPULATE_Calender
+		  POPULATE_Calendar
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Forward_Year_Button
 	#tag Event
 		Sub Pressed()
-		  Calender_Month = Calender_Month.AddInterval(1, 0, 0)
-		  If Calender_Month.SecondsFrom1970 > DateTime.Now.SecondsFrom1970 Then
+		  Calendar_Month = Calendar_Month.AddInterval(1, 0, 0)
+		  If Calendar_Month.SecondsFrom1970 > DateTime.Now.SecondsFrom1970 Then
 		    
-		    Calender_Month = New DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
+		    Calendar_Month = New DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
 		    
 		  End If
 		  
-		  POPULATE_Calender
+		  POPULATE_Calendar
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Backward_Month_Button
 	#tag Event
 		Sub Pressed()
-		  Calender_Month = Calender_Month.SubtractInterval(0, 1, 0)
+		  Calendar_Month = Calendar_Month.SubtractInterval(0, 1, 0)
 		  
-		  POPULATE_Calender
+		  POPULATE_Calendar
 		  
 		End Sub
 	#tag EndEvent
@@ -581,9 +580,9 @@ End
 #tag Events Backward_Year_Button
 	#tag Event
 		Sub Pressed()
-		  Calender_Month = Calender_Month.SubtractInterval(1, 0, 0)
+		  Calendar_Month = Calendar_Month.SubtractInterval(1, 0, 0)
 		  
-		  POPULATE_Calender
+		  POPULATE_Calendar
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -592,7 +591,7 @@ End
 		Sub Run()
 		  If App.last_database_update <> Latest_UPDATE Then
 		    
-		    POPULATE_Calender
+		    POPULATE_Calendar
 		    
 		  End If
 		  
