@@ -21,7 +21,6 @@ Begin WebContainer WEBCONTAINER_My_Due_Plans
    Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebLabel My_Plans_Label
       Bold            =   False

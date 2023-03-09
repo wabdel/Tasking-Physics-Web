@@ -132,7 +132,7 @@ End
 		  End If
 		  
 		  
-		  Var sql As String = "SELECT user_id, initials, COUNT(*) as total, SUM(is_completed) as completed " _
+		  Var sql As String = "SELECT user_id, initials, COUNT(*) as total, SUM(is_completed) as completed, is_active " _
 		  + "FROM plans " _
 		  + "INNER JOIN users USING(user_id) " _
 		  + "WHERE DATE(due_date) = '"+ d_Calendar_date.SQLDate + "' " _
@@ -165,6 +165,9 @@ End
 		    Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).user_id = _
 		    rs.Column("user_id").IntegerValue
 		    
+		    Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).date = _
+		    d_Calendar_date
+		    
 		    status_left_position = status_left_position + _
 		    Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Width + 5
 		    
@@ -183,12 +186,23 @@ End
 		      
 		    End If
 		    
-		    Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Style.Value("background") = _
-		    "linear-gradient(to right, #009051 0%, " _
-		    +"#009051 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
-		    +"#941100 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
-		    + "#941100 100%);"
-		    
+		    If rs.Column("is_active").BooleanValue Then
+		      Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Style.Value("background") = _
+		      "linear-gradient(to right, #009051 0%, " _
+		      +"#009051 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
+		      +"#941100 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
+		      + "#941100 100%);"
+		    Else
+		      
+		      Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Style.Value("background") = _
+		      "linear-gradient(to right, #009051 0%, " _
+		      +"#009051 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
+		      +"#f4c430 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
+		      + "#f4c430 100%);"
+		      
+		      '#f0e130
+		      '#f4c430 
+		    End If
 		    
 		    Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Style.Value("box-shadow") =  "1px 1px 1px lightblue;"
 		    'If rs.Column("name").StringValue.Lowercase.IndexOf("brachy") > -1 Then
@@ -239,6 +253,8 @@ End
 		    Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).user_id = _
 		    rs.Column("user_id").IntegerValue
 		    
+		    
+		    
 		    status_left_position = status_left_position + _
 		    Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Width + 7
 		    
@@ -283,7 +299,7 @@ End
 		    
 		  Wend
 		  
-		  
+		  UPDATE_Theme
 		  
 		  'Label1.Text = Date_Label.Left.ToString + ", " + Date_Label.top.ToString
 		  'Label2.Text = Self.Left.ToString + ", " + Self.Top.ToString
@@ -316,8 +332,8 @@ End
 		  Month_Label.Style = New WebStyle
 		  If d_Calendar_date.Month <> Calendar_month.Month Or d_Calendar_date.Year <> Calendar_month.Year Then
 		    
-		    Date_Label.Style.Value("color") = "#B7B7B7,"
-		    Month_Label.Style.Value("color") = "#B7B7B7,"
+		    Date_Label.Style.Value("color") = "#FFFFFF,"
+		    Month_Label.Style.Value("color") = "#C9C9C9,"
 		    Month_Label.Italic = True
 		    Date_Label.Italic = True
 		    

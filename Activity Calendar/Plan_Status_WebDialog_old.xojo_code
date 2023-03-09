@@ -1,9 +1,9 @@
 #tag WebPage
-Begin WebDialog Plan_Status_WebDialog
+Begin WebDialog Plan_Status_WebDialog_old
    Compatibility   =   ""
    ControlID       =   ""
    Enabled         =   True
-   Height          =   468
+   Height          =   392
    Index           =   -2147483648
    Indicator       =   0
    LayoutDirection =   0
@@ -18,20 +18,46 @@ Begin WebDialog Plan_Status_WebDialog
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1154
+   Width           =   1117
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
+   Begin WebButton Close_Button
+      AllowAutoDisable=   False
+      Cancel          =   False
+      Caption         =   "Close"
+      ControlID       =   ""
+      Default         =   True
+      Enabled         =   True
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   1
+      Left            =   503
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Scope           =   2
+      TabIndex        =   0
+      Tooltip         =   ""
+      Top             =   334
+      Visible         =   True
+      Width           =   100
+      _mPanelIndex    =   -1
+   End
    Begin WebListBox Plans_ListBox
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
       Enabled         =   True
       HasHeader       =   True
-      Height          =   382
+      Height          =   306
       HighlightSortedColumn=   True
       Index           =   -2147483648
-      Indicator       =   ""
+      Indicator       =   0
       InitialValue    =   ""
       LastAddedRowIndex=   0
       LastRowIndex    =   0
@@ -47,29 +73,28 @@ Begin WebDialog Plan_Status_WebDialog
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
-      Scope           =   0
+      Scope           =   2
       SearchCriteria  =   ""
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
-      TabIndex        =   0
-      TabStop         =   True
+      TabIndex        =   1
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
-      Width           =   1114
+      Width           =   1077
       _mPanelIndex    =   -1
    End
-   Begin WebButton Close_Button
-      AllowAutoDisable=   False
-      Cancel          =   False
-      Caption         =   "Close"
+   Begin WebLabel Label1
+      Bold            =   False
       ControlID       =   ""
-      Default         =   True
       Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   1
-      Left            =   527
+      Indicator       =   0
+      Italic          =   False
+      Left            =   997
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -77,11 +102,15 @@ Begin WebDialog Plan_Status_WebDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Multiline       =   False
       Scope           =   0
-      TabIndex        =   1
-      TabStop         =   True
+      TabIndex        =   2
+      Text            =   "Untitled"
+      TextAlignment   =   0
+      TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   410
+      Top             =   324
+      Underline       =   False
       Visible         =   True
       Width           =   100
       _mPanelIndex    =   -1
@@ -91,9 +120,7 @@ End
 
 #tag WindowCode
 	#tag Method, Flags = &h0
-		Sub POPULATE_Plans_ListBox(user_id as integer, date as DateTime)
-		  Plans_ListBox.RemoveAllRows
-		  
+		Sub POPULATE()
 		  Var sql As String = "SELECT physics_tasking.plans.plan_id As plan_id, " _
 		  + "physics_tasking.patients.mrn As mrn, " _
 		  + "physics_tasking.patients.first_name As first_name, " _
@@ -117,6 +144,58 @@ End
 		  + "AND user_id = " + user_id.ToString + " " _
 		  + "ORDER BY physics_tasking.plans.is_completed;"
 		  
+		  Label1.Text = Self.RowCount.ToString
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function RowCount() As Integer
+		  // Part of the WebDataSource interface.
+		  
+		  Var sql As String = "SELECT COUNT(*) as c FROM physics_tasking.plans " _
+		  + "WHERE DATE(physics_tasking.plans.due_date) = '" + date.SQLDate + "' " _
+		  + "AND user_id = " + user_id.ToString + " " _
+		  + "ORDER BY physics_tasking.plans.is_completed;"
+		  
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  
+		  Return  rs.Column("c").IntegerValue
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function RowData(RowCount as Integer, RowOffset as Integer, SortColumns as String) As WebListboxRowData()
+		  // Part of the WebDataSource interface.
+		  
+		  
+		  Var rows() As WebListboxRowData
+		  Var sql As String = "SELECT physics_tasking.plans.plan_id As plan_id, " _
+		  + "physics_tasking.patients.mrn As mrn, " _
+		  + "physics_tasking.patients.first_name As first_name, " _
+		  + "physics_tasking.patients.family_name As family_name, " _
+		  + "physics_tasking.plan_types.name As plan_type_name, " _
+		  + "physics_tasking.sites.name As site, " _
+		  + "physics_tasking.sites.is_uppercase As is_uppercase, " _
+		  + "physics_tasking.plans.assignment_date as assignment_date, " _
+		  + "physics_tasking.plans.is_replan as is_replan, " _
+		  + "physics_tasking.plans.is_completed as is_completed, " _
+		  + "(" _
+		  + "SELECT physics_tasking.users.initials " _
+		  + "FROM physics_tasking.users " _
+		  + "WHERE physics_tasking.plans.physician_id = physics_tasking.users.user_id" _
+		  +") As physician_initials " _
+		  + "FROM physics_tasking.plans " _
+		  + "INNER JOIN physics_tasking.patients USING (patient_id) " _
+		  + "INNER JOIN physics_tasking.plan_types USING (plan_type_id) " _
+		  + "INNER JOIN physics_tasking.sites USING (site_id) " _
+		  + "WHERE DATE(physics_tasking.plans.due_date) = '" + date.SQLDate + "' " _
+		  + "AND user_id = " + user_id.ToString + " " _
+		  + "ORDER BY physics_tasking.plans.is_completed;"
+		  
+		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
@@ -131,68 +210,120 @@ End
 		      
 		    Case True
 		      
-		      s.BackgroundColor = App.Colour_Pass //Color.Orange
+		      s.BackgroundColor = App.Colour_Warn //Color.Orange
 		      s.Bold = True
 		      
 		    End Select
 		    
-		    Plans_ListBox.AddRow("")
+		    
+		    Var row As New WebListBoxRowData
+		    row.PrimaryKey = rs.Column("plan_id").IntegerValue
+		    row.tag = rs.Column("plan_id").IntegerValue
 		    
 		    Var cellRenderer As New WebListBoxStyleRenderer(s, rs.Column("mrn").StringValue.Trim)
-		    Plans_ListBox.CellTextAt(Plans_ListBox.LastAddedRowIndex, 0) = cellRenderer
+		    row.Value("mrn") = cellRenderer
 		    
-		    
-		    'Var cellRenderer As New WebListBoxStyleRenderer(s, rs.Column("mrn").StringValue.Trim)
-		    'row.Value("mrn") = cellRenderer
-		    
-		    cellRenderer = New WebListBoxStyleRenderer(s, _
-		    rs.Column("first_name").StringValue.Trim.Titlecase + " " _
-		    + rs.Column("family_name").StringValue.Trim.Uppercase)
-		    Plans_ListBox.CellTextAt(Plans_ListBox.LastAddedRowIndex, 1) = cellRenderer
-		    If rs.Column("is_uppercase").BooleanValue Then
-		      
-		      cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("site").StringValue.Trim.Uppercase)
-		      
-		    Else
-		      
-		      cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("site").StringValue.Trim.Titlecase)
-		      
-		    End If
-		    
-		    Plans_ListBox.CellTextAt(Plans_ListBox.LastAddedRowIndex, 2) = cellRenderer
+		    'cellRenderer = New WebListBoxStyleRenderer(s, _
+		    'rs.Column("first_name").StringValue.Trim.Titlecase + " " _
+		    '+ rs.Column("family_name").StringValue.Trim.Uppercase)
+		    'row.Value("full_name") = cellRenderer
 		    '
-		    If rs.Column("is_replan").BooleanValue Then
-		      
-		      cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("plan_type_name").StringValue.Trim + " (R)") 
-		      
-		    Else
-		      
-		      cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("plan_type_name").StringValue.Trim) 
-		      
-		    End If
+		    'If rs.Column("is_uppercase").BooleanValue Then
 		    '
-		    Plans_ListBox.CellTextAt(Plans_ListBox.LastAddedRowIndex, 3) = cellRenderer
+		    'cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("site").StringValue.Trim.Uppercase)
 		    '
-		    Var d As DateTime = rs.Column("assignment_date").DateValue
-		    cellRenderer = New WebListBoxStyleRenderer(s, _
-		    d.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None))
-		    Plans_ListBox.CellTextAt(Plans_ListBox.LastAddedRowIndex, 4) = cellRenderer
+		    'Else
 		    '
-		    cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("physician_initials").StringValue.Trim.Uppercase)
-		    Plans_ListBox.CellTextAt(Plans_ListBox.LastAddedRowIndex, 5) = cellRenderer
-		    
-		    
-		    
+		    'cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("site").StringValue.Trim.Titlecase)
+		    '
+		    'End If
+		    '
+		    'row.Value("site") = cellRenderer
+		    '
+		    'If rs.Column("is_replan").BooleanValue Then
+		    '
+		    'cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("plan_type_name").StringValue.Trim + " (R)") 
+		    '
+		    'Else
+		    '
+		    'cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("plan_type_name").StringValue.Trim) 
+		    '
+		    'End If
+		    '
+		    'row.Value("plan_type") = cellRenderer
+		    '
+		    'Var d As DateTime = rs.Column("assignment_date").DateValue
+		    'cellRenderer = New WebListBoxStyleRenderer(s, _
+		    'd.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None))
+		    'row.Value("assignment_date") = cellRenderer
+		    '
+		    'cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("physician_initials").StringValue.Trim.Uppercase)
+		    'row.Value("physician_initials") = cellRenderer
 		    
 		    rs.MoveToNextRow
-		    
 		  Wend
-		End Sub
+		  rs.Close
+		  
+		  Return rows
+		  
+		  
+		  
+		  
+		  
+		End Function
 	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function SortedPrimaryKeys(sortColumns as String) As Integer()
+		  // Part of the WebDataSource interface.
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function UnsortedPrimaryKeys() As Integer()
+		  // Part of the WebDataSource interface.
+		  
+		  Var keys() As Integer 
+		  
+		  Var sql As String = "SELECT physics_tasking.plans.plan_id As plan_id " _
+		  + "FROM physics_tasking.plans " _
+		  + "WHERE DATE(physics_tasking.plans.due_date) = '" + date.SQLDate + "' " _
+		  + "AND user_id = " + user_id.ToString + " " _
+		  + "ORDER BY physics_tasking.plans.is_completed;"
+		  
+		  
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  While Not rs.AfterLastRow
+		    keys.Append( rs.Column("plan_id").IntegerValue)
+		    
+		    rs.MoveToNextRow
+		  Wend
+		  Return keys
+		End Function
+	#tag EndMethod
+
+
+	#tag Property, Flags = &h0
+		date As DateTime
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		User_Id As Integer
+	#tag EndProperty
 
 
 #tag EndWindowCode
 
+#tag Events Close_Button
+	#tag Event
+		Sub Pressed()
+		  Self.Close
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events Plans_ListBox
 	#tag Event
 		Sub Opening()
@@ -205,20 +336,6 @@ End
 		  Me.HeaderAt(3) = "Plan type"
 		  Me.HeaderAt(4) = "Assigned on"
 		  Me.HeaderAt(5) = "Physician"
-		  
-		  Me.ColumnSortTypeAt(0) = WebListBox.SortTypes.Unsortable
-		  Me.ColumnSortTypeAt(1) = WebListBox.SortTypes.Unsortable
-		  Me.ColumnSortTypeAt(2) = WebListBox.SortTypes.Unsortable
-		  Me.ColumnSortTypeAt(3) = WebListBox.SortTypes.Unsortable
-		  Me.ColumnSortTypeAt(4) = WebListBox.SortTypes.Unsortable
-		  Me.ColumnSortTypeAt(5) = WebListBox.SortTypes.Unsortable
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Close_Button
-	#tag Event
-		Sub Pressed()
-		  Self.Close
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -436,5 +553,13 @@ End
 			"2 - TopToBottom"
 			"3 - BottomToTop"
 		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="User_Id"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

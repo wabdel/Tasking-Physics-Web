@@ -65,6 +65,10 @@ End
 
 
 	#tag Property, Flags = &h0
+		date As DateTime
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		user_id As Integer
 	#tag EndProperty
 
@@ -74,12 +78,10 @@ End
 #tag Events Initials_Label
 	#tag Event
 		Sub Pressed()
-		  'Var thedialog As New Plan_Status_WebDialog
-		  'thedialog.show
-		  'thedialog.Plan_Record = New Physics_Tasking.CLASS_Plan_Record
-		  'thedialog.Plan_Record.id = user_id
-		  '
-		  'thedialog.POPULATE
+		  Var thedialog As New Plan_Status_WebDialog
+		  
+		  thedialog.POPULATE_Plans_ListBox(user_id, date)
+		  thedialog.show
 		End Sub
 	#tag EndEvent
 #tag EndEvents
