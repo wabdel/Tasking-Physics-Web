@@ -21,7 +21,6 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
    Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Add_Button
       AllowAutoDisable=   False
@@ -302,15 +301,15 @@ End
 		      Select Case rs.Column("time_in").DateTimeValue.DayOfWeek
 		      Case 6, 7
 		        
-		        s.BackgroundColor = App.Colour_pass
+		        s.BackgroundColor = Theme_Colors.Color_Palette.Pass
 		        
 		      Else
 		        
 		        If h < 9 Then
-		          s.BackgroundColor = App.Colour_Fail
+		          s.BackgroundColor = Theme_Colors.Color_Palette.Fail
 		          
 		        Else
-		          s.BackgroundColor = App.Colour_Pass
+		          s.BackgroundColor = Theme_Colors.Color_Palette.Pass
 		          
 		          
 		        End If

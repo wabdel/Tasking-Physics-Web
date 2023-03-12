@@ -103,6 +103,10 @@ Inherits WebSession
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		darkmode As Boolean = True
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		Logged_in_User As Physics_Tasking.CLASS_User_Record
 	#tag EndProperty
 

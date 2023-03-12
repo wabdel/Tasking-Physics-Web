@@ -226,23 +226,11 @@ Inherits WebApplication
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		Colour_Fail As Color = &cED293900
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
 		Colour_Note As Color = &cFFDF0000
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		Colour_Pass As Color = &c05e17700
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
 		Colour_Title As Color = &cFEACA700
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		Colour_Warn As Color = &cFE922700
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -317,30 +305,6 @@ Inherits WebApplication
 			Group="Behavior"
 			InitialValue=""
 			Type="Double"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Colour_Fail"
-			Visible=false
-			Group="Behavior"
-			InitialValue="&cED293900"
-			Type="Color"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Colour_Pass"
-			Visible=false
-			Group="Behavior"
-			InitialValue="&c05e17700"
-			Type="Color"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Colour_Warn"
-			Visible=false
-			Group="Behavior"
-			InitialValue="&cFE922700"
-			Type="Color"
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty

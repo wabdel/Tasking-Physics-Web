@@ -255,6 +255,9 @@ End
 		    
 		    
 		    
+		    Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).date = _
+		    d_Calendar_date
+		    
 		    status_left_position = status_left_position + _
 		    Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Width + 7
 		    

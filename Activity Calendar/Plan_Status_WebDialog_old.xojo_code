@@ -205,12 +205,12 @@ End
 		    Select Case rs.Column("is_completed").BooleanValue
 		    Case False
 		      
-		      s.BackgroundColor = App.Colour_Fail //Color.Red
+		      s.BackgroundColor = Theme_Colors.Color_Palette.Fail //Color.Red
 		      s.Bold = True
 		      
 		    Case True
 		      
-		      s.BackgroundColor = App.Colour_Warn //Color.Orange
+		      s.BackgroundColor = Theme_Colors.Color_Palette.Caution //Color.Orange
 		      s.Bold = True
 		      
 		    End Select

@@ -1,5 +1,5 @@
 #tag Module
-Protected Module WebTools
+Protected Module Theme_Colors
 	#tag Method, Flags = &h0
 		Sub ModalBackgroundColor(Extends v As WebDialog, assigns c As String)
 		  v.ExecuteJavascript("document.getElementById('" + v.ControlID + "_body').style.backgroundColor='"+c+"';")
