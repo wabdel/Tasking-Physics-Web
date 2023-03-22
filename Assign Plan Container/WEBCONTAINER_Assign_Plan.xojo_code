@@ -21,6 +21,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
    Width           =   1200
    _mDesignHeight  =   0
    _mDesignWidth   =   0
+   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Reset_Button
       AllowAutoDisable=   False
@@ -255,7 +256,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Multiline       =   False
       Scope           =   2
       TabIndex        =   8
-      Text            =   "Family NAme :"
+      Text            =   "Family Name :"
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""

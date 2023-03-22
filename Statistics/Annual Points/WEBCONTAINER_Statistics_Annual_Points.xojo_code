@@ -1,9 +1,9 @@
 #tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Statistics
+Begin WebContainer WEBCONTAINER_Statistics_Annual_Points
    Compatibility   =   ""
    ControlID       =   ""
    Enabled         =   True
-   Height          =   700
+   Height          =   600
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -18,19 +18,23 @@ Begin WebContainer WEBCONTAINER_Statistics
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1300
+   Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin WebTabPanel Plans_TabPanel
+   Begin WebListBox Planner_Annual_Points_ListBox
+      ColumnCount     =   1
+      ColumnWidths    =   ""
       ControlID       =   ""
       Enabled         =   True
-      HasBorder       =   True
-      Height          =   660
+      HasHeader       =   False
+      Height          =   506
+      HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
-      LayoutDirection =   0
-      LayoutType      =   0
+      InitialValue    =   ""
+      LastAddedRowIndex=   0
+      LastRowIndex    =   0
       Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
@@ -39,17 +43,19 @@ Begin WebContainer WEBCONTAINER_Statistics
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      PanelCount      =   2
+      NoRowsMessage   =   ""
+      ProcessingMessage=   ""
+      RowCount        =   0
+      RowSelectionType=   1
       Scope           =   2
-      SelectedPanelIndex=   4
-      TabDefinition   =   "Sites\rPlans\rTasks\rPlanners\rPoints History\rPhysicians\rFor Shama"
-      TabIndex        =   3
+      SearchCriteria  =   ""
+      SelectedRowColor=   &c0272D300
+      SelectedRowIndex=   0
+      TabIndex        =   0
       Tooltip         =   ""
-      Top             =   20
+      Top             =   41
       Visible         =   True
-      Width           =   1260
-      _mDesignHeight  =   0
-      _mDesignWidth   =   0
+      Width           =   803
       _mPanelIndex    =   -1
    End
 End
@@ -58,73 +64,143 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Session.COLOR_Central_Background
+		  Me.Style.BackgroundColor = Session.COLOR_Central_Background2
 		  
-		  LOAD_TabPanel_Container( 0)
+		  POPULATE_List
+		  
 		End Sub
 	#tag EndEvent
 
 
 	#tag Method, Flags = &h21
-		Private Sub LOAD_TabPanel_Container(index as Integer)
-		  Var i As Integer = 10
-		  Var j As Integer = 50
+		Private Sub POPULATE_List()
+		  Planner.ResizeTo(-1)
 		  
-		  If Panel_Container <> Nil Then
-		    
-		    Panel_Container.Close
-		    
-		  End If
+		  Var sql As String ="SELECT user_id FROM users WHERE is_retired = False AND category_id IN(2,3)"
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
 		  
-		  Select Case index
-		  Case 0
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Sites
-		    
-		  Case 1
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Plans
-		    
-		  Case 2
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Tasks
-		    
-		  Case 3
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Planners_Points
-		    
-		  Case 4
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Points_History
-		    
-		  Case 5
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Physicians
-		    
-		  Case 6
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Annual_Points
-		    
-		    
-		  End
 		  
-		  Panel_Container.EmbedWithin( Plans_TabPanel, i, j, _
-		  Panel_Container.Width, Panel_Container.Height)
+		  Planner.ResizeTo(-1)
+		  
+		  While Not rs.AfterLastRow
+		    
+		    Planner.Add( New Physics_Tasking.CLASS_User_Record)
+		    Planner( Planner.LastIndex).id = rs.Column("user_id").IntegerValue
+		    
+		    rs.MoveToNextRow
+		  Wend
+		  
+		  Planner_Annual_Points_ListBox.RemoveAllRows
+		  
+		  For Each item As Physics_Tasking.CLASS_User_Record In Planner
+		    
+		    Planner_Annual_Points_ListBox.AddRow()
+		    Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 0) = item.initials
+		    
+		    Var Today As DateTime = DateTime.Now
+		    Var Year_First_Date As DateTime = New DateTime( Today.Year, 1, 1)
+		    
+		    sql = "SELECT SUM(" _
+		    + "CASE " _
+		    + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
+		    + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
+		    + "WEEKDAY(DATE(due_date)) + 1, 1) <= 0 THEN " _
+		    + "weight * 2 " _
+		    + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
+		    + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
+		    + "WEEKDAY(DATE(due_date)) + 1, 1) <= 1 THEN " _
+		    + "weight * 1.5 " _
+		    + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
+		    + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
+		    + "WEEKDAY(DATE(due_date)) + 1, 1) <= 2 THEN " _
+		    + "weight * 1.25 " _
+		    + "ELSE " _
+		    + "weight " _
+		    + "END) " _
+		    + "AS sum " _
+		    + "FROM plans INNER JOIN plan_types on plans.plan_type_id = plan_types.plan_type_id " _
+		    + "WHERE user_id = " + item.id.ToString + " " _
+		    + "AND DATE(assignment_date) >= '"  + Year_First_Date.SQLDate + "';"
+		    
+		    rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		    
+		    Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 1) = _
+		    Format( rs.Column("sum").DoubleValue, "#0.0")
+		    
+		    Var Points As Double = rs.Column("sum").DoubleValue
+		    
+		    
+		    sql = "SELECT SUM( " _
+		    + "weight * multiplier) as sum " _
+		    + "FROM tasks INNER JOIN task_types USING(task_type_id) " _
+		    + "WHERE user_id = " + item.id.ToString +  " "_
+		    + "AND DATE(completion_date) >= '"  + Year_First_Date.SQLDate + "';"
+		    
+		    rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		    
+		    Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 2) = _
+		    Format( rs.Column("sum").DoubleValue, "#0.0")
+		    
+		    Points = Points + rs.Column("sum").DoubleValue
+		    
+		    
+		    sql = "SELECT SUM( " _
+		    + "CASE " _
+		    + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 0 THEN " _
+		    + "weight * 0.75 " _
+		    + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 7 THEN " _
+		    + "weight " _
+		    + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 14 THEN " _
+		    + "weight * 1.25 " _
+		    + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 21 THEN " _
+		    + "weight * 1.5 " _
+		    + "ELSE " _
+		    + "weight * 2 " _
+		    + "END * multiplier) as sum " _
+		    + "FROM scheduled_tasks INNER JOIN task_types USING(task_type_id) " _
+		    + "WHERE user_id = " + item.id.ToString +  " "_
+		    + "AND is_completed = TRUE " _
+		    + "AND DATE(completion_date) >= '"  + Year_First_Date.SQLDate + "';"
+		    
+		    
+		    rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		    
+		    Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 3) = _
+		    Format( rs.Column("sum").DoubleValue, "#0.0")
+		    
+		    Points = Points + rs.Column("sum").DoubleValue
+		    
+		    Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 4) = _
+		    Format( Points, "#0.0")
+		     
+		    
+		  Next
 		End Sub
 	#tag EndMethod
 
 
 	#tag Property, Flags = &h21
-		Private Panel_Container As WebContainer
+		Private Planner() As Physics_Tasking.CLASS_User_Record
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		Series() As CLASS_WebChartLinear
 	#tag EndProperty
 
 
 #tag EndWindowCode
 
-#tag Events Plans_TabPanel
+#tag Events Planner_Annual_Points_ListBox
 	#tag Event
-		Sub PanelChanged()
-		  LOAD_TabPanel_Container( Me.SelectedPanelIndex)
+		Sub Opening()
+		  Me.HasHeader = True
+		  Me.ColumnCount = 5
+		  
+		  Me.HeaderAt(0) = "Initials"
+		  Me.HeaderAt(1) = "Plans"
+		  Me.HeaderAt(2) = "Tasks"
+		  Me.HeaderAt(3) = "Scheduled tasks"
+		  Me.HeaderAt(4) = "Total"
 		End Sub
 	#tag EndEvent
 #tag EndEvents

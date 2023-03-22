@@ -21,7 +21,6 @@ Begin WebContainer WEBCONTAINER_Login
    Width           =   350
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Login_Button
       AllowAutoDisable=   False
@@ -232,12 +231,9 @@ End
 		      + "FROM physics_tasking.users " _
 		      + "WHERE login = ?")
 		      
-		      
-		      
 		      ps.BindType(0, MySQLPreparedStatement.MYSQL_TYPE_STRING)
 		      
 		      Var rs As RowSet = ps.SelectSQL(User_TextField.Text.Trim.Lowercase)
-		      
 		      
 		      If rs.RowCount = 0 Or rs.Column("password").BlobValue <> _
 		        Crypto.Hash(Password_TextField.Text, Crypto.Algorithm.SHA512) Then
@@ -270,6 +266,7 @@ End
 		          Var sql As String = "UPDATE physics_tasking.users " _
 		          + "SET is_active = TRUE " _
 		          + "WHERE user_id = " + rs.Column("user_id").IntegerValue.ToString + ";"
+		          App.last_database_update = DateTime.Now
 		          
 		        End If
 		        Session.LOGIN_User(rs.Column("user_id").IntegerValue)

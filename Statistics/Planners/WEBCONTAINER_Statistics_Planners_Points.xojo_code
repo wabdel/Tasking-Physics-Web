@@ -286,9 +286,8 @@ End
 		          + Planner(i).GET_Accumulated_Task_Points(d)  _
 		          + Planner(i).GET_Accumulated_Assigned_Task_Points(d)
 		          
-		          //If points > 0 Then
 		          s.ADD_Point(points)
-		          //End If
+		          
 		          Exit For i
 		          
 		        End If
@@ -297,26 +296,9 @@ End
 		        
 		      Next i
 		      
-		      
-		      
-		      
 		    Next s
 		    
-		    'For Each item As Physics_Tasking.CLASS_User_Record In Physics_Tasking.Users
-		    'If (item.Group.id = 2 Or item.Group.id = 3) Then
-		    '
-		    'For Each s As CLASS_WebChartLinear In Series
-		    'If item.initials = s.myset.Label Then
-		    '
-		    's.ADD_Point( item.GET_Total_Points( d))
-		    '
-		    'Exit For s
-		    'End If
-		    'Next s
-		    '
-		    '
-		    'End If
-		    'Next item
+		    
 		    
 		    Points_Chart.AddLabel( d.Day.ToString + "/" + d.Month.ToString + "/" + d.Year.ToString)
 		    
