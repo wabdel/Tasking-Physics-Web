@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Assign_Plan
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   500
@@ -21,7 +22,6 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
    Width           =   1200
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Reset_Button
       AllowAutoDisable=   False
@@ -606,6 +606,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       _mPanelIndex    =   -1
    End
    Begin WEBCONTAINER_Points Points_WEBCONTAINER
+      ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   300
@@ -1291,6 +1292,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

@@ -1,5 +1,5 @@
 Type=Web2
-RBProjectVersion=2022.041
+RBProjectVersion=2023.01
 MinIDEVersion=20200200
 OrigIDEVersion=20220302
 Class=DeleteButtonCellRenderer;Cell Renderers/DeleteButtonCellRenderer.xojo_code;&h0000000051C3C7FF;&h0000000042435FFF;false

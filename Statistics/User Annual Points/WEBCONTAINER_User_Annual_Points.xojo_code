@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_User_Annual_Points
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   600
@@ -21,7 +22,6 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
    Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebListBox Users_ListBox
       ColumnCount     =   1
@@ -173,107 +173,107 @@ End
 #tag WindowCode
 	#tag Method, Flags = &h21
 		Private Sub POPULATE_Users_ListBox()
-		  Planner.ResizeTo(-1)
-		  
-		  Var sql As String ="SELECT user_id FROM users WHERE is_retired = False AND category_id IN(2,3)"
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
-		  
-		  
-		  Planner.ResizeTo(-1)
-		  
-		  While Not rs.AfterLastRow
-		    
-		    Planner.Add( New Physics_Tasking.CLASS_User_Record)
-		    Planner( Planner.LastIndex).id = rs.Column("user_id").IntegerValue
-		    
-		    rs.MoveToNextRow
-		  Wend
-		  
-		  Planner_Annual_Points_ListBox.RemoveAllRows
-		  
-		  For Each item As Physics_Tasking.CLASS_User_Record In Planner
-		    
-		    Planner_Annual_Points_ListBox.AddRow()
-		    Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 0) = item.initials
-		    
-		    Var Today As DateTime = DateTime.Now
-		    Var Year_First_Date As DateTime = New DateTime( Today.Year, 1, 1)
-		    
-		    sql = "SELECT SUM(" _
-		    + "CASE " _
-		    + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
-		    + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
-		    + "WEEKDAY(DATE(due_date)) + 1, 1) <= 0 THEN " _
-		    + "weight * 2 " _
-		    + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
-		    + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
-		    + "WEEKDAY(DATE(due_date)) + 1, 1) <= 1 THEN " _
-		    + "weight * 1.5 " _
-		    + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
-		    + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
-		    + "WEEKDAY(DATE(due_date)) + 1, 1) <= 2 THEN " _
-		    + "weight * 1.25 " _
-		    + "ELSE " _
-		    + "weight " _
-		    + "END) " _
-		    + "AS sum " _
-		    + "FROM plans INNER JOIN plan_types on plans.plan_type_id = plan_types.plan_type_id " _
-		    + "WHERE user_id = " + item.id.ToString + " " _
-		    + "AND DATE(assignment_date) >= '"  + Year_First_Date.SQLDate + "';"
-		    
-		    rs = Physics_Tasking.DB_SELECT_Statement(sql)
-		    
-		    Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 1) = _
-		    Format( rs.Column("sum").DoubleValue, "#0.0")
-		    
-		    Var Points As Double = rs.Column("sum").DoubleValue
-		    
-		    
-		    sql = "SELECT SUM( " _
-		    + "weight * multiplier) as sum " _
-		    + "FROM tasks INNER JOIN task_types USING(task_type_id) " _
-		    + "WHERE user_id = " + item.id.ToString +  " "_
-		    + "AND DATE(completion_date) >= '"  + Year_First_Date.SQLDate + "';"
-		    
-		    rs = Physics_Tasking.DB_SELECT_Statement(sql)
-		    
-		    Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 2) = _
-		    Format( rs.Column("sum").DoubleValue, "#0.0")
-		    
-		    Points = Points + rs.Column("sum").DoubleValue
-		    
-		    
-		    sql = "SELECT SUM( " _
-		    + "CASE " _
-		    + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 0 THEN " _
-		    + "weight * 0.75 " _
-		    + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 7 THEN " _
-		    + "weight " _
-		    + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 14 THEN " _
-		    + "weight * 1.25 " _
-		    + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 21 THEN " _
-		    + "weight * 1.5 " _
-		    + "ELSE " _
-		    + "weight * 2 " _
-		    + "END * multiplier) as sum " _
-		    + "FROM scheduled_tasks INNER JOIN task_types USING(task_type_id) " _
-		    + "WHERE user_id = " + item.id.ToString +  " "_
-		    + "AND is_completed = TRUE " _
-		    + "AND DATE(completion_date) >= '"  + Year_First_Date.SQLDate + "';"
-		    
-		    
-		    rs = Physics_Tasking.DB_SELECT_Statement(sql)
-		    
-		    Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 3) = _
-		    Format( rs.Column("sum").DoubleValue, "#0.0")
-		    
-		    Points = Points + rs.Column("sum").DoubleValue
-		    
-		    Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 4) = _
-		    Format( Points, "#0.0")
-		    
-		    
-		  Next
+		  'Planner.ResizeTo(-1)
+		  '
+		  'Var sql As String ="SELECT user_id FROM users WHERE is_retired = False AND category_id IN(2,3)"
+		  'Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  '
+		  '
+		  'Planner.ResizeTo(-1)
+		  '
+		  'While Not rs.AfterLastRow
+		  '
+		  'Planner.Add( New Physics_Tasking.CLASS_User_Record)
+		  'Planner( Planner.LastIndex).id = rs.Column("user_id").IntegerValue
+		  '
+		  'rs.MoveToNextRow
+		  'Wend
+		  '
+		  'Planner_Annual_Points_ListBox.RemoveAllRows
+		  '
+		  'For Each item As Physics_Tasking.CLASS_User_Record In Planner
+		  '
+		  'Planner_Annual_Points_ListBox.AddRow()
+		  'Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 0) = item.initials
+		  '
+		  'Var Today As DateTime = DateTime.Now
+		  'Var Year_First_Date As DateTime = New DateTime( Today.Year, 1, 1)
+		  '
+		  'sql = "SELECT SUM(" _
+		  '+ "CASE " _
+		  '+ "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
+		  '+ "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
+		  '+ "WEEKDAY(DATE(due_date)) + 1, 1) <= 0 THEN " _
+		  '+ "weight * 2 " _
+		  '+ "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
+		  '+ "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
+		  '+ "WEEKDAY(DATE(due_date)) + 1, 1) <= 1 THEN " _
+		  '+ "weight * 1.5 " _
+		  '+ "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
+		  '+ "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
+		  '+ "WEEKDAY(DATE(due_date)) + 1, 1) <= 2 THEN " _
+		  '+ "weight * 1.25 " _
+		  '+ "ELSE " _
+		  '+ "weight " _
+		  '+ "END) " _
+		  '+ "AS sum " _
+		  '+ "FROM plans INNER JOIN plan_types on plans.plan_type_id = plan_types.plan_type_id " _
+		  '+ "WHERE user_id = " + item.id.ToString + " " _
+		  '+ "AND DATE(assignment_date) >= '"  + Year_First_Date.SQLDate + "';"
+		  '
+		  'rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  '
+		  'Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 1) = _
+		  'Format( rs.Column("sum").DoubleValue, "#0.0")
+		  '
+		  'Var Points As Double = rs.Column("sum").DoubleValue
+		  '
+		  '
+		  'sql = "SELECT SUM( " _
+		  '+ "weight * multiplier) as sum " _
+		  '+ "FROM tasks INNER JOIN task_types USING(task_type_id) " _
+		  '+ "WHERE user_id = " + item.id.ToString +  " "_
+		  '+ "AND DATE(completion_date) >= '"  + Year_First_Date.SQLDate + "';"
+		  '
+		  'rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  '
+		  'Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 2) = _
+		  'Format( rs.Column("sum").DoubleValue, "#0.0")
+		  '
+		  'Points = Points + rs.Column("sum").DoubleValue
+		  '
+		  '
+		  'sql = "SELECT SUM( " _
+		  '+ "CASE " _
+		  '+ "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 0 THEN " _
+		  '+ "weight * 0.75 " _
+		  '+ "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 7 THEN " _
+		  '+ "weight " _
+		  '+ "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 14 THEN " _
+		  '+ "weight * 1.25 " _
+		  '+ "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 21 THEN " _
+		  '+ "weight * 1.5 " _
+		  '+ "ELSE " _
+		  '+ "weight * 2 " _
+		  '+ "END * multiplier) as sum " _
+		  '+ "FROM scheduled_tasks INNER JOIN task_types USING(task_type_id) " _
+		  '+ "WHERE user_id = " + item.id.ToString +  " "_
+		  '+ "AND is_completed = TRUE " _
+		  '+ "AND DATE(completion_date) >= '"  + Year_First_Date.SQLDate + "';"
+		  '
+		  '
+		  'rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  '
+		  'Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 3) = _
+		  'Format( rs.Column("sum").DoubleValue, "#0.0")
+		  '
+		  'Points = Points + rs.Column("sum").DoubleValue
+		  '
+		  'Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 4) = _
+		  'Format( Points, "#0.0")
+		  '
+		  '
+		  'Next
 		End Sub
 	#tag EndMethod
 
@@ -291,6 +291,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false
