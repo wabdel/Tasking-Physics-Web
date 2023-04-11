@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_User_Statistics
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   700
@@ -21,9 +22,9 @@ Begin WebContainer WEBCONTAINER_User_Statistics
    Width           =   1300
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebTabPanel User_Statistics_TabPanel
+      ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       HasBorder       =   True
@@ -43,7 +44,7 @@ Begin WebContainer WEBCONTAINER_User_Statistics
       PanelCount      =   2
       Scope           =   2
       SelectedPanelIndex=   0
-      TabDefinition   =   "Sites\rPoints\rPlans\rTasks"
+      TabDefinition   =   "Sites\rPoints\rPlans\rTasks\rActivity Fraction"
       TabIndex        =   3
       Tooltip         =   ""
       Top             =   20
@@ -76,6 +77,7 @@ End
 		    Panel_Container.Close
 		    
 		  End If
+		  
 		  Select Case index
 		  Case 0
 		    
@@ -94,6 +96,9 @@ End
 		    
 		    Panel_Container = New WEBCONTAINER_User_Statistics_Tasks
 		    
+		  Case 4
+		    
+		    Panel_Container = New WEBCONTAINER_Activity_Fraction
 		    
 		  End
 		  
@@ -118,6 +123,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

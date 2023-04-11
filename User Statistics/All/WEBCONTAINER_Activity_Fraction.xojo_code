@@ -1,10 +1,10 @@
 #tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Calendar
+Begin WebContainer WEBCONTAINER_Activity_Fraction
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   700
+   Height          =   600
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -19,20 +19,22 @@ Begin WebContainer WEBCONTAINER_Calendar
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1200
+   Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin WEBCONTAINER_Date_Header WEBCONTAINER_Date_Header1
-      ControlCount    =   0
+   Begin WebChart Activity_Fraction_Chart
+      AllowPopover    =   True
       ControlID       =   ""
+      DatasetCount    =   0
       Enabled         =   True
-      Height          =   30
+      GridColor       =   &c000000AA
+      HasAnimation    =   False
+      HasLegend       =   False
+      Height          =   560
       Index           =   -2147483648
-      Indicator       =   0
-      LayoutDirection =   0
-      LayoutType      =   0
-      Left            =   1050
+      Indicator       =   ""
+      Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -40,65 +42,40 @@ Begin WebContainer WEBCONTAINER_Calendar
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      Scope           =   0
-      ScrollDirection =   0
+      Mode            =   0
+      PopoverBackgroundColor=   &c000000
+      Scope           =   2
       TabIndex        =   0
-      title           =   ""
+      TabStop         =   True
+      Title           =   ""
       Tooltip         =   ""
-      Top             =   0
+      Top             =   20
       Visible         =   True
-      Width           =   150
-      _mDesignHeight  =   0
-      _mDesignWidth   =   0
+      Width           =   560
+      _mMode          =   ""
       _mPanelIndex    =   -1
    End
 End
 #tag EndWebContainerControl
 
 #tag WindowCode
-	#tag Event
-		Sub Opening()
-		  Me.Style.BackgroundColor = Color.Yellow
-		  
-		  Construct_Dates
-		End Sub
-	#tag EndEvent
-
-
 	#tag Method, Flags = &h21
-		Private Sub Construct_Dates()
-		  Var colums As Integer = 7
-		  Var rows As Integer = 8 
-		  
-		  Date_WebContianer.ResizeTo(-1)
-		  Date_Header_WebContainer.ResizeTo(-1)
-		  
-		  For colum As Integer = 0 To colums - 1
-		    
-		    Date_Header_WebContainer.Add( New WEBCONTAINER_Date_Header(colum))
-		    
-		    Date_Header_WebContainer( Date_Header_WebContainer.LastIndex).EmbedWithin( _
-		    Self , _
-		    colum * Date_Header_WebContainer( Date_Header_WebContainer.LastIndex).width, _
-		    0, _
-		    Date_Header_WebContainer( Date_Header_WebContainer.LastIndex).width, _
-		    Date_Header_WebContainer( Date_Header_WebContainer.LastIndex).height)
-		    
-		  Next
-		  
-		  
-		  
+		Private Sub LOAD_Activity_Fraction_Chart()
 		  
 		End Sub
 	#tag EndMethod
 
 
-	#tag Property, Flags = &h0
-		Date_Header_WebContainer() As WEBCONTAINER_Date_Header
+	#tag Property, Flags = &h21
+		Private administration As double
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private Date_WebContianer() As WEBCONTAINER_Date
+		Private development As double
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private education As double
 	#tag EndProperty
 
 
@@ -106,18 +83,18 @@ End
 
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="ControlCount"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Integer"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false
 		Group="Behavior"
 		InitialValue="-1"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
 		Type="Integer"
 		EditorType=""
 	#tag EndViewProperty

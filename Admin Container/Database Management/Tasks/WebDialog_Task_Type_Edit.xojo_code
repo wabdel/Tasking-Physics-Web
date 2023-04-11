@@ -1,6 +1,7 @@
 #tag WebPage
 Begin WebDialog WebDialog_Task_Type_Edit
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   500
@@ -553,6 +554,13 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events Instructions_TextArea
+	#tag Event
+		Sub TextChanged()
+		  ENABLE_Modify_Button
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events Has_Multiplier_Checkbox
 	#tag Event
 		Sub ValueChanged()
@@ -591,6 +599,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

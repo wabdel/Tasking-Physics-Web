@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WebContainer_Calendar_Date
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   120
@@ -21,6 +22,7 @@ Begin WebContainer WebContainer_Calendar_Date
    Width           =   180
    _mDesignHeight  =   0
    _mDesignWidth   =   0
+   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebLabel Month_Label
       Bold            =   False
@@ -377,6 +379,14 @@ End
 #tag EndWindowCode
 
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false
