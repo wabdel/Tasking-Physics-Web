@@ -22,7 +22,6 @@ Begin WebDialog WebDialog_Task_Type_Edit
    Width           =   800
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebLabel Title_Label
       Bold            =   False
