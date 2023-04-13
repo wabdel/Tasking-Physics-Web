@@ -452,9 +452,43 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub POPULATE_POPUPMENUS()
-		  Var Task_Group_id As Variant =  Task_Type_PopupMenu.RowTagAt( Task_Type_PopupMenu.SelectedRowIndex)
-		  Var Machine_id As Variant = Machine_PopupMenu.RowTagAt( Machine_PopupMenu.SelectedRowIndex)
-		  Var Due_Date As Variant = Due_Date_PopupMenu.RowTagAt( Due_Date_PopupMenu.SelectedRowIndex)
+		  Var Task_Group_id As Variant
+		   
+		  If Task_Type_PopupMenu.RowCount > 0 And Task_Type_PopupMenu.SelectedRowIndex > -1 Then
+		    
+		    Task_Group_id =  Task_Type_PopupMenu.RowTagAt( Task_Type_PopupMenu.SelectedRowIndex)
+		    
+		  Else
+		    
+		    Task_Group_id = 0
+		    
+		    
+		  End If
+		  
+		  Var Machine_id As Variant 
+		  
+		  If Machine_PopupMenu.RowCount > 0  And Machine_PopupMenu.SelectedRowIndex > -1 Then
+		    
+		    Machine_id = Machine_PopupMenu.RowTagAt( Machine_PopupMenu.SelectedRowIndex)
+		    
+		  Else
+		    
+		    Machine_id = 0
+		    
+		    
+		  End If
+		  
+		  
+		  Var Due_Date As Variant 
+		  
+		  If Due_Date_PopupMenu.RowCount > 0 And Due_Date_PopupMenu.SelectedRowIndex > -1 Then
+		    
+		    Due_date = Due_Date_PopupMenu.RowTagAt( Due_Date_PopupMenu.SelectedRowIndex)
+		    
+		  Else
+		    Due_date = 0
+		    
+		  End If
 		  
 		  Var sql As String = "CREATE OR REPLACE VIEW completed_assigned_tasks AS " _
 		  + "SELECT physics_tasking.scheduled_tasks.scheduled_task_id As scheduled_task_id, " _
@@ -568,10 +602,40 @@ End
 		    
 		  Wend
 		  
+		  If Task_Group_id = 0 Then
+		    
+		    Task_Type_PopupMenu.SelectedRowIndex = 0
+		    
+		  Else
+		    
+		    Task_Type_PopupMenu.SelectRowWithTag(Task_Group_id)
+		    
+		  End If
 		  
-		  Task_Type_PopupMenu.SelectRowWithTag(Task_Group_id)
-		  Machine_PopupMenu.SelectRowWithTag(Machine_id)
-		  Due_Date_PopupMenu.SelectRowWithTag( Due_Date)
+		  If Machine_id = 0 Then
+		    
+		    Machine_PopupMenu.SelectedRowIndex = 0
+		    
+		  Else
+		    
+		    Machine_PopupMenu.SelectRowWithTag(Machine_id)
+		    
+		  End If
+		  
+		  
+		  If Due_Date = 0 Then
+		    
+		    Due_Date_PopupMenu.SelectedRowIndex = 0
+		    
+		  Else
+		    
+		    Due_Date_PopupMenu.SelectRowWithTag( Due_Date)
+		    
+		  End If
+		  
+		  Completed_Assigned_Tasks_ListBox.ReloadData
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -820,6 +884,8 @@ End
 	#tag Event
 		Sub SelectionChanged(item as WebMenuItem)
 		  Completed_Assigned_Tasks_ListBox.ReloadData
+		  
+		  'POPULATE_POPUPMENUS
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -827,6 +893,8 @@ End
 	#tag Event
 		Sub SelectionChanged(item as WebMenuItem)
 		  Completed_Assigned_Tasks_ListBox.ReloadData
+		  
+		  'POPULATE_POPUPMENUS
 		End Sub
 	#tag EndEvent
 #tag EndEvents
