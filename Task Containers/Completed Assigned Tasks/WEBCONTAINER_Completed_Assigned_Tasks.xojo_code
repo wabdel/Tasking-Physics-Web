@@ -1,5 +1,5 @@
 #tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks
+Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSource
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
@@ -284,12 +284,18 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
+		  
+		End Sub
+	#tag EndEvent
+
+	#tag Event
+		Sub Shown()
 		  Me.Style.BackgroundColor = Session.COLOR_Central_Background2
 		  
 		  Var sql As String = "CREATE OR REPLACE VIEW completed_assigned_tasks AS " _
 		  + "SELECT physics_tasking.scheduled_tasks.scheduled_task_id As scheduled_task_id, " _
 		  + "physics_tasking.task_types.name As task_type_name, " _
-		  + "physics_tasking.task_types.task_type_id As task_type_id, " _
+		  + "physics_tasking.task_groups.task_group_id As task_group_id, " _
 		  + "physics_tasking.task_groups.name As task_group_name, " _
 		  + "physics_tasking.machines.name As machine_name, " _
 		  + "physics_tasking.machines.machine_id As machine_id, " _
@@ -315,18 +321,17 @@ End
 		  
 		  
 		  
-		  sql = "SELECT DISTINCT(task_type_name), " _
-		  + "task_group_name, " _
-		  + "task_type_id " _
+		  sql = "SELECT DISTINCT(task_group_name), " _
+		  + "task_group_id " _
 		  + "FROM physics_tasking.completed_assigned_tasks " _
-		  + "ORDER BY task_group_name, task_type_name"
+		  + "ORDER BY task_group_name;"
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
-		    Task_Type_PopupMenu.AddRow( rs.Column("task_group_name").StringValue.Trim.Uppercase + " / " +rs.Column("task_type_name").StringValue.Trim)
-		    Task_Type_PopupMenu.RowTagAt( Task_Type_PopupMenu.LastAddedRowIndex) = rs.Column("task_type_id").IntegerValue
+		    Task_Type_PopupMenu.AddRow( rs.Column("task_group_name").StringValue.Trim.Uppercase )
+		    Task_Type_PopupMenu.RowTagAt( Task_Type_PopupMenu.LastAddedRowIndex) =rs.Column( "task_group_id").IntegerValue 
 		    
 		    rs.MoveToNextRow
 		    
@@ -384,6 +389,374 @@ End
 	#tag EndEvent
 
 
+	#tag Method, Flags = &h21
+		Private Function ColumnData() As WebListboxColumnData()
+		  // Part of the WebDataSource interface.
+		  
+		  // This method is called once when the control is first created
+		  // Returns information about the columns themselves
+		  
+		  Var cols() As WebListboxColumnData
+		  
+		  Var col As WebListboxColumnData
+		  
+		  col = New WebListboxColumnData
+		  col.DatabaseColumnName = "task_type" // the name of the field in your database or data source
+		  col.Heading = "Task" // the name that appears above the column
+		  col.Sortable = False // Whether or not the column is sortable
+		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
+		  col.Width = "650"
+		  cols.Add(col)
+		  
+		  col = New WebListboxColumnData
+		  col.DatabaseColumnName = "machine_name" // the name of the field in your database or data source
+		  col.Heading = "Machine" // the name that appears above the column
+		  col.Sortable = False // Whether or not the column is sortable
+		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
+		  col.Width = "150"
+		  cols.Add(col)
+		  
+		  col = New WebListboxColumnData
+		  col.DatabaseColumnName = "due_date" // the name of the field in your database or data source
+		  col.Heading = "Due Date" // the name that appears above the column
+		  col.Sortable = False // Whether or not the column is sortable
+		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
+		  col.Width = "250"
+		  cols.Add(col)
+		  
+		  col = New WebListboxColumnData
+		  col.DatabaseColumnName = "completion_date" // the name of the field in your database or data source
+		  col.Heading = "Completion Date" // the name that appears above the column
+		  col.Sortable = False // Whether or not the column is sortable
+		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
+		  col.Width = "250"
+		  cols.Add(col)
+		  
+		  
+		  col = New WebListboxColumnData
+		  col.DatabaseColumnName = "staff" // the name of the field in your database or data source
+		  col.Heading = "Staff" // the name that appears above the column
+		  col.Sortable = False // Whether or not the column is sortable
+		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
+		  col.Width = "80"
+		  cols.Add(col)
+		  
+		  Return cols// Part of the WebDataSource interface.
+		  
+		  // Part of the WebDataSource interface.
+		  
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub POPULATE_POPUPMENUS()
+		  Var Task_Group_id As Variant =  Task_Type_PopupMenu.RowTagAt( Task_Type_PopupMenu.SelectedRowIndex)
+		  Var Machine_id As Variant = Machine_PopupMenu.RowTagAt( Machine_PopupMenu.SelectedRowIndex)
+		  Var Due_Date As Variant = Due_Date_PopupMenu.RowTagAt( Due_Date_PopupMenu.SelectedRowIndex)
+		  
+		  Var sql As String = "CREATE OR REPLACE VIEW completed_assigned_tasks AS " _
+		  + "SELECT physics_tasking.scheduled_tasks.scheduled_task_id As scheduled_task_id, " _
+		  + "physics_tasking.task_types.name As task_type_name, " _
+		  + "physics_tasking.task_groups.task_group_id As task_group_id, " _
+		  + "physics_tasking.task_groups.name As task_group_name, " _
+		  + "physics_tasking.machines.name As machine_name, " _
+		  + "physics_tasking.machines.machine_id As machine_id, " _
+		  + "physics_tasking.users.initials As initials, " _
+		  + "DATE(physics_tasking.scheduled_tasks.due_date) As due_date, " _
+		  + "DATE(physics_tasking.scheduled_tasks.completion_date) As completion_date " _
+		  + "FROM physics_tasking.scheduled_tasks " _
+		  + "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
+		  + "INNER JOIN physics_tasking.machines USING(machine_id) " _
+		  + "INNER JOIN physics_tasking.task_groups USING(task_group_id) " _
+		  + "INNER JOIN physics_tasking.users USING(user_id) " _
+		  + "WHERE physics_tasking.scheduled_tasks.is_completed = TRUE " _
+		  
+		  If Task_Type_PopupMenu.SelectedRowIndex > 0 Then
+		    
+		    sql = sql + "AND physics_tasking.task_groups.task_group_id = " _
+		    + Str(Task_Type_PopupMenu.RowTagAt( Task_Type_PopupMenu.SelectedRowIndex)) + " "
+		    
+		  End If
+		  
+		  If Machine_PopupMenu.SelectedRowIndex > 0 Then
+		    
+		    sql = sql + "AND physics_tasking.machines.machine_id = " _
+		    + Str(Machine_PopupMenu.RowTagAt( Machine_PopupMenu.SelectedRowIndex)) + " "
+		    
+		  End If
+		  
+		  If Due_Date_PopupMenu.SelectedRowIndex > 0 Then
+		    
+		    sql = sql + "AND physics_tasking.scheduled_tasks.due_date = '" _
+		    + Due_Date_PopupMenu.RowTagAt( Due_Date_PopupMenu.SelectedRowIndex) + "' "
+		    
+		  End If
+		  
+		  
+		  sql = sql + "ORDER BY DATE(physics_tasking.scheduled_tasks.due_date) DESC, " _
+		  + "physics_tasking.scheduled_tasks.scheduled_task_id DESC;"
+		  
+		  
+		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  
+		  
+		  Task_Type_PopupMenu.RemoveAllRows
+		  
+		  Task_Type_PopupMenu.AddRow("All")
+		  Task_Type_PopupMenu.RowTagAt(Task_Type_PopupMenu.LastAddedRowIndex) = 0
+		  
+		  
+		  
+		  sql = "SELECT DISTINCT(task_group_name), " _
+		  + "task_group_id " _
+		  + "FROM physics_tasking.completed_assigned_tasks " _
+		  + "ORDER BY task_group_name;"
+		  
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  While Not rs.AfterLastRow
+		    
+		    Task_Type_PopupMenu.AddRow( rs.Column("task_group_name").StringValue.Trim.Uppercase )
+		    Task_Type_PopupMenu.RowTagAt( Task_Type_PopupMenu.LastAddedRowIndex) =rs.Column( "task_group_id").IntegerValue 
+		    
+		    rs.MoveToNextRow
+		    
+		  Wend
+		  
+		  
+		  Machine_PopupMenu.RemoveAllRows
+		  
+		  Machine_PopupMenu.AddRow("All")
+		  Machine_PopupMenu.RowTagAt(Machine_PopupMenu.LastAddedRowIndex) = 0
+		  
+		  sql = "SELECT DISTINCT(machine_name), " _
+		  + "machine_id " _
+		  + "FROM physics_tasking.completed_assigned_tasks " _
+		  + "ORDER BY machine_name"
+		  
+		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  While Not rs.AfterLastRow
+		    
+		    Machine_PopupMenu.AddRow( rs.Column("machine_name").StringValue.Trim.Uppercase )
+		    Machine_PopupMenu.RowTagAt( Machine_PopupMenu.LastAddedRowIndex) = rs.Column("machine_id").IntegerValue
+		    
+		    rs.MoveToNextRow
+		    
+		  Wend
+		  
+		  Due_Date_PopupMenu.RemoveAllRows
+		  
+		  Due_Date_PopupMenu.AddRow("All")
+		  Due_Date_PopupMenu.RowTagAt(Due_Date_PopupMenu.LastAddedRowIndex) = 0
+		  
+		  sql = "SELECT DISTINCT(due_date) " _
+		  + "FROM physics_tasking.completed_assigned_tasks " _
+		  + "ORDER BY due_date DESC"
+		  
+		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  While Not rs.AfterLastRow
+		    
+		    Due_Date_PopupMenu.AddRow( rs.Column("due_date").DateTimeValue.ToString( _
+		    Locale.Current, DateTime.FormatStyles.Medium, DateTime.FormatStyles.None ))
+		    
+		    Due_Date_PopupMenu.RowTagAt( Due_Date_PopupMenu.LastAddedRowIndex) = rs.Column("due_date").DateTimeValue
+		    rs.MoveToNextRow
+		    
+		  Wend
+		  
+		  
+		  Task_Type_PopupMenu.SelectRowWithTag(Task_Group_id)
+		  Machine_PopupMenu.SelectRowWithTag(Machine_id)
+		  Due_Date_PopupMenu.SelectRowWithTag( Due_Date)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function RowCount() As Integer
+		  // Part of the WebDataSource interface.
+		  
+		  
+		  Var d As DateTime = DateTime.Now
+		  Var d_min As DateTime = New DateTime( d.Year, d.Month, d.Day)
+		  
+		  Var sql As String = "SELECT COUNT(*) as c " _
+		  + "FROM physics_tasking.scheduled_tasks " _
+		  + "WHERE is_completed = TRUE " _
+		  + "ORDER BY physics_tasking.scheduled_tasks.due_date DESC"
+		  
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  
+		  Return rs.Column("c").IntegerValue
+		  // Part of the WebDataSource interface.
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function RowData(RowCount as Integer, RowOffset as Integer, SortColumns as String) As WebListboxRowData()
+		  // Part of the WebDataSource interface.
+		  
+		  
+		  
+		  Var rows() As WebListboxRowData
+		  
+		  
+		  
+		  Var d As DateTime = DateTime.Now
+		  'Var d_min As DateTime = New DateTime( d.Year, d.Month, d.Day)
+		  Var today As New DateTime(d.Year, d.Month, d.Day)
+		  
+		  //+ "physics_tasking.users.first_name As first_name, " _
+		  //+ "physics_tasking.users.family_name As family_name, " _
+		  Var sql As String = "SELECT physics_tasking.scheduled_tasks.scheduled_task_id As scheduled_task_id, " _
+		  + "physics_tasking.task_types.name As task_type_name, " _
+		  + "physics_tasking.task_groups.name As task_group_name, " _
+		  + "physics_tasking.machines.name As machine_name, " _
+		  + "physics_tasking.users.initials As initials, " _
+		  + "DATE(physics_tasking.scheduled_tasks.due_date) As due_date, " _
+		  + "DATE(physics_tasking.scheduled_tasks.completion_date) As completion_date " _
+		  + "FROM physics_tasking.scheduled_tasks " _
+		  + "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
+		  + "INNER JOIN physics_tasking.machines USING(machine_id) " _
+		  + "INNER JOIN physics_tasking.task_groups USING(task_group_id) " _
+		  + "INNER JOIN physics_tasking.users USING(user_id) " _
+		  + "WHERE physics_tasking.scheduled_tasks.is_completed = TRUE " 
+		  
+		  If Task_Type_PopupMenu.SelectedRowIndex > 0 Then
+		    
+		    sql = sql + "AND physics_tasking.task_groups.task_group_id = " _
+		    + Str(Task_Type_PopupMenu.RowTagAt( Task_Type_PopupMenu.SelectedRowIndex)) + " "
+		    
+		  End If
+		  
+		  If Machine_PopupMenu.SelectedRowIndex > 0 Then
+		    
+		    sql = sql + "AND physics_tasking.machines.machine_id = " _
+		    + Str(Machine_PopupMenu.RowTagAt( Machine_PopupMenu.SelectedRowIndex)) + " "
+		    
+		  End If
+		  
+		  If Due_Date_PopupMenu.SelectedRowIndex > 0 Then
+		    
+		    sql = sql + "AND physics_tasking.scheduled_tasks.due_date = '" _
+		    + Due_Date_PopupMenu.RowTagAt( Due_Date_PopupMenu.SelectedRowIndex) + "' "
+		    
+		  End If
+		  
+		  
+		  sql = sql + "ORDER BY DATE(physics_tasking.scheduled_tasks.due_date) DESC, " _
+		  + "physics_tasking.scheduled_tasks.scheduled_task_id DESC;"
+		  
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  
+		  While Not rs.AfterLastRow
+		    Var s As New WebStyle
+		    
+		    Var row As New WebListBoxRowData
+		    row.PrimaryKey = rs.Column("scheduled_task_id").IntegerValue
+		    row.tag = rs.Column("scheduled_task_id").IntegerValue
+		    row.Value("task_type") = rs.Column("task_group_name").StringValue.Trim.Uppercase + " / " _
+		    + rs.Column("task_type_name").StringValue.Trim
+		    
+		    row.Value("machine_name") =  rs.Column("machine_name").StringValue.Trim
+		    
+		    Var temp As DateTime = rs.Column("due_date").DateValue
+		    Var cellRenderer As New WebListBoxStyleRenderer(s, _
+		    temp.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None))
+		    row.Value("due_date") = cellRenderer
+		    
+		    temp = rs.Column("completion_date").DateValue
+		    cellRenderer = New WebListBoxStyleRenderer(s, _
+		    temp.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None))
+		    row.Value("completion_date") = cellRenderer
+		    
+		    row.Value("staff") = rs.Column("initials").StringValue.Trim.Uppercase
+		    rows.Add(row)
+		    
+		    
+		    rs.MoveToNextRow
+		  Wend
+		  rs.Close
+		  
+		  Return rows
+		  
+		  
+		  
+		  
+		  
+		  // Part of the WebDataSource interface.
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function SortedPrimaryKeys(sortColumns as String) As Integer()
+		  // Part of the WebDataSource interface.
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function UnsortedPrimaryKeys() As Integer()
+		  // Part of the WebDataSource interface.
+		  
+		  Var keys() As Integer 
+		  
+		  
+		  Var sql As String = "SELECT physics_tasking.scheduled_tasks.scheduled_task_id As scheduled_task_id " _
+		  + "FROM physics_tasking.scheduled_tasks " _
+		  + "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
+		  + "INNER JOIN physics_tasking.machines USING(machine_id) " _
+		  + "INNER JOIN physics_tasking.task_groups USING(task_group_id) " _
+		  + "INNER JOIN physics_tasking.users USING(user_id) " _
+		  + "WHERE physics_tasking.scheduled_tasks.is_completed = TRUE "
+		  
+		  If Task_Type_PopupMenu.SelectedRowIndex > 0 Then
+		    
+		    sql = sql + "AND physics_tasking.task_groups.task_group_id = " _
+		    + Str(Task_Type_PopupMenu.RowTagAt( Task_Type_PopupMenu.SelectedRowIndex)) + " "
+		    
+		  End If
+		  
+		  If Machine_PopupMenu.SelectedRowIndex > 0 Then
+		    
+		    sql = sql + "AND physics_tasking.machines.machine_id = " _
+		    + Str(Machine_PopupMenu.RowTagAt( Machine_PopupMenu.SelectedRowIndex)) + " "
+		    
+		  End If
+		  
+		  If Due_Date_PopupMenu.SelectedRowIndex > 0 Then
+		    
+		    sql = sql + "AND physics_tasking.scheduled_tasks.due_date = '" _
+		    + Due_Date_PopupMenu.RowTagAt( Due_Date_PopupMenu.SelectedRowIndex) + "' "
+		    
+		  End If
+		  
+		  sql = sql + "ORDER BY DATE(physics_tasking.scheduled_tasks.due_date) DESC, " _
+		  + "physics_tasking.scheduled_tasks.scheduled_task_id DESC;"
+		  
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  While Not rs.AfterLastRow
+		    keys.Append( rs.Column("scheduled_task_id").IntegerValue)
+		    
+		    rs.MoveToNextRow
+		  Wend
+		  Return keys
+		  
+		End Function
+	#tag EndMethod
+
+
 	#tag Property, Flags = &h21
 		Private Latest_UPDATE As DateTime
 	#tag EndProperty
@@ -396,16 +769,17 @@ End
 		Sub Opening()
 		  Me.HasHeader = True
 		  Me.RowSelectionType = WebListBox.RowSelectionTypes.None
+		  Me.DataSource = Self
 		  'Me.DataSource = New CompletedAssignedTasksDataSource
-		  'Me.ReloadData
+		  Me.ReloadData
 		  'Completed_Assigned_Tasks_Label.Text = "Tasks = " + Me.DataSource.RowCount.ToString
 		  
-		  Me.ColumnCount = 5
-		  Me.HeaderAt(0) = "Assigned Task"
-		  Me.HeaderAt(1) = "Machine"
-		  Me.HeaderAt(2) = "Due date"
-		  Me.HeaderAt(3) = "Completion date"
-		  Me.HeaderAt(4) = "Staff"
+		  'Me.ColumnCount = 5
+		  'Me.HeaderAt(0) = "Assigned Task"
+		  'Me.HeaderAt(1) = "Machine"
+		  'Me.HeaderAt(2) = "Due date"
+		  'Me.HeaderAt(3) = "Completion date"
+		  'Me.HeaderAt(4) = "Staff"
 		  Latest_UPDATE = App.last_database_update
 		End Sub
 	#tag EndEvent
@@ -433,29 +807,26 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events Task_Type_PopupMenu
+	#tag Event
+		Sub SelectionChanged(item as WebMenuItem)
+		  Completed_Assigned_Tasks_ListBox.ReloadData
+		  
+		  'POPULATE_POPUPMENUS
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events Machine_PopupMenu
 	#tag Event
-		Sub Opening()
-		  Me.RemoveAllRows
-		  
-		  Me.AddRow("All")
-		  Me.RowTagAt(Me.LastAddedRowIndex) = 0
+		Sub SelectionChanged(item as WebMenuItem)
+		  Completed_Assigned_Tasks_ListBox.ReloadData
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Due_Date_PopupMenu
 	#tag Event
 		Sub SelectionChanged(item as WebMenuItem)
-		  
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub Opening()
-		  Me.RemoveAllRows
-		  
-		  Me.AddRow("All")
-		  Me.RowTagAt(Me.LastAddedRowIndex) = 0
-		  
+		  Completed_Assigned_Tasks_ListBox.ReloadData
 		End Sub
 	#tag EndEvent
 #tag EndEvents
