@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_App_Logo
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   262
@@ -21,13 +22,13 @@ Begin WebContainer WEBCONTAINER_App_Logo
    Width           =   263
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebImageViewer ImageViewer1
       ControlID       =   ""
+      DisplayMode     =   3
       Enabled         =   True
       Height          =   262
-      HorizontalAlignment=   2
+      Image           =   1759225855
       Index           =   -2147483648
       Indicator       =   0
       Left            =   0
@@ -38,14 +39,12 @@ Begin WebContainer WEBCONTAINER_App_Logo
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      Picture         =   1759225855
       Scope           =   0
       SVGData         =   ""
       TabIndex        =   0
       Tooltip         =   ""
       Top             =   0
       URL             =   ""
-      VerticalAlignment=   2
       Visible         =   True
       Width           =   263
       _mPanelIndex    =   -1
@@ -58,6 +57,14 @@ End
 #tag EndWindowCode
 
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

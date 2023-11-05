@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Header
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   200
@@ -24,9 +25,10 @@ Begin WebContainer WEBCONTAINER_Header
    _mPanelIndex    =   -1
    Begin WebImageViewer ImageViewer_App_Logo
       ControlID       =   ""
+      DisplayMode     =   3
       Enabled         =   True
       Height          =   150
-      HorizontalAlignment=   2
+      Image           =   1759225855
       Index           =   -2147483648
       Indicator       =   0
       Left            =   20
@@ -37,14 +39,12 @@ Begin WebContainer WEBCONTAINER_Header
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      Picture         =   1759225855
       Scope           =   0
       SVGData         =   ""
       TabIndex        =   0
       Tooltip         =   ""
       Top             =   20
       URL             =   ""
-      VerticalAlignment=   2
       Visible         =   True
       Width           =   150
       _mPanelIndex    =   -1
@@ -52,9 +52,10 @@ Begin WebContainer WEBCONTAINER_Header
    End
    Begin WebImageViewer ImageViewer_Hospital_Logo
       ControlID       =   ""
+      DisplayMode     =   3
       Enabled         =   True
       Height          =   94
-      HorizontalAlignment=   2
+      Image           =   2129203199
       Index           =   -2147483648
       Indicator       =   0
       Left            =   370
@@ -65,14 +66,12 @@ Begin WebContainer WEBCONTAINER_Header
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      Picture         =   2129203199
       Scope           =   0
       SVGData         =   ""
       TabIndex        =   1
       Tooltip         =   ""
       Top             =   20
       URL             =   ""
-      VerticalAlignment=   2
       Visible         =   True
       Width           =   480
       _mPanelIndex    =   -1
@@ -353,7 +352,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub Pressed(x as Integer, y as Integer)
+		Sub Pressed(x As Integer, y As Integer)
 		  'Me.Style.Value("transform") = "rotate(180deg) translatex(190px)"
 		  'Me.Style.Value("position") = "absolute; left:10px;"
 		  'Me.Style.Value("transform") = "translatex(170px) rotate(14deg);"
@@ -440,7 +439,7 @@ End
 #tag EndEvents
 #tag Events Online_Canvas
 	#tag Event
-		Sub Paint(g as WebGraphics)
+		Sub Paint(g As WebGraphics)
 		  If Physics_Tasking.isDatabase_Online Then
 		    
 		    g.DrawingColor = &c21FE8000
@@ -454,7 +453,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub Pressed(x as Integer, y as Integer)
+		Sub Pressed(x As Integer, y As Integer)
 		  Var dialog As New Database_WebDialog
 		  dialog.Show
 		End Sub
@@ -521,6 +520,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

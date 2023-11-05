@@ -453,7 +453,7 @@ End
 	#tag Method, Flags = &h21
 		Private Sub POPULATE_POPUPMENUS()
 		  Var Task_Group_id As Variant
-		   
+		  
 		  If Task_Type_PopupMenu.RowCount > 0 And Task_Type_PopupMenu.SelectedRowIndex > -1 Then
 		    
 		    Task_Group_id =  Task_Type_PopupMenu.RowTagAt( Task_Type_PopupMenu.SelectedRowIndex)

@@ -1,7 +1,8 @@
 Type=Web2
-RBProjectVersion=2023.011
+RBProjectVersion=2023.031
 MinIDEVersion=20200200
 OrigIDEVersion=20220302
+FileTypeSet=FileTypes;FileTypes.xojo_filetypeset;&h000000005622BFFF;&h0000000000000000;false
 Class=DeleteButtonCellRenderer;Cell Renderers/DeleteButtonCellRenderer.xojo_code;&h0000000051C3C7FF;&h0000000042435FFF;false
 Class=GroupButtonItem;Cell Renderers/GroupButtonItem.xojo_code;&h000000000D72BFFF;&h0000000042435FFF;false
 Class=Modify_Task_ButtonItem;Cell Renderers/Modify_Task_ButtonItem.xojo_code;&h0000000047999FFF;&h0000000042435FFF;false
@@ -265,6 +266,7 @@ UseBuildsFolder=True
 HiDPI=True
 CopyRedistNextToWindowsEXE=False
 IncludePDB=False
+WinUIFramework=False
 IsWebProject=True
 WebDebugPort=9090
 WebLivePort=80

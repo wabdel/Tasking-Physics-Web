@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Hospital_Logo
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   94
@@ -24,9 +25,10 @@ Begin WebContainer WEBCONTAINER_Hospital_Logo
    _mPanelIndex    =   -1
    Begin WebImageViewer Hospital_Logo_ImageViewer
       ControlID       =   ""
+      DisplayMode     =   3
       Enabled         =   True
       Height          =   94
-      HorizontalAlignment=   2
+      Image           =   2129203199
       Index           =   -2147483648
       Indicator       =   0
       Left            =   0
@@ -37,14 +39,12 @@ Begin WebContainer WEBCONTAINER_Hospital_Logo
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      Picture         =   2129203199
       Scope           =   2
       SVGData         =   ""
       TabIndex        =   0
       Tooltip         =   ""
       Top             =   0
       URL             =   ""
-      VerticalAlignment=   2
       Visible         =   True
       Width           =   480
       _mPanelIndex    =   -1
@@ -69,6 +69,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false
