@@ -236,7 +236,7 @@ Inherits WebApplication
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  Const kReturn As String = &u13
+			  Const kReturn As String = &u10
 			  
 			  Return kReturn
 			End Get
@@ -343,6 +343,22 @@ Inherits WebApplication
 			Group="Behavior"
 			InitialValue="&cFEACA700"
 			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="kReturn"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="kTab"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="String"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

@@ -240,7 +240,6 @@ Begin WebContainer WEBCONTAINER_Search_Plans Implements WebDataSource
       LockVertical    =   False
       Scope           =   2
       TabIndex        =   6
-      TabStop         =   True
       Tooltip         =   ""
       Top             =   43
       Visible         =   True
@@ -769,7 +768,7 @@ End
 		      + rs.Column("first_name").StringValue + ", " _
 		      + rs.Column("family_name").StringValue + ", " _
 		      + rs.Column("site").StringValue + ", " _
-		      + rs.Column("plan_type_name").StringValue + App.kReturn
+		      + rs.Column("plan_type_name").StringValue + EndOfLine
 		      
 		      
 		      
