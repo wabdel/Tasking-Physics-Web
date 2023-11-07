@@ -226,7 +226,7 @@ Begin WebContainer WEBCONTAINER_Search_Plans Implements WebDataSource
       Caption         =   "Save List"
       ControlID       =   ""
       Default         =   True
-      Enabled         =   True
+      Enabled         =   False
       Height          =   38
       Index           =   -2147483648
       Indicator       =   1
@@ -337,6 +337,8 @@ End
 		  Plan_Type_PopupMenu.RemoveAllRows
 		  
 		  Select Case Sites_PopupMenu.RowTagAt( Sites_PopupMenu.SelectedRowIndex)
+		  Case -1 
+		    Return
 		  Case 0 
 		    
 		    Plan_Type_PopupMenu.Visible = False
@@ -384,13 +386,21 @@ End
 		  
 		  Plans_ListBox.ReloadData
 		  Plans_Label.Text = "Plans = " + Self.RowCount.ToString
-		  
+		  If Self.RowCount > 0 Then
+		    
+		    Save_Button.Enabled = True
+		  Else
+		    Save_Button.Enabled = False
+		    
+		  End If
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
 		Private Function RowCount() As Integer
 		  // Part of the WebDataSource interface.
+		  If Sites_PopupMenu.SelectedRowIndex = -1 Then Return 0
+		  
 		  
 		  Var sql As String = "SELECT COUNT(*) as c  " _
 		  + "FROM physics_tasking.plans " _
@@ -425,6 +435,7 @@ End
 		  // Part of the WebDataSource interface.
 		  Var rows() As WebListboxRowData
 		  
+		  If Sites_PopupMenu.SelectedRowIndex = -1 Then Return rows
 		  
 		  Var sql As String = "SELECT physics_tasking.plans.plan_id As plan_id, " _
 		  + "physics_tasking.patients.mrn As mrn, " _
@@ -548,7 +559,9 @@ End
 		  // Part of the WebDataSource interface.
 		  
 		  
+		  
 		  Var keys() As Integer 
+		  If Sites_PopupMenu.SelectedRowIndex = -1 Then Return keys
 		  
 		  Var sql As String = "SELECT physics_tasking.plans.plan_id As plan_id " _
 		  + "FROM physics_tasking.plans " _
@@ -645,7 +658,7 @@ End
 		    
 		  Wend
 		  
-		  Me.SelectedRowIndex = 0
+		  'Me.SelectedRowIndex = 0
 		  
 		End Sub
 	#tag EndEvent

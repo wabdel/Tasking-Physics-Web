@@ -28,7 +28,7 @@ Begin WebContainer WEBCONTAINER_Hospital_Logo
       DisplayMode     =   3
       Enabled         =   True
       Height          =   94
-      Image           =   2129203199
+      Image           =   379791359
       Index           =   -2147483648
       Indicator       =   0
       Left            =   0

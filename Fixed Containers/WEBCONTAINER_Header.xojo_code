@@ -28,7 +28,7 @@ Begin WebContainer WEBCONTAINER_Header
       DisplayMode     =   3
       Enabled         =   True
       Height          =   150
-      Image           =   1759225855
+      Image           =   2024888319
       Index           =   -2147483648
       Indicator       =   0
       Left            =   20
@@ -55,7 +55,7 @@ Begin WebContainer WEBCONTAINER_Header
       DisplayMode     =   3
       Enabled         =   True
       Height          =   94
-      Image           =   2129203199
+      Image           =   379791359
       Index           =   -2147483648
       Indicator       =   0
       Left            =   370

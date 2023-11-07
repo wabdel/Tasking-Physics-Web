@@ -28,7 +28,7 @@ Begin WebContainer WEBCONTAINER_App_Logo
       DisplayMode     =   3
       Enabled         =   True
       Height          =   262
-      Image           =   1759225855
+      Image           =   2024888319
       Index           =   -2147483648
       Indicator       =   0
       Left            =   0
