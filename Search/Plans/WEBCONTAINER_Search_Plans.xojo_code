@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Search_Plans Implements WebDataSource
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   600
@@ -21,7 +22,6 @@ Begin WebContainer WEBCONTAINER_Search_Plans Implements WebDataSource
    Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebTimer REFRESH_Timer
       ControlID       =   ""
@@ -54,7 +54,7 @@ Begin WebContainer WEBCONTAINER_Search_Plans Implements WebDataSource
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   0
       Tooltip         =   ""
       Top             =   20
@@ -113,7 +113,7 @@ Begin WebContainer WEBCONTAINER_Search_Plans Implements WebDataSource
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   2
       Tooltip         =   ""
       Top             =   66
@@ -164,6 +164,7 @@ Begin WebContainer WEBCONTAINER_Search_Plans Implements WebDataSource
       Indicator       =   ""
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   20
       LockBottom      =   False
@@ -217,6 +218,32 @@ Begin WebContainer WEBCONTAINER_Search_Plans Implements WebDataSource
       Underline       =   False
       Visible         =   True
       Width           =   146
+      _mPanelIndex    =   -1
+   End
+   Begin WebButton Save_Button
+      AllowAutoDisable=   False
+      Cancel          =   False
+      Caption         =   "Save List"
+      ControlID       =   ""
+      Default         =   True
+      Enabled         =   False
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   1
+      Left            =   859
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Scope           =   2
+      TabIndex        =   6
+      Tooltip         =   ""
+      Top             =   43
+      Visible         =   True
+      Width           =   100
       _mPanelIndex    =   -1
    End
 End
@@ -297,10 +324,21 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub FileDownloaded(file As WebFile)
+		  If file = TextFile Then
+		    TextFile = Nil
+		    MessageBox("The Browser has initiated the download.")
+		  End If
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub POPULATE_Plan_Types_POPUPMENU()
 		  Plan_Type_PopupMenu.RemoveAllRows
 		  
 		  Select Case Sites_PopupMenu.RowTagAt( Sites_PopupMenu.SelectedRowIndex)
+		  Case -1 
+		    Return
 		  Case 0 
 		    
 		    Plan_Type_PopupMenu.Visible = False
@@ -348,13 +386,21 @@ End
 		  
 		  Plans_ListBox.ReloadData
 		  Plans_Label.Text = "Plans = " + Self.RowCount.ToString
-		  
+		  If Self.RowCount > 0 Then
+		    
+		    Save_Button.Enabled = True
+		  Else
+		    Save_Button.Enabled = False
+		    
+		  End If
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
 		Private Function RowCount() As Integer
 		  // Part of the WebDataSource interface.
+		  If Sites_PopupMenu.SelectedRowIndex = -1 Then Return 0
+		  
 		  
 		  Var sql As String = "SELECT COUNT(*) as c  " _
 		  + "FROM physics_tasking.plans " _
@@ -389,6 +435,7 @@ End
 		  // Part of the WebDataSource interface.
 		  Var rows() As WebListboxRowData
 		  
+		  If Sites_PopupMenu.SelectedRowIndex = -1 Then Return rows
 		  
 		  Var sql As String = "SELECT physics_tasking.plans.plan_id As plan_id, " _
 		  + "physics_tasking.patients.mrn As mrn, " _
@@ -512,7 +559,9 @@ End
 		  // Part of the WebDataSource interface.
 		  
 		  
+		  
 		  Var keys() As Integer 
+		  If Sites_PopupMenu.SelectedRowIndex = -1 Then Return keys
 		  
 		  Var sql As String = "SELECT physics_tasking.plans.plan_id As plan_id " _
 		  + "FROM physics_tasking.plans " _
@@ -555,6 +604,10 @@ End
 
 	#tag Property, Flags = &h21
 		Private Latest_Update As DateTime
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private TextFile As WebFile
 	#tag EndProperty
 
 
@@ -605,12 +658,12 @@ End
 		    
 		  Wend
 		  
-		  Me.SelectedRowIndex = 0
+		  'Me.SelectedRowIndex = 0
 		  
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub SelectionChanged(item as WebMenuItem)
+		Sub SelectionChanged(item As WebMenuItem)
 		  POPULATE_Plan_Types_POPUPMENU
 		End Sub
 	#tag EndEvent
@@ -630,7 +683,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub SelectionChanged(item as WebMenuItem)
+		Sub SelectionChanged(item As WebMenuItem)
 		  Plans_ListBox.ReloadData
 		  Plans_Label.Text = "Plans = " + Self.RowCount.ToString
 		End Sub
@@ -662,7 +715,101 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events Save_Button
+	#tag Event
+		Sub Pressed()
+		  
+		  
+		  Var sql As String = "SELECT physics_tasking.plans.plan_id As plan_id, " _
+		  + "physics_tasking.patients.mrn As mrn, " _
+		  + "physics_tasking.patients.first_name As first_name, " _
+		  + "physics_tasking.patients.family_name As family_name, " _
+		  + "physics_tasking.plan_types.name As plan_type_name, " _
+		  + "physics_tasking.sites.name As site, " _
+		  + "physics_tasking.sites.is_uppercase As is_uppercase, " _
+		  + "DATE(physics_tasking.plans.completion_date) as completion_date, " _
+		  + "physics_tasking.users.first_name As u_first_name, " _
+		  + "physics_tasking.users.family_name As u_family_name, " _
+		  + "physics_tasking.users.initials As initials, " _
+		  + "physics_tasking.plans.is_replan as is_replan, " _
+		  + "(" _
+		  + "SELECT physics_tasking.users.initials " _
+		  + "FROM physics_tasking.users " _
+		  + "WHERE physics_tasking.plans.physician_id = physics_tasking.users.user_id" _
+		  +") As physician_initials " _
+		  + "FROM physics_tasking.plans " _
+		  + "INNER JOIN physics_tasking.patients USING (patient_id) " _
+		  + "INNER JOIN physics_tasking.plan_types USING (plan_type_id) " _
+		  + "INNER JOIN physics_tasking.sites USING (site_id) " _
+		  + "INNER JOIN physics_tasking.users USING (user_id) "
+		  
+		  
+		  If Sites_PopupMenu.RowTagAt( Sites_PopupMenu.SelectedRowIndex) = 0 Then
+		    
+		    sql = sql + "WHERE is_completed = TRUE " 
+		    
+		  ElseIf Plan_Type_PopupMenu.RowTagAt( Plan_Type_PopupMenu.SelectedRowIndex) = 0 Then
+		    
+		    sql = sql + "WHERE is_completed = TRUE " _
+		    + "AND site_id = " +Str(Sites_PopupMenu.RowTagAt( Sites_PopupMenu.SelectedRowIndex)) + " " _
+		    
+		  Else
+		    
+		    sql = sql + "WHERE is_completed = TRUE " _
+		    + "AND plan_type_id = " +Str(Plan_Type_PopupMenu.RowTagAt( Plan_Type_PopupMenu.SelectedRowIndex)) + " " _
+		    
+		  End If
+		  
+		  sql = sql + "ORDER BY DATE(physics_tasking.plans.completion_date) DESC, physics_tasking.patients.mrn ASC;"
+		  
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  
+		  If TextFile = Nil Then
+		    // Create a text file to download
+		    TextFile = New WebFile
+		    TextFile.MimeType = "text/plain"
+		    TextFile.ForceDownload = True
+		    TextFile.FileName = "TextFile.txt"
+		    
+		    'Var d As DateTime = Session.ClientTime.Now
+		    Var s As String
+		    
+		    While Not rs.AfterLastRow
+		      
+		      s = s + rs.Column("mrn").StringValue + ", " _
+		      + rs.Column("first_name").StringValue + ", " _
+		      + rs.Column("family_name").StringValue + ", " _
+		      + rs.Column("site").StringValue + ", " _
+		      + rs.Column("plan_type_name").StringValue + EndOfLine
+		      
+		      
+		      
+		      rs.MoveToNextRow
+		    Wend
+		    
+		    TextFile.Data = s
+		    // The WebFile.Downloaded event handler is called when the browser
+		    // requests the file for downloading. This code maps that event handler
+		    // to the FileDownloaded method on this web page.
+		    AddHandler TextFile.Downloaded, AddressOf FileDownloaded
+		  End If
+		  
+		  Session.GoToURL(TextFile.URL)
+		  
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

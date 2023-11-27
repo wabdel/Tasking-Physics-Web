@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Logout
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   200
@@ -21,7 +22,6 @@ Begin WebContainer WEBCONTAINER_Logout
    Width           =   666
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Logout_Button
       AllowAutoDisable=   False
@@ -434,9 +434,10 @@ Begin WebContainer WEBCONTAINER_Logout
    End
    Begin WebImageViewer Preferences_ImageViewer
       ControlID       =   ""
+      DisplayMode     =   3
       Enabled         =   True
       Height          =   45
-      HorizontalAlignment=   2
+      Image           =   1486747647
       Index           =   -2147483648
       Indicator       =   0
       Left            =   273
@@ -447,14 +448,12 @@ Begin WebContainer WEBCONTAINER_Logout
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      Picture         =   1486747647
       Scope           =   2
       SVGData         =   ""
       TabIndex        =   13
       Tooltip         =   ""
       Top             =   20
       URL             =   ""
-      VerticalAlignment=   2
       Visible         =   True
       Width           =   45
       _mPanelIndex    =   -1
@@ -765,7 +764,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub Pressed(x as Integer, y as Integer)
+		Sub Pressed(x As Integer, y As Integer)
 		  Var dialog As New WebDialog_User_Edit
 		  dialog.Show
 		  dialog.user_id = Session.Logged_in_User.id
@@ -792,6 +791,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

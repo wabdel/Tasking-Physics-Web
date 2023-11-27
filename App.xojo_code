@@ -2,7 +2,7 @@
 Protected Class App
 Inherits WebApplication
 	#tag Event
-		Sub Opening(args() as String)
+		Sub Opening(args() As String)
 		  #If Not DebugBuild Then
 		    Call Daemonize
 		  #EndIf
@@ -233,6 +233,28 @@ Inherits WebApplication
 		Colour_Title As Color = &cFEACA700
 	#tag EndProperty
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  Const kReturn As String = &u10
+			  
+			  Return kReturn
+			End Get
+		#tag EndGetter
+		kReturn As String
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  Const kTab As String = &u09
+			  
+			  Return kTab
+			End Get
+		#tag EndGetter
+		kTab As String
+	#tag EndComputedProperty
+
 	#tag Property, Flags = &h0
 		last_database_update As DateTime
 	#tag EndProperty
@@ -321,6 +343,22 @@ Inherits WebApplication
 			Group="Behavior"
 			InitialValue="&cFEACA700"
 			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="kReturn"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="kTab"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="String"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

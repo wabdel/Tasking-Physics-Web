@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Login
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   200
@@ -266,6 +267,8 @@ End
 		          Var sql As String = "UPDATE physics_tasking.users " _
 		          + "SET is_active = TRUE " _
 		          + "WHERE user_id = " + rs.Column("user_id").IntegerValue.ToString + ";"
+		          Physics_Tasking.DB_EXECUTE_Statement(sql)
+		          
 		          App.last_database_update = DateTime.Now
 		          
 		        End If
@@ -388,6 +391,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false
