@@ -22,7 +22,6 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
    Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Add_Button
       AllowAutoDisable=   False
@@ -62,6 +61,7 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       Indicator       =   ""
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   20
       LockBottom      =   False
@@ -234,7 +234,7 @@ End
 		  // Part of the WebDataSource interface.
 		  
 		  Var sql As String = "SELECT COUNT(*) as c FROM physics_tasking.timelogs " _
-		  + "WHERE user_id = " + Session.Logged_in_User.id.ToString + ";"
+		  + "WHERE user_id = " + Session.Logged_in_User.id.ToString + " LIMIT 30;"
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
@@ -257,7 +257,7 @@ End
 		  Var rows() As WebListboxRowData
 		  Var sql As String = "SELECT * FROM physics_tasking.timelogs " _
 		  + "WHERE user_id = " + Session.Logged_in_User.id.ToString + " " _
-		  + "ORDER BY physics_tasking.timelogs.time_in DESC "
+		  + "ORDER BY physics_tasking.timelogs.time_in DESC LIMIT 30"
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
@@ -383,7 +383,7 @@ End
 		  Var sql As String = "SELECT physics_tasking.timelogs.timelog_id " _
 		  + "FROM physics_tasking.timelogs " _
 		  + "WHERE user_id = " + Session.Logged_in_User.id.ToString + " " _
-		  + "ORDER BY physics_tasking.timelogs.time_in DESC "
+		  + "ORDER BY physics_tasking.timelogs.time_in DESC LIMIT 30"
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
@@ -422,7 +422,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub DoublePressed(row as integer, column as integer)
+		Sub DoublePressed(row As Integer, column As Integer)
 		  If row > Me.RowCount - 1 Then Return
 		  
 		  Var theDialog As New WebDialog_TimeLog_Edit
