@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Statistics_Points_History
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   600
@@ -23,15 +24,21 @@ Begin WebContainer WEBCONTAINER_Statistics_Points_History
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
    Begin WebChart Points_Chart
+      AllowPopover    =   True
+      AutoCalculateYAxis=   False
       ControlID       =   ""
       DatasetCount    =   0
       Enabled         =   True
+      GridColor       =   &c000000AA
       HasAnimation    =   False
       HasLegend       =   False
       Height          =   560
       Index           =   -2147483648
       Indicator       =   0
       Left            =   20
+      LegendColor     =   &c000000
+      LegendFontName  =   ""
+      LegendFontSize  =   0.0
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -40,9 +47,13 @@ Begin WebContainer WEBCONTAINER_Statistics_Points_History
       LockTop         =   True
       LockVertical    =   False
       Mode            =   0
+      PopoverBackgroundColor=   &c000000
       Scope           =   2
       TabIndex        =   0
       Title           =   ""
+      TitleColor      =   &c000000
+      TitleFontName   =   ""
+      TitleFontSize   =   0.0
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -88,15 +99,21 @@ Begin WebContainer WEBCONTAINER_Statistics_Points_History
       ThreadState     =   0
    End
    Begin WebChart Points_Chart_old
+      AllowPopover    =   True
+      AutoCalculateYAxis=   False
       ControlID       =   ""
       DatasetCount    =   0
       Enabled         =   True
+      GridColor       =   &c000000AA
       HasAnimation    =   False
       HasLegend       =   False
       Height          =   560
       Index           =   -2147483648
       Indicator       =   0
       Left            =   40
+      LegendColor     =   &c000000
+      LegendFontName  =   ""
+      LegendFontSize  =   0.0
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -105,9 +122,13 @@ Begin WebContainer WEBCONTAINER_Statistics_Points_History
       LockTop         =   True
       LockVertical    =   False
       Mode            =   7
+      PopoverBackgroundColor=   &c000000
       Scope           =   2
       TabIndex        =   2
       Title           =   ""
+      TitleColor      =   &c000000
+      TitleFontName   =   ""
+      TitleFontSize   =   0.0
       Tooltip         =   ""
       Top             =   40
       Visible         =   False
@@ -193,13 +214,15 @@ End
 #tag Events Points_Chart
 	#tag Event
 		Sub Opening()
+		  Me.HasLegend = True
+		  Me.HasAnimation = False
 		  Me.Style.BackgroundColor = Color.White
 		  
 		  
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub OverrideOptions(Options as JSONItem)
+		Sub OverrideOptions(options As JSONItem)
 		  '//Format Title
 		  Var title As New JSONItem
 		  title.Value("display") = True
@@ -459,7 +482,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub UserInterfaceUpdate(data() as Dictionary)
+		Sub UserInterfaceUpdate(data() As Dictionary)
 		  For Each arg As Dictionary In data
 		    If arg.HasKey("UIProgress") Then
 		      
@@ -486,7 +509,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub OverrideOptions(Options as JSONItem)
+		Sub OverrideOptions(options As JSONItem)
 		  '//Format Title
 		  Var title As New JSONItem
 		  title.Value("display") = True
@@ -569,6 +592,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

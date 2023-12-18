@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Statistics_Planners_Points
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   600
@@ -34,6 +35,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Planners_Points
       Indicator       =   ""
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   20
       LockBottom      =   False
@@ -59,15 +61,21 @@ Begin WebContainer WEBCONTAINER_Statistics_Planners_Points
       _mPanelIndex    =   -1
    End
    Begin WebChart Points_Chart
+      AllowPopover    =   True
+      AutoCalculateYAxis=   False
       ControlID       =   ""
       DatasetCount    =   0
       Enabled         =   True
+      GridColor       =   &c000000AA
       HasAnimation    =   False
       HasLegend       =   False
       Height          =   367
       Index           =   -2147483648
       Indicator       =   ""
       Left            =   690
+      LegendColor     =   &c000000
+      LegendFontName  =   ""
+      LegendFontSize  =   0.0
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -76,9 +84,13 @@ Begin WebContainer WEBCONTAINER_Statistics_Planners_Points
       LockTop         =   True
       LockVertical    =   False
       Mode            =   0
+      PopoverBackgroundColor=   &c000000
       Scope           =   2
       TabIndex        =   1
       Title           =   ""
+      TitleColor      =   &c000000
+      TitleFontName   =   ""
+      TitleFontSize   =   0.0
       Tooltip         =   ""
       Top             =   105
       Visible         =   True
@@ -156,7 +168,7 @@ End
 #tag EndEvents
 #tag Events Points_Chart
 	#tag Event
-		Sub OverrideOptions(Options as JSONItem)
+		Sub OverrideOptions(options As JSONItem)
 		  '//Format Title
 		  Var title As New JSONItem
 		  title.Value("display") = True
@@ -239,6 +251,8 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
+		  Me.HasLegend = True
+		  Me.HasAnimation = False
 		  Me.Style.BackgroundColor = Color.White
 		  
 		  
@@ -313,7 +327,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub UserInterfaceUpdate(data() as Dictionary)
+		Sub UserInterfaceUpdate(data() As Dictionary)
 		  For Each arg As Dictionary In data
 		    If arg.HasKey("UIProgress") Then
 		      
@@ -331,6 +345,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false
