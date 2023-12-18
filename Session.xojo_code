@@ -6,6 +6,8 @@ Inherits WebSession
   disconnectmessage=You have been disconnected from this application.
   confirmmessage=
   AllowTabOrderWrap=True
+  ColorMode=0
+  SendEventsInBatches=False
 #tag EndSession
 	#tag Event
 		Sub Opening()
@@ -134,8 +136,16 @@ Inherits WebSession
 		My_Task_Changed As Boolean
 	#tag EndProperty
 
+	#tag Property, Flags = &h0
+		PDF_Document As PDFDocument
+	#tag EndProperty
+
 	#tag Property, Flags = &h21
 		Private TimeoutDialog As SessionWarningDialog
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		WebFile_Download As WebFile
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -155,6 +165,35 @@ Inherits WebSession
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="ColorMode"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="WebSession.ColorModes"
+			EditorType="Enum"
+			#tag EnumValues
+				"0 - Auto"
+				"1 - Light"
+				"2 - Dark"
+			#tag EndEnumValues
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="UserPrefersDarkMode"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="SendEventsInBatches"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true
@@ -384,6 +423,14 @@ Inherits WebSession
 			Visible=false
 			Group="Behavior"
 			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="darkmode"
+			Visible=false
+			Group="Behavior"
+			InitialValue="True"
 			Type="Boolean"
 			EditorType=""
 		#tag EndViewProperty

@@ -159,6 +159,66 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       Width           =   289
       _mPanelIndex    =   -1
    End
+   Begin WebLabel Note_Label1
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   15.0
+      Height          =   38
+      Index           =   -2147483648
+      indicator       =   0
+      Italic          =   True
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      PanelIndex      =   0
+      Scope           =   2
+      TabIndex        =   4
+      TabStop         =   True
+      Text            =   "Data listed is for the past 30 enteries."
+      TextAlignment   =   0
+      TextColor       =   &cFF7E7900
+      Tooltip         =   ""
+      Top             =   562
+      Underline       =   False
+      Visible         =   True
+      Width           =   397
+      _mPanelIndex    =   -1
+   End
+   Begin WebButton Download_Button
+      AllowAutoDisable=   False
+      Cancel          =   False
+      Caption         =   "Download"
+      ControlID       =   ""
+      Default         =   True
+      Enabled         =   True
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   1
+      Left            =   840
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Scope           =   2
+      TabIndex        =   5
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   542
+      Visible         =   True
+      Width           =   126
+      _mPanelIndex    =   -1
+   End
 End
 #tag EndWebContainerControl
 
@@ -227,6 +287,94 @@ End
 		  
 		  // Part of the WebDataSource interface.
 		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub GENERATE_PDFDocument_List()
+		  Session.PDF_Document = New PDFDocument(PDFDocument.PageSizes.A4)
+		  Var g As Graphics = Session.PDF_Document.Graphics
+		  
+		  
+		  Var sql As String = "SELECT * FROM physics_tasking.timelogs " _
+		  + "WHERE user_id = " + Session.Logged_in_User.id.ToString + " " _
+		  + "ORDER BY physics_tasking.timelogs.time_in DESC"
+		  
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  Var y_position As Integer = 0
+		  
+		  Var image_scale As Double = 150 / Hospital_Logo_Image.Width
+		  
+		  While Not rs.AfterLastRow
+		    
+		    If y_position = 0 Then
+		      
+		      'g.DrawPicture(Hospital_Logo_Image, (g.Width - Hospital_Logo_Image.Width* image_scale) / 2, 5, _
+		      'Hospital_Logo_Image.Width* image_scale, Hospital_Logo_Image.Height * image_scale, _
+		      '0, 0, Hospital_Logo_Image.Width, Hospital_Logo_Image.Height)
+		      g.FontSize = 12
+		      
+		      g.DrawPicture(Hospital_Logo_Image, 20, 5, _
+		      Hospital_Logo_Image.Width* image_scale, Hospital_Logo_Image.Height * image_scale, _
+		      0, 0, Hospital_Logo_Image.Width, Hospital_Logo_Image.Height)
+		      
+		      g.DrawText("Name : " + Session.Logged_in_User.full_name, _
+		      g.Width - 20 - g.TextWidth("Name : " + Session.Logged_in_User.full_name), 25)
+		      
+		      g.FontSize = 20
+		      g.DrawText("Daily log", (g.Width - 20 - g.TextWidth("Daily log"))/ 2, 25)
+		      
+		      y_position = y_position + 10 + Hospital_Logo_Image.Height*image_scale 
+		      
+		      g.DrawingColor = Color.Black
+		      
+		      
+		      g.DrawLine( 10, y_position, g.Width - 10, y_position)
+		      
+		      y_position = y_position + 15
+		      
+		      g.FontSize = 12
+		    End If
+		    
+		    
+		    g.DrawText( rs.Column("time_in").DateTimeValue.ToString( Locale.Current, _
+		    DateTime.FormatStyles.Short, DateTime.FormatStyles.None), 20, y_position)
+		    
+		    g.DrawText( rs.Column("time_in").DateTimeValue.ToString( Locale.Current, _
+		    DateTime.FormatStyles.None, DateTime.FormatStyles.Short), 100, y_position)
+		    
+		    If rs.Column("time_out").DateTimeValue <> Nil Then
+		      
+		      g.DrawText( rs.Column("time_out").DateTimeValue.ToString( Locale.Current, _
+		      DateTime.FormatStyles.None, DateTime.FormatStyles.Short), 170, y_position)
+		      
+		    End If
+		    
+		    g.DrawText( rs.Column("notes").StringValue, 240, y_position)
+		    
+		    y_position = y_position + 15
+		    
+		    
+		    If y_position >= g.Height - 50 Then
+		      g.DrawLine( 10, y_position, g.Width - 10, y_position)
+		      
+		      g.NextPage
+		      y_position = 0
+		      
+		    End If
+		    
+		    rs.MoveToNextRow
+		    
+		  Wend
+		  
+		  
+		  Session.WebFile_Download = New WebFile
+		  
+		  Session.WebFile_Download.Data = Session.PDF_Document.ToData
+		  
+		  Session.WebFile_Download.MIMEType = "application/pdf"
+		  Session.WebFile_Download.Filename = Session.Logged_in_User.full_name + ".pdf"
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
@@ -452,6 +600,18 @@ End
 	#tag Event
 		Sub Opening()
 		  Me.Style = Session.WEBSTYLE_Label
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Download_Button
+	#tag Event
+		Sub Pressed()
+		  GENERATE_PDFDocument_List
+		  Session.WebFile_Download.ForceDownload = True
+		  
+		  Call Session.WebFile_Download.Download
+		  
+		  Session.WebFile_Download.ForceDownload = False
 		End Sub
 	#tag EndEvent
 #tag EndEvents
