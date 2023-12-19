@@ -325,10 +325,10 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub FileDownloaded(file As WebFile)
-		  If file = TextFile Then
-		    TextFile = Nil
-		    MessageBox("The Browser has initiated the download.")
-		  End If
+		  'If file = TextFile Then
+		  'TextFile = Nil
+		  'MessageBox("The Browser has initiated the download.")
+		  'End If
 		End Sub
 	#tag EndMethod
 
@@ -606,10 +606,6 @@ End
 		Private Latest_Update As DateTime
 	#tag EndProperty
 
-	#tag Property, Flags = &h21
-		Private TextFile As WebFile
-	#tag EndProperty
-
 
 #tag EndWindowCode
 
@@ -764,38 +760,46 @@ End
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
+		  '
+		  'If TextFile = Nil Then
+		  '// Create a text file to download
+		  Session.WebFile_Download = New WebFile
+		  Session.WebFile_Download.MimeType = "text/plain"
+		  'TextFile.ForceDownload = True
+		  Session.WebFile_Download.FileName = "TextFile.txt"
 		  
-		  If TextFile = Nil Then
-		    // Create a text file to download
-		    TextFile = New WebFile
-		    TextFile.MimeType = "text/plain"
-		    TextFile.ForceDownload = True
-		    TextFile.FileName = "TextFile.txt"
-		    
-		    'Var d As DateTime = Session.ClientTime.Now
-		    Var s As String
-		    
-		    While Not rs.AfterLastRow
-		      
-		      s = s + rs.Column("mrn").StringValue + ", " _
-		      + rs.Column("first_name").StringValue + ", " _
-		      + rs.Column("family_name").StringValue + ", " _
-		      + rs.Column("site").StringValue + ", " _
-		      + rs.Column("plan_type_name").StringValue + EndOfLine
-		      
-		      
-		      
-		      rs.MoveToNextRow
-		    Wend
-		    
-		    TextFile.Data = s
-		    // The WebFile.Downloaded event handler is called when the browser
-		    // requests the file for downloading. This code maps that event handler
-		    // to the FileDownloaded method on this web page.
-		    AddHandler TextFile.Downloaded, AddressOf FileDownloaded
-		  End If
+		  'Var d As DateTime = Session.ClientTime.Now
+		  Var File_data_List As String
 		  
-		  Session.GoToURL(TextFile.URL)
+		  While Not rs.AfterLastRow
+		    
+		    File_data_List = File_data_List + rs.Column("mrn").StringValue + ", " _
+		    + rs.Column("first_name").StringValue + ", " _
+		    + rs.Column("family_name").StringValue + ", " _
+		    + rs.Column("site").StringValue + ", " _
+		    + rs.Column("plan_type_name").StringValue + EndOfLine
+		    
+		    
+		    
+		    rs.MoveToNextRow
+		  Wend
+		  
+		  Session.WebFile_Download.Data = File_data_List
+		  
+		  Session.WebFile_Download.Filename = "Plans_List.txt"
+		  // The WebFile.Downloaded event handler is called when the browser
+		  // requests the file for downloading. This code maps that event handler
+		  // to the FileDownloaded method on this web page.
+		  'AddHandler TextFile.Downloaded, AddressOf FileDownloaded
+		  'End If
+		  
+		  'Session.GoToURL(TextFile.URL)
+		  
+		  Session.WebFile_Download.ForceDownload = True
+		  
+		  Call Session.WebFile_Download.Download
+		  
+		  Session.WebFile_Download.ForceDownload = False
 		  
 		  
 		End Sub

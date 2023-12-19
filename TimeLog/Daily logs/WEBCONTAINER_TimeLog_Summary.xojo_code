@@ -167,7 +167,7 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       FontSize        =   15.0
       Height          =   38
       Index           =   -2147483648
-      indicator       =   0
+      Indicator       =   0
       Italic          =   True
       Left            =   20
       LockBottom      =   False
@@ -178,10 +178,8 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
-      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   4
-      TabStop         =   True
       Text            =   "Data listed is for the past 30 enteries."
       TextAlignment   =   0
       TextColor       =   &cFF7E7900
@@ -212,7 +210,6 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       LockVertical    =   False
       Scope           =   2
       TabIndex        =   5
-      TabStop         =   True
       Tooltip         =   ""
       Top             =   542
       Visible         =   True
@@ -294,7 +291,6 @@ End
 		  Session.PDF_Document = New PDFDocument(PDFDocument.PageSizes.A4)
 		  Var g As Graphics = Session.PDF_Document.Graphics
 		  
-		  
 		  Var sql As String = "SELECT * FROM physics_tasking.timelogs " _
 		  + "WHERE user_id = " + Session.Logged_in_User.id.ToString + " " _
 		  + "ORDER BY physics_tasking.timelogs.time_in DESC"
@@ -304,11 +300,13 @@ End
 		  Var y_position As Integer = 0
 		  
 		  Var image_scale As Double = 150 / Hospital_Logo_Image.Width
+		  Var page_number As Integer = 0
 		  
 		  While Not rs.AfterLastRow
 		    
 		    If y_position = 0 Then
 		      
+		      page_number = page_number + 1
 		      'g.DrawPicture(Hospital_Logo_Image, (g.Width - Hospital_Logo_Image.Width* image_scale) / 2, 5, _
 		      'Hospital_Logo_Image.Width* image_scale, Hospital_Logo_Image.Height * image_scale, _
 		      '0, 0, Hospital_Logo_Image.Width, Hospital_Logo_Image.Height)
@@ -412,6 +410,11 @@ End
 		    If y_position >= g.Height - 50 Then
 		      g.DrawLine( 10, g.Height - 50, g.Width - 10, g.Height - 50)
 		      
+		      y_position = g.Height - 50 + 20
+		      
+		      g.DrawText( page_number.ToString, (g.Width -g.TextWidth(page_number.ToString)) /2 _
+		      , y_position, g.Width - 20 - 340 , False)
+		      
 		      g.NextPage
 		      y_position = 0
 		      
@@ -421,6 +424,10 @@ End
 		    
 		  Wend
 		  g.DrawLine( 10, g.Height - 50, g.Width - 10, g.Height - 50)
+		  y_position = g.Height - 50 + 20
+		  
+		  g.DrawText( page_number.ToString, (g.Width -g.TextWidth(page_number.ToString)) /2 _
+		  , y_position, g.Width - 20 - 340 , False)
 		  
 		  Session.WebFile_Download = New WebFile
 		  
@@ -660,12 +667,25 @@ End
 #tag Events Download_Button
 	#tag Event
 		Sub Pressed()
+		  Download_Button.Enabled = False
+		  
+		  
+		  If Session.WebFile_Download <> Nil Then
+		    Session.WebFile_Download = Nil
+		    
+		  End If
+		  
+		  MessageBox("The Browser has initiated the download.")
+		  
 		  GENERATE_PDFDocument_List
+		  
 		  Session.WebFile_Download.ForceDownload = True
 		  
 		  Call Session.WebFile_Download.Download
 		  
 		  Session.WebFile_Download.ForceDownload = False
+		  
+		  Download_Button.Enabled = False
 		End Sub
 	#tag EndEvent
 #tag EndEvents
