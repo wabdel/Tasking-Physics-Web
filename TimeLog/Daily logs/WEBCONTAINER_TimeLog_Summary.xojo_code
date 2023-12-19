@@ -324,16 +324,31 @@ End
 		      g.FontSize = 20
 		      g.DrawText("Daily log", (g.Width - 20 - g.TextWidth("Daily log"))/ 2, 25)
 		      
-		      y_position = y_position + 10 + Hospital_Logo_Image.Height*image_scale 
+		      y_position = y_position + 30 + Hospital_Logo_Image.Height*image_scale 
+		      
+		      g.FontSize = 12
+		      
+		      g.DrawText( "Date", 20, y_position)
+		      
+		      g.DrawText( "Time In", 90, y_position)
+		      
+		      g.DrawText( "Time Out", 150, y_position)
+		      
+		      g.DrawText( "Hours", 210, y_position)
+		      
+		      g.DrawText( "(+)/(-) hrs", 280, y_position)
+		      
+		      g.DrawText( "Notes", 340, y_position)
 		      
 		      g.DrawingColor = Color.Black
 		      
+		      y_position = y_position + 15
 		      
 		      g.DrawLine( 10, y_position, g.Width - 10, y_position)
 		      
 		      y_position = y_position + 15
 		      
-		      g.FontSize = 12
+		      g.FontSize = 10
 		    End If
 		    
 		    
@@ -341,22 +356,61 @@ End
 		    DateTime.FormatStyles.Short, DateTime.FormatStyles.None), 20, y_position)
 		    
 		    g.DrawText( rs.Column("time_in").DateTimeValue.ToString( Locale.Current, _
-		    DateTime.FormatStyles.None, DateTime.FormatStyles.Short), 100, y_position)
+		    DateTime.FormatStyles.None, DateTime.FormatStyles.Short), 90, y_position)
 		    
 		    If rs.Column("time_out").DateTimeValue <> Nil Then
 		      
 		      g.DrawText( rs.Column("time_out").DateTimeValue.ToString( Locale.Current, _
-		      DateTime.FormatStyles.None, DateTime.FormatStyles.Short), 170, y_position)
+		      DateTime.FormatStyles.None, DateTime.FormatStyles.Short), 150, y_position)
+		      
+		      
+		      Var diff_seconds As Integer = rs.Column("time_out").DateTimeValue.SecondsFrom1970 - _
+		      rs.Column("time_in").DateTimeValue.SecondsFrom1970
+		      Var diff_minutes As Integer = diff_seconds / 60
+		      
+		      Var m As Integer = diff_minutes Mod 60
+		      Var h As Integer = (diff_minutes - m) / 60 + rs.Column("add_subtract").DoubleValue
+		      
+		      
+		      Select Case rs.Column("time_in").DateTimeValue.DayOfWeek
+		      Case 6, 7
+		        
+		        g.DrawingColor = Theme_Colors.Color_Palette.Pass
+		        
+		      Else
+		        
+		        If h < 9 Then
+		          g.DrawingColor = Theme_Colors.Color_Palette.Fail
+		          
+		        Else
+		          g.DrawingColor = Theme_Colors.Color_Palette.Pass
+		          
+		          
+		        End If
+		        
+		      End Select
+		      
+		      g.DrawText( Format(h, "#0") + ":" + Format(m, "00"), 210, y_position)
+		      
+		      g.DrawingColor = Color.Black
 		      
 		    End If
 		    
-		    g.DrawText( rs.Column("notes").StringValue, 240, y_position)
+		    If rs.Column("time_out").DateTimeValue <> Nil Then
+		      
+		      g.DrawText( Format(rs.Column("add_subtract").DoubleValue, "-#0.00"), 280, y_position)
+		      
+		    End If
 		    
-		    y_position = y_position + 15
+		    g.DrawText( rs.Column("notes").StringValue, 340, y_position, g.Width - 20 - 340 , False)
+		    
+		    y_position = y_position + g.TextHeight( rs.Column("notes").StringValue, g.Width - 20 - 340 ) + 15
+		    
+		    'y_position = y_position + 15
 		    
 		    
 		    If y_position >= g.Height - 50 Then
-		      g.DrawLine( 10, y_position, g.Width - 10, y_position)
+		      g.DrawLine( 10, g.Height - 50, g.Width - 10, g.Height - 50)
 		      
 		      g.NextPage
 		      y_position = 0
@@ -366,7 +420,7 @@ End
 		    rs.MoveToNextRow
 		    
 		  Wend
-		  
+		  g.DrawLine( 10, g.Height - 50, g.Width - 10, g.Height - 50)
 		  
 		  Session.WebFile_Download = New WebFile
 		  
