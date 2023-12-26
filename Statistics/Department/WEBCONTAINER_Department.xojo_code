@@ -1,10 +1,10 @@
 #tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Statistics
+Begin WebContainer WEBCONTAINER_Department
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   700
+   Height          =   600
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -19,21 +19,21 @@ Begin WebContainer WEBCONTAINER_Statistics
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1300
+   Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin WebTabPanel Plans_TabPanel
-      ControlCount    =   0
+   Begin WebCombobox COMBOBOX_Year
       ControlID       =   ""
       Enabled         =   True
-      HasBorder       =   True
-      Height          =   660
+      Height          =   38
+      Hint            =   ""
       Index           =   -2147483648
       Indicator       =   0
-      LayoutDirection =   0
-      LayoutType      =   0
-      Left            =   20
+      InitialValue    =   ""
+      LastAddedRowIndex=   0
+      LastRowIndex    =   0
+      Left            =   68
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -41,17 +41,17 @@ Begin WebContainer WEBCONTAINER_Statistics
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      PanelCount      =   2
+      RowCount        =   0
       Scope           =   2
-      SelectedPanelIndex=   7
-      TabDefinition   =   "Sites\rPlans\rTasks\rPlanners\rPoints History\rPhysicians\rPlanner Annual Points\rDepartment\rTab 8"
+      SelectedRowIndex=   -1
+      SelectedRowText =   ""
       TabIndex        =   3
+      TabStop         =   True
+      Text            =   ""
       Tooltip         =   ""
-      Top             =   20
+      Top             =   35
       Visible         =   True
-      Width           =   1260
-      _mDesignHeight  =   0
-      _mDesignWidth   =   0
+      Width           =   150
       _mPanelIndex    =   -1
    End
 End
@@ -60,77 +60,45 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Session.COLOR_Central_Background
+		  Me.Style.BackgroundColor = Session.COLOR_Central_Background2
 		  
-		  LOAD_TabPanel_Container( 0)
+		  
 		End Sub
 	#tag EndEvent
 
 
-	#tag Method, Flags = &h21
-		Private Sub LOAD_TabPanel_Container(index as Integer)
-		  Var i As Integer = 10
-		  Var j As Integer = 50
-		  
-		  If Panel_Container <> Nil Then
-		    
-		    Panel_Container.Close
-		    
-		  End If
-		  
-		  Select Case index
-		  Case 0
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Sites
-		    
-		  Case 1
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Plans
-		    
-		  Case 2
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Tasks
-		    
-		  Case 3
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Planners_Points
-		    
-		  Case 4
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Points_History
-		    
-		  Case 5
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Physicians
-		    
-		  Case 6
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Annual_Points
-		    
-		  Case 7
-		    
-		    Panel_Container = New WEBCONTAINER_Department
-		    
-		    
-		  End
-		  
-		  Panel_Container.EmbedWithin( Plans_TabPanel, i, j, _
-		  Panel_Container.Width, Panel_Container.Height)
-		End Sub
-	#tag EndMethod
-
-
-	#tag Property, Flags = &h21
-		Private Panel_Container As WebContainer
-	#tag EndProperty
-
-
 #tag EndWindowCode
 
-#tag Events Plans_TabPanel
+#tag Events COMBOBOX_Year
 	#tag Event
-		Sub PanelChanged()
-		  LOAD_TabPanel_Container( Me.SelectedPanelIndex)
+		Sub Opening()
+		  Me.RemoveAllRows
+		  
+		  Var sql As String = "SELECT physician_id, initials, COUNT(DISTINCT(patient_id)) as count_patients, " _
+		  + "SUM(physics_tasking.plan_types.no_of_plans) AS count_plans " _
+		  + "FROM physics_tasking.plans " _
+		  + "INNER JOIN physics_tasking.plan_types USING(plan_type_id) " _
+		  + "INNER JOIN physics_tasking.users ON plans.physician_id = users.user_id " _
+		  + "INNER JOIN physics_tasking.sites USING(site_id) " _
+		  + "WHERE physician_id IS NOT NULL " _
+		  + "AND is_completed = TRUE " _
+		  + "AND is_retired = FALSE " _
+		  + "AND MONTH(due_date) = " + Month_DatePicker.SelectedDate.Month.ToString + " " _
+		  + "AND YEAR(due_date) = " + Month_DatePicker.SelectedDate.Year.ToString + " " _
+		  + "GROUP BY physician_id " _
+		  + "ORDER BY initials;"
+		  
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  
+		  If Not rs.AfterLastRow Then
+		    
+		    
+		    
+		    
+		    
+		    rs.MoveToNextRow
+		    
+		  End If
 		End Sub
 	#tag EndEvent
 #tag EndEvents
