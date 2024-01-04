@@ -46,7 +46,6 @@ Begin WebContainer WEBCONTAINER_Department
       SelectedRowIndex=   -1
       SelectedRowText =   ""
       TabIndex        =   3
-      TabStop         =   True
       Text            =   ""
       Tooltip         =   ""
       Top             =   35
@@ -72,33 +71,33 @@ End
 #tag Events COMBOBOX_Year
 	#tag Event
 		Sub Opening()
-		  Me.RemoveAllRows
-		  
-		  Var sql As String = "SELECT physician_id, initials, COUNT(DISTINCT(patient_id)) as count_patients, " _
-		  + "SUM(physics_tasking.plan_types.no_of_plans) AS count_plans " _
-		  + "FROM physics_tasking.plans " _
-		  + "INNER JOIN physics_tasking.plan_types USING(plan_type_id) " _
-		  + "INNER JOIN physics_tasking.users ON plans.physician_id = users.user_id " _
-		  + "INNER JOIN physics_tasking.sites USING(site_id) " _
-		  + "WHERE physician_id IS NOT NULL " _
-		  + "AND is_completed = TRUE " _
-		  + "AND is_retired = FALSE " _
-		  + "AND MONTH(due_date) = " + Month_DatePicker.SelectedDate.Month.ToString + " " _
-		  + "AND YEAR(due_date) = " + Month_DatePicker.SelectedDate.Year.ToString + " " _
-		  + "GROUP BY physician_id " _
-		  + "ORDER BY initials;"
-		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
-		  
-		  If Not rs.AfterLastRow Then
-		    
-		    
-		    
-		    
-		    
-		    rs.MoveToNextRow
-		    
-		  End If
+		  'Me.RemoveAllRows
+		  '
+		  'Var sql As String = "SELECT physician_id, initials, COUNT(DISTINCT(patient_id)) as count_patients, " _
+		  '+ "SUM(physics_tasking.plan_types.no_of_plans) AS count_plans " _
+		  '+ "FROM physics_tasking.plans " _
+		  '+ "INNER JOIN physics_tasking.plan_types USING(plan_type_id) " _
+		  '+ "INNER JOIN physics_tasking.users ON plans.physician_id = users.user_id " _
+		  '+ "INNER JOIN physics_tasking.sites USING(site_id) " _
+		  '+ "WHERE physician_id IS NOT NULL " _
+		  '+ "AND is_completed = TRUE " _
+		  '+ "AND is_retired = FALSE " _
+		  '+ "AND MONTH(due_date) = " + Month_DatePicker.SelectedDate.Month.ToString + " " _
+		  '+ "AND YEAR(due_date) = " + Month_DatePicker.SelectedDate.Year.ToString + " " _
+		  '+ "GROUP BY physician_id " _
+		  '+ "ORDER BY initials;"
+		  '
+		  'Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  '
+		  'If Not rs.AfterLastRow Then
+		  '
+		  '
+		  '
+		  '
+		  '
+		  'rs.MoveToNextRow
+		  '
+		  'End If
 		End Sub
 	#tag EndEvent
 #tag EndEvents
