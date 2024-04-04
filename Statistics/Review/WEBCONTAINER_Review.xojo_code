@@ -1,10 +1,10 @@
 #tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Statistics
+Begin WebContainer WEBCONTAINER_Review
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   700
+   Height          =   600
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -19,20 +19,49 @@ Begin WebContainer WEBCONTAINER_Statistics
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1300
+   Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin WebTabPanel Plans_TabPanel
-      ControlCount    =   0
+   Begin WebPopupMenu PopupMenu_Planners
       ControlID       =   ""
       Enabled         =   True
-      HasBorder       =   True
-      Height          =   660
+      Height          =   38
       Index           =   -2147483648
       Indicator       =   0
-      LayoutDirection =   0
-      LayoutType      =   0
+      InitialValue    =   ""
+      LastAddedRowIndex=   0
+      LastRowIndex    =   0
+      Left            =   128
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      RowCount        =   0
+      Scope           =   2
+      SelectedRowIndex=   0
+      SelectedRowText =   ""
+      TabIndex        =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   20
+      Visible         =   True
+      Width           =   273
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel LABEL_Planner
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   ""
+      Italic          =   False
       Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
@@ -41,17 +70,18 @@ Begin WebContainer WEBCONTAINER_Statistics
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      PanelCount      =   2
+      Multiline       =   False
       Scope           =   2
-      SelectedPanelIndex=   8
-      TabDefinition   =   "Sites\rPlans\rTasks\rPlanners\rPoints History\rPhysicians\rPlanner Annual Points\rDepartment\rReview"
-      TabIndex        =   3
+      TabIndex        =   1
+      TabStop         =   True
+      Text            =   "Planner : "
+      TextAlignment   =   3
+      TextColor       =   &c000000FF
       Tooltip         =   ""
       Top             =   20
+      Underline       =   False
       Visible         =   True
-      Width           =   1260
-      _mDesignHeight  =   0
-      _mDesignWidth   =   0
+      Width           =   100
       _mPanelIndex    =   -1
    End
 End
@@ -60,98 +90,58 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Session.COLOR_Central_Background
+		  Me.Style.BackgroundColor = Session.COLOR_Central_Background2
 		  
-		  LOAD_TabPanel_Container( 0)
 		End Sub
 	#tag EndEvent
 
 
-	#tag Method, Flags = &h21
-		Private Sub LOAD_TabPanel_Container(index as Integer)
-		  Var i As Integer = 10
-		  Var j As Integer = 50
-		  
-		  If Panel_Container <> Nil Then
-		    
-		    Panel_Container.Close
-		    
-		  End If
-		  
-		  Select Case index
-		  Case 0
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Sites
-		    
-		  Case 1
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Plans
-		    
-		  Case 2
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Tasks
-		    
-		  Case 3
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Planners_Points
-		    
-		  Case 4
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Points_History
-		    
-		  Case 5
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Physicians
-		    
-		  Case 6
-		    
-		    Panel_Container = New WEBCONTAINER_Statistics_Annual_Points
-		    
-		  Case 7
-		    
-		    Panel_Container = New WEBCONTAINER_Department
-		    
-		  Case 8
-		    
-		    Panel_Container = New WEBCONTAINER_Review
-		    
-		    
-		  End
-		  
-		  Panel_Container.EmbedWithin( Plans_TabPanel, i, j, _
-		  Panel_Container.Width, Panel_Container.Height)
-		End Sub
-	#tag EndMethod
-
-
-	#tag Property, Flags = &h21
-		Private Panel_Container As WebContainer
-	#tag EndProperty
-
-
 #tag EndWindowCode
 
-#tag Events Plans_TabPanel
+#tag Events PopupMenu_Planners
 	#tag Event
-		Sub PanelChanged()
-		  LOAD_TabPanel_Container( Me.SelectedPanelIndex)
+		Sub Opening()
+		  Me.RemoveAllRows
+		  
+		  Var sql as string = "SELECT user_id, first_name, family_name FROM physics_tasking.users " _
+		  + "WHERE category_id IN(2,3) " _
+		  + "AND is_retired = FALSE;"
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  
+		  While Not rs.AfterLastRow
+		    
+		    Me.AddRow( rs.Column("first_name").StringValue.Trim.Titlecase + " " _
+		    + rs.Column("family_name").StringValue.Trim.Uppercase)
+		    Me.RowTagAt( Me.LastAddedRowIndex) = rs.Column("user_id").IntegerValue
+		    
+		    
+		    rs.MoveToNextRow
+		    
+		  Wend
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events LABEL_Planner
+	#tag Event
+		Sub Opening()
+		  Me.TextColor = Color.White
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="ControlCount"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Integer"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false
 		Group="Behavior"
 		InitialValue="-1"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
 		Type="Integer"
 		EditorType=""
 	#tag EndViewProperty
