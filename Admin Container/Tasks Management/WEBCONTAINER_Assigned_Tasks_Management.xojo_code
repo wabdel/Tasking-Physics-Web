@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Assigned_Tasks_Management
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   700
@@ -21,9 +22,9 @@ Begin WebContainer WEBCONTAINER_Assigned_Tasks_Management
    Width           =   1300
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
-   Begin WebTabPanel Dashboard_TabPanel
+   Begin WebTabPanel WebTabPanel_Tasks_Management
+      ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       HasBorder       =   True
@@ -45,6 +46,7 @@ Begin WebContainer WEBCONTAINER_Assigned_Tasks_Management
       SelectedPanelIndex=   0
       TabDefinition   =   "Assigned tasks\rCompleted assigned tasks"
       TabIndex        =   3
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -68,8 +70,8 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub LOAD_TabPanel_Container(index as Integer)
-		  Var i As Integer = 5
-		  Var j As Integer = 48
+		  Var left_position As Integer = WebTabPanel_Tasks_Management.Left + 5
+		  Var top_position As Integer = WebTabPanel_Tasks_Management.Top + 48
 		  
 		  If Panel_Container <> Nil Then
 		    
@@ -89,7 +91,8 @@ End
 		    Panel_Container = New WEBCONTAINER_Completed_Assigned_Tasks
 		  End
 		  
-		  Panel_Container.EmbedWithin( Dashboard_TabPanel, i, j, _
+		  Panel_Container.EmbedWithin( WebTabPanel_Tasks_Management, _
+		  left_position, top_position, _
 		  Panel_Container.Width, Panel_Container.Height)
 		  UpdateBrowser
 		End Sub
@@ -103,7 +106,7 @@ End
 
 #tag EndWindowCode
 
-#tag Events Dashboard_TabPanel
+#tag Events WebTabPanel_Tasks_Management
 	#tag Event
 		Sub PanelChanged()
 		  LOAD_TabPanel_Container(Me.SelectedPanelIndex)
@@ -111,6 +114,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

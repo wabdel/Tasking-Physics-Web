@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Reports
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   700
@@ -22,7 +23,8 @@ Begin WebContainer WEBCONTAINER_Reports
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin WebTabPanel Reports_TabPanel
+   Begin WebTabPanel WebTabPanel_Reports
+      ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       HasBorder       =   True
@@ -44,6 +46,7 @@ Begin WebContainer WEBCONTAINER_Reports
       SelectedPanelIndex=   3
       TabDefinition   =   "Plans\rTasks\rPlan Monthly\rPatients Monthly"
       TabIndex        =   3
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -67,8 +70,8 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub LOAD_TabPanel_Container(index as Integer)
-		  Var i As Integer = 10
-		  Var j As Integer = 50
+		  Var left_position As Integer = WebTabPanel_Reports.Left + 10
+		  Var top_position As Integer = WebTabPanel_Reports.Top + 50
 		  
 		  If Panel_Container <> Nil Then
 		    
@@ -92,7 +95,8 @@ End
 		    
 		  End
 		  
-		  Panel_Container.EmbedWithin( Reports_TabPanel, i, j, _
+		  Panel_Container.EmbedWithin( WebTabPanel_Reports, _
+		  left_position, top_position, _
 		  Panel_Container.Width, Panel_Container.Height)
 		End Sub
 	#tag EndMethod
@@ -105,7 +109,7 @@ End
 
 #tag EndWindowCode
 
-#tag Events Reports_TabPanel
+#tag Events WebTabPanel_Reports
 	#tag Event
 		Sub PanelChanged()
 		  LOAD_TabPanel_Container(Me.SelectedPanelIndex)
@@ -113,6 +117,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

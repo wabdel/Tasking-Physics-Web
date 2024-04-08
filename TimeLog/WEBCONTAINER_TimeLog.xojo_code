@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_TimeLog
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   700
@@ -21,9 +22,9 @@ Begin WebContainer WEBCONTAINER_TimeLog
    Width           =   1300
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
-   Begin WebTabPanel TimeLog_TabPanel
+   Begin WebTabPanel WebTabPanel_TimeLog
+      ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       HasBorder       =   True
@@ -45,6 +46,7 @@ Begin WebContainer WEBCONTAINER_TimeLog
       SelectedPanelIndex=   0
       TabDefinition   =   "Daily Logs\rOvertime\rTime Back"
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   40
       Visible         =   True
@@ -68,8 +70,8 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub LOAD_TabPanel_Container(index as Integer)
-		  Var i As Integer = 5
-		  Var j As Integer = 48
+		  Var left_position As Integer = WebTabPanel_TimeLog.Left + 5
+		  Var top_position As Integer = WebTabPanel_TimeLog.top +48
 		  
 		  If Panel_Container <> Nil Then
 		    
@@ -91,7 +93,8 @@ End
 		    
 		  End
 		  
-		  Panel_Container.EmbedWithin( TimeLog_TabPanel, i, j, _
+		  Panel_Container.EmbedWithin( WebTabPanel_TimeLog, _
+		  left_position, top_position, _
 		  Panel_Container.Width, Panel_Container.Height)
 		End Sub
 	#tag EndMethod
@@ -104,7 +107,7 @@ End
 
 #tag EndWindowCode
 
-#tag Events TimeLog_TabPanel
+#tag Events WebTabPanel_TimeLog
 	#tag Event
 		Sub PanelChanged()
 		  LOAD_TabPanel_Container(Me.SelectedPanelIndex)
@@ -112,6 +115,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false
