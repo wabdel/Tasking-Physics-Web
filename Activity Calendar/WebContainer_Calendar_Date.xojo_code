@@ -22,7 +22,6 @@ Begin WebContainer WebContainer_Calendar_Date
    Width           =   180
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebLabel Month_Label
       Bold            =   False
@@ -45,6 +44,7 @@ Begin WebContainer WebContainer_Calendar_Date
       Multiline       =   False
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Text            =   "Jun"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -76,6 +76,7 @@ Begin WebContainer WebContainer_Calendar_Date
       Multiline       =   False
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Text            =   "23"
       TextAlignment   =   2
       TextColor       =   &c00000000
@@ -113,11 +114,11 @@ End
 		  UPDATE_Theme
 		  'Var top_position As Integer = SUN_Label.Top + SUN_Label.Height + self  + 10
 		  
-		  Var t1 As Integer = Self.Parent.Parent.top
-		  Var l1 As Integer = Self.Parent.Parent.Left
+		  'Var t1 As Integer = Self.Parent.Parent.top
+		  'Var l1 As Integer = Self.Parent.Parent.Left
 		  'Month_Label.Left = Left + Self.Left + Self.Width - Month_Label.Width - 5
 		  'Month_Label.Top = Self.Top
-		  Date_Label.Top = 0
+		  Date_Label.Top =  0
 		  Date_Label.Left = 180 - 5 - Date_Label.Width
 		  Month_Label.Visible = False
 		  
@@ -152,8 +153,8 @@ End
 		  
 		  Plan_Status_WEBCONTAINER.ResizeTo(-1)
 		  
-		  Var status_left_position As Integer = 5
-		  Var status_top_position As Integer = Date_Label.Height + 5
+		  Var status_left_position As Integer = Self.Left + 5
+		  Var status_top_position As Integer = Self.Top + Date_Label.Height + 5
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -181,9 +182,9 @@ End
 		    Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("color") = "white"
 		    Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("text-shadow") =  "2px 2px 4px #000000;"
 		    
-		    If status_left_position > Self.width - 10 - Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Width Then
+		    If status_left_position > Self.Left + Self.width - 10 - Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Width Then
 		      
-		      status_left_position = 5
+		      status_left_position = Self.Left + 5
 		      status_top_position = status_top_position + Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Height + 5
 		      
 		    End If
@@ -218,7 +219,7 @@ End
 		  Wend
 		  
 		  
-		  status_left_position = 5
+		  status_left_position = Self.Left + 5
 		  If Plan_Status_WEBCONTAINER.LastIndex > -1 Then
 		    
 		    status_top_position = status_top_position + Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Height + 5
@@ -260,7 +261,7 @@ End
 		    Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).date = _
 		    d_Calendar_date
 		    
-		    status_left_position = status_left_position + _
+		    status_left_position = Self.Left + status_left_position + _
 		    Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Width + 7
 		    
 		    Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Initials_Label.Text = _
@@ -272,10 +273,10 @@ End
 		    Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("text-shadow") =  "2px 2px 4px #000000;"
 		    
 		    
-		    If status_left_position > Self.width - 10 - Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Width Then
+		    If status_left_position > Self.Left + Self.width - 10 - Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Width Then
 		      
-		      status_left_position = 7
-		      status_top_position = status_top_position + Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Height + 5
+		      status_left_position = Self.Left + 7
+		      status_top_position = Self.Top + status_top_position + Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Height + 5
 		      
 		    End If
 		    

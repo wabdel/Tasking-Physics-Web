@@ -23,7 +23,7 @@ Begin WebContainer WEBCONTAINER_Statistics
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin WebTabPanel Plans_TabPanel
+   Begin WebTabPanel WebTabPanel_Statistics
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
@@ -46,6 +46,7 @@ Begin WebContainer WEBCONTAINER_Statistics
       SelectedPanelIndex=   8
       TabDefinition   =   "Sites\rPlans\rTasks\rPlanners\rPoints History\rPhysicians\rPlanner Annual Points\rDepartment\rReview"
       TabIndex        =   3
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -69,8 +70,8 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub LOAD_TabPanel_Container(index as Integer)
-		  Var i As Integer = 10
-		  Var j As Integer = 50
+		  Var left_position As Integer = WebTabPanel_Statistics.Left + 10
+		  Var top_position As Integer = WebTabPanel_Statistics.Top + 50
 		  
 		  If Panel_Container <> Nil Then
 		    
@@ -118,7 +119,8 @@ End
 		    
 		  End
 		  
-		  Panel_Container.EmbedWithin( Plans_TabPanel, i, j, _
+		  Panel_Container.EmbedWithin( WebTabPanel_Statistics, _
+		  left_position, top_position, _
 		  Panel_Container.Width, Panel_Container.Height)
 		End Sub
 	#tag EndMethod
@@ -131,7 +133,7 @@ End
 
 #tag EndWindowCode
 
-#tag Events Plans_TabPanel
+#tag Events WebTabPanel_Statistics
 	#tag Event
 		Sub PanelChanged()
 		  LOAD_TabPanel_Container( Me.SelectedPanelIndex)

@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Activity_Calendar
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   900
@@ -42,6 +43,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       LockVertical    =   False
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -68,6 +70,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       LockVertical    =   False
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -94,6 +97,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       LockVertical    =   False
       Scope           =   2
       TabIndex        =   2
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -120,6 +124,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       LockVertical    =   False
       Scope           =   2
       TabIndex        =   3
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -147,6 +152,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Multiline       =   False
       Scope           =   2
       TabIndex        =   4
+      TabStop         =   True
       Text            =   "JAN 2023"
       TextAlignment   =   2
       TextColor       =   &c00000000
@@ -178,6 +184,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Multiline       =   False
       Scope           =   0
       TabIndex        =   5
+      TabStop         =   True
       Text            =   "SUN"
       TextAlignment   =   2
       TextColor       =   &c00000000
@@ -209,6 +216,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Multiline       =   False
       Scope           =   0
       TabIndex        =   6
+      TabStop         =   True
       Text            =   "MON"
       TextAlignment   =   2
       TextColor       =   &c00000000
@@ -240,6 +248,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Multiline       =   False
       Scope           =   0
       TabIndex        =   7
+      TabStop         =   True
       Text            =   "TUE"
       TextAlignment   =   2
       TextColor       =   &c00000000
@@ -271,6 +280,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Multiline       =   False
       Scope           =   0
       TabIndex        =   8
+      TabStop         =   True
       Text            =   "WED"
       TextAlignment   =   2
       TextColor       =   &c00000000
@@ -302,6 +312,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Multiline       =   False
       Scope           =   0
       TabIndex        =   9
+      TabStop         =   True
       Text            =   "THU"
       TextAlignment   =   2
       TextColor       =   &c00000000
@@ -333,6 +344,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Multiline       =   False
       Scope           =   0
       TabIndex        =   10
+      TabStop         =   True
       Text            =   "FRI"
       TextAlignment   =   2
       TextColor       =   &c00000000
@@ -364,6 +376,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Multiline       =   False
       Scope           =   0
       TabIndex        =   11
+      TabStop         =   True
       Text            =   "SAT"
       TextAlignment   =   2
       TextColor       =   &c00000000
@@ -383,7 +396,6 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Period          =   1000
       RunMode         =   0
       Scope           =   2
-      Top             =   -50.0
       _mPanelIndex    =   -1
    End
 End
@@ -409,8 +421,8 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub DRAW_Date_WebContainers()
-		  Var left_position_Initial As Integer = 20
-		  Var top_position As Integer = SUN_Label.Top + SUN_Label.Height + 10
+		  Var left_position_Initial As Integer = Self.Left + 20
+		  Var top_position As Integer = Self.Top + SUN_Label.Top + SUN_Label.Height + 10
 		  
 		  For row As Integer = 0 To 5
 		    
@@ -599,6 +611,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false
