@@ -112,12 +112,6 @@ End
 		  
 		  Date_Label.Text = d_Calendar_date.Day.ToString
 		  UPDATE_Theme
-		  'Var top_position As Integer = SUN_Label.Top + SUN_Label.Height + self  + 10
-		  
-		  'Var t1 As Integer = Self.Parent.Parent.top
-		  'Var l1 As Integer = Self.Parent.Parent.Left
-		  'Month_Label.Left = Left + Self.Left + Self.Width - Month_Label.Width - 5
-		  'Month_Label.Top = Self.Top
 		  Date_Label.Top =  0
 		  Date_Label.Left = 180 - 5 - Date_Label.Width
 		  Month_Label.Visible = False
@@ -203,16 +197,9 @@ End
 		      +"#f4c430 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
 		      + "#f4c430 100%);"
 		      
-		      '#f0e130
-		      '#f4c430 
 		    End If
 		    
 		    Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Style.Value("box-shadow") =  "1px 1px 1px lightblue;"
-		    'If rs.Column("name").StringValue.Lowercase.IndexOf("brachy") > -1 Then
-		    '
-		    'Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Style.Value("border-radius") = "10px;"
-		    '
-		    'End If
 		    
 		    rs.MoveToNextRow
 		    
@@ -220,6 +207,7 @@ End
 		  
 		  
 		  status_left_position = Self.Left + 5
+		  
 		  If Plan_Status_WEBCONTAINER.LastIndex > -1 Then
 		    
 		    status_top_position = status_top_position + Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Height + 5
@@ -233,8 +221,6 @@ End
 		  Next
 		  
 		  Task_Status_WEBCONTAINER.ResizeTo(-1)
-		  
-		  
 		  
 		  sql = "SELECT user_id, initials, COUNT(*) as total, SUM(is_completed) as completed " _
 		  + "FROM scheduled_tasks " _
@@ -261,7 +247,7 @@ End
 		    Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).date = _
 		    d_Calendar_date
 		    
-		    status_left_position = Self.Left + status_left_position + _
+		    status_left_position = status_left_position + _
 		    Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Width + 7
 		    
 		    Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Initials_Label.Text = _
@@ -276,17 +262,9 @@ End
 		    If status_left_position > Self.Left + Self.width - 10 - Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Width Then
 		      
 		      status_left_position = Self.Left + 7
-		      status_top_position = Self.Top + status_top_position + Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Height + 5
+		      status_top_position = status_top_position + Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Height + 5
 		      
 		    End If
-		    
-		    
-		    'Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Style.Value("background") = _
-		    '"linear-gradient(to right, #002E0B 0%, " _
-		    '+ "#FFFFFF " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
-		    '+ "#FFFFFF " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
-		    '+ "#4A1300 100%);"
-		    
 		    
 		    Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Style.Value("background") = _
 		    "linear-gradient(to right, #009051 0%, " _
@@ -296,10 +274,6 @@ End
 		    Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Style.Value("box-shadow") =  "1px 1px 1px lightblue;"
 		    
 		    Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Style.Value("border-radius") =  "50px 50px;"
-		    'Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Style.Value("border") =  "1px solid #AAAAAA;"
-		    
-		    'Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Style.Value("transform") = "rotate(45deg);"
-		    'Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("transform") = "rotate(-45deg);"
 		    
 		    rs.MoveToNextRow
 		    
@@ -307,8 +281,6 @@ End
 		  
 		  UPDATE_Theme
 		  
-		  'Label1.Text = Date_Label.Left.ToString + ", " + Date_Label.top.ToString
-		  'Label2.Text = Self.Left.ToString + ", " + Self.Top.ToString
 		  If d.day <> DateTime.Now.Day Then Return
 		  If d.Month <> DateTime.Now.Month Then Return
 		  If d.Year <> DateTime.Now.Year Then Return

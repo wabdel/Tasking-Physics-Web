@@ -54,6 +54,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Planners_Points
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   41
       Visible         =   True
@@ -65,6 +66,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Planners_Points
       AutoCalculateYAxis=   False
       ControlID       =   ""
       DatasetCount    =   0
+      DatasetLastIndex=   0
       Enabled         =   True
       GridColor       =   &c000000AA
       HasAnimation    =   False
@@ -72,6 +74,8 @@ Begin WebContainer WEBCONTAINER_Statistics_Planners_Points
       Height          =   367
       Index           =   -2147483648
       Indicator       =   ""
+      LabelCount      =   0
+      LabelLastIndex  =   0
       Left            =   690
       LegendColor     =   &c000000
       LegendFontName  =   ""
@@ -87,6 +91,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Planners_Points
       PopoverBackgroundColor=   &c000000
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Title           =   ""
       TitleColor      =   &c000000
       TitleFontName   =   ""
@@ -147,8 +152,8 @@ End
 		Private Planner() As Physics_Tasking.CLASS_User_Record
 	#tag EndProperty
 
-	#tag Property, Flags = &h0
-		Series() As CLASS_WebChartLinear
+	#tag Property, Flags = &h21
+		Private Series() As CLASS_WebChartLinear
 	#tag EndProperty
 
 

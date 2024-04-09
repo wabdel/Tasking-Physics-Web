@@ -84,6 +84,164 @@ Begin WebContainer WEBCONTAINER_Review
       Width           =   100
       _mPanelIndex    =   -1
    End
+   Begin WebChart WebChart_User_Points
+      AllowPopover    =   True
+      AutoCalculateYAxis=   False
+      ControlID       =   ""
+      DatasetCount    =   0
+      DatasetLastIndex=   0
+      Enabled         =   True
+      GridColor       =   &c000000AA
+      HasAnimation    =   False
+      HasLegend       =   True
+      Height          =   300
+      Index           =   -2147483648
+      Indicator       =   ""
+      LabelCount      =   0
+      LabelLastIndex  =   0
+      Left            =   44
+      LegendColor     =   &c000000
+      LegendFontName  =   ""
+      LegendFontSize  =   0.0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Mode            =   0
+      PopoverBackgroundColor=   &c000000
+      Scope           =   2
+      TabIndex        =   2
+      TabStop         =   True
+      Title           =   ""
+      TitleColor      =   &c000000
+      TitleFontName   =   ""
+      TitleFontSize   =   0.0
+      Tooltip         =   ""
+      Top             =   92
+      Visible         =   True
+      Width           =   400
+      _mMode          =   ""
+      _mPanelIndex    =   -1
+   End
+   Begin WebThread WebThread_Populate_WebChart_User_Points
+      DebugIdentifier =   ""
+      Index           =   -2147483648
+      LockedInPosition=   False
+      Priority        =   5
+      Scope           =   2
+      StackSize       =   0
+      TabIndex        =   3
+      TabStop         =   True
+      ThreadID        =   0
+      ThreadState     =   0
+   End
+   Begin WebDatePicker DatePicker_Points
+      AllowKeyboardEntry=   True
+      ControlID       =   ""
+      EarliestDate    =   ""
+      Enabled         =   True
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   ""
+      InitialValue    =   ""
+      LatestDate      =   ""
+      Left            =   844
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Scope           =   2
+      TabIndex        =   3
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   20
+      Visible         =   True
+      Width           =   150
+      _mPanelIndex    =   -1
+   End
+   Begin WebListBox WebListBox_Plans
+      ColumnCount     =   1
+      ColumnWidths    =   ""
+      ControlID       =   ""
+      Enabled         =   True
+      HasHeader       =   True
+      Height          =   245
+      HighlightSortedColumn=   True
+      Index           =   -2147483648
+      Indicator       =   ""
+      InitialValue    =   ""
+      LastAddedRowIndex=   0
+      LastColumnIndex =   0
+      LastRowIndex    =   0
+      Left            =   542
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      NoRowsMessage   =   ""
+      ProcessingMessage=   ""
+      RowCount        =   0
+      RowSelectionType=   1
+      Scope           =   2
+      SearchCriteria  =   ""
+      SelectedRowColor=   &c0d6efd
+      SelectedRowIndex=   0
+      TabIndex        =   4
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   80
+      Visible         =   True
+      Width           =   669
+      _mPanelIndex    =   -1
+   End
+   Begin WebListBox WebListBox_Tasks
+      ColumnCount     =   1
+      ColumnWidths    =   ""
+      ControlID       =   ""
+      Enabled         =   True
+      HasHeader       =   True
+      Height          =   245
+      HighlightSortedColumn=   True
+      Index           =   -2147483648
+      indicator       =   0
+      InitialValue    =   ""
+      LastAddedRowIndex=   0
+      LastColumnIndex =   0
+      LastRowIndex    =   0
+      Left            =   542
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      NoRowsMessage   =   ""
+      PanelIndex      =   0
+      ProcessingMessage=   ""
+      RowCount        =   0
+      RowSelectionType=   1
+      Scope           =   2
+      SearchCriteria  =   ""
+      SelectedRowColor=   &c0d6efd
+      SelectedRowIndex=   0
+      TabIndex        =   5
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   333
+      Visible         =   True
+      Width           =   669
+      _mPanelIndex    =   -1
+   End
 End
 #tag EndWebContainerControl
 
@@ -94,6 +252,15 @@ End
 		  
 		End Sub
 	#tag EndEvent
+
+
+	#tag Property, Flags = &h21
+		Private Planner As Physics_Tasking.CLASS_User_Record
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private Series() As CLASS_WebChartLinear
+	#tag EndProperty
 
 
 #tag EndWindowCode
@@ -120,11 +287,225 @@ End
 		  Wend
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub SelectionChanged(item As WebMenuItem)
+		  WebThread_Populate_WebChart_User_Points.Stop
+		  
+		  WebChart_User_Points.RemoveAllDatasets
+		  Series.ResizeTo(-1)
+		  
+		  Planner = New Physics_Tasking.CLASS_User_Record
+		  Planner.id = Me.RowTagAt( Me.SelectedRowIndex)
+		  
+		  WebThread_Populate_WebChart_User_Points.Start
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events LABEL_Planner
 	#tag Event
 		Sub Opening()
 		  Me.TextColor = Color.White
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events WebChart_User_Points
+	#tag Event
+		Sub Opening()
+		  Me.HasLegend = True
+		  Me.HasAnimation = False
+		  Me.Style.BackgroundColor = Color.White
+		  
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub OverrideOptions(options As JSONItem)
+		  '//Format Title
+		  Var title As New JSONItem
+		  title.Value("display") = True
+		  title.Value("text") = "Points"
+		  title.Value("fontSize") = 24
+		  Options.Value("title") = title
+		  
+		  Var legend As New JSONItem
+		  legend.Value("display") = True
+		  legend.Value("fontColor") = "rgb(255, 99, 132)"
+		  Options.Value("legend") = legend
+		  
+		  
+		  'Var elements As New JSONItem
+		  'Var point As New JSONItem
+		  'point.Value("display") = True
+		  'point.Value("radius") = 3
+		  'elements.Value("point") = point
+		  'Options.Value("elements") = elements
+		  '
+		  '//Format Axis
+		  'Var injectionyAxes As New JSONItem
+		  ''Var injectionxAxes As New JSONItem
+		  'Var injectionScales As New JSONItem
+		  '
+		  ''//Format yAxis
+		  'Var injectionyValue As New JSONItem
+		  'Var injectionyTicks As New JSONItem
+		  'Var injectionyTitle As New JSONItem
+		  'Var injectionyScaleLabel As New JSONItem
+		  '
+		  '
+		  '
+		  'injectionyValue.value("min") = 0
+		  'injectionyTicks.value("ticks") = injectionyValue
+		  '
+		  '
+		  'injectionyTitle.Value("display") = True
+		  'injectionyTitle.Value("labelString") =  "Points"
+		  'injectionyTitle.Value("fontSize") = 20
+		  '
+		  'injectionyTicks.Value("scaleLabel") = injectionyTitle
+		  '
+		  'injectionyAxes.add injectionyTicks
+		  'injectionScales.value("yAxes") = injectionyAxes
+		  
+		  
+		  '//Format xAxis
+		  
+		  'Var injectionxValue As New JSONItem
+		  'Var injectionxType As New JSONItem
+		  'Var injectionxTime As New JSONItem
+		  'Var injectionxMonth As New JSONItem
+		  'Var injectionxDisplayFormats As New JSONItem
+		  'Var injectionxTicks As New JSONItem
+		  'Var injectionxTitle As New JSONItem
+		  'Var injectionxScaleLabel As New JSONItem
+		  '
+		  'injectionxTicks.value("type") = "time"
+		  '
+		  'injectionxMonth.Value("second") =  "DD MMM YYYY"
+		  'injectionxDisplayFormats.Value("unit") = "second"
+		  'injectionxDisplayFormats.Value("displayFormats") = injectionxMonth
+		  '
+		  'injectionxTicks.Value("time") = injectionxDisplayFormats
+		  '
+		  'injectionxTitle.Value("display") = True
+		  'injectionxTitle.Value("labelString") =  "Date"
+		  'injectionxTitle.Value("fontSize") = 20
+		  'injectionxTicks.Value("scaleLabel") = injectionxTitle
+		  'injectionxTicks.value("distribution") = "linear"
+		  'injectionxAxes.add injectionxTicks
+		  'injectionScales.value("xAxes") = injectionxAxes
+		  
+		  
+		  'options.value("scales") = injectionScales
+		  'System.DebugLog(Options.ToString)
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events WebThread_Populate_WebChart_User_Points
+	#tag Event
+		Sub Run()
+		  Var d As DateTime = DateTime.Now.SubtractInterval(1,0.0)
+		  
+		  Var Today As New DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day)
+		  
+		  Series.ResizeTo(-1)
+		  Series.Add( New CLASS_WebChartLinear("Plan_Points", Color.blue))
+		  Series( Series.LastIndex).myset.ChartType = WebChartLinearDataset.ChartTypes.Line
+		  Series( Series.LastIndex).label = "Plan points"
+		  WebChart_User_Points.AddDataset( Series( Series.LastIndex).myset)
+		  
+		  Series.Add( New CLASS_WebChartLinear("Task_Points", Color.red))
+		  Series( Series.LastIndex).myset.ChartType = WebChartLinearDataset.ChartTypes.Line
+		  Series( Series.LastIndex).label = "Task points"
+		  WebChart_User_Points.AddDataset( Series( Series.LastIndex).myset)
+		  
+		  Series.Add( New CLASS_WebChartLinear("Assigned_Task_Points", Color.Green))
+		  Series( Series.LastIndex).myset.ChartType = WebChartLinearDataset.ChartTypes.Line
+		  Series( Series.LastIndex).label = "Assigned task points"
+		  WebChart_User_Points.AddDataset( Series( Series.LastIndex).myset)
+		  'Var c_index As Integer = 0
+		  'For Each item As Physics_Tasking.CLASS_User_Record In Planner
+		  'If (item.Group.id = 2 Or item.Group.id = 3) Then
+		  '
+		  ''Var r As Integer = System.Random.InRange(0,255)
+		  ''Var g As Integer = System.Random.InRange(0,255)
+		  ''Var b As Integer = System.Random.InRange(0,255)
+		  'Series.Add( New CLASS_WebChartLinear(item.initials, App.Color_Set(c_index)))
+		  'Series( Series.LastIndex).myset.ChartType = WebChartLinearDataset.ChartTypes.Line
+		  '
+		  '
+		  'Points_Chart.AddDataset( Series( Series.LastIndex).myset)
+		  'c_index = c_index + 1
+		  '
+		  '
+		  'End If
+		  'Next item
+		  
+		  While d <= Today
+		    
+		    Series(0).ADD_Point(Planner.GET_Accumulated_Plan_Points(d))
+		    Series(1).ADD_Point(Planner.GET_Accumulated_Task_Points(d))
+		    Series(2).ADD_Point(Planner.GET_Accumulated_Assigned_Task_Points(d))
+		    WebChart_User_Points.AddLabel( d.Day.ToString + "/" + d.Month.ToString + "/" + d.Year.ToString)
+		    d = d.AddInterval(0,0,1)
+		    
+		    Me.AddUserInterfaceUpdate("UIProgress":Series(0).points.Count)
+		    
+		  Wend
+		  
+		  'While d <= Today
+		  '
+		  'For Each s As CLASS_WebChartLinear In Series
+		  'For i As Integer = 0 To Planner.LastIndex
+		  '
+		  'If s.myset.Label = Planner(i).initials Then
+		  '
+		  '
+		  'Var points As Double = Planner(i).GET_Accumulated_Plan_Points(d) _
+		  '+ Planner(i).GET_Accumulated_Task_Points(d)  _
+		  '+ Planner(i).GET_Accumulated_Assigned_Task_Points(d)
+		  '
+		  's.ADD_Point(points)
+		  '
+		  'Exit For i
+		  '
+		  'End If
+		  '
+		  '
+		  '
+		  'Next i
+		  '
+		  'Next s
+		  '
+		  '
+		  '
+		  'Points_Chart.AddLabel( d.Day.ToString + "/" + d.Month.ToString + "/" + d.Year.ToString)
+		  '
+		  'd = d.AddInterval(0,0,1)
+		  '
+		  '
+		  'Me.AddUserInterfaceUpdate("UIProgress":Series(0).points.Count)
+		  'Wend
+		  
+		  
+		  Me.AddUserInterfaceUpdate("Finished":True)
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub UserInterfaceUpdate(data() As Dictionary)
+		  For Each arg As Dictionary In data
+		    If arg.HasKey("UIProgress") Then
+		      
+		      For i As Integer = 0 To WebChart_User_Points.DatasetCount - 1
+		        
+		        
+		        
+		        
+		        WebChart_User_Points.DatasetAt(i) = Series(i).myset
+		        
+		      Next i
+		    End If
+		  Next
 		End Sub
 	#tag EndEvent
 #tag EndEvents
