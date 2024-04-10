@@ -136,21 +136,17 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
       ThreadID        =   0
       ThreadState     =   0
    End
-   Begin WebListBox WebListBox_Plans
-      ColumnCount     =   1
-      ColumnWidths    =   ""
+   Begin WebTabPanel WebTabPanel_Planner_Stats
+      ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
-      HasHeader       =   True
-      Height          =   245
-      HighlightSortedColumn=   True
+      HasBorder       =   True
+      Height          =   560
       Index           =   -2147483648
-      Indicator       =   0
-      InitialValue    =   ""
-      LastAddedRowIndex=   0
-      LastColumnIndex =   0
-      LastRowIndex    =   0
-      Left            =   542
+      Indicator       =   ""
+      LayoutDirection =   0
+      LayoutType      =   0
+      Left            =   479
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -158,60 +154,171 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      NoRowsMessage   =   ""
-      ProcessingMessage=   ""
-      RowCount        =   0
-      RowSelectionType=   1
+      PanelCount      =   2
       Scope           =   2
-      SearchCriteria  =   ""
-      SelectedRowColor=   &c0d6efd
-      SelectedRowIndex=   0
-      TabIndex        =   4
+      SelectedPanelIndex=   1
+      TabDefinition   =   "Plans\rTasks\rAssigned tasks"
+      TabIndex        =   8
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   80
+      Top             =   20
       Visible         =   True
-      Width           =   669
+      Width           =   741
+      _mDesignHeight  =   0
+      _mDesignWidth   =   0
       _mPanelIndex    =   -1
-   End
-   Begin WebListBox WebListBox_Tasks
-      ColumnCount     =   1
-      ColumnWidths    =   ""
-      ControlID       =   ""
-      Enabled         =   True
-      HasHeader       =   True
-      Height          =   245
-      HighlightSortedColumn=   True
-      Index           =   -2147483648
-      Indicator       =   0
-      InitialValue    =   ""
-      LastAddedRowIndex=   0
-      LastColumnIndex =   0
-      LastRowIndex    =   0
-      Left            =   542
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      NoRowsMessage   =   ""
-      PanelIndex      =   "0"
-      ProcessingMessage=   ""
-      RowCount        =   0
-      RowSelectionType=   1
-      Scope           =   2
-      SearchCriteria  =   ""
-      SelectedRowColor=   &c0d6efd
-      SelectedRowIndex=   0
-      TabIndex        =   5
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   333
-      Visible         =   True
-      Width           =   669
-      _mPanelIndex    =   -1
+      Begin WebListBox WebListBox_Tasks
+         ColumnCount     =   3
+         ColumnWidths    =   ""
+         ControlID       =   ""
+         Enabled         =   True
+         HasHeader       =   True
+         Height          =   440
+         HighlightSortedColumn=   True
+         Index           =   -2147483648
+         Indicator       =   0
+         InitialParent   =   "WebTabPanel_Planner_Stats"
+         InitialValue    =   "Task	Count; Points"
+         LastAddedRowIndex=   0
+         LastColumnIndex =   0
+         LastRowIndex    =   0
+         Left            =   509
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         NoRowsMessage   =   ""
+         PanelIndex      =   "1"
+         Parent          =   "TabPanel1"
+         ProcessingMessage=   ""
+         RowCount        =   0
+         RowSelectionType=   1
+         Scope           =   2
+         SearchCriteria  =   ""
+         SelectedRowColor=   &c0d6efd
+         SelectedRowIndex=   0
+         TabIndex        =   0
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   74
+         Visible         =   True
+         Width           =   691
+         _mPanelIndex    =   -1
+      End
+      Begin WebLabel WebLabel_Task_Points
+         Bold            =   True
+         ControlID       =   ""
+         Enabled         =   True
+         FontName        =   ""
+         FontSize        =   0.0
+         Height          =   38
+         Index           =   -2147483648
+         indicator       =   0
+         InitialParent   =   "WebTabPanel_Planner_Stats"
+         Italic          =   False
+         Left            =   1043
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         Multiline       =   False
+         PanelIndex      =   1
+         Parent          =   "TabPanel1"
+         Scope           =   2
+         TabIndex        =   0
+         TabStop         =   True
+         Text            =   "Total = 0.00"
+         TextAlignment   =   3
+         TextColor       =   &c000000FF
+         Tooltip         =   ""
+         Top             =   522
+         Underline       =   False
+         Visible         =   True
+         Width           =   157
+         _mPanelIndex    =   -1
+      End
+      Begin WebListBox WebListBox_Plans
+         ColumnCount     =   1
+         ColumnWidths    =   ""
+         ControlID       =   ""
+         Enabled         =   True
+         HasHeader       =   True
+         Height          =   440
+         HighlightSortedColumn=   True
+         Index           =   -2147483648
+         Indicator       =   0
+         InitialParent   =   "WebTabPanel_Planner_Stats"
+         InitialValue    =   ""
+         LastAddedRowIndex=   0
+         LastColumnIndex =   0
+         LastRowIndex    =   0
+         Left            =   509
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         NoRowsMessage   =   ""
+         PanelIndex      =   0
+         Parent          =   "TabPanel1"
+         ProcessingMessage=   ""
+         RowCount        =   0
+         RowSelectionType=   1
+         Scope           =   2
+         SearchCriteria  =   ""
+         SelectedRowColor=   &c0d6efd
+         SelectedRowIndex=   0
+         TabIndex        =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   74
+         Visible         =   True
+         Width           =   691
+         _mPanelIndex    =   -1
+      End
+      Begin WebLabel WebLabel_Plan_Points
+         Bold            =   False
+         ControlID       =   ""
+         Enabled         =   True
+         FontName        =   ""
+         FontSize        =   0.0
+         Height          =   38
+         Index           =   -2147483648
+         Indicator       =   ""
+         InitialParent   =   "WebTabPanel_Planner_Stats"
+         Italic          =   False
+         Left            =   1100
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         Multiline       =   False
+         PanelIndex      =   0
+         Parent          =   "TabPanel1"
+         Scope           =   2
+         TabIndex        =   1
+         TabStop         =   True
+         Text            =   "Total = 0.00"
+         TextAlignment   =   3
+         TextColor       =   &c000000FF
+         Tooltip         =   ""
+         Top             =   522
+         Underline       =   False
+         Visible         =   True
+         Width           =   100
+         _mPanelIndex    =   -1
+      End
    End
 End
 #tag EndWebContainerControl
@@ -240,6 +347,23 @@ End
 		  + "ORDER BY name;"
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  
+		  
+		  Var sum As Double = 0
+		  While Not  rs.AfterLastRow
+		    
+		    WebListBox_Tasks.AddRow()
+		    WebListBox_Tasks.CellTextAt( WebListBox_Tasks.LastAddedRowIndex, 0) = rs.Column("name").StringValue
+		    WebListBox_Tasks.CellTextAt( WebListBox_Tasks.LastAddedRowIndex, 1) = rs.Column("m").IntegerValue.ToString
+		    WebListBox_Tasks.CellTextAt( WebListBox_Tasks.LastAddedRowIndex, 2) =Format(rs.Column("p").DoubleValue,"0.00")
+		    
+		    sum = sum + rs.Column("p").DoubleValue
+		    
+		    rs.MoveToNextRow
+		    
+		  Wend
+		  
+		  WebLabel_Task_Points.Text = "Total = " + Format(sum, "0.00")
 		End Sub
 	#tag EndMethod
 
@@ -282,10 +406,13 @@ End
 		  WebThread_Populate_WebChart_User_Points.Stop
 		  
 		  WebChart_User_Points.RemoveAllDatasets
+		  WebChart_User_Points.
+		  
 		  Series.ResizeTo(-1)
 		  
 		  Planner = New Physics_Tasking.CLASS_User_Record
 		  Planner.id = Me.RowTagAt( Me.SelectedRowIndex)
+		  POPULATE_Tasks_ListBox
 		  
 		  WebThread_Populate_WebChart_User_Points.Start
 		End Sub
@@ -506,6 +633,13 @@ End
 		  Me.HeaderAt(0) = "Tast"
 		  Me.HeaderAt(1) = "Count"
 		  Me.HeaderAt(2) = "Points"
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events WebLabel_Task_Points
+	#tag Event
+		Sub Opening()
+		  Me.TextColor = Color.White
 		End Sub
 	#tag EndEvent
 #tag EndEvents

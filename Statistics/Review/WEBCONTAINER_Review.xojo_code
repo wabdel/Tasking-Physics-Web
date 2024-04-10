@@ -169,7 +169,7 @@ Begin WebContainer WEBCONTAINER_Review
       ControlID       =   ""
       Enabled         =   True
       HasHeader       =   True
-      Height          =   245
+      Height          =   187
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   ""
@@ -207,7 +207,7 @@ Begin WebContainer WEBCONTAINER_Review
       ControlID       =   ""
       Enabled         =   True
       HasHeader       =   True
-      Height          =   245
+      Height          =   203
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
@@ -240,6 +240,71 @@ Begin WebContainer WEBCONTAINER_Review
       Width           =   669
       _mPanelIndex    =   -1
    End
+   Begin WebLabel WebLabel_Plan_Points
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   ""
+      Italic          =   False
+      Left            =   1111
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      Scope           =   2
+      TabIndex        =   6
+      TabStop         =   True
+      Text            =   "Total = 0.00"
+      TextAlignment   =   3
+      TextColor       =   &c000000FF
+      Tooltip         =   ""
+      Top             =   275
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel WebLabel_Task_Points
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      indicator       =   0
+      Italic          =   False
+      Left            =   1111
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      PanelIndex      =   0
+      Scope           =   2
+      TabIndex        =   7
+      TabStop         =   True
+      Text            =   "Total = 0.00"
+      TextAlignment   =   3
+      TextColor       =   &c000000FF
+      Tooltip         =   ""
+      Top             =   544
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+      _mPanelIndex    =   -1
+   End
 End
 #tag EndWebContainerControl
 
@@ -265,6 +330,22 @@ End
 		  + "ORDER BY name;"
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  
+		  Var sum As Double = 0
+		  While Not  rs.AfterLastRow
+		    
+		    WebListBox_Tasks.AddRow()
+		    WebListBox_Tasks.CellTextAt( WebListBox_Tasks.LastAddedRowIndex, 0) = rs.Column("name").StringValue
+		    WebListBox_Tasks.CellTextAt( WebListBox_Tasks.LastAddedRowIndex, 1) = rs.Column("m").IntegerValue.ToString
+		    WebListBox_Tasks.CellTextAt( WebListBox_Tasks.LastAddedRowIndex, 2) =Format(rs.Column("p").DoubleValue,"0.00")
+		    
+		    sum = sum + rs.Column("p").DoubleValue
+		    
+		    rs.MoveToNextRow
+		    
+		  Wend
+		  
+		  WebLabel_Task_Points.Text = "Total = " + Format(sum, "0.00")
 		End Sub
 	#tag EndMethod
 
@@ -530,6 +611,16 @@ End
 	#tag Event
 		Sub DateChanged(selectedDate As DateTime)
 		  POPULATE_Tasks_ListBox
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events WebListBox_Tasks
+	#tag Event
+		Sub Opening()
+		  Me.ColumnCount = 3
+		  Me.HeaderAt(0) = "Task"
+		  Me.HeaderAt(1) = "Count"
+		  Me.HeaderAt(2) = "Points"
 		End Sub
 	#tag EndEvent
 #tag EndEvents

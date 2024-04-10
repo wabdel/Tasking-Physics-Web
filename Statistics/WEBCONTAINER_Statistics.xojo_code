@@ -44,7 +44,7 @@ Begin WebContainer WEBCONTAINER_Statistics
       PanelCount      =   2
       Scope           =   2
       SelectedPanelIndex=   8
-      TabDefinition   =   "Sites\rPlans\rTasks\rPlanners\rPoints History\rPhysicians\rPlanner Annual Points\rDepartment\rReview"
+      TabDefinition   =   "Sites\rPlans\rTasks\rPlanners\rPoints History\rPhysicians\rPlanner Annual Points\rDepartment\rReview\rPlanner Stats"
       TabIndex        =   3
       TabStop         =   True
       Tooltip         =   ""
@@ -115,6 +115,10 @@ End
 		  Case 8
 		    
 		    Panel_Container = New WEBCONTAINER_Review
+		    
+		  Case 9
+		    
+		    Panel_Container = New WEBCONTAINER_Planner_Stats
 		    
 		    
 		  End
