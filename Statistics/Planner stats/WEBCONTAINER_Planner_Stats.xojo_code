@@ -192,7 +192,7 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
          LockVertical    =   False
          NoRowsMessage   =   ""
          PanelIndex      =   "1"
-         Parent          =   "TabPanel1"
+         Parent          =   "WebTabPanel_Planner_Stats"
          ProcessingMessage=   ""
          RowCount        =   0
          RowSelectionType=   1
@@ -201,6 +201,7 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
          SelectedRowColor=   &c0d6efd
          SelectedRowIndex=   0
          TabIndex        =   0
+         TabPanelIndex   =   0
          TabStop         =   True
          Tooltip         =   ""
          Top             =   74
@@ -216,7 +217,7 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
          FontSize        =   0.0
          Height          =   38
          Index           =   -2147483648
-         indicator       =   0
+         Indicator       =   0
          InitialParent   =   "WebTabPanel_Planner_Stats"
          Italic          =   False
          Left            =   1043
@@ -228,10 +229,11 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
          LockTop         =   True
          LockVertical    =   False
          Multiline       =   False
-         PanelIndex      =   1
-         Parent          =   "TabPanel1"
+         PanelIndex      =   "1"
+         Parent          =   "WebTabPanel_Planner_Stats"
          Scope           =   2
          TabIndex        =   0
+         TabPanelIndex   =   0
          TabStop         =   True
          Text            =   "Total = 0.00"
          TextAlignment   =   3
@@ -267,8 +269,8 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
          LockTop         =   True
          LockVertical    =   False
          NoRowsMessage   =   ""
-         PanelIndex      =   0
-         Parent          =   "TabPanel1"
+         PanelIndex      =   "0"
+         Parent          =   "WebTabPanel_Planner_Stats"
          ProcessingMessage=   ""
          RowCount        =   0
          RowSelectionType=   1
@@ -277,6 +279,7 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
          SelectedRowColor=   &c0d6efd
          SelectedRowIndex=   0
          TabIndex        =   1
+         TabPanelIndex   =   0
          TabStop         =   True
          Tooltip         =   ""
          Top             =   74
@@ -292,7 +295,7 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
          FontSize        =   0.0
          Height          =   38
          Index           =   -2147483648
-         Indicator       =   ""
+         Indicator       =   0
          InitialParent   =   "WebTabPanel_Planner_Stats"
          Italic          =   False
          Left            =   1100
@@ -304,10 +307,11 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
          LockTop         =   True
          LockVertical    =   False
          Multiline       =   False
-         PanelIndex      =   0
-         Parent          =   "TabPanel1"
+         PanelIndex      =   "0"
+         Parent          =   "WebTabPanel_Planner_Stats"
          Scope           =   2
          TabIndex        =   1
+         TabPanelIndex   =   0
          TabStop         =   True
          Text            =   "Total = 0.00"
          TextAlignment   =   3
@@ -406,7 +410,6 @@ End
 		  WebThread_Populate_WebChart_User_Points.Stop
 		  
 		  WebChart_User_Points.RemoveAllDatasets
-		  WebChart_User_Points.
 		  
 		  Series.ResizeTo(-1)
 		  
