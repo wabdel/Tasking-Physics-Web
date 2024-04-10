@@ -1,5 +1,5 @@
 #tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Review
+Begin WebContainer WEBCONTAINER_Planner_Stats
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
@@ -60,7 +60,7 @@ Begin WebContainer WEBCONTAINER_Review
       FontSize        =   0.0
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   ""
+      Indicator       =   0
       Italic          =   False
       Left            =   20
       LockBottom      =   False
@@ -96,7 +96,7 @@ Begin WebContainer WEBCONTAINER_Review
       HasLegend       =   True
       Height          =   300
       Index           =   -2147483648
-      Indicator       =   ""
+      Indicator       =   0
       LabelCount      =   0
       LabelLastIndex  =   0
       Left            =   44
@@ -123,7 +123,7 @@ Begin WebContainer WEBCONTAINER_Review
       Top             =   92
       Visible         =   True
       Width           =   400
-      _mMode          =   ""
+      _mMode          =   0
       _mPanelIndex    =   -1
    End
    Begin WebThread WebThread_Populate_WebChart_User_Points
@@ -136,33 +136,6 @@ Begin WebContainer WEBCONTAINER_Review
       ThreadID        =   0
       ThreadState     =   0
    End
-   Begin WebDatePicker DatePicker_Points
-      AllowKeyboardEntry=   True
-      ControlID       =   ""
-      EarliestDate    =   ""
-      Enabled         =   True
-      Height          =   38
-      Index           =   -2147483648
-      Indicator       =   ""
-      InitialValue    =   ""
-      LatestDate      =   ""
-      Left            =   844
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Scope           =   2
-      TabIndex        =   3
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   20
-      Visible         =   True
-      Width           =   150
-      _mPanelIndex    =   -1
-   End
    Begin WebListBox WebListBox_Plans
       ColumnCount     =   1
       ColumnWidths    =   ""
@@ -172,7 +145,7 @@ Begin WebContainer WEBCONTAINER_Review
       Height          =   245
       HighlightSortedColumn=   True
       Index           =   -2147483648
-      Indicator       =   ""
+      Indicator       =   0
       InitialValue    =   ""
       LastAddedRowIndex=   0
       LastColumnIndex =   0
@@ -255,12 +228,14 @@ End
 	#tag Method, Flags = &h21
 		Private Sub POPULATE_Tasks_ListBox()
 		  WebListBox_Tasks.RemoveAllRows
+		  Var d As DateTime = DateTime.Now.SubtractInterval(1,0.0)
+		  
 		  
 		  Var sql As String = "SELECT name, SUM(multiplier) as m, SUM(multiplier*weight) as p " _
 		  + "FROM physics_tasking.tasks " _
 		  + "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
 		  + "WHERE physics_tasking.tasks.user_id = " + Planner.id.ToString + " " _
-		  + "AND DATE(physics_tasking.tasks.completion_date) = '"  + DatePicker_Points.SelectedDate.SQLDate + "'" _
+		  + "AND DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "'" _
 		  + "GROUP BY name " _
 		  + "ORDER BY name;"
 		  
@@ -311,8 +286,6 @@ End
 		  
 		  Planner = New Physics_Tasking.CLASS_User_Record
 		  Planner.id = Me.RowTagAt( Me.SelectedRowIndex)
-		  
-		  DatePicker_Points.SelectedDate = DateTime.Now
 		  
 		  WebThread_Populate_WebChart_User_Points.Start
 		End Sub
@@ -526,10 +499,13 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events DatePicker_Points
+#tag Events WebListBox_Tasks
 	#tag Event
-		Sub DateChanged(selectedDate As DateTime)
-		  POPULATE_Tasks_ListBox
+		Sub Opening()
+		  Me.ColumnCount = 3
+		  Me.HeaderAt(0) = "Tast"
+		  Me.HeaderAt(1) = "Count"
+		  Me.HeaderAt(2) = "Points"
 		End Sub
 	#tag EndEvent
 #tag EndEvents
