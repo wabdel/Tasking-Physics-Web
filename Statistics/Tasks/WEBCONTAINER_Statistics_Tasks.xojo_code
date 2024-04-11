@@ -60,7 +60,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Tasks
          ControlID       =   ""
          Enabled         =   True
          HasHeader       =   True
-         Height          =   424
+         Height          =   486
          HighlightSortedColumn=   True
          Index           =   -2147483648
          Indicator       =   0
@@ -90,20 +90,19 @@ Begin WebContainer WEBCONTAINER_Statistics_Tasks
          TabPanelIndex   =   0
          TabStop         =   True
          Tooltip         =   ""
-         Top             =   136
+         Top             =   74
          Visible         =   True
          Width           =   1160
          _mPanelIndex    =   -1
       End
-      Begin WebRadioGroup WebRadioGroup_All_Planners
+      Begin WebProgressWheel ProgressWheel1
+         Colorize        =   True
          ControlID       =   ""
          Enabled         =   True
-         Height          =   60
-         Horizontal      =   True
+         Height          =   178
          Index           =   -2147483648
          Indicator       =   ""
-         InitialValue    =   "Count\nPoints"
-         Left            =   240
+         Left            =   508
          LockBottom      =   False
          LockedInPosition=   False
          LockHorizontal  =   False
@@ -114,14 +113,14 @@ Begin WebContainer WEBCONTAINER_Statistics_Tasks
          PanelIndex      =   0
          Parent          =   "WebTabPanel_Tasks"
          Scope           =   2
-         SelectedIndex   =   0
+         SVGColor        =   &cFF930000
+         SVGData         =   ""
          TabIndex        =   2
          TabStop         =   True
          Tooltip         =   ""
-         Top             =   74
-         Visible         =   True
-         Width           =   265
-         _mInitialValue  =   "Option 1\rOption 2"
+         Top             =   246
+         Visible         =   False
+         Width           =   225
          _mPanelIndex    =   -1
       End
    End
@@ -131,6 +130,7 @@ End
 #tag WindowCode
 	#tag Method, Flags = &h21
 		Private Sub POPULATE_WebListBox_All_Planners()
+		  ProgressWheel1.Visible = True
 		  Var d As DateTime = DateTime.Now.SubtractInterval(1,0.0)
 		  
 		  
@@ -138,35 +138,20 @@ End
 		    
 		    For column As Integer= 1 To WebListBox_All_Planners.LastColumnIndex
 		      
-		      Select Case WebRadioGroup_All_Planners.SelectedIndex
-		      Case 0
-		        
-		        Var sql As String = "SELECT name, SUM(multiplier*weight) as p " _
-		        + "FROM physics_tasking.tasks " _
-		        + "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
-		        + "WHERE physics_tasking.tasks.user_id = " + WebListBox_All_Planners.ColumnTagAt( column) + " " _
-		        + "AND physics_tasking.tasks.task_type_id = " + WebListBox_All_Planners.RowTagAt( row) + " " _
-		        + "AND DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "'" _
-		        + "GROUP BY name;"
-		        
-		        Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
-		        
-		        WebListBox_All_Planners.CellTextAt(row, column  )= Format( rs.Column("p").DoubleValue, "#0.0")
-		      Case 1
-		        
-		        
-		        Var sql As String = "SELECT name, SUM(multiplier) as m " _
-		        + "FROM physics_tasking.tasks " _
-		        + "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
-		        + "WHERE physics_tasking.tasks.user_id = " + WebListBox_All_Planners.ColumnTagAt( column) + " " _
-		        + "AND physics_tasking.tasks.task_type_id = " + WebListBox_All_Planners.RowTagAt( row) + " " _
-		        + "AND DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "'" _
-		        + "GROUP BY name;"
-		        
-		        Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
-		        
-		        WebListBox_All_Planners.CellTextAt(row, column  )= Format( rs.Column("m").DoubleValue, "#0")
-		      End Select
+		      
+		      
+		      Var sql As String = "SELECT name, SUM(multiplier*weight) as p " _
+		      + "FROM physics_tasking.tasks " _
+		      + "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
+		      + "WHERE physics_tasking.tasks.user_id = " + WebListBox_All_Planners.ColumnTagAt( column) + " " _
+		      + "AND physics_tasking.tasks.task_type_id = " + WebListBox_All_Planners.RowTagAt( row) + " " _
+		      + "AND DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "'" _
+		      + "GROUP BY name;"
+		      
+		      Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		      
+		      WebListBox_All_Planners.CellTextAt(row, column  )= Format( rs.Column("p").DoubleValue, "#0.0")
+		      
 		      
 		      
 		    Next
@@ -175,9 +160,8 @@ End
 		    
 		  Next
 		  
-		  WebRadioGroup_All_Planners.Enabled = True
 		  
-		  
+		  ProgressWheel1.Visible = False
 		End Sub
 	#tag EndMethod
 
@@ -191,10 +175,11 @@ End
 		  
 		  Var d As DateTime = DateTime.Now.SubtractInterval(1,0.0)
 		  
-		  Var sql As String = "SELECT user_id, initials FROM physics_tasking.users " _
-		  + "WHERE is_retired = FALSE " _
-		  + "AND category_id In(2,3) " _
-		  + "ORDER BY initials;"
+		  Var sql As String = "SELECT users.user_id, initials FROM physics_tasking.tasks " _
+		  + "INNER JOIN physics_tasking.users USING(user_id) "_
+		  + "WHERE DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "'" _
+		  + "GROUP BY user_id "  _
+		  + "ORDER BY initials"
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
 		  
@@ -233,21 +218,25 @@ End
 		    
 		  Wend
 		  
-		  WebRadioGroup_All_Planners.SelectedIndex = 0
 		  
 		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events WebRadioGroup_All_Planners
-	#tag Event
-		Sub Opening()
 		  
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub SelectionChanged(button As WebRadioButton)
-		  Me.Enabled = False 
+		Sub Pressed(row As Integer, column As Integer)
+		  If column < 1 Or column > Me.LastColumnIndex Then Return
+		  If row < 0 Or row > Me.LastRowIndex Then Return
+		  
+		  Var thedialog As New WebDialog_User_Tasks
+		  thedialog.user_id = Me.ColumnTagAt( column)
+		  thedialog.task_type_id = Me.RowTagAt(row)
+		  thedialog.POPULATE
+		  thedialog.show
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Shown()
 		  POPULATE_WebListBox_All_Planners
 		End Sub
 	#tag EndEvent

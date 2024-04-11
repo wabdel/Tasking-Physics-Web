@@ -240,6 +240,7 @@ WebContainer=WEBCONTAINER_Review;Statistics/Review/WEBCONTAINER_Review.xojo_code
 Folder=Planner stats;Statistics/Planner stats;&h0000000055C167FF;&h0000000035BB07FF;false
 WebContainer=WEBCONTAINER_Planner_Stats;Statistics/Planner stats/WEBCONTAINER_Planner_Stats.xojo_code;&h00000000069667FF;&h0000000055C167FF;false
 WebContainer=WEBCONTAINER_Statistics_Tasks;Statistics/Tasks/WEBCONTAINER_Statistics_Tasks.xojo_code;&h0000000016804FFF;&h0000000021AD1FFF;false
+WebView=WebDialog_User_Tasks;Statistics/Tasks/WebDialog_User_Tasks.xojo_code;&h0000000019161FFF;&h0000000021AD1FFF;false
 DefaultWindow=MainWebPage
 MajorVersion=1
 MinorVersion=0
