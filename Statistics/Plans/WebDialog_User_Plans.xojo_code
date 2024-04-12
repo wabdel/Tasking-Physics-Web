@@ -1,5 +1,5 @@
 #tag WebPage
-Begin WebDialog WebDialog_User_Tasks
+Begin WebDialog WebDialog_User_Plans
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
@@ -50,7 +50,7 @@ Begin WebDialog WebDialog_User_Tasks
       Width           =   100
       _mPanelIndex    =   -1
    End
-   Begin WebListBox WebListBox_User_Tasks
+   Begin WebListBox WebListBox_User_Plans
       ColumnCount     =   3
       ColumnWidths    =   ""
       ControlID       =   ""
@@ -59,7 +59,7 @@ Begin WebDialog WebDialog_User_Tasks
       Height          =   526
       HighlightSortedColumn=   True
       Index           =   -2147483648
-      Indicator       =   ""
+      Indicator       =   0
       InitialValue    =   ""
       LastAddedRowIndex=   0
       LastColumnIndex =   0
@@ -96,7 +96,7 @@ Begin WebDialog WebDialog_User_Tasks
       FontSize        =   0.0
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   ""
+      Indicator       =   0
       Italic          =   False
       Left            =   20
       LockBottom      =   False
@@ -117,10 +117,10 @@ Begin WebDialog WebDialog_User_Tasks
       Top             =   20
       Underline       =   False
       Visible         =   True
-      Width           =   340
+      Width           =   409
       _mPanelIndex    =   -1
    End
-   Begin WebLabel WebLabel_Task_Type_Name
+   Begin WebLabel WebLabel_Site_Name
       Bold            =   True
       ControlID       =   ""
       Enabled         =   True
@@ -128,7 +128,7 @@ Begin WebDialog WebDialog_User_Tasks
       FontSize        =   0.0
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   ""
+      Indicator       =   0
       Italic          =   False
       Left            =   20
       LockBottom      =   False
@@ -142,7 +142,7 @@ Begin WebDialog WebDialog_User_Tasks
       Scope           =   2
       TabIndex        =   3
       TabStop         =   True
-      Text            =   "Task : "
+      Text            =   "Site : "
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
@@ -158,7 +158,7 @@ Begin WebDialog WebDialog_User_Tasks
       Enabled         =   True
       Height          =   250
       Index           =   -2147483648
-      Indicator       =   ""
+      Indicator       =   0
       Left            =   437
       LockBottom      =   False
       LockedInPosition=   False
@@ -186,9 +186,9 @@ Begin WebDialog WebDialog_User_Tasks
       FontSize        =   0.0
       Height          =   38
       Index           =   -2147483648
-      indicator       =   0
+      Indicator       =   0
       Italic          =   False
-      Left            =   764
+      Left            =   695
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -201,14 +201,14 @@ Begin WebDialog WebDialog_User_Tasks
       Scope           =   2
       TabIndex        =   5
       TabStop         =   True
-      Text            =   "Total Points = 0"
+      Text            =   "Total points = 0"
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
       Top             =   20
       Underline       =   False
       Visible         =   True
-      Width           =   340
+      Width           =   409
       _mPanelIndex    =   -1
    End
 End
@@ -236,60 +236,82 @@ End
 		    
 		  End If
 		  
-		  sql = "SELECT name FROM physics_tasking.task_types " _
-		  + "WHERE task_type_id = " + task_type_id.ToString + ";"
+		  sql = "SELECT name, is_uppercase FROM physics_tasking.sites " _
+		  + "WHERE site_id = " + site_id.ToString + ";"
 		  
 		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
 		  
 		  If rs.RowCount = 1 Then
 		    
-		    WebLabel_Task_Type_Name.Text = "Task : " + rs.Column("name").StringValue.Trim
+		    Select Case rs.Column("is_uppercase").BooleanValue
+		    Case True
+		      
+		      WebLabel_Site_Name.Text = "Site : " + rs.Column("name").StringValue.Trim.Uppercase
+		      
+		    Else
+		      
+		      WebLabel_Site_Name.Text = "Site : " + rs.Column("name").StringValue.Trim.Titlecase
+		      
+		      
+		    End Select
+		    
 		    
 		  End If
 		  
-		  WebListBox_User_Tasks.ColumnCount = 4
-		  WebListBox_User_Tasks.HeaderAt(0) = "Date"
-		  WebListBox_User_Tasks.HeaderAt(1) = "Count"
-		  WebListBox_User_Tasks.HeaderAt(2) = "Points"
-		  WebListBox_User_Tasks.HeaderAt(3) = "Comments"
+		  WebListBox_User_Plans.ColumnCount = 5
+		  WebListBox_User_Plans.HeaderAt(0) = "Plan type"
+		  WebListBox_User_Plans.HeaderAt(1) = "MRN"
+		  WebListBox_User_Plans.HeaderAt(2) = "Assignment Date"
+		  WebListBox_User_Plans.HeaderAt(3) = "Due Date"
+		  WebListBox_User_Plans.HeaderAt(4) = "Points"
 		  
-		  WebListBox_User_Tasks.RemoveAllRows
+		  
+		  WebListBox_User_Plans.RemoveAllRows
 		  
 		  Var d As DateTime = DateTime.Now.SubtractInterval(1,0.0)
 		  
-		  sql = "SELECT completion_date, multiplier as c, multiplier*weight as p, notes FROM physics_tasking.tasks " _
-		  + "INNER JOIN physics_tasking.task_types USING(task_type_id) "  _
+		  sql = "SELECT name, mrn, assignment_date, due_date, " _
+		  + "(" + App.Points_Plans_Condition + ") " _
+		  + "AS p " _
+		  + " FROM physics_tasking.plans " _
+		  + "INNER JOIN physics_tasking.plan_types USING(plan_type_id) "  _
+		  + "INNER JOIN physics_tasking.patients USING(patient_id) "  _
 		  + "WHERE user_id = " + user_id.ToString + " "  _
-		  + "AND task_type_id = " + task_type_id.ToString + " "  _
-		  + "AND DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "'" _
-		  + "ORDER BY completion_date DESC;"
+		  + "AND site_id = " + site_id.ToString + " "  _
+		  + "AND DATE(physics_tasking.plans.assignment_date) >= '"  + d.SQLDate + "'" _
+		  + "ORDER BY assignment_date DESC;"
 		  
 		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
 		  
-		  Var sum As Double = 0.0
+		  Var sum As Double = 0
 		  
 		  While Not rs.AfterLastRow
 		    
-		    WebListBox_User_Tasks.AddRow()
-		    WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 0) = _
-		    rs.Column("completion_date").DateTimeValue.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None)
+		    WebListBox_User_Plans.AddRow()
+		    WebListBox_User_Plans.CellTextAt( WebListBox_User_Plans.LastAddedRowIndex, 0) = rs.Column("name").StringValue.Trim
+		    WebListBox_User_Plans.CellTextAt( WebListBox_User_Plans.LastAddedRowIndex, 1) = rs.Column("mrn").StringValue
+		    WebListBox_User_Plans.CellTextAt( WebListBox_User_Plans.LastAddedRowIndex, 2) = _
+		    rs.Column("assignment_date").DateTimeValue.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None)
+		    WebListBox_User_Plans.CellTextAt( WebListBox_User_Plans.LastAddedRowIndex, 3) = _
+		    rs.Column("due_date").DateTimeValue.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None)
 		    
-		    WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 1) = rs.Column("c").IntegerValue.ToString
-		    WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 2) = Format( rs.Column("p").DoubleValue, "0.00")
-		    WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 3) = rs.Column("notes").StringValue.Trim
+		    WebListBox_User_Plans.CellTextAt( WebListBox_User_Plans.LastAddedRowIndex, 4) = Format(rs.Column("p").DoubleValue, "0.00")
 		    
 		    sum = sum + rs.Column("p").DoubleValue
+		    
 		    rs.MoveToNextRow
 		    
 		  Wend
-		  WebLabel_Total_Points.Text = "Total Points = " + Format(sum, "0.00")
+		  
+		  WebLabel_Total_Points.Text = "Total points = " + Format( sum, "0.00")
+		  
 		  ProgressWheel1.Visible = False
 		End Sub
 	#tag EndMethod
 
 
 	#tag Property, Flags = &h0
-		task_type_id As Integer
+		site_id As Integer
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -314,7 +336,7 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events WebLabel_Task_Type_Name
+#tag Events WebLabel_Site_Name
 	#tag Event
 		Sub Shown()
 		  me.TextColor = Color.Yellow
@@ -560,7 +582,7 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="task_type_id"
+		Name="site_id"
 		Visible=false
 		Group="Behavior"
 		InitialValue=""

@@ -7,6 +7,26 @@ Inherits WebApplication
 		    Call Daemonize
 		  #EndIf
 		  
+		  Points_Plans_Condition = "CASE " _
+		  + "WHEN plan_types.name LIKE '%Brachytherapy%' " _
+		  + "THEN weight " _
+		  + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
+		  + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
+		  + "WEEKDAY(DATE(due_date)) + 1, 1) = 0 THEN " _
+		  + "weight * 2 " _
+		  + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
+		  + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
+		  + "WEEKDAY(DATE(due_date)) + 1, 1) = 1 THEN " _
+		  + "weight * 1.5 " _
+		  + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
+		  + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
+		  + "WEEKDAY(DATE(due_date)) + 1, 1) = 2 THEN " _
+		  + "weight * 1.25 " _
+		  + "ELSE " _
+		  + "weight " _
+		  + "END " _
+		  
+		  
 		  Var db_status As Boolean = Physics_Tasking.isDatabase_Online
 		  Physics_Tasking.POPULATE_Main_Data
 		  'Points_Container = New WEBCONTAINER_Points
@@ -300,6 +320,10 @@ Inherits WebApplication
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		Points_Plans_Condition As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		Points_Stdev As Double
 	#tag EndProperty
 
@@ -351,7 +375,7 @@ Inherits WebApplication
 			Group="Behavior"
 			InitialValue=""
 			Type="String"
-			EditorType=""
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="kTab"
@@ -359,7 +383,7 @@ Inherits WebApplication
 			Group="Behavior"
 			InitialValue=""
 			Type="String"
-			EditorType=""
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

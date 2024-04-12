@@ -151,7 +151,7 @@ End
 		      
 		      Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
 		      
-		      WebListBox_All_Planners.CellTextAt(row, column  )= Format( rs.Column("p").DoubleValue, "#0.0")
+		      WebListBox_All_Planners.CellTextAt(row, column  )= Format( rs.Column("p").DoubleValue, "#0.00")
 		      
 		      
 		      

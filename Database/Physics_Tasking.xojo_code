@@ -10,7 +10,163 @@ Protected Module Physics_Tasking
 		  + "WEEKDAY(CURDATE()) + 1, 1) > 0, " _
 		  + "Exp(-ln(2)*DATEDIFF( CURDATE(), DATE(due_date)) / " + Physics_Tasking.Half_life_In_Days.ToString +"), 1) " _
 		  + " * "  _
+		  + App.Points_Plans_Condition + ") " _
+		  + "FROM plans INNER JOIN plan_types USING(plan_type_id) " _
+		  + "WHERE user_id = users.user_id " _
+		  + "AND DATEDIFF( CURDATE(), DATE(assignment_date)) <= " + Physics_Tasking.Points_period_days.ToString + " " _
+		  + "AND DATEDIFF( CURDATE(), DATE(assignment_date)) >= 0 ) AS points " _
+		  + "FROM users " _
+		  + "WHERE is_retired = FALSE " _
+		  + "AND category_id In (2,3);"
+		  
+		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  
+		  
+		  
+		  sql = "CREATE OR REPLACE VIEW annual_plan_points AS " _
+		  + "SELECT user_id, " _
+		  + "(SELECT SUM( " _
+		  + App.Points_Plans_Condition + ") " _
+		  + "FROM plans INNER JOIN plan_types USING(plan_type_id) " _
+		  + "WHERE user_id = users.user_id " _
+		  + "AND DATEDIFF( CURDATE(), DATE(assignment_date)) <= 365 " _
+		  + "AND DATEDIFF( CURDATE(), DATE(assignment_date)) >= 0) AS points " _
+		  + "FROM users " _
+		  + "WHERE is_retired = FALSE " _
+		  + "AND category_id In (2,3);"
+		  
+		  
+		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  
+		  
+		  sql = "CREATE OR REPLACE VIEW annual_task_points AS " _
+		  + "SELECT user_id, " _
+		  + "(SELECT SUM( " _
+		  + "weight * multiplier) AS points " _
+		  + "FROM tasks INNER JOIN task_types USING(task_type_id) " _
+		  + "WHERE user_id = users.user_id " _
+		  + "AND DATEDIFF( CURDATE(), DATE(completion_date)) <= 365 " _
+		  + "AND DATEDIFF( CURDATE(), DATE(completion_date)) >= 0) AS points " _
+		  + "FROM users " _
+		  + "WHERE is_retired = FALSE " _
+		  + "AND category_id In (2,3);"
+		  
+		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  
+		  sql = "CREATE OR REPLACE VIEW recent_task_points AS " _
+		  + "SELECT user_id, " _
+		  + "(SELECT SUM( " _
+		  + "weight * multiplier * Exp(-ln(2)*DATEDIFF( CURDATE(), DATE(completion_date))/ " + Physics_Tasking.Half_life_In_Days.ToString +")) AS points " _
+		  + "FROM tasks INNER JOIN task_types USING(task_type_id) " _
+		  + "WHERE user_id = users.user_id " _
+		  + "AND DATEDIFF( CURDATE(), DATE(completion_date)) <= " + Physics_Tasking.Points_period_days.ToString + " " _
+		  + "AND DATEDIFF( CURDATE(), DATE(completion_date)) >= 0) AS points " _
+		  + "FROM users " _
+		  + "WHERE is_retired = FALSE " _
+		  + "AND category_id In (2,3);"
+		  
+		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  
+		  sql = "CREATE OR REPLACE VIEW annual_scheduled_task_points AS " _
+		  + "SELECT user_id, " _
+		  + "(SELECT SUM( " _
 		  + "CASE " _
+		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 0 THEN " _
+		  + "weight * 0.75 " _
+		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 7 THEN " _
+		  + "weight " _
+		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 14 THEN " _
+		  + "weight * 1.25 " _
+		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 21 THEN " _
+		  + "weight * 1.5 " _
+		  + "ELSE " _
+		  + "weight * 2 " _
+		  + "END * multiplier) " _
+		  + "FROM scheduled_tasks " _
+		  + "INNER JOIN task_types Using(task_type_id) " _
+		  + "WHERE user_id = users.user_id  " _
+		  + "AND is_completed = TRUE " _
+		  + "AND DATEDIFF( CURDATE(), DATE(completion_date)) <= 365 " _
+		  + "AND DATEDIFF( CURDATE(), DATE(completion_date)) >= 0) AS points " _
+		  + "FROM users " _
+		  + "WHERE is_retired = FALSE " _
+		  + "AND category_id IN (2,3);"
+		  
+		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  
+		  
+		  
+		  sql = "CREATE OR REPLACE VIEW recent_scheduled_task_points AS " _
+		  + "SELECT user_id, " _
+		  + "(SELECT SUM( " _
+		  + "CASE " _
+		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 0 THEN " _
+		  + "weight * 0.75 " _
+		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 7 THEN " _
+		  + "weight " _
+		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 14 THEN " _
+		  + "weight * 1.25 " _
+		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 21 THEN " _
+		  + "weight * 1.5 " _
+		  + "ELSE " _
+		  + "weight * 2 " _
+		  + "END * multiplier) " _
+		  + "FROM scheduled_tasks " _
+		  + "INNER JOIN task_types Using(task_type_id) " _
+		  + "WHERE user_id = users.user_id  " _
+		  + "AND is_completed = TRUE " _
+		  + "AND DATEDIFF( CURDATE(), DATE(completion_date)) <= " + Physics_Tasking.Points_period_days.ToString + " " _
+		  + "AND DATEDIFF( CURDATE(), DATE(completion_date)) >= 0) AS points " _
+		  + "FROM users " _
+		  + "WHERE is_retired = FALSE " _
+		  + "AND category_id IN (2,3); "
+		  
+		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  
+		  
+		  
+		  
+		  sql  = "CREATE OR REPLACE VIEW points AS " _
+		  + "SELECT user_id, IFNULL(recent_task_points.points, 0) AS recent_task_points, " _
+		  + "IFNULL(annual_task_points.points, 0) AS annual_task_points, " _
+		  + "IFNULL(recent_scheduled_task_points.points, 0) As recent_scheduled_task_points, " _
+		  + "IFNULL(annual_scheduled_task_points.points, 0) AS annual_scheduled_task_points, " _
+		  + "IFNULL(recent_plan_points.points, 0) AS recent_plan_points, " _
+		  + "IFNULL(annual_plan_points.points, 0) AS annual_plan_points, " _
+		  + "(0.9 * (IFNULL(recent_task_points.points, 0) + IFNULL(recent_scheduled_task_points.points, 0)) + " _
+		  + "0.1 * (IFNULL(annual_task_points.points, 0) + IFNULL(annual_scheduled_task_points.points, 0))) AS tasks_total, " _
+		  + "(0.9 * IFNULL(recent_plan_points.points, 0) + 0.1 * IFNULL(annual_plan_points.points, 0)) AS plans_total, " _
+		  + "(0.9 * (IFNULL(recent_task_points.points, 0) + IFNULL(recent_plan_points.points, 0) + IFNULL(recent_scheduled_task_points.points, 0)) + " _
+		  + "0.1 * (IFNULL(annual_task_points.points, 0) + IFNULL(annual_plan_points.points, 0) + IFNULL(annual_scheduled_task_points.points, 0))) As total, " _
+		  + "is_active " _
+		  + "FROM recent_task_points " _
+		  + "INNER JOIN annual_task_points USING(user_id) " _
+		  + "INNER JOIN recent_scheduled_task_points USING(user_id) " _
+		  + "INNER JOIN annual_scheduled_task_points USING(user_id) " _
+		  + "INNER JOIN recent_plan_points USING(user_id) " _
+		  + "INNER JOIN annual_plan_points USING(user_id) " _
+		  + "INNER JOIN users USING(user_id) " _
+		  + "ORDER BY total DESC;"
+		  
+		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub CREATE_VIEWS_old()
+		  Var sql As String = "CREATE OR REPLACE VIEW recent_plan_points AS " _
+		  + "SELECT user_id, " _
+		  + "(SELECT SUM( " _
+		  + "If( 5 * (DATEDIFF(CURDATE(), DATE(due_date)) DIV 7) + " _
+		  + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(due_date)) + " _
+		  + "WEEKDAY(CURDATE()) + 1, 1) > 0, " _
+		  + "Exp(-ln(2)*DATEDIFF( CURDATE(), DATE(due_date)) / " + Physics_Tasking.Half_life_In_Days.ToString +"), 1) " _
+		  + " * "  _
+		  + "CASE " _
+		  + "WHEN plan_types.name LIKE '%Brachytherapy%' " _
+		  + "THEN weight " _
 		  + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
 		  + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
 		  + "WEEKDAY(DATE(due_date)) + 1, 1) = 0 THEN " _
@@ -42,6 +198,8 @@ Protected Module Physics_Tasking
 		  + "SELECT user_id, " _
 		  + "(SELECT SUM( " _
 		  + "CASE " _
+		  + "WHEN plan_types.name LIKE '%Brachytherapy%' " _
+		  + "THEN weight " _
 		  + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
 		  + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
 		  + "WEEKDAY(DATE(due_date)) + 1, 1) = 0 THEN " _

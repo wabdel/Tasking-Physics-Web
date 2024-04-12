@@ -135,27 +135,12 @@ End
 		  ProgressWheel1.Visible = True
 		  Var d As DateTime = DateTime.Now.SubtractInterval(1,0.0)
 		  
-		  
 		  For row As Integer = 0 To WebListBox_All_Planners.LastRowIndex
 		    
 		    For column As Integer= 1 To WebListBox_All_Planners.LastColumnIndex
 		      
 		      Var sql As String = "SELECT SUM( " _
-		      + "CASE WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
-		      + "MID('0123334401222334011122340001123400012344001234440', 7 * " _
-		      + "WEEKDAY(DATE(assignment_date)) + WEEKDAY(DATE(due_date)) + 1, 1) <= 0 THEN " _
-		      + "weight * 2 " _
-		      + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
-		      + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
-		      + "WEEKDAY(DATE(due_date)) + 1, 1) <= 1 THEN " _
-		      + "weight * 1.5 " _
-		      + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
-		      + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
-		      + "WEEKDAY(DATE(due_date)) + 1, 1) <= 2 THEN " _
-		      + "weight * 1.25 " _
-		      + "ELSE " _
-		      + "weight " _
-		      +" END) " _
+		      + App.Points_Plans_Condition + ") " _
 		      + "AS sum FROM physics_tasking.plans " _
 		      + "INNER JOIN physics_tasking.plan_types USING(plan_type_id) " _
 		      + "INNER JOIN physics_tasking.sites USING(site_id) " _
@@ -163,26 +148,13 @@ End
 		      + "AND site_id = " + WebListBox_All_Planners.RowTagAt( row) + " " _
 		      + "AND DATE(physics_tasking.plans.assignment_date) >=  '"  + d.SQLDate + "';"
 		      
-		      'Var sql As String = "SELECT name, SUM(multiplier*weight) as p " _
-		      '+ "FROM physics_tasking.tasks " _
-		      '+ "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
-		      '+ "WHERE physics_tasking.tasks.user_id = " + WebListBox_All_Planners.ColumnTagAt( column) + " " _
-		      '+ "AND physics_tasking.tasks.task_type_id = " + WebListBox_All_Planners.RowTagAt( row) + " " _
-		      '+ "AND DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "'" _
-		      '+ "GROUP BY name;"
-		      '
 		      Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
 		      
-		      WebListBox_All_Planners.CellTextAt(row, column  )= Format( rs.Column("SUM").DoubleValue, "#0.0")
-		      
-		      
+		      WebListBox_All_Planners.CellTextAt( row, column ) = Format( rs.Column("SUM").DoubleValue, "#0.00")
 		      
 		    Next
 		    
-		    
-		    
 		  Next
-		  
 		  
 		  ProgressWheel1.Visible = False
 		End Sub
@@ -264,11 +236,11 @@ End
 		  If column < 1 Or column > Me.LastColumnIndex Then Return
 		  If row < 0 Or row > Me.LastRowIndex Then Return
 		  
-		  'Var thedialog As New WebDialog_User_Tasks
-		  'thedialog.user_id = Me.ColumnTagAt( column)
-		  'thedialog.task_type_id = Me.RowTagAt(row)
-		  'thedialog.POPULATE
-		  'thedialog.show
+		  Var thedialog As New WebDialog_User_Plans
+		  thedialog.user_id = Me.ColumnTagAt( column)
+		  thedialog.site_id = Me.RowTagAt(row)
+		  thedialog.POPULATE
+		  thedialog.show
 		End Sub
 	#tag EndEvent
 	#tag Event

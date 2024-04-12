@@ -42,22 +42,7 @@ Protected Class CLASS_User_Record
 		  Var Set_Date As New DateTime( d.Year, d.Month, d.day)
 		  
 		  Var sql As String = "SELECT SUM(" _
-		  + "CASE " _
-		  + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
-		  + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
-		  + "WEEKDAY(DATE(due_date)) + 1, 1) <= 0 THEN " _
-		  + "weight * 2 " _
-		  + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
-		  + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
-		  + "WEEKDAY(DATE(due_date)) + 1, 1) <= 1 THEN " _
-		  + "weight * 1.5 " _
-		  + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
-		  + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
-		  + "WEEKDAY(DATE(due_date)) + 1, 1) <= 2 THEN " _
-		  + "weight * 1.25 " _
-		  + "ELSE " _
-		  + "weight " _
-		  + "END) " _
+		  + App.Points_Plans_Condition + ") " _
 		  + "AS sum " _
 		  + "FROM plans INNER JOIN plan_types on plans.plan_type_id = plan_types.plan_type_id " _
 		  + "WHERE user_id = " + id.ToString + " " _
@@ -242,22 +227,7 @@ Protected Class CLASS_User_Record
 		  + "Exp(-ln(2)*DATEDIFF('" +Set_Date.SQLDate+"', DATE(due_date))/" + Physics_Tasking.Half_life_In_Days.ToString +"), " _
 		  + " 1) " _
 		  + "* " _
-		  + "CASE " _
-		  + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
-		  + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
-		  + "WEEKDAY(DATE(due_date)) + 1, 1) = 0 Then " _
-		  + "weight * 2 " _
-		  + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
-		  + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
-		  + "WEEKDAY(DATE(due_date)) + 1, 1) = 1 Then " _
-		  + "weight * 1.5 " _
-		  + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
-		  + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
-		  + "WEEKDAY(DATE(due_date)) + 1, 1) = 2 Then " _
-		  + "weight * 1.25 " _
-		  + "ELSE " _
-		  + "weight " _
-		  + "END) " _
+		  + App.Points_Plans_Condition + ") " _
 		  + "AS sum " _
 		  + "FROM plans INNER JOIN plan_types USING(plan_type_id) " _
 		  + "WHERE user_id = " + id.ToString + " " _
