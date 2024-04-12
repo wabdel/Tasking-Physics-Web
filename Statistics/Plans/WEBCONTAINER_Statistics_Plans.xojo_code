@@ -79,7 +79,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans
          LockVertical    =   False
          NoRowsMessage   =   ""
          PanelIndex      =   "0"
-         Parent          =   "TabPanel1"
+         Parent          =   "WebTabPanel_Statistics_Plans"
          ProcessingMessage=   ""
          RowCount        =   0
          RowSelectionType=   1
@@ -102,7 +102,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans
          Enabled         =   True
          Height          =   250
          Index           =   -2147483648
-         indicator       =   0
+         Indicator       =   0
          Left            =   457
          LockBottom      =   False
          LockedInPosition=   False
@@ -111,12 +111,13 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans
          LockRight       =   False
          LockTop         =   True
          LockVertical    =   False
-         PanelIndex      =   0
+         PanelIndex      =   "0"
          Parent          =   "WebTabPanel_Statistics_Plans"
          Scope           =   2
          SVGColor        =   &cFFD47900
          SVGData         =   ""
          TabIndex        =   2
+         TabPanelIndex   =   0
          TabStop         =   True
          Tooltip         =   ""
          Top             =   292
@@ -139,7 +140,28 @@ End
 		    
 		    For column As Integer= 1 To WebListBox_All_Planners.LastColumnIndex
 		      
-		      
+		      Var sql As String = "SELECT SUM( " _
+		      + "CASE WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
+		      + "MID('0123334401222334011122340001123400012344001234440', 7 * " _
+		      + "WEEKDAY(DATE(assignment_date)) + WEEKDAY(DATE(due_date)) + 1, 1) <= 0 THEN " _
+		      + "weight * 2 " _
+		      + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
+		      + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
+		      + "WEEKDAY(DATE(due_date)) + 1, 1) <= 1 THEN " _
+		      + "weight * 1.5 " _
+		      + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
+		      + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
+		      + "WEEKDAY(DATE(due_date)) + 1, 1) <= 2 THEN " _
+		      + "weight * 1.25 " _
+		      + "ELSE " _
+		      + "weight " _
+		      +" END) " _
+		      + "AS sum FROM physics_tasking.plans " _
+		      + "INNER JOIN physics_tasking.plan_types USING(plan_type_id) " _
+		      + "INNER JOIN physics_tasking.sites USING(site_id) " _
+		      + "WHERE user_id = " + WebListBox_All_Planners.ColumnTagAt( column) + " " _
+		      + "AND site_id = " + WebListBox_All_Planners.RowTagAt( row) + " " _
+		      + "AND DATE(physics_tasking.plans.assignment_date) >=  '"  + d.SQLDate + "';"
 		      
 		      'Var sql As String = "SELECT name, SUM(multiplier*weight) as p " _
 		      '+ "FROM physics_tasking.tasks " _
@@ -149,9 +171,9 @@ End
 		      '+ "AND DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "'" _
 		      '+ "GROUP BY name;"
 		      '
-		      'Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
-		      '
-		      'WebListBox_All_Planners.CellTextAt(row, column  )= Format( rs.Column("p").DoubleValue, "#0.0")
+		      Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		      
+		      WebListBox_All_Planners.CellTextAt(row, column  )= Format( rs.Column("SUM").DoubleValue, "#0.0")
 		      
 		      
 		      

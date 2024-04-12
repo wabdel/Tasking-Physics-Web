@@ -168,16 +168,22 @@ Protected Class CLASS_User_Record
 	#tag Method, Flags = &h0
 		Function GET_Count_and_Points_for_site(site_id as Integer, d_initial as DateTime, d_final as Datetime) As Rowset
 		  
-		  Var sql As String = "SELECT COUNT(*), SUM( CASE " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(assignment_date)) <= 0 THEN " _
+		  Var sql As String = "SELECT COUNT(*), SUM( " _
+		  + "CASE WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
+		  + "MID('0123334401222334011122340001123400012344001234440', 7 * " _
+		  + "WEEKDAY(DATE(assignment_date)) + WEEKDAY(DATE(due_date)) + 1, 1) <= 0 THEN " _
 		  + "weight * 2 " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(assignment_date)) <= 1 THEN " _
+		  + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
+		  + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
+		  + "WEEKDAY(DATE(due_date)) + 1, 1) <= 1 THEN " _
 		  + "weight * 1.5 " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(assignment_date)) <= 2 THEN " _
+		  + "WHEN 5 * (DATEDIFF(DATE(due_date), DATE(assignment_date)) DIV 7) + " _
+		  + "MID('0123334401222334011122340001123400012344001234440', 7 * WEEKDAY(DATE(assignment_date)) + " _
+		  + "WEEKDAY(DATE(due_date)) + 1, 1) <= 2 THEN " _
 		  + "weight * 1.25 " _
 		  + "ELSE " _
 		  + "weight " _
-		  + "END) " _
+		  +" END) " _
 		  + "AS sum " _
 		  + "FROM physics_tasking.plans " _
 		  + "INNER JOIN physics_tasking.plan_types USING (plan_type_id) " _
