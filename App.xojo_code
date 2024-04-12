@@ -24,8 +24,20 @@ Inherits WebApplication
 		  + "weight * 1.25 " _
 		  + "ELSE " _
 		  + "weight " _
-		  + "END " _
+		  + "END "
 		  
+		  Points_Schedulted_Tasks_Condition =  "CASE " _
+		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 0 THEN " _
+		  + "weight * 0.75 " _
+		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 7 THEN " _
+		  + "weight " _
+		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 14 THEN " _
+		  + "weight * 1.25 " _
+		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 21 THEN " _
+		  + "weight * 1.5 " _
+		  + "ELSE " _
+		  + "weight * 2 " _
+		  + "END "
 		  
 		  Var db_status As Boolean = Physics_Tasking.isDatabase_Online
 		  Physics_Tasking.POPULATE_Main_Data
@@ -321,6 +333,10 @@ Inherits WebApplication
 
 	#tag Property, Flags = &h0
 		Points_Plans_Condition As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		Points_Schedulted_Tasks_Condition As String
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

@@ -11,18 +11,7 @@ Protected Class CLASS_User_Record
 		  Var Set_Date As New DateTime( d.Year, d.Month, d.day)
 		  
 		  Var sql As String = "SELECT SUM( " _
-		  + "CASE " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 0 THEN " _
-		  + "weight * 0.75 " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 7 THEN " _
-		  + "weight " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 14 THEN " _
-		  + "weight * 1.25 " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 21 THEN " _
-		  + "weight * 1.5 " _
-		  + "ELSE " _
-		  + "weight * 2 " _
-		  + "END * multiplier) as sum " _
+		  + App.Points_Schedulted_Tasks_Condition + " * multiplier) as sum " _
 		  + "FROM scheduled_tasks INNER JOIN task_types USING(task_type_id) " _
 		  + "WHERE user_id = " + id.ToString + " "_
 		  + "AND is_completed = TRUE " _
@@ -189,18 +178,7 @@ Protected Class CLASS_User_Record
 		  Var Set_date As New DateTime(d.Year, d.Month, d.Day)
 		  
 		  Var sql As String = "SELECT SUM( " _
-		  + "CASE " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 0 THEN " _
-		  + "weight * 0.75 " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 7 THEN " _
-		  + "weight " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 14 THEN " _
-		  + "weight * 1.25 " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 21 THEN " _
-		  + "weight * 1.5 " _
-		  + "ELSE " _
-		  + "weight * 2 " _
-		  + "END * multiplier) as sum " _
+		  + App.Points_Schedulted_Tasks_Condition + " * multiplier) as sum " _
 		  + "FROM scheduled_tasks INNER JOIN task_types USING(task_type_id) " _
 		  + "WHERE user_id = " + id.ToString + " "_
 		  + "AND is_completed = TRUE " _

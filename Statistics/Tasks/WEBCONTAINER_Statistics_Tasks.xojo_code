@@ -139,19 +139,43 @@ End
 		    
 		    For column As Integer= 1 To WebListBox_All_Planners.LastColumnIndex
 		      
-		      
-		      
-		      Var sql As String = "SELECT name, SUM(multiplier*weight) as p " _
+		      Var sql As String = " SELECT SUM(p) as total FROM (" _
+		      + "SELECT SUM(multiplier*weight) AS p " _
 		      + "FROM physics_tasking.tasks " _
 		      + "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
 		      + "WHERE physics_tasking.tasks.user_id = " + WebListBox_All_Planners.ColumnTagAt( column) + " " _
 		      + "AND physics_tasking.tasks.task_type_id = " + WebListBox_All_Planners.RowTagAt( row) + " " _
-		      + "AND DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "'" _
-		      + "GROUP BY name;"
+		      + "AND DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "' " _
+		      + "UNION " _
+		      + "SELECT SUM( " _
+		      + App.Points_Schedulted_Tasks_Condition + " * multiplier) aS p " _
+		      + "FROM physics_tasking.scheduled_tasks " _
+		      + "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
+		      + "WHERE physics_tasking.scheduled_tasks.user_id = " + WebListBox_All_Planners.ColumnTagAt( column) + " " _
+		      + "AND physics_tasking.scheduled_tasks.task_type_id = " + WebListBox_All_Planners.RowTagAt( row) + " " _
+		      + "AND DATE(physics_tasking.scheduled_tasks.completion_date) >= '"  + d.SQLDate + "' " _
+		      +") as t;"
 		      
+		      'Var sql As String = "SELECT SUM(multiplier*weight) as p " _
+		      '+ "FROM physics_tasking.tasks " _
+		      '+ "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
+		      '+ "WHERE physics_tasking.tasks.user_id = " + WebListBox_All_Planners.ColumnTagAt( column) + " " _
+		      '+ "AND physics_tasking.tasks.task_type_id = " + WebListBox_All_Planners.RowTagAt( row) + " " _
+		      '+ "AND DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "';" 
+		      '
 		      Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		      '
+		      'sql = "SELECT SUM(multiplier*weight) as p " _
+		      '+ "FROM physics_tasking.scheduled_tasks " _
+		      '+ "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
+		      '+ "WHERE physics_tasking.scheduled_tasks.user_id = " + WebListBox_All_Planners.ColumnTagAt( column) + " " _
+		      '+ "AND physics_tasking.scheduled_tasks.task_type_id = " + WebListBox_All_Planners.RowTagAt( row) + " " _
+		      '+ "AND DATE(physics_tasking.scheduled_tasks.completion_date) >= '"  + d.SQLDate + "';"
 		      
-		      WebListBox_All_Planners.CellTextAt(row, column  )= Format( rs.Column("p").DoubleValue, "#0.00")
+		      'Var rs_scheduled_tasks As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		      
+		      
+		      WebListBox_All_Planners.CellTextAt(row, column  )= Format( rs.Column("total").DoubleValue, "#0.00")
 		      
 		      
 		      
@@ -202,12 +226,14 @@ End
 		    
 		  Wend
 		  
+		  sql = " SELECT task_types.task_type_id as task_type_id, name FROM physics_tasking.tasks " _
+		  + "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
+		  + "UNION " _
+		  + "SELECT task_types.task_type_id AS task_type_id, name FROM physics_tasking.scheduled_tasks " _
+		  + "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
+		  + "ORDER by name"
 		  
-		  sql = "SELECT task_type_id, name FROM physics_tasking.tasks " _
-		  + "INNER JOIN physics_tasking.task_types USING(task_type_id) "_
-		  + "WHERE DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "' " _
-		  + "GROUP BY task_type_id " _
-		  + "ORDER BY name;"
+		  
 		  
 		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
 		  

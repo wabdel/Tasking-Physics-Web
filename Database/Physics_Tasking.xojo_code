@@ -70,18 +70,7 @@ Protected Module Physics_Tasking
 		  sql = "CREATE OR REPLACE VIEW annual_scheduled_task_points AS " _
 		  + "SELECT user_id, " _
 		  + "(SELECT SUM( " _
-		  + "CASE " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 0 THEN " _
-		  + "weight * 0.75 " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 7 THEN " _
-		  + "weight " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 14 THEN " _
-		  + "weight * 1.25 " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 21 THEN " _
-		  + "weight * 1.5 " _
-		  + "ELSE " _
-		  + "weight * 2 " _
-		  + "END * multiplier) " _
+		  + App.Points_Schedulted_Tasks_Condition + " * multiplier) " _
 		  + "FROM scheduled_tasks " _
 		  + "INNER JOIN task_types Using(task_type_id) " _
 		  + "WHERE user_id = users.user_id  " _
@@ -99,18 +88,7 @@ Protected Module Physics_Tasking
 		  sql = "CREATE OR REPLACE VIEW recent_scheduled_task_points AS " _
 		  + "SELECT user_id, " _
 		  + "(SELECT SUM( " _
-		  + "CASE " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 0 THEN " _
-		  + "weight * 0.75 " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 7 THEN " _
-		  + "weight " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 14 THEN " _
-		  + "weight * 1.25 " _
-		  + "WHEN DATEDIFF(DATE(due_date), DATE(completion_date)) < 21 THEN " _
-		  + "weight * 1.5 " _
-		  + "ELSE " _
-		  + "weight * 2 " _
-		  + "END * multiplier) " _
+		  + App.Points_Schedulted_Tasks_Condition + " * multiplier) " _
 		  + "FROM scheduled_tasks " _
 		  + "INNER JOIN task_types Using(task_type_id) " _
 		  + "WHERE user_id = users.user_id  " _
