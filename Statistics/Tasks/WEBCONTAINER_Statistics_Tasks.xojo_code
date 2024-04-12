@@ -99,10 +99,10 @@ Begin WebContainer WEBCONTAINER_Statistics_Tasks
          Colorize        =   True
          ControlID       =   ""
          Enabled         =   True
-         Height          =   178
+         Height          =   250
          Index           =   -2147483648
-         Indicator       =   ""
-         Left            =   508
+         Indicator       =   0
+         Left            =   495
          LockBottom      =   False
          LockedInPosition=   False
          LockHorizontal  =   False
@@ -110,17 +110,18 @@ Begin WebContainer WEBCONTAINER_Statistics_Tasks
          LockRight       =   False
          LockTop         =   True
          LockVertical    =   False
-         PanelIndex      =   0
+         PanelIndex      =   "0"
          Parent          =   "WebTabPanel_Tasks"
          Scope           =   2
-         SVGColor        =   &cFF930000
+         SVGColor        =   &cFFD47900
          SVGData         =   ""
          TabIndex        =   2
+         TabPanelIndex   =   0
          TabStop         =   True
          Tooltip         =   ""
-         Top             =   246
-         Visible         =   False
-         Width           =   225
+         Top             =   175
+         Visible         =   True
+         Width           =   250
          _mPanelIndex    =   -1
       End
    End
@@ -177,9 +178,9 @@ End
 		  
 		  Var sql As String = "SELECT users.user_id, initials FROM physics_tasking.tasks " _
 		  + "INNER JOIN physics_tasking.users USING(user_id) "_
-		  + "WHERE DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "'" _
+		  + "WHERE DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "' " _
 		  + "GROUP BY user_id "  _
-		  + "ORDER BY initials"
+		  + "ORDER BY initials;"
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
 		  
@@ -204,8 +205,10 @@ End
 		  
 		  sql = "SELECT task_type_id, name FROM physics_tasking.tasks " _
 		  + "INNER JOIN physics_tasking.task_types USING(task_type_id) "_
-		  + "WHERE DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "'" _
-		  + "GROUP BY task_type_id;"
+		  + "WHERE DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "' " _
+		  + "GROUP BY task_type_id " _
+		  + "ORDER BY name;"
+		  
 		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
 		  
 		  While Not rs.AfterLastRow

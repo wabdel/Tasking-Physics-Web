@@ -153,13 +153,13 @@ Begin WebDialog WebDialog_User_Tasks
       _mPanelIndex    =   -1
    End
    Begin WebProgressWheel ProgressWheel1
-      Colorize        =   False
+      Colorize        =   True
       ControlID       =   ""
       Enabled         =   True
-      Height          =   189
+      Height          =   250
       Index           =   -2147483648
       Indicator       =   ""
-      Left            =   459
+      Left            =   437
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -168,14 +168,14 @@ Begin WebDialog WebDialog_User_Tasks
       LockTop         =   True
       LockVertical    =   False
       Scope           =   2
-      SVGColor        =   &c00000000
+      SVGColor        =   &cFFD47900
       SVGData         =   ""
       TabIndex        =   4
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   271
+      Top             =   272
       Visible         =   True
-      Width           =   207
+      Width           =   250
       _mPanelIndex    =   -1
    End
 End
@@ -247,6 +247,8 @@ End
 		    rs.MoveToNextRow
 		    
 		  Wend
+		  
+		  ProgressWheel1.Visible = False
 		End Sub
 	#tag EndMethod
 
