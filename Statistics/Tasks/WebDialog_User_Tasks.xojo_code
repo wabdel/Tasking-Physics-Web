@@ -186,7 +186,7 @@ Begin WebDialog WebDialog_User_Tasks
       FontSize        =   0.0
       Height          =   38
       Index           =   -2147483648
-      indicator       =   0
+      Indicator       =   0
       Italic          =   False
       Left            =   764
       LockBottom      =   False
@@ -197,7 +197,7 @@ Begin WebDialog WebDialog_User_Tasks
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
-      PanelIndex      =   0
+      PanelIndex      =   "0"
       Scope           =   2
       TabIndex        =   5
       TabStop         =   True
@@ -261,7 +261,7 @@ End
 		  + "INNER JOIN physics_tasking.task_types USING(task_type_id) "  _
 		  + "WHERE user_id = " + user_id.ToString + " "  _
 		  + "AND task_type_id = " + task_type_id.ToString + " "  _
-		  + "AND DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "'" _
+		  + "AND DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "' " _
 		  + "ORDER BY completion_date DESC;"
 		  
 		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
@@ -273,6 +273,8 @@ End
 		    WebListBox_User_Tasks.AddRow()
 		    WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 0) = _
 		    rs.Column("completion_date").DateTimeValue.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None)
+		    WebListBox_User_Tasks.CellTagAt( WebListBox_User_Tasks.LastAddedRowIndex, 0) = _
+		     rs.Column("completion_date").DateTimeValue.SecondsFrom1970
 		    
 		    WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 1) = rs.Column("c").IntegerValue.ToString
 		    WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 2) = Format( rs.Column("p").DoubleValue, "0.00")
@@ -282,6 +284,96 @@ End
 		    rs.MoveToNextRow
 		    
 		  Wend
+		  
+		  
+		  
+		  sql = "SELECT completion_date, multiplier as c, " _
+		  + "(SELECT " _
+		  + App.Points_Schedulted_Tasks_Condition + " * multiplier) AS p, " _
+		  + "notes FROM physics_tasking.scheduled_tasks " _
+		  + "INNER JOIN physics_tasking.task_types USING(task_type_id) "  _
+		  + "WHERE user_id = " + user_id.ToString + " "  _
+		  + "AND task_type_id = " + task_type_id.ToString + " "  _
+		  + "AND DATE(physics_tasking.scheduled_tasks.completion_date) >= '"  + d.SQLDate + "' " _
+		  + "ORDER BY completion_date DESC;"
+		  
+		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  
+		  While Not rs.AfterLastRow
+		    
+		    If WebListBox_User_Tasks.RowCount = 0 Then
+		      WebListBox_User_Tasks.AddRow()
+		      WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 0) = _
+		      rs.Column("completion_date").DateTimeValue.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None)
+		      WebListBox_User_Tasks.CellTagAt( WebListBox_User_Tasks.LastAddedRowIndex, 0) = _
+		      rs.Column("completion_date").DateTimeValue.SecondsFrom1970
+		      
+		      WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 1) = rs.Column("c").IntegerValue.ToString
+		      WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 2) = Format( rs.Column("p").DoubleValue, "0.00")
+		      WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 3) = rs.Column("notes").StringValue.Trim
+		      
+		      sum = sum + rs.Column("p").DoubleValue
+		      
+		      
+		      Continue While
+		    End If
+		    
+		    
+		    
+		    Select Case rs.Column("completion_date").DateTimeValue.SecondsFrom1970
+		    Case Is < WebListBox_User_Tasks.CellTagAt( WebListBox_User_Tasks.LastRowIndex, 0)
+		      
+		      
+		      WebListBox_User_Tasks.AddRow()
+		      WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 0) = _
+		      rs.Column("completion_date").DateTimeValue.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None)
+		      WebListBox_User_Tasks.CellTagAt( WebListBox_User_Tasks.LastAddedRowIndex, 0) = _
+		      rs.Column("completion_date").DateTimeValue.SecondsFrom1970
+		      
+		      WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 1) = rs.Column("c").IntegerValue.ToString
+		      WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 2) = Format( rs.Column("p").DoubleValue, "0.00")
+		      WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 3) = rs.Column("notes").StringValue.Trim
+		      
+		      sum = sum + rs.Column("p").DoubleValue
+		      
+		      
+		    Else
+		      
+		      
+		      For row As Integer = 0 To WebListBox_User_Tasks.LastRowIndex
+		        
+		        If rs.Column("completion_date").DateTimeValue.SecondsFrom1970 > WebListBox_User_Tasks.CellTagAt( row, 0) Then
+		          
+		          WebListBox_User_Tasks.AddRowAt( row)
+		          
+		          WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 0) = _
+		          rs.Column("completion_date").DateTimeValue.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None)
+		          WebListBox_User_Tasks.CellTagAt( WebListBox_User_Tasks.LastAddedRowIndex, 0) = _
+		          rs.Column("completion_date").DateTimeValue.SecondsFrom1970
+		          
+		          WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 1) = rs.Column("c").IntegerValue.ToString
+		          WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 2) = Format( rs.Column("p").DoubleValue, "0.00")
+		          WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 3) = rs.Column("notes").StringValue.Trim
+		          
+		          sum = sum + rs.Column("p").DoubleValue
+		          
+		          Exit For Row
+		          
+		        End If
+		        
+		      Next
+		      
+		    End Select
+		    
+		    
+		    
+		    rs.MoveToNextRow
+		    
+		  Wend
+		  
+		  
+		  
+		  
 		  WebLabel_Total_Points.Text = "Total Points = " + Format(sum, "0.00")
 		  ProgressWheel1.Visible = False
 		End Sub
