@@ -23,15 +23,19 @@ Begin WebContainer WEBCONTAINER_Department
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin WebCombobox COMBOBOX_Year
+   Begin WebListBox Department_Stats_ListBox
+      ColumnCount     =   3
+      ColumnWidths    =   ""
       ControlID       =   ""
       Enabled         =   True
-      Height          =   38
-      Hint            =   ""
+      HasHeader       =   True
+      Height          =   360
+      HighlightSortedColumn=   True
       Index           =   -2147483648
-      Indicator       =   0
+      Indicator       =   ""
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   68
       LockBottom      =   False
@@ -41,16 +45,114 @@ Begin WebContainer WEBCONTAINER_Department
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      NoRowsMessage   =   ""
+      ProcessingMessage=   ""
+      RowCount        =   0
+      RowSelectionType=   1
+      Scope           =   2
+      SearchCriteria  =   ""
+      SelectedRowColor=   &c0d6efd
+      SelectedRowIndex=   0
+      TabIndex        =   4
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   103
+      Visible         =   True
+      Width           =   627
+      _mPanelIndex    =   -1
+   End
+   Begin WebPopupMenu Year_PopupMenu
+      ControlID       =   ""
+      Enabled         =   True
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   0
+      InitialValue    =   ""
+      LastAddedRowIndex=   0
+      LastRowIndex    =   0
+      Left            =   131
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
       RowCount        =   0
       Scope           =   2
-      SelectedRowIndex=   -1
+      SelectedRowIndex=   0
       SelectedRowText =   ""
-      TabIndex        =   3
-      Text            =   ""
+      TabIndex        =   5
+      TabStop         =   True
       Tooltip         =   ""
-      Top             =   35
+      Top             =   57
       Visible         =   True
       Width           =   150
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Label_Total_Plans
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   ""
+      Italic          =   False
+      Left            =   488
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      Scope           =   2
+      TabIndex        =   6
+      TabStop         =   True
+      Text            =   "Total Plans = 0"
+      TextAlignment   =   0
+      TextColor       =   &c000000FF
+      Tooltip         =   ""
+      Top             =   471
+      Underline       =   False
+      Visible         =   True
+      Width           =   207
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Label_Total_Patients
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      indicator       =   0
+      Italic          =   False
+      Left            =   281
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      PanelIndex      =   0
+      Scope           =   2
+      TabIndex        =   7
+      TabStop         =   True
+      Text            =   "Total Patients = 0"
+      TextAlignment   =   0
+      TextColor       =   &c000000FF
+      Tooltip         =   ""
+      Top             =   471
+      Underline       =   False
+      Visible         =   True
+      Width           =   199
       _mPanelIndex    =   -1
    End
 End
@@ -66,38 +168,100 @@ End
 	#tag EndEvent
 
 
+	#tag Method, Flags = &h21
+		Private Sub POPULATE_Department_Stats_ListBox()
+		  Department_Stats_ListBox.RemoveAllRows
+		  
+		  Var sql As String = "SELECT MONTH(due_date) As m, COUNT(DISTINCT(mrn)) As c, SUM(no_of_plans) As p " _
+		  + "FROM physics_tasking.plans " _
+		  + "INNER JOIN physics_tasking.patients USING(patient_id) " _
+		  + "INNER JOIN physics_tasking.plan_types USING(plan_type_id) " _
+		  + "WHERE YEAR(due_date) = " _
+		  + Str(Year_PopupMenu.RowTagAt( Year_PopupMenu.SelectedRowIndex)) + " AND " _
+		  + "is_completed = TRUE " _
+		  + "GROUP BY m;"
+		  
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var Plans_Sum As Integer = 0
+		  Var Patients_Sum As Integer = 0
+		  
+		  While Not rs.AfterLastRow
+		    
+		    Department_Stats_ListBox.AddRow()
+		    Department_Stats_ListBox.CellTextAt(Department_Stats_ListBox.LastAddedRowIndex, 0) = _
+		    rs.Column("m").IntegerValue.ToString
+		    
+		    Department_Stats_ListBox.CellTextAt(Department_Stats_ListBox.LastAddedRowIndex,1) = _
+		    rs.Column("c").IntegerValue.ToString
+		    
+		    Patients_Sum = Patients_Sum + rs.Column("c").IntegerValue
+		    
+		    Department_Stats_ListBox.CellTextAt(Department_Stats_ListBox.LastAddedRowIndex,2) = _
+		    rs.Column("p").IntegerValue.ToString
+		    
+		    Plans_Sum = Plans_Sum + rs.Column("p").IntegerValue
+		    
+		    rs.MoveToNextRow
+		    
+		  Wend
+		  
+		  
+		  sql = "SELECT COUNT(DISTINCT(mrn)) As c " _
+		  + "FROM physics_tasking.plans " _
+		  + "INNER JOIN physics_tasking.patients USING(patient_id) " _
+		  + "WHERE YEAR(due_date) = " _
+		  + Str(Year_PopupMenu.RowTagAt( Year_PopupMenu.SelectedRowIndex)) + " AND " _
+		  + "is_completed = TRUE " 
+		  
+		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Label_Total_Plans.Text = "Total Plans = " + Plans_Sum.ToString
+		  Label_Total_Patients.Text = "Total Patients = " + rs.Column("c").IntegerValue.ToString
+		  
+		End Sub
+	#tag EndMethod
+
+
+	#tag Property, Flags = &h21
+		Private Year As Integer
+	#tag EndProperty
+
+
 #tag EndWindowCode
 
-#tag Events COMBOBOX_Year
+#tag Events Department_Stats_ListBox
 	#tag Event
 		Sub Opening()
-		  'Me.RemoveAllRows
-		  '
-		  'Var sql As String = "SELECT physician_id, initials, COUNT(DISTINCT(patient_id)) as count_patients, " _
-		  '+ "SUM(physics_tasking.plan_types.no_of_plans) AS count_plans " _
-		  '+ "FROM physics_tasking.plans " _
-		  '+ "INNER JOIN physics_tasking.plan_types USING(plan_type_id) " _
-		  '+ "INNER JOIN physics_tasking.users ON plans.physician_id = users.user_id " _
-		  '+ "INNER JOIN physics_tasking.sites USING(site_id) " _
-		  '+ "WHERE physician_id IS NOT NULL " _
-		  '+ "AND is_completed = TRUE " _
-		  '+ "AND is_retired = FALSE " _
-		  '+ "AND MONTH(due_date) = " + Month_DatePicker.SelectedDate.Month.ToString + " " _
-		  '+ "AND YEAR(due_date) = " + Month_DatePicker.SelectedDate.Year.ToString + " " _
-		  '+ "GROUP BY physician_id " _
-		  '+ "ORDER BY initials;"
-		  '
-		  'Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
-		  '
-		  'If Not rs.AfterLastRow Then
-		  '
-		  '
-		  '
-		  '
-		  '
-		  'rs.MoveToNextRow
-		  '
-		  'End If
+		  Me.ColumnCount = 3
+		  Me.HasHeader = True
+		  Me.HeaderAt(0) = "Month"
+		  Me.HeaderAt(1) = "No. Patients"
+		  Me.HeaderAt(2) = "No. Plans"
+		  
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Year_PopupMenu
+	#tag Event
+		Sub Opening()
+		  Var sql As String = "SELECT DISTINCT(YEAR(due_date)) AS y FROM physics_tasking.plans " _
+		  + "ORDER BY y DESC;"
+		  
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  
+		  While Not rs.AfterLastRow
+		    
+		    Me.AddRow( rs.Column("y").IntegerValue.ToString )
+		    Me.RowTagAt( Me.LastAddedRowIndex) = rs.Column("y").IntegerValue
+		    
+		    
+		    rs.MoveToNextRow
+		  Wend
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub SelectionChanged(item As WebMenuItem)
+		  POPULATE_Department_Stats_ListBox
 		End Sub
 	#tag EndEvent
 #tag EndEvents

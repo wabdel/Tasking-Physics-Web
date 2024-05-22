@@ -43,7 +43,7 @@ Begin WebContainer WEBCONTAINER_Statistics
       LockVertical    =   False
       PanelCount      =   2
       Scope           =   2
-      SelectedPanelIndex=   8
+      SelectedPanelIndex=   7
       TabDefinition   =   "Sites\rPlans\rTasks\rPlanners\rPoints History\rPhysicians\rPlanner Annual Points\rDepartment\rReview\rPlanner Stats"
       TabIndex        =   3
       TabStop         =   True
