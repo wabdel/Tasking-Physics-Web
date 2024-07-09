@@ -15,6 +15,7 @@ Begin WebContainer WEBCONTAINER_General_Tabs_Panel
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -22,7 +23,6 @@ Begin WebContainer WEBCONTAINER_General_Tabs_Panel
    Width           =   200
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
 End
 #tag EndWebContainerControl
@@ -85,6 +85,10 @@ End
 		  Tab_Container.Append( New WEBCONTAINER_Tab)
 		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
 		  "Tasks"
+		  
+		  Tab_Container.Append( New WEBCONTAINER_Tab)
+		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
+		  "QC Reports"
 		  
 		  Tab_Container.Append( New WEBCONTAINER_Tab)
 		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
@@ -362,6 +366,16 @@ End
 		    MainWebPage.Header_Container.Top + MainWebPage.Header_Container.Height, _
 		    Central_Container.Width, Central_Container.Height)
 		    
+		  Case "QC Reports"
+		    
+		    Central_Container = New WEBCONTAINER_QCReports
+		    Central_Container.LockLeft = True
+		    Central_Container.LockTop = True
+		    Central_Container.EmbedWithin( MainWebPage, _
+		    MainWebPage.General_Tabs_Panel_Container.Width, _
+		    MainWebPage.Header_Container.Top + MainWebPage.Header_Container.Height, _
+		    Central_Container.Width, Central_Container.Height)
+		    
 		  End Select
 		End Sub
 	#tag EndMethod
@@ -452,6 +466,14 @@ End
 #tag EndWindowCode
 
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ControlCount"
 		Visible=false

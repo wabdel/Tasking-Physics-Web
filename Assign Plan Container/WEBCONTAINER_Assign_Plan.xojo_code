@@ -15,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -41,8 +42,11 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   442
       Visible         =   True
@@ -68,8 +72,10 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Text            =   "Assign New Plan"
       TextAlignment   =   2
       TextColor       =   &c00000000
@@ -100,9 +106,11 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   3
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -130,8 +138,10 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   4
+      TabStop         =   True
       Text            =   "MRN :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -162,9 +172,11 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   5
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -192,8 +204,10 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   6
+      TabStop         =   True
       Text            =   "First Name :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -224,9 +238,11 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   7
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -254,8 +270,10 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   8
+      TabStop         =   True
       Text            =   "Family Name :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -285,8 +303,10 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   9
+      TabStop         =   True
       Text            =   "Site :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -314,11 +334,13 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   10
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   66
       Visible         =   True
@@ -344,8 +366,10 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   11
+      TabStop         =   True
       Text            =   "Plan Type :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -373,11 +397,13 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   12
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   112
       Visible         =   True
@@ -402,8 +428,11 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   13
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   442
       Visible         =   True
@@ -426,9 +455,11 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   2
       SelectedIndex   =   0
       TabIndex        =   14
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   311
       Visible         =   False
@@ -453,11 +484,13 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   15
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   379
       Visible         =   False
@@ -482,8 +515,10 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   16
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   158
       Visible         =   True
@@ -509,8 +544,10 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   17
+      TabStop         =   True
       Text            =   "Start Date :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -537,8 +574,10 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   19
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   158
       Value           =   False
@@ -565,8 +604,10 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   20
+      TabStop         =   True
       Text            =   "Physician :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -594,11 +635,13 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   21
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   243
       Visible         =   True
@@ -622,14 +665,16 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Random_Planner_ID=   0
       Scope           =   2
       ScrollDirection =   0
       TabIndex        =   22
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   199
       Visible         =   True
-      Width           =   500
+      Width           =   650
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
@@ -1094,7 +1139,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub SelectionChanged(item as WebMenuItem)
+		Sub SelectionChanged(item As WebMenuItem)
 		  POPULATE_Plan_Type_PopupMenu( Me.RowTagAt( Me.SelectedRowIndex))
 		  ENABLE_ASSIGN_Button
 		End Sub
@@ -1115,7 +1160,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub SelectionChanged(item as WebMenuItem)
+		Sub SelectionChanged(item As WebMenuItem)
 		  Planner_RadioGroup.RemoveAllRows
 		  selected_user_id = Points_WEBCONTAINER.GET_Random_Planner
 		  
@@ -1215,7 +1260,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub SelectionChanged(button as WebRadioButton)
+		Sub SelectionChanged(button As WebRadioButton)
 		  
 		  Select Case Me.SelectedIndex
 		  Case 0 
@@ -1240,7 +1285,7 @@ End
 #tag EndEvents
 #tag Events Planner_PopupMenu
 	#tag Event
-		Sub SelectionChanged(item as WebMenuItem)
+		Sub SelectionChanged(item As WebMenuItem)
 		  ENABLE_ASSIGN_Button
 		End Sub
 	#tag EndEvent
@@ -1286,12 +1331,20 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub SelectionChanged(item as WebMenuItem)
+		Sub SelectionChanged(item As WebMenuItem)
 		  ENABLE_ASSIGN_Button
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ControlCount"
 		Visible=false

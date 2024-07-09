@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Reports_Plans_Monthly Implements WebDataSource
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   600
@@ -14,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Reports_Plans_Monthly Implements WebDataSource
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -40,8 +42,10 @@ Begin WebContainer WEBCONTAINER_Reports_Plans_Monthly Implements WebDataSource
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -66,8 +70,11 @@ Begin WebContainer WEBCONTAINER_Reports_Plans_Monthly Implements WebDataSource
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   542
       Visible         =   True
@@ -78,14 +85,19 @@ Begin WebContainer WEBCONTAINER_Reports_Plans_Monthly Implements WebDataSource
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   False
+      HeaderHeight    =   0
       Height          =   436
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   20
       LockBottom      =   False
@@ -96,6 +108,7 @@ Begin WebContainer WEBCONTAINER_Reports_Plans_Monthly Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -104,6 +117,7 @@ Begin WebContainer WEBCONTAINER_Reports_Plans_Monthly Implements WebDataSource
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   2
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   85
       Visible         =   True
@@ -116,6 +130,7 @@ Begin WebContainer WEBCONTAINER_Reports_Plans_Monthly Implements WebDataSource
       Index           =   -2147483648
       Location        =   0
       LockedInPosition=   False
+      PanelIndex      =   0
       Period          =   1000
       RunMode         =   2
       Scope           =   2
@@ -140,8 +155,10 @@ Begin WebContainer WEBCONTAINER_Reports_Plans_Monthly Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   3
+      TabStop         =   True
       Text            =   "Plans = 0"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -171,8 +188,10 @@ Begin WebContainer WEBCONTAINER_Reports_Plans_Monthly Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   4
+      TabStop         =   True
       Text            =   "Pick a date to list plans done in a month"
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -532,7 +551,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub DateChanged()
+		Sub DateChanged(selectedDate As DateTime)
 		  Plans_ListBox.ReloadData
 		  Plans_Label.Text = "Plans = " + Self.RowCount.ToString
 		End Sub
@@ -553,7 +572,7 @@ End
 		  + "_" + Month_DatePicker.SelectedDate.Year.ToString _
 		  + "_Plans_due_date.csv"
 		  
-		  Patient_List_File.Data = "mrn,Full Name,Site, Plan, Due date"
+		  Patient_List_File.Data = "mrn,Full Name,Site, Plan, Due date, Year. Physician"
 		  
 		  Var sql As String = "SELECT physics_tasking.plans.plan_id AS plan_id, " _
 		  + "physics_tasking.patients.mrn AS mrn, " _
@@ -562,7 +581,13 @@ End
 		  + "physics_tasking.plan_types.name AS plan_type_name, " _
 		  + "physics_tasking.sites.name As site, " _
 		  + "physics_tasking.sites.is_uppercase AS is_uppercase, " _
-		  + "physics_tasking.plans.due_date AS due_date " _
+		  + "physics_tasking.plans.due_date AS due_date, " _
+		  + "(SELECT initials " _
+		  + "FROM physics_tasking.users " _
+		  + "WHERE physics_tasking.plans.user_id = physics_tasking.users.user_id) As planner_initials, " _
+		  + "(SELECT initials " _
+		  + "FROM physics_tasking.users " _
+		  + "WHERE physics_tasking.plans.physician_id = physics_tasking.users.user_id) As physician_initials " _
 		  + "FROM physics_tasking.plans " _
 		  + "INNER JOIN physics_tasking.patients USING (patient_id) " _
 		  + "INNER JOIN physics_tasking.plan_types USING (plan_type_id) " _
@@ -571,6 +596,7 @@ End
 		  + "AND MONTH(due_date)  = " + Month_DatePicker.SelectedDate.Month.ToString  + " " _
 		  + "AND YEAR(due_date) = " + Month_DatePicker.SelectedDate.Year.ToString + " " _
 		  + "ORDER BY physics_tasking.plans.due_date ASC"
+		  
 		  
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
@@ -592,13 +618,13 @@ End
 		      
 		    End If
 		    
-		    s = s + rs.Column("plan_type_name").StringValue.Trim
+		    s = s + rs.Column("plan_type_name").StringValue.Trim + ","
 		    
 		    Var due_date As DateTime = rs.Column("due_date").DateTimeValue
-		    s = s + due_date.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None)
+		    s = s + due_date.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None) + ","
 		    
 		    
-		    
+		    s = s + rs.Column("physician_initials").StringValue.Trim 
 		    
 		    
 		    Patient_List_File.Data = Patient_List_File.Data.Operator_Add(Chr(13))
@@ -624,7 +650,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub DoublePressed(row as integer, column as integer)
+		Sub DoublePressed(row As Integer, column As Integer)
 		  If Session.Logged_in_User Is Nil Then Return
 		  
 		  If row > Me.RowCount - 1 Then Return
@@ -675,6 +701,22 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false
