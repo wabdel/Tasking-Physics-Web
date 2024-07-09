@@ -228,7 +228,7 @@ Begin WebContainer WEBCONTAINER_QCReports_Plans_Quarterly Implements WebDataSour
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
-      Width           =   214
+      Width           =   350
       _mInitialValue  =   "Option 1\rOption 2"
       _mPanelIndex    =   -1
    End
@@ -283,9 +283,7 @@ End
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
-		  If rs.Column("c").IntegerValue = 0 Then Return
-		  
-		  RadioGroup_Quarters.Add("Q1")
+		  If rs.Column("c").IntegerValue > 0 Then RadioGroup_Quarters.Add("Q1")
 		  
 		  sql = "SELECT count(*) as c FROM physics_tasking.plans " _
 		  + "WHERE YEAR(DATE(due_date)) = " + Str( PopupMenu_Year.RowTagAt( PopupMenu_Year.SelectedRowIndex)) + " " _
@@ -294,9 +292,8 @@ End
 		  
 		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
-		  If rs.Column("c").IntegerValue = 0 Then Return
+		  If rs.Column("c").IntegerValue > 0 Then RadioGroup_Quarters.Add("Q2")
 		  
-		  RadioGroup_Quarters.Add("Q2")
 		  
 		  
 		  sql = "SELECT count(*) as c FROM physics_tasking.plans " _
@@ -306,9 +303,8 @@ End
 		  
 		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
-		  If rs.Column("c").IntegerValue = 0 Then Return
+		  If rs.Column("c").IntegerValue > 0 Then RadioGroup_Quarters.Add("Q3")
 		  
-		  RadioGroup_Quarters.Add("Q3")
 		  
 		  
 		  sql = "SELECT count(*) as c FROM physics_tasking.plans " _
@@ -318,9 +314,10 @@ End
 		  
 		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
-		  If rs.Column("c").IntegerValue = 0 Then Return
+		  If rs.Column("c").IntegerValue > 0 Then RadioGroup_Quarters.Add("Q4")
 		  
-		  RadioGroup_Quarters.Add("Q4")
+		  
+		  RadioGroup_Quarters.SelectedIndex = RadioGroup_Quarters.Count - 1
 		End Sub
 	#tag EndMethod
 
@@ -535,9 +532,9 @@ End
 		  
 		  If App.last_database_update <> Latest_UPDATE Then
 		    
-		    Plans_ListBox.ReloadData
-		    Plans_Label.Text = "Plans = " + Plans_ListBox.DataSource.RowCount.ToString
-		    Latest_UPDATE = App.last_database_update
+		    'Plans_ListBox.ReloadData
+		    ''Plans_Label.Text = "Plans = " + Plans_ListBox.DataSource.RowCount.ToString
+		    'Latest_UPDATE = App.last_database_update
 		    
 		  End If
 		  
