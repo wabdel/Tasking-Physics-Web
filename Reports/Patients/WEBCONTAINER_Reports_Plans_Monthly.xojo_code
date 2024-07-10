@@ -89,7 +89,7 @@ Begin WebContainer WEBCONTAINER_Reports_Plans_Monthly Implements WebDataSource
       Enabled         =   True
       GridLineStyle   =   3
       HasBorder       =   True
-      HasHeader       =   False
+      HasHeader       =   True
       HeaderHeight    =   0
       Height          =   436
       HighlightSortedColumn=   True

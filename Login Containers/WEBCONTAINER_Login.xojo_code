@@ -15,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Login
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -32,7 +33,7 @@ Begin WebContainer WEBCONTAINER_Login
       Enabled         =   False
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   0
+      Indicator       =   1
       Left            =   190
       LockBottom      =   False
       LockedInPosition=   False
@@ -41,8 +42,11 @@ Begin WebContainer WEBCONTAINER_Login
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   127
       Visible         =   True
@@ -68,8 +72,10 @@ Begin WebContainer WEBCONTAINER_Login
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Text            =   "User :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -99,8 +105,10 @@ Begin WebContainer WEBCONTAINER_Login
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   2
+      TabStop         =   True
       Text            =   "Password :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -131,9 +139,11 @@ Begin WebContainer WEBCONTAINER_Login
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   3
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   1
       Tooltip         =   ""
@@ -162,9 +172,11 @@ Begin WebContainer WEBCONTAINER_Login
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   4
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   1
       Tooltip         =   ""
@@ -391,6 +403,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ControlCount"
 		Visible=false
