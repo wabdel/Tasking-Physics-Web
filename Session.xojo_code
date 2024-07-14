@@ -93,6 +93,26 @@ Inherits WebSession
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		COLOR_Button_Dark As Color = &c2E3136
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		COLOR_Button_Info As Color = &c00CAED
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		COLOR_Button_Light As Color = &cFAFAFA
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		COLOR_Button_Primary As Color = &c006EF8
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		COLOR_Button_Succes As Color = &c55966A
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		COLOR_Central_Background As Color = &c55555500
 	#tag EndProperty
 
@@ -432,6 +452,30 @@ Inherits WebSession
 			Group="Behavior"
 			InitialValue="True"
 			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_Button_Info"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c00CAED"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_Button_Primary"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c006EF8"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_Button_Succes"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c55966A"
+			Type="Color"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

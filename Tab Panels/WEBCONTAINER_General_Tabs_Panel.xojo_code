@@ -169,23 +169,15 @@ End
 		  For Each item As WEBCONTAINER_Tab In Tab_Container
 		    If item.Tab_Button.Caption <> button_caption Then
 		      
-		      item.Tab_Button.Indicator = WebUIControl.Indicators.Info
-		      
+		      item.Tab_Button.Style.BackgroundColor = Session.COLOR_Button_Info
+		      item.Tab_Button.Style.BorderColor = Session.COLOR_Button_Info
+		      item.Tab_Button.Style.ForegroundColor = Color.Black
 		    Else
 		      
-		      item.Tab_Button.Indicator = WebUIControl.Indicators.Primary
+		      item.Tab_Button.Style.BackgroundColor = Session.COLOR_Button_Primary
+		      Item.Tab_Button.Style.BorderColor = Session.COLOR_Button_Primary
+		      item.Tab_Button.Style.ForegroundColor = Color.White
 		      
-		      'Var s As WebContainer = New WEBCONTAINER_Due_Plans
-		      '
-		      's.EmbedWithin( MainWebPage, _
-		      'MainWebPage.General_Tabs_Panel_Container.Left + MainWebPage.General_Tabs_Panel_Container.Width, _
-		      'MainWebPage.Header_Container.Top + MainWebPage.Header_Container.Height, _
-		      's.Width, s.Height)
-		      'If MainWebPage.General_Tabs_Panel_Container <> Nil And  MainWebPage.Header_Container <> Nil Then
-		      '
-		      
-		      
-		      'End If
 		      
 		    End If
 		  Next item

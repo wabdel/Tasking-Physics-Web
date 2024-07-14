@@ -30,10 +30,10 @@ Begin WebContainer WEBCONTAINER_Login
       Caption         =   "Login"
       ControlID       =   ""
       Default         =   False
-      Enabled         =   False
+      Enabled         =   True
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   1
+      Indicator       =   7
       Left            =   190
       LockBottom      =   False
       LockedInPosition=   False
@@ -203,13 +203,17 @@ End
 		  
 		  If User_TextField.Text <> "" And Password_TextField.Text <> "" Then
 		    
-		    Login_Button.Indicator = WebUIControl.Indicators.Primary
+		    Login_Button.Style.BackgroundColor = Session.COLOR_Button_Primary
+		    Login_Button.Style.BorderColor = Session.COLOR_Button_Primary
+		    Login_Button.Style.ForegroundColor = Color.White
 		    Login_Button.Enabled = True
 		    Login_Button.Style.Value("box-shadow") = "0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)"
 		    
 		  Else
 		    
-		    Login_Button.Indicator = WebUIControl.Indicators.Light
+		    Login_Button.Style.BackgroundColor = Session.COLOR_Button_Info
+		    Login_Button.Style.BorderColor = Session.COLOR_Button_Info
+		    Login_Button.Style.ForegroundColor = Color.Black
 		    Login_Button.Enabled = False
 		    Login_Button.Style.Value("box-shadow") = "none"
 		    
