@@ -63,7 +63,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Session.COLOR_Central_Background
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background
 		  
 		  LOAD_TabPanel_Container( 0)
 		End Sub

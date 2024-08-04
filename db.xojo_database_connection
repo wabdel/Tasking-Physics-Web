@@ -1,0 +1,44 @@
+#tag DatabaseConnection 1
+AutoConnect = True
+Stage = 0
+Begin ConnectionSet
+	Name = "Development"
+	Host = "127.0.0.1"
+	UserName = "physics_tasking_user"
+	Password = "physics_tasking_user"
+	DatabaseName = "physics_tasking"
+	Port = "3306"
+	Timeout = "15"
+	AutoConnect = "True"
+End
+Begin ConnectionSet
+	Name = "Alpha"
+	Host = "127.0.0.1"
+	UserName = ""
+	Password = ""
+	DatabaseName = ""
+	Port = "3306"
+	Timeout = "15"
+	AutoConnect = "True"
+End
+Begin ConnectionSet
+	Name = "Beta"
+	Host = "127.0.0.1"
+	UserName = ""
+	Password = ""
+	DatabaseName = ""
+	Port = "3306"
+	Timeout = "15"
+	AutoConnect = "True"
+End
+Begin ConnectionSet
+	Name = "Final"
+	Host = "127.0.0.1"
+	UserName = ""
+	Password = ""
+	DatabaseName = ""
+	Port = "3306"
+	Timeout = "15"
+	AutoConnect = "True"
+End
+#tag EndDatabaseConnection

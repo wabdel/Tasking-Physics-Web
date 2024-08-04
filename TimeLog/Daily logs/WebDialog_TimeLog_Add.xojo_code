@@ -1,6 +1,7 @@
 #tag WebPage
 Begin WebDialog WebDialog_TimeLog_Add
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   400
@@ -15,13 +16,14 @@ Begin WebDialog WebDialog_TimeLog_Add
    LockRight       =   False
    LockTop         =   False
    LockVertical    =   False
+   PanelIndex      =   0
+   Position        =   0
    TabIndex        =   0
    Top             =   0
    Visible         =   True
    Width           =   600
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Cancel_Button
       AllowAutoDisable=   False
@@ -41,8 +43,11 @@ Begin WebDialog WebDialog_TimeLog_Add
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   342
       Visible         =   True
@@ -67,8 +72,11 @@ Begin WebDialog WebDialog_TimeLog_Add
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   342
       Visible         =   True
@@ -94,8 +102,10 @@ Begin WebDialog WebDialog_TimeLog_Add
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   2
+      TabStop         =   True
       Text            =   "Add timelog entry"
       TextAlignment   =   2
       TextColor       =   &cFF7E7900
@@ -124,8 +134,10 @@ Begin WebDialog WebDialog_TimeLog_Add
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   3
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   93
       Visible         =   True
@@ -151,8 +163,10 @@ Begin WebDialog WebDialog_TimeLog_Add
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   4
+      TabStop         =   True
       Text            =   "Date:"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -165,6 +179,7 @@ Begin WebDialog WebDialog_TimeLog_Add
    End
    Begin WebRectangle Rectangle1
       BackgroundColor =   &cD6D6D680
+      ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       HasBackgroundColor=   True
@@ -181,8 +196,10 @@ Begin WebDialog WebDialog_TimeLog_Add
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   5
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   139
       Visible         =   True
@@ -209,6 +226,7 @@ Begin WebDialog WebDialog_TimeLog_Add
          LockTop         =   True
          LockVertical    =   False
          Multiline       =   False
+         PanelIndex      =   0
          Parent          =   "Rectangle1"
          Scope           =   2
          TabIndex        =   6
@@ -240,6 +258,7 @@ Begin WebDialog WebDialog_TimeLog_Add
          LockVertical    =   False
          MaximumValue    =   96
          MinimumValue    =   0
+         PanelIndex      =   0
          Parent          =   "Rectangle1"
          Scope           =   2
          StepValue       =   1
@@ -272,6 +291,7 @@ Begin WebDialog WebDialog_TimeLog_Add
          LockTop         =   True
          LockVertical    =   False
          Multiline       =   False
+         PanelIndex      =   0
          Parent          =   "Rectangle1"
          Scope           =   2
          TabIndex        =   10
@@ -305,13 +325,7 @@ End
 	#tag Event
 		Sub Pressed()
 		  
-		  Var db As New MySQLCommunityServer
 		  
-		  db.Host = Physics_Tasking.DB_Host
-		  db.Port = Physics_Tasking.DB_Port
-		  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		  db.UserName = Physics_Tasking.DB_UserName
-		  db.Password = Physics_Tasking.DB_Password
 		  
 		  Try
 		    
@@ -404,6 +418,34 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Position"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="WebDialog.Positions"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Top"
+			"1 - Center"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

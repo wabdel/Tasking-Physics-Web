@@ -343,13 +343,7 @@ Protected Module Physics_Tasking
 
 	#tag Method, Flags = &h0
 		Sub DB_EXECUTE_Statement(sql as String)
-		  Var db As New MySQLCommunityServer
 		  
-		  db.Host = Physics_Tasking.DB_Host
-		  db.Port = Physics_Tasking.DB_Port
-		  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		  db.UserName = Physics_Tasking.DB_UserName
-		  db.Password = Physics_Tasking.DB_Password
 		  
 		  
 		  If Not sql.EndsWith(";") Then sql = sql + ";"
@@ -395,13 +389,7 @@ Protected Module Physics_Tasking
 
 	#tag Method, Flags = &h0
 		Function DB_SELECT_Statement(sql as String) As RowSet
-		  Var db As New MySQLCommunityServer
 		  
-		  db.Host = Physics_Tasking.DB_Host
-		  db.Port = Physics_Tasking.DB_Port
-		  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		  db.UserName = Physics_Tasking.DB_UserName
-		  db.Password = Physics_Tasking.DB_Password
 		  
 		  
 		  If Not sql.EndsWith(";") Then sql = sql + ";"
@@ -727,12 +715,6 @@ Protected Module Physics_Tasking
 	#tag Method, Flags = &h0
 		Function RETURN_Login_User_ID(login as String, password as String) As Integer
 		  
-		  Var db As New MySQLCommunityServer
-		  db.Host = Physics_Tasking.DB_Host
-		  db.Port = Physics_Tasking.DB_Port
-		  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		  db.UserName = Physics_Tasking.DB_UserName
-		  db.Password = Physics_Tasking.DB_Password
 		  
 		  
 		  Try
@@ -943,9 +925,13 @@ Protected Module Physics_Tasking
 		Sub UPDATE_Database_Tables()
 		  
 		  UPDATE_General_Information
+		  UPDATE_Vacations
 		  UPDATE_Groups
 		  UPDATE_Users
 		  UPDATE_Machines
+		  UPDATE_Vacations
+		  UPDATE_On_Call
+		  
 		  
 		  UPDATE_Task_Groups
 		  UPDATE_Task_Types
@@ -1060,6 +1046,27 @@ Protected Module Physics_Tasking
 		  +"name VARCHAR(50) NOT NULL UNIQUE, " _
 		  +"PRIMARY KEY (machine_id));"
 		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub UPDATE_On_Call()
+		  // Create General Information table
+		  
+		  
+		  Var sql As String = "CREATE TABLE IF NOT EXISTS physics_tasking.on_calls (" _
+		  +"on_call_date DATE NOT NULL, " _
+		  +"user_id INTEGER NOT NULL, "_
+		  +"PRIMARY KEY (on_call_date), " _
+		  +"FOREIGN KEY (user_id) REFERENCES users(user_id) " _
+		  +"ON UPDATE NO ACTION ON DELETE NO ACTION);"
+		  
+		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  
+		  
+		  
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -1560,13 +1567,7 @@ Protected Module Physics_Tasking
 		  
 		  If rs.RowCount = 0 Then
 		    
-		    Var db As New MySQLCommunityServer
 		    
-		    db.Host = Physics_Tasking.DB_Host
-		    db.Port = Physics_Tasking.DB_Port
-		    db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		    db.UserName = Physics_Tasking.DB_UserName
-		    db.Password = Physics_Tasking.DB_Password
 		    
 		    Var row As New DatabaseRow
 		    
@@ -1610,6 +1611,25 @@ Protected Module Physics_Tasking
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Sub UPDATE_Vacations()
+		  // Create General Information table
+		  
+		  
+		  Var sql As String = "CREATE TABLE IF NOT EXISTS physics_tasking.vacations (" _
+		  +"vacation_date DATE NOT NULL, " _
+		  +"users_list VARCHAR(100) NOT NULL, "_
+		  +"PRIMARY KEY (vacation_date));"
+		  
+		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  
+		  
+		  
+		  
+		  
+		End Sub
+	#tag EndMethod
+
 
 	#tag Note, Name = Create User and Database
 		
@@ -1635,30 +1655,6 @@ Protected Module Physics_Tasking
 
 
 	#tag Property, Flags = &h0
-		DB_DatabaseName As String = "physics_tasking"
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		DB_Host As String = "127.0.0.1"
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		db_old As MySQLCommunityServer
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		DB_Password As String = "physics_tasking_user"
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		DB_Port As Integer = 3306
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		DB_UserName As String = "physics_tasking_user"
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
 		Groups() As Physics_Tasking.CLASS_Group_Record
 	#tag EndProperty
 
@@ -1673,12 +1669,7 @@ Protected Module Physics_Tasking
 			  misDatabase_Online = False
 			  
 			  
-			  Var db As New MySQLCommunityServer
-			  db.Host = Physics_Tasking.DB_Host
-			  db.Port = Physics_Tasking.DB_Port
-			  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-			  db.Username = Physics_Tasking.DB_UserName
-			  db.Password = Physics_Tasking.DB_Password
+			  
 			  
 			  If db.Connect Then misDatabase_Online = True
 			  
@@ -1784,46 +1775,6 @@ Protected Module Physics_Tasking
 			InitialValue=""
 			Type="Boolean"
 			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="DB_DatabaseName"
-			Visible=false
-			Group="Behavior"
-			InitialValue="physics_tasking"
-			Type="String"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="DB_Host"
-			Visible=false
-			Group="Behavior"
-			InitialValue="127.0.0.1"
-			Type="String"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="DB_Password"
-			Visible=false
-			Group="Behavior"
-			InitialValue="physics_tasking_user"
-			Type="String"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="DB_Port"
-			Visible=false
-			Group="Behavior"
-			InitialValue="3306"
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="DB_UserName"
-			Visible=false
-			Group="Behavior"
-			InitialValue="physics_tasking_user"
-			Type="String"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Module

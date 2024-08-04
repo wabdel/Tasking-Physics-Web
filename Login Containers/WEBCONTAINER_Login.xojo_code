@@ -191,7 +191,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Self.Style.BackgroundColor = Session.COLOR_Background
+		  Self.Style.BackgroundColor = Design_Palette.COLOR_Background
 		End Sub
 	#tag EndEvent
 
@@ -203,7 +203,7 @@ End
 		  
 		  If User_TextField.Text <> "" And Password_TextField.Text <> "" Then
 		    
-		    'Login_Button.Style.BackgroundColor = Session.COLOR_Button_Primary
+		    'Login_Button.Style.BackgroundColor = Design_Palette.COLOR_Button_Primary
 		    'Login_Button.Style.BorderColor = Session.COLOR_Button_Primary
 		    'Login_Button.Style.ForegroundColor = Color.White
 		    Login_Button.Indicator = WebUIControl.Indicators.Primary
@@ -212,7 +212,7 @@ End
 		    
 		  Else
 		    
-		    'Login_Button.Style.BackgroundColor = Session.COLOR_Button_Info
+		    'Login_Button.Style.BackgroundColor = Design_Palette.COLOR_Button_Info
 		    'Login_Button.Style.BorderColor = Session.COLOR_Button_Info
 		    'Login_Button.Style.ForegroundColor = Color.Black
 		    Login_Button.Indicator = WebUIControl.Indicators.Info
@@ -233,13 +233,7 @@ End
 #tag Events Login_Button
 	#tag Event
 		Sub Pressed()
-		  Var db As New MySQLCommunityServer
 		  
-		  db.Host = Physics_Tasking.DB_Host
-		  db.Port = Physics_Tasking.DB_Port
-		  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		  db.UserName = Physics_Tasking.DB_UserName
-		  db.Password = Physics_Tasking.DB_Password
 		  
 		  Try
 		    
@@ -383,14 +377,14 @@ End
 #tag Events User_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Session.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Password_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Session.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		End Sub
 	#tag EndEvent
 #tag EndEvents

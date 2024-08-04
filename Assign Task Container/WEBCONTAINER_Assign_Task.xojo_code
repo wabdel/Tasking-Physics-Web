@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Assign_Task
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   700
@@ -14,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Assign_Task
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -21,7 +23,6 @@ Begin WebContainer WEBCONTAINER_Assign_Task
    Width           =   1200
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebPopupMenu Task_Group_PopupMenu
       ControlID       =   ""
@@ -40,11 +41,13 @@ Begin WebContainer WEBCONTAINER_Assign_Task
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   37
       Visible         =   True
@@ -70,8 +73,10 @@ Begin WebContainer WEBCONTAINER_Assign_Task
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Text            =   "Task Group:"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -86,14 +91,19 @@ Begin WebContainer WEBCONTAINER_Assign_Task
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   False
+      HeaderHeight    =   0
       Height          =   360
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   ""
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   20
       LockBottom      =   False
@@ -104,6 +114,7 @@ Begin WebContainer WEBCONTAINER_Assign_Task
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -112,6 +123,7 @@ Begin WebContainer WEBCONTAINER_Assign_Task
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   2
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   125
       Visible         =   True
@@ -136,8 +148,11 @@ Begin WebContainer WEBCONTAINER_Assign_Task
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   3
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   634
       Visible         =   True
@@ -160,8 +175,10 @@ Begin WebContainer WEBCONTAINER_Assign_Task
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   4
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   83
       Value           =   False
@@ -188,8 +205,10 @@ Begin WebContainer WEBCONTAINER_Assign_Task
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   5
+      TabStop         =   True
       Text            =   "Machine :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -217,11 +236,13 @@ Begin WebContainer WEBCONTAINER_Assign_Task
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   6
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   511
       Visible         =   True
@@ -247,8 +268,10 @@ Begin WebContainer WEBCONTAINER_Assign_Task
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   7
+      TabStop         =   True
       Text            =   "Assign to :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -276,11 +299,13 @@ Begin WebContainer WEBCONTAINER_Assign_Task
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   8
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   567
       Visible         =   True
@@ -305,8 +330,10 @@ Begin WebContainer WEBCONTAINER_Assign_Task
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   9
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   511
       Visible         =   True
@@ -332,8 +359,10 @@ Begin WebContainer WEBCONTAINER_Assign_Task
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   10
+      TabStop         =   True
       Text            =   "Due Date :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -346,6 +375,7 @@ Begin WebContainer WEBCONTAINER_Assign_Task
    End
    Begin WebDialog_Assign_Tasks Assign_Tasks_WebDialog
       Assign          =   False
+      ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   400
@@ -361,8 +391,11 @@ Begin WebContainer WEBCONTAINER_Assign_Task
       LockRight       =   False
       LockTop         =   False
       LockVertical    =   False
+      PanelIndex      =   0
+      Position        =   0
       Scope           =   2
       TabIndex        =   11
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   0
       Visible         =   True
@@ -377,7 +410,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Style.BackgroundColor = Session.COLOR_Central_Background
+		  Style.BackgroundColor = Design_Palette.COLOR_Central_Background
 		  
 		End Sub
 	#tag EndEvent
@@ -385,13 +418,7 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub ASSIGN_Scheduled_Tasks()
-		  Var db As New MySQLCommunityServer
 		  
-		  db.Host = Physics_Tasking.DB_Host
-		  db.Port = Physics_Tasking.DB_Port
-		  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		  db.UserName = Physics_Tasking.DB_UserName
-		  db.Password = Physics_Tasking.DB_Password
 		  
 		  Try
 		    
@@ -589,7 +616,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub SelectionChanged(item as WebMenuItem)
+		Sub SelectionChanged(item As WebMenuItem)
 		  'Assign_Tasks_ListBox.DataSource = Self
 		  'Assign_Tasks_ListBox.ReloadData
 		  
@@ -618,7 +645,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub CustomCellAction(row as Integer, column as Integer, identifier as string, value as variant)
+		Sub CustomCellAction(row As Integer, column As Integer, identifier As String, value As Variant)
 		  If identifier = "GroupButtonPressed" Then
 		    
 		    Var is_selected As Boolean = Me.CellTagAt( row, column)
@@ -791,7 +818,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub SelectionChanged(item as WebMenuItem)
+		Sub SelectionChanged(item As WebMenuItem)
 		  ENABLE_Assign_Button
 		End Sub
 	#tag EndEvent
@@ -830,7 +857,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub SelectionChanged(item as WebMenuItem)
+		Sub SelectionChanged(item As WebMenuItem)
 		  ENABLE_Assign_Button
 		End Sub
 	#tag EndEvent
@@ -844,7 +871,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub DateChanged()
+		Sub DateChanged(selectedDate As DateTime)
 		  ENABLE_Assign_Button
 		End Sub
 	#tag EndEvent
@@ -876,6 +903,22 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

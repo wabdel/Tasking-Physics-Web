@@ -30,7 +30,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Session.COLOR_Background
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  'Me.Style.AddTransition("opacity", 2, WebStyle.SpeedPatterns.EaseInOut, 0)
 		  'Me.Style.Value("opacity") = "0%"
 		  
@@ -51,21 +51,23 @@ End
 		  
 		  Tab_Container.Append( New WEBCONTAINER_Tab)
 		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
-		  "Database Management"
+		  "Database"
 		  
 		  Tab_Container.Append( New WEBCONTAINER_Tab)
 		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
-		  "Plans Management"
+		  "Plans"
 		  
 		  Tab_Container.Append( New WEBCONTAINER_Tab)
 		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
-		  "Assigned Tasks Management"
+		  "Assigned Tasks"
 		  
 		  Tab_Container.Append( New WEBCONTAINER_Tab)
 		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
-		  "Patients Management"
+		  "Patients"
 		  
-		  
+		  Tab_Container.Append( New WEBCONTAINER_Tab)
+		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
+		  "On-Calls"
 		  
 		End Sub
 	#tag EndMethod
@@ -169,13 +171,13 @@ End
 		  For Each item As WEBCONTAINER_Tab In Tab_Container
 		    If item.Tab_Button.Caption <> button_caption Then
 		      
-		      'item.Tab_Button.Style.BackgroundColor = Session.COLOR_Button_Info
+		      'item.Tab_Button.Style.BackgroundColor = Design_Palette.COLOR_Button_Info
 		      'item.Tab_Button.Style.BorderColor = Session.COLOR_Button_Info
 		      'item.Tab_Button.Style.ForegroundColor = Color.Black
 		      Item.Tab_Button.Indicator = WebUIControl.Indicators.Info
 		    Else
 		      
-		      'item.Tab_Button.Style.BackgroundColor = Session.COLOR_Button_Primary
+		      'item.Tab_Button.Style.BackgroundColor = Design_Palette.COLOR_Button_Primary
 		      'Item.Tab_Button.Style.BorderColor = Session.COLOR_Button_Primary
 		      'item.Tab_Button.Style.ForegroundColor = Color.White
 		      Item.Tab_Button.Indicator = WebUIControl.Indicators.Primary
@@ -193,8 +195,17 @@ End
 		  Select Case button_caption
 		  Case "Calendar"
 		    
-		    
 		    Central_Container = New WEBCONTAINER_Activity_Calendar
+		    Central_Container.LockLeft = True
+		    Central_Container.LockTop = True
+		    Central_Container.EmbedWithin( MainWebPage, _
+		    MainWebPage.General_Tabs_Panel_Container.Width, _
+		    MainWebPage.Header_Container.Top + MainWebPage.Header_Container.Height, _
+		    Central_Container.Width, Central_Container.Height)
+		  Case "On-Calls"
+		    
+		    
+		    Central_Container = New WEBCONTAINER_On_Call_Calendar
 		    Central_Container.LockLeft = True
 		    Central_Container.LockTop = True
 		    Central_Container.EmbedWithin( MainWebPage, _
@@ -225,7 +236,7 @@ End
 		    MainWebPage.Header_Container.Top + MainWebPage.Header_Container.Height, _
 		    Central_Container.Width, Central_Container.Height)
 		    
-		  Case "Database Management"
+		  Case "Database"
 		    
 		    
 		    Central_Container = New WEBCONTAINER_Database_Management
@@ -236,7 +247,7 @@ End
 		    MainWebPage.Header_Container.Top + MainWebPage.Header_Container.Height, _
 		    Central_Container.Width, Central_Container.Height)
 		    
-		  Case "Plans Management"
+		  Case "Plans"
 		    
 		    
 		    Central_Container = New WEBCONTAINER_Plans_Management
@@ -247,7 +258,7 @@ End
 		    MainWebPage.Header_Container.Top + MainWebPage.Header_Container.Height, _
 		    Central_Container.Width, Central_Container.Height)
 		    
-		  Case "Assigned Tasks Management"
+		  Case "Assigned Tasks"
 		    
 		    
 		    Central_Container = New WEBCONTAINER_Assigned_Tasks_Management
@@ -258,7 +269,7 @@ End
 		    MainWebPage.Header_Container.Top + MainWebPage.Header_Container.Height, _
 		    Central_Container.Width, Central_Container.Height)
 		    
-		  Case "Patients Management"
+		  Case "Patients"
 		    
 		    
 		    Central_Container = New WEBCONTAINER_Patients_Management

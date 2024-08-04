@@ -1,6 +1,7 @@
 #tag WebPage
 Begin WebDialog Modify_Assigned_Task_WebDialog
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   494
@@ -15,13 +16,14 @@ Begin WebDialog Modify_Assigned_Task_WebDialog
    LockRight       =   False
    LockTop         =   False
    LockVertical    =   False
+   PanelIndex      =   0
+   Position        =   0
    TabIndex        =   0
    Top             =   0
    Visible         =   True
    Width           =   876
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Cancel_Button
       AllowAutoDisable=   False
@@ -41,8 +43,11 @@ Begin WebDialog Modify_Assigned_Task_WebDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   436
       Visible         =   True
@@ -67,8 +72,11 @@ Begin WebDialog Modify_Assigned_Task_WebDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   2
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   436
       Visible         =   True
@@ -93,8 +101,10 @@ Begin WebDialog Modify_Assigned_Task_WebDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   4
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   260
       Visible         =   True
@@ -120,8 +130,10 @@ Begin WebDialog Modify_Assigned_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   7
+      TabStop         =   True
       Text            =   "Due Date :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -151,8 +163,10 @@ Begin WebDialog Modify_Assigned_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   9
+      TabStop         =   True
       Text            =   "Machine :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -180,11 +194,13 @@ Begin WebDialog Modify_Assigned_Task_WebDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   10
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   132
       Visible         =   True
@@ -208,11 +224,13 @@ Begin WebDialog Modify_Assigned_Task_WebDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   11
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   86
       Visible         =   True
@@ -238,8 +256,10 @@ Begin WebDialog Modify_Assigned_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   12
+      TabStop         =   True
       Text            =   "Task :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -269,8 +289,10 @@ Begin WebDialog Modify_Assigned_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   13
+      TabStop         =   True
       Text            =   "Modify assigned task"
       TextAlignment   =   2
       TextColor       =   &cFF7E7900
@@ -300,8 +322,10 @@ Begin WebDialog Modify_Assigned_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   14
+      TabStop         =   True
       Text            =   "Planner :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -329,11 +353,13 @@ Begin WebDialog Modify_Assigned_Task_WebDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   15
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   178
       Visible         =   True
@@ -358,8 +384,11 @@ Begin WebDialog Modify_Assigned_Task_WebDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   19
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   436
       Visible         =   True
@@ -380,6 +409,7 @@ Begin WebDialog Modify_Assigned_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Message         =   ""
+      PanelIndex      =   0
       Scope           =   0
       Title           =   ""
       Tooltip         =   ""
@@ -441,13 +471,7 @@ End
 	#tag Event
 		Sub Pressed()
 		  
-		  Var db As New MySQLCommunityServer
 		  
-		  db.Host = Physics_Tasking.DB_Host
-		  db.Port = Physics_Tasking.DB_Port
-		  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		  db.UserName = Physics_Tasking.DB_UserName
-		  db.Password = Physics_Tasking.DB_Password
 		  
 		  
 		  Try
@@ -616,7 +640,7 @@ End
 #tag EndEvents
 #tag Events dialog
 	#tag Event
-		Sub ButtonPressed(button as WebMessageDialogButton)
+		Sub ButtonPressed(button As WebMessageDialogButton)
 		  
 		  Select Case button
 		  Case Me.ActionButton 
@@ -638,6 +662,34 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Position"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="WebDialog.Positions"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Top"
+			"1 - Center"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

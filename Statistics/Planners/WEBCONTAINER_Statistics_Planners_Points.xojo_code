@@ -15,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Planners_Points
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -27,8 +28,12 @@ Begin WebContainer WEBCONTAINER_Statistics_Planners_Points
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   False
+      HeaderHeight    =   0
       Height          =   506
       HighlightSortedColumn=   True
       Index           =   -2147483648
@@ -46,6 +51,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Planners_Points
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -74,6 +80,9 @@ Begin WebContainer WEBCONTAINER_Statistics_Planners_Points
       Height          =   367
       Index           =   -2147483648
       Indicator       =   ""
+      IsGridVisible   =   False
+      IsXAxisVisible  =   False
+      IsYAxisVisible  =   False
       LabelCount      =   0
       LabelLastIndex  =   0
       Left            =   690
@@ -88,6 +97,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Planners_Points
       LockTop         =   True
       LockVertical    =   False
       Mode            =   0
+      PanelIndex      =   0
       PopoverBackgroundColor=   &c000000
       Scope           =   2
       TabIndex        =   1
@@ -105,6 +115,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Planners_Points
    End
    Begin WebThread Populate_Chart_Thread
       DebugIdentifier =   ""
+      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Priority        =   5
@@ -119,7 +130,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Session.COLOR_Central_Background2
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background2
 		  
 		  POPULATE_Planners
 		  Populate_Chart_Thread.Start
@@ -350,6 +361,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ControlCount"
 		Visible=false

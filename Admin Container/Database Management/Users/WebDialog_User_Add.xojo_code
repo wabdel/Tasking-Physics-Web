@@ -1,6 +1,7 @@
 #tag WebPage
 Begin WebDialog WebDialog_User_Add
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   696
@@ -15,6 +16,8 @@ Begin WebDialog WebDialog_User_Add
    LockRight       =   False
    LockTop         =   False
    LockVertical    =   False
+   PanelIndex      =   0
+   Position        =   0
    TabIndex        =   0
    Top             =   0
    Visible         =   True
@@ -41,8 +44,10 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   1
+      TabStop         =   True
       Text            =   "Login :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -72,8 +77,10 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   2
+      TabStop         =   True
       Text            =   "First Name :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -103,8 +110,10 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   3
+      TabStop         =   True
       Text            =   "Family Name :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -134,8 +143,10 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   4
+      TabStop         =   True
       Text            =   "Initials :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -165,8 +176,10 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   6
+      TabStop         =   True
       Text            =   "Mobile :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -196,8 +209,10 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   7
+      TabStop         =   True
       Text            =   "Email :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -227,8 +242,10 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   8
+      TabStop         =   True
       Text            =   "Extension :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -258,8 +275,10 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   5
+      TabStop         =   True
       Text            =   "Hospital ID :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -290,9 +309,11 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   0
       TabIndex        =   9
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -321,9 +342,11 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   0
       TabIndex        =   10
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -352,9 +375,11 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   0
       TabIndex        =   11
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -383,9 +408,11 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   0
       TabIndex        =   12
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -414,9 +441,11 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   0
       TabIndex        =   13
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -445,9 +474,11 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   0
       TabIndex        =   14
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -476,9 +507,11 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   0
       TabIndex        =   15
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -507,9 +540,11 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   0
       TabIndex        =   16
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -536,8 +571,11 @@ Begin WebDialog WebDialog_User_Add
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   18
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   590
       Visible         =   True
@@ -562,8 +600,11 @@ Begin WebDialog WebDialog_User_Add
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   17
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   590
       Visible         =   True
@@ -589,8 +630,10 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   0
+      TabStop         =   True
       Text            =   "Add User"
       TextAlignment   =   2
       TextColor       =   &cFF7E7900
@@ -620,8 +663,10 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   19
+      TabStop         =   True
       Text            =   "Untitled"
       TextAlignment   =   0
       TextColor       =   &cFF260000
@@ -651,8 +696,10 @@ Begin WebDialog WebDialog_User_Add
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   20
+      TabStop         =   True
       Text            =   "Group :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -680,11 +727,13 @@ Begin WebDialog WebDialog_User_Add
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   0
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   21
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   282
       Visible         =   True
@@ -804,13 +853,7 @@ End
 		  
 		  
 		  
-		  Var db As New MySQLCommunityServer
 		  
-		  db.Host = Physics_Tasking.DB_Host
-		  db.Port = Physics_Tasking.DB_Port
-		  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		  db.UserName = Physics_Tasking.DB_UserName
-		  db.Password = Physics_Tasking.DB_Password
 		  
 		  Try
 		    
@@ -887,12 +930,40 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub SelectionChanged(item as WebMenuItem)
+		Sub SelectionChanged(item As WebMenuItem)
 		  ENABLE_Add_Button
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Position"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="WebDialog.Positions"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Top"
+			"1 - Center"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

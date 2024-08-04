@@ -2,6 +2,7 @@
 Begin WebPage MainWebPage
    AllowTabOrderWrap=   True
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   False
    Height          =   1200
@@ -20,6 +21,7 @@ Begin WebPage MainWebPage
    LockVertical    =   False
    MinimumHeight   =   1200
    MinimumWidth    =   1600
+   PanelIndex      =   0
    TabIndex        =   0
    Title           =   "Tasking Physics"
    Top             =   0
@@ -35,7 +37,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Session.COLOR_Background
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  
 		  
 		  
@@ -51,7 +53,7 @@ End
 
 	#tag Event
 		Sub Shown()
-		  Me.Style.BackgroundColor = Session.COLOR_Background
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  
 		  
 		  
@@ -154,6 +156,22 @@ End
 #tag EndWindowCode
 
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

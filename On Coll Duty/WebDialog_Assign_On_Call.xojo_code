@@ -1,10 +1,10 @@
 #tag WebPage
-Begin WebDialog WebDialog_Group_Edit
+Begin WebDialog WebDialog_Assign_On_Call
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   225
+   Height          =   188
    Index           =   -2147483648
    Indicator       =   0
    LayoutDirection =   0
@@ -25,17 +25,16 @@ Begin WebDialog WebDialog_Group_Edit
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin WebLabel Group_Name_Label
-      Bold            =   False
+   Begin WebPopupMenu PopupMenu_Users_List
       ControlID       =   ""
       Enabled         =   True
-      FontName        =   ""
-      FontSize        =   0.0
       Height          =   38
       Index           =   -2147483648
       Indicator       =   0
-      Italic          =   False
-      Left            =   129
+      InitialValue    =   ""
+      LastAddedRowIndex=   0
+      LastRowIndex    =   0
+      Left            =   146
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -43,65 +42,59 @@ Begin WebDialog WebDialog_Group_Edit
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      Multiline       =   False
       PanelIndex      =   0
+      RowCount        =   0
       Scope           =   2
+      SelectedRowIndex=   0
+      SelectedRowText =   ""
       TabIndex        =   0
       TabStop         =   True
-      Text            =   "Group Name:"
-      TextAlignment   =   3
-      TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   83
-      Underline       =   False
+      Top             =   63
       Visible         =   True
-      Width           =   120
+      Width           =   365
       _mPanelIndex    =   -1
    End
-   Begin WebTextField Group_Name_TextField
-      AllowAutoComplete=   False
-      AllowSpellChecking=   False
-      Caption         =   ""
-      ControlID       =   ""
-      Enabled         =   True
-      FieldType       =   0
-      Height          =   38
-      Hint            =   ""
-      Index           =   -2147483648
-      Indicator       =   0
-      Left            =   265
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      MaximumCharactersAllowed=   0
-      PanelIndex      =   0
-      ReadOnly        =   False
-      Scope           =   2
-      TabIndex        =   1
-      TabStop         =   True
-      Text            =   ""
-      TextAlignment   =   0
-      Tooltip         =   ""
-      Top             =   83
-      Visible         =   True
-      Width           =   206
-      _mPanelIndex    =   -1
-   End
-   Begin WebButton Cancel_Button
+   Begin WebButton Button_Close
       AllowAutoDisable=   False
       Cancel          =   True
-      Caption         =   "Cancel"
+      Caption         =   "Close"
       ControlID       =   ""
       Default         =   False
       Enabled         =   True
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   0
+      Indicator       =   5
       Left            =   480
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
+      Scope           =   2
+      TabIndex        =   1
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   130
+      Visible         =   True
+      Width           =   100
+      _mPanelIndex    =   -1
+   End
+   Begin WebButton Button_Assign
+      AllowAutoDisable=   False
+      Cancel          =   False
+      Caption         =   "Assign"
+      ControlID       =   ""
+      Default         =   True
+      Enabled         =   False
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   2
+      Left            =   244
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -115,84 +108,22 @@ Begin WebDialog WebDialog_Group_Edit
       TabIndex        =   2
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   166
+      Top             =   130
       Visible         =   True
       Width           =   100
       _mPanelIndex    =   -1
    End
-   Begin WebButton Modify_Button
-      AllowAutoDisable=   False
-      Cancel          =   False
-      Caption         =   "Modify"
-      ControlID       =   ""
-      Default         =   True
-      Enabled         =   False
-      Height          =   38
-      Index           =   -2147483648
-      Indicator       =   7
-      Left            =   250
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Outlined        =   False
-      PanelIndex      =   0
-      Scope           =   2
-      TabIndex        =   3
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   166
-      Visible         =   True
-      Width           =   100
-      _mPanelIndex    =   -1
-   End
-   Begin WebLabel Title_Label
-      Bold            =   False
-      ControlID       =   ""
-      Enabled         =   True
-      FontName        =   ""
-      FontSize        =   24.0
-      Height          =   38
-      Index           =   -2147483648
-      Indicator       =   0
-      Italic          =   False
-      Left            =   52
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Multiline       =   False
-      PanelIndex      =   0
-      Scope           =   2
-      TabIndex        =   4
-      TabStop         =   True
-      Text            =   "Modify group"
-      TextAlignment   =   2
-      TextColor       =   &cFF7E7900
-      Tooltip         =   ""
-      Top             =   20
-      Underline       =   True
-      Visible         =   True
-      Width           =   478
-      _mPanelIndex    =   -1
-   End
-   Begin WebLabel Notes_Label
+   Begin WebLabel Label_Name
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
-      Height          =   29
+      Height          =   38
       Index           =   -2147483648
-      Indicator       =   0
+      Indicator       =   ""
       Italic          =   False
-      Left            =   207
+      Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -203,145 +134,103 @@ Begin WebDialog WebDialog_Group_Edit
       Multiline       =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   5
+      TabIndex        =   3
       TabStop         =   True
-      Text            =   "Notes"
-      TextAlignment   =   0
-      TextColor       =   &c00000000
+      Text            =   "On_Call:"
+      TextAlignment   =   3
+      TextColor       =   &c000000FF
       Tooltip         =   ""
-      Top             =   129
+      Top             =   63
       Underline       =   False
       Visible         =   True
-      Width           =   215
+      Width           =   100
       _mPanelIndex    =   -1
    End
 End
 #tag EndWebPage
 
 #tag WindowCode
-	#tag Method, Flags = &h0
-		Sub ENABLE_Modify_Button()
-		  Modify_Button.Indicator = WebUIControl.Indicators.Light
-		  Modify_Button.Enabled = False
-		  
-		  Notes_Label.Text = ""
-		  Notes_Label.TextColor = Color.Black
-		  
-		  If Group_Name_TextField.Text.IsEmpty Then Return
-		  
-		  Var sql As String = "SELECT category_id FROM physics_tasking.categories " _
-		  + "WHERE LOWER(name) = '" _
-		  + Group_Name_TextField.Text.Trim.Lowercase + "'"
-		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
-		  
-		  If rs.RowCount > 0 Then 
-		    
-		    Notes_Label.Text = "Group name exists in the data base!!!"
-		    Notes_Label.TextColor = Color.Red
-		    Return
-		    
-		  End If
-		  
-		  Modify_Button.Indicator = WebUIControl.Indicators.Primary
-		  Modify_Button.Enabled = True
-		End Sub
-	#tag EndMethod
-
-
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  Return mgroup_id
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mgroup_id = value
-			  
-			  Var sql As String = "SELECT * FROM categories " _
-			  + "WHERE category_id = " + mgroup_id.ToString + ";"
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
-			  
-			  
-			  Group_Name_TextField.Text = rs.Column("name").StringValue.Trim.Titlecase
-			  
-			  Modify_Button.Enabled = False
-			  Modify_Button.Indicator = WebUIControl.Indicators.Light
-			End Set
-		#tag EndSetter
-		group_id As Integer
-	#tag EndComputedProperty
-
-	#tag Property, Flags = &h21
-		Private mgroup_id As Integer
+	#tag Property, Flags = &h0
+		d As DateTime
 	#tag EndProperty
 
 
 #tag EndWindowCode
 
-#tag Events Group_Name_TextField
+#tag Events PopupMenu_Users_List
 	#tag Event
-		Sub TextChanged()
-		  ENABLE_Modify_Button
+		Sub SelectionChanged(item As WebMenuItem)
+		  If Me.SelectedRowIndex = -1 Then Return
+		  
+		  Me.Indicator = WebUIControl.Indicators.Success
+		  Button_Assign.Enabled = True
+		  Button_Assign.Indicator = WebUIControl.Indicators.Primary
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Shown()
+		  Var sql As String = "SELECT user_id, first_name, family_name FROM physics_tasking.users " _
+		  + "WHERE category_id IN (2,3) " _
+		  + "AND is_retired = FALSE " _
+		  + "ORDER BY first_name;"
+		  Var rs As Rowset = Physics_Tasking.DB_SELECT_Statement(sql)
+		  
+		  If rs.RowCount = 0 Then Return
+		  
+		  While Not rs.AfterLastRow
+		    
+		    
+		    Me.AddRow( rs.Column("first_name").StringValue.Trim.Titlecase + " " _
+		    +  rs.Column("family_name").StringValue.Trim.Uppercase)
+		    
+		    Me.RowTagAt( Me.LastAddedRowIndex) = rs.Column("user_id").IntegerValue
+		    
+		    rs.MoveToNextRow
+		    
+		  Wend
+		  
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Cancel_Button
+#tag Events Button_Close
 	#tag Event
 		Sub Pressed()
 		  Self.Close
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Modify_Button
+#tag Events Button_Assign
 	#tag Event
 		Sub Pressed()
+		  Var sql As String = "SELECT * FROM physics_tasking.on_calls " _
+		  + "WHERE on_call_date = '" + d.SQLDate + "';"
 		  
+		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
+		  If rs.RowCount = 0 Then
+		    
+		    Var row As New DatabaseRow
+		    
+		    row.Column("on_call_date").DateTimeValue = d
+		    row.Column("user_id").IntegerValue = PopupMenu_Users_List.RowTagAt( PopupMenu_Users_List.SelectedRowIndex)
+		    
+		    db.AddRow( "physics_tasking.on_calls", row)
+		    
+		    
+		  Else
+		    
+		    rs.EditRow
+		    rs.Column("user_id").IntegerValue = _
+		    PopupMenu_Users_List.RowTagAt( PopupMenu_Users_List.SelectedRowIndex)
+		    
+		    rs.SaveRow
+		    
+		  End If
 		  
-		  Try
-		    
-		    If db.Connect Then
-		      
-		      Var ps As  PreparedSQLStatement = _
-		      db.Prepare("UPDATE categories SET name = ? " _
-		      +"WHERE " _
-		      +"category_id = ?")
-		      
-		      ps.BindType(0, MySQLPreparedStatement.MYSQL_TYPE_STRING)
-		      ps.BindType(1, MySQLPreparedStatement.MYSQL_TYPE_LONG)
-		      
-		      
-		      
-		      
-		      ps.ExecuteSQL( _
-		      Group_Name_TextField.Text.Trim.Lowercase, _
-		      group_id )
-		      
-		      App.last_database_update = DateTime.Now
-		      
-		      
-		      
-		    End If
-		    
-		    Self.Close
-		    
-		  Catch de As DatabaseException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
-		    theDialog.Show
-		    
-		  Catch noe As NilObjectException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
-		    theDialog.Show
-		    
-		  End Try
+		  App.last_database_update = DateTime.Now
 		  
-		  
+		  Self.Close
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -351,34 +240,6 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Integer"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Position"
-		Visible=true
-		Group="Position"
-		InitialValue="0"
-		Type="WebDialog.Positions"
-		EditorType="Enum"
-		#tag EnumValues
-			"0 - Top"
-			"1 - Center"
-		#tag EndEnumValues
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="ControlCount"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Integer"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="_mPanelIndex"
-		Visible=false
-		Group="Behavior"
-		InitialValue="-1"
 		Type="Integer"
 		EditorType=""
 	#tag EndViewProperty
@@ -419,6 +280,34 @@ End
 		Visible=true
 		Group="Position"
 		InitialValue="0"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Position"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="WebDialog.Positions"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Top"
+			"1 - Center"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="_mPanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue="-1"
 		Type="Integer"
 		EditorType=""
 	#tag EndViewProperty
@@ -587,13 +476,5 @@ End
 			"2 - TopToBottom"
 			"3 - BottomToTop"
 		#tag EndEnumValues
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="group_id"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Integer"
-		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

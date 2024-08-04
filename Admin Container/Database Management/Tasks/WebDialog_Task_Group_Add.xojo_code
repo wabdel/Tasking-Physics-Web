@@ -1,6 +1,7 @@
 #tag WebPage
 Begin WebDialog WebDialog_Task_Group_Add
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   225
@@ -15,13 +16,14 @@ Begin WebDialog WebDialog_Task_Group_Add
    LockRight       =   False
    LockTop         =   False
    LockVertical    =   False
+   PanelIndex      =   0
+   Position        =   0
    TabIndex        =   0
    Top             =   0
    Visible         =   True
    Width           =   600
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebLabel Task_Group_Name_Label
       Bold            =   False
@@ -42,8 +44,10 @@ Begin WebDialog WebDialog_Task_Group_Add
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Text            =   "Name:"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -74,9 +78,11 @@ Begin WebDialog WebDialog_Task_Group_Add
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -103,8 +109,11 @@ Begin WebDialog WebDialog_Task_Group_Add
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   2
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   166
       Visible         =   True
@@ -129,8 +138,11 @@ Begin WebDialog WebDialog_Task_Group_Add
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   3
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   166
       Visible         =   True
@@ -156,8 +168,10 @@ Begin WebDialog WebDialog_Task_Group_Add
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   5
+      TabStop         =   True
       Text            =   "Add task group"
       TextAlignment   =   2
       TextColor       =   &cFF7E7900
@@ -187,8 +201,10 @@ Begin WebDialog WebDialog_Task_Group_Add
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   6
+      TabStop         =   True
       Text            =   "Notes"
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -254,13 +270,6 @@ End
 	#tag Event
 		Sub Pressed()
 		  
-		  Var db As New MySQLCommunityServer
-		  
-		  db.Host = Physics_Tasking.DB_Host
-		  db.Port = Physics_Tasking.DB_Port
-		  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		  db.UserName = Physics_Tasking.DB_UserName
-		  db.Password = Physics_Tasking.DB_Password
 		  
 		  Try
 		    
@@ -304,6 +313,34 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Position"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="WebDialog.Positions"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Top"
+			"1 - Center"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

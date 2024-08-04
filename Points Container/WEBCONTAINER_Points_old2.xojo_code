@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Points_old2
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   300
@@ -14,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Points_old2
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -26,14 +28,19 @@ Begin WebContainer WEBCONTAINER_Points_old2
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   True
+      HeaderHeight    =   0
       Height          =   214
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   20
       LockBottom      =   False
@@ -44,6 +51,7 @@ Begin WebContainer WEBCONTAINER_Points_old2
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -52,6 +60,7 @@ Begin WebContainer WEBCONTAINER_Points_old2
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -77,8 +86,10 @@ Begin WebContainer WEBCONTAINER_Points_old2
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Text            =   "Average points = 0.0"
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -95,6 +106,7 @@ Begin WebContainer WEBCONTAINER_Points_old2
       Index           =   -2147483648
       Location        =   0
       LockedInPosition=   False
+      PanelIndex      =   0
       Period          =   1000
       RunMode         =   2
       Scope           =   2
@@ -326,7 +338,7 @@ End
 #tag Events Points_Avg_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Session.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -344,6 +356,22 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

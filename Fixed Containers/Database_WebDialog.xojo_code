@@ -1,6 +1,7 @@
 #tag WebPage
 Begin WebDialog Database_WebDialog
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   400
@@ -15,13 +16,14 @@ Begin WebDialog Database_WebDialog
    LockRight       =   False
    LockTop         =   False
    LockVertical    =   False
+   PanelIndex      =   0
+   Position        =   0
    TabIndex        =   0
    Top             =   0
    Visible         =   True
    Width           =   600
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Close_Button
       AllowAutoDisable=   False
@@ -41,8 +43,11 @@ Begin WebDialog Database_WebDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   342
       Visible         =   True
@@ -68,8 +73,10 @@ Begin WebDialog Database_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   1
+      TabStop         =   True
       Text            =   "DB_Host ="
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -99,8 +106,10 @@ Begin WebDialog Database_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   2
+      TabStop         =   True
       Text            =   "Untitled"
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -127,12 +136,6 @@ End
 		  
 		  
 		  
-		  Var db As New MySQLCommunityServer
-		  db.Host = Physics_Tasking.DB_Host
-		  db.Port = Physics_Tasking.DB_Port
-		  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		  db.Username = Physics_Tasking.DB_UserName
-		  db.Password = Physics_Tasking.DB_Password
 		  
 		  
 		  
@@ -166,6 +169,34 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Position"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="WebDialog.Positions"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Top"
+			"1 - Center"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

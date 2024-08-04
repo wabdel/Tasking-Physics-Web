@@ -1,6 +1,7 @@
 #tag WebPage
 Begin WebDialog WebDialog_Reset_Password
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   274
@@ -15,6 +16,8 @@ Begin WebDialog WebDialog_Reset_Password
    LockRight       =   False
    LockTop         =   False
    LockVertical    =   False
+   PanelIndex      =   0
+   Position        =   0
    TabIndex        =   0
    Top             =   0
    Visible         =   True
@@ -40,8 +43,11 @@ Begin WebDialog WebDialog_Reset_Password
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   216
       Visible         =   True
@@ -66,8 +72,11 @@ Begin WebDialog WebDialog_Reset_Password
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   1
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   216
       Visible         =   True
@@ -94,9 +103,11 @@ Begin WebDialog WebDialog_Reset_Password
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   0
       TabIndex        =   2
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -125,9 +136,11 @@ Begin WebDialog WebDialog_Reset_Password
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   0
       TabIndex        =   3
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -155,8 +168,10 @@ Begin WebDialog WebDialog_Reset_Password
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   4
+      TabStop         =   True
       Text            =   "Confirm Password:"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -186,8 +201,10 @@ Begin WebDialog WebDialog_Reset_Password
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   5
+      TabStop         =   True
       Text            =   "Password:"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -217,8 +234,10 @@ Begin WebDialog WebDialog_Reset_Password
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   6
+      TabStop         =   True
       Text            =   "You need to set a new password."
       TextAlignment   =   2
       TextColor       =   &cFF7E7900
@@ -275,13 +294,6 @@ End
 	#tag Event
 		Sub Pressed()
 		  
-		  Var db As New MySQLCommunityServer
-		  
-		  db.Host = Physics_Tasking.DB_Host
-		  db.Port = Physics_Tasking.DB_Port
-		  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		  db.UserName = Physics_Tasking.DB_UserName
-		  db.Password = Physics_Tasking.DB_Password
 		  
 		  Try
 		    
@@ -357,6 +369,34 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Position"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="WebDialog.Positions"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Top"
+			"1 - Center"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

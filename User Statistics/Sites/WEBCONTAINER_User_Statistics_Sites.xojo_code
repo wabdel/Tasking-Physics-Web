@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_User_Statistics_Sites
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   600
@@ -14,6 +15,7 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Sites
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -21,7 +23,6 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Sites
    Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebRadioGroup Plot_Options_RadioGroup
       ControlID       =   ""
@@ -39,9 +40,11 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Sites
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   2
       SelectedIndex   =   0
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -50,15 +53,27 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Sites
       _mPanelIndex    =   -1
    End
    Begin WebChart Site_Statistics_WebChart
+      AllowPopover    =   True
+      AutoCalculateYAxis=   False
       ControlID       =   ""
       DatasetCount    =   0
+      DatasetLastIndex=   0
       Enabled         =   True
+      GridColor       =   &c000000AA
       HasAnimation    =   False
       HasLegend       =   False
       Height          =   492
       Index           =   -2147483648
       Indicator       =   0
+      IsGridVisible   =   False
+      IsXAxisVisible  =   False
+      IsYAxisVisible  =   False
+      LabelCount      =   0
+      LabelLastIndex  =   0
       Left            =   20
+      LegendColor     =   &c000000
+      LegendFontName  =   ""
+      LegendFontSize  =   0.0
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -67,9 +82,15 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Sites
       LockTop         =   True
       LockVertical    =   False
       Mode            =   0
+      PanelIndex      =   0
+      PopoverBackgroundColor=   &c000000
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Title           =   ""
+      TitleColor      =   &c000000
+      TitleFontName   =   ""
+      TitleFontSize   =   0.0
       Tooltip         =   ""
       Top             =   88
       Visible         =   True
@@ -203,13 +224,13 @@ End
 
 #tag Events Plot_Options_RadioGroup
 	#tag Event
-		Sub ValueChanged(button as WebRadioButton)
+		Sub ValueChanged(button As WebRadioButton)
 		  POPULATE_Chart
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Session.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -220,7 +241,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub OverrideOptions(Options as JSONItem)
+		Sub OverrideOptions(options As JSONItem)
 		  '//Format Title
 		  Var title As New JSONItem
 		  title.Value("display") = True
@@ -299,6 +320,22 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

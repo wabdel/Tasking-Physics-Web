@@ -1,6 +1,7 @@
 #tag WebPage
 Begin WebDialog Modify_Task_WebDialog
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   592
@@ -15,13 +16,14 @@ Begin WebDialog Modify_Task_WebDialog
    LockRight       =   False
    LockTop         =   False
    LockVertical    =   False
+   PanelIndex      =   0
+   Position        =   0
    TabIndex        =   0
    Top             =   0
    Visible         =   True
    Width           =   1195
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Cancel_Button
       AllowAutoDisable=   False
@@ -41,8 +43,11 @@ Begin WebDialog Modify_Task_WebDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   534
       Visible         =   True
@@ -66,11 +71,13 @@ Begin WebDialog Modify_Task_WebDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   1
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   118
       Visible         =   True
@@ -96,8 +103,10 @@ Begin WebDialog Modify_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   2
+      TabStop         =   True
       Text            =   "Task Group:"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -125,11 +134,13 @@ Begin WebDialog Modify_Task_WebDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   3
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   164
       Visible         =   True
@@ -155,8 +166,10 @@ Begin WebDialog Modify_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   4
+      TabStop         =   True
       Text            =   "Task Type:"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -185,8 +198,10 @@ Begin WebDialog Modify_Task_WebDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   5
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   227
       Visible         =   True
@@ -212,8 +227,10 @@ Begin WebDialog Modify_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   6
+      TabStop         =   True
       Text            =   "Date:"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -243,8 +260,10 @@ Begin WebDialog Modify_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   7
+      TabStop         =   True
       Text            =   "Multiplier:"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -275,9 +294,11 @@ Begin WebDialog Modify_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   8
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -305,8 +326,10 @@ Begin WebDialog Modify_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   9
+      TabStop         =   True
       Text            =   "Notes:"
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -336,9 +359,11 @@ Begin WebDialog Modify_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   10
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -365,8 +390,11 @@ Begin WebDialog Modify_Task_WebDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   11
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   534
       Visible         =   True
@@ -392,8 +420,10 @@ Begin WebDialog Modify_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   12
+      TabStop         =   True
       Text            =   "Modify task"
       TextAlignment   =   2
       TextColor       =   &cFF7E7900
@@ -423,8 +453,10 @@ Begin WebDialog Modify_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   13
+      TabStop         =   True
       Text            =   "Instructions:"
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -454,9 +486,11 @@ Begin WebDialog Modify_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   True
       Scope           =   2
       TabIndex        =   14
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -484,8 +518,10 @@ Begin WebDialog Modify_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   15
+      TabStop         =   True
       Text            =   "Weight:"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -516,9 +552,11 @@ Begin WebDialog Modify_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   16
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -546,8 +584,10 @@ Begin WebDialog Modify_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   17
+      TabStop         =   True
       Text            =   "Points:"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -578,9 +618,11 @@ Begin WebDialog Modify_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   18
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -607,8 +649,11 @@ Begin WebDialog Modify_Task_WebDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   19
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   534
       Visible         =   True
@@ -629,6 +674,7 @@ Begin WebDialog Modify_Task_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Message         =   ""
+      PanelIndex      =   0
       Scope           =   0
       Title           =   ""
       Tooltip         =   ""
@@ -739,7 +785,7 @@ End
 #tag EndEvents
 #tag Events Task_Groups_PopupMenu
 	#tag Event
-		Sub SelectionChanged(item as WebMenuItem)
+		Sub SelectionChanged(item As WebMenuItem)
 		  POPULATE_Task_Types_PopupMenu
 		End Sub
 	#tag EndEvent
@@ -764,7 +810,7 @@ End
 #tag EndEvents
 #tag Events Task_Types_PopupMenu
 	#tag Event
-		Sub SelectionChanged(item as WebMenuItem)
+		Sub SelectionChanged(item As WebMenuItem)
 		  If Me.SelectedRowIndex >= 0 Then
 		    
 		    Modify_Button.Enabled = True
@@ -781,7 +827,7 @@ End
 #tag EndEvents
 #tag Events Task_DatePicker
 	#tag Event
-		Sub DateChanged()
+		Sub DateChanged(selectedDate As DateTime)
 		  If Task_Types_PopupMenu.SelectedRowIndex >= 0 Then
 		    
 		    Modify_Button.Enabled = True
@@ -836,13 +882,7 @@ End
 #tag Events Modify_Button
 	#tag Event
 		Sub Pressed()
-		  Var db As New MySQLCommunityServer
 		  
-		  db.Host = Physics_Tasking.DB_Host
-		  db.Port = Physics_Tasking.DB_Port
-		  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		  db.UserName = Physics_Tasking.DB_UserName
-		  db.Password = Physics_Tasking.DB_Password
 		  
 		  Try
 		    
@@ -914,7 +954,7 @@ End
 #tag EndEvents
 #tag Events dialog
 	#tag Event
-		Sub ButtonPressed(button as WebMessageDialogButton)
+		Sub ButtonPressed(button As WebMessageDialogButton)
 		  
 		  Select Case button
 		  Case Me.ActionButton 
@@ -936,6 +976,34 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Position"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="WebDialog.Positions"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Top"
+			"1 - Center"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

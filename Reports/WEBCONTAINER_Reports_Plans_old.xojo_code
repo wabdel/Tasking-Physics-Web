@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Reports_Plans_old
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   600
@@ -14,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Reports_Plans_old
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -21,18 +23,29 @@ Begin WebContainer WEBCONTAINER_Reports_Plans_old
    Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebChart Plans_Chart
+      AllowPopover    =   True
+      AutoCalculateYAxis=   False
       ControlID       =   ""
       DatasetCount    =   0
+      DatasetLastIndex=   0
       Enabled         =   True
+      GridColor       =   &c000000AA
       HasAnimation    =   False
       HasLegend       =   False
       Height          =   560
       Index           =   -2147483648
       Indicator       =   0
+      IsGridVisible   =   False
+      IsXAxisVisible  =   False
+      IsYAxisVisible  =   False
+      LabelCount      =   0
+      LabelLastIndex  =   0
       Left            =   20
+      LegendColor     =   &c000000
+      LegendFontName  =   ""
+      LegendFontSize  =   0.0
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -41,9 +54,15 @@ Begin WebContainer WEBCONTAINER_Reports_Plans_old
       LockTop         =   True
       LockVertical    =   False
       Mode            =   1
+      PanelIndex      =   0
+      PopoverBackgroundColor=   &c000000
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Title           =   ""
+      TitleColor      =   &c000000
+      TitleFontName   =   ""
+      TitleFontSize   =   0.0
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -57,7 +76,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Session.COLOR_Central_Background2
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background2
 		  
 		  
 		  POPULATE_Plans_Chart
@@ -170,7 +189,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub OverrideOptions(Options as JSONItem)
+		Sub OverrideOptions(options As JSONItem)
 		  //Format Title
 		  Var title As New JSONItem
 		  title.Value("display") = True
@@ -253,6 +272,22 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

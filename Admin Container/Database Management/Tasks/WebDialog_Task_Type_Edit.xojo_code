@@ -16,6 +16,8 @@ Begin WebDialog WebDialog_Task_Type_Edit
    LockRight       =   False
    LockTop         =   False
    LockVertical    =   False
+   PanelIndex      =   0
+   Position        =   0
    TabIndex        =   0
    Top             =   0
    Visible         =   True
@@ -42,8 +44,10 @@ Begin WebDialog WebDialog_Task_Type_Edit
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Text            =   "Edit task type"
       TextAlignment   =   2
       TextColor       =   &cFF7E7900
@@ -72,8 +76,11 @@ Begin WebDialog WebDialog_Task_Type_Edit
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   442
       Visible         =   True
@@ -98,8 +105,11 @@ Begin WebDialog WebDialog_Task_Type_Edit
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   2
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   442
       Visible         =   True
@@ -125,8 +135,10 @@ Begin WebDialog WebDialog_Task_Type_Edit
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   3
+      TabStop         =   True
       Text            =   "Name:"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -157,9 +169,11 @@ Begin WebDialog WebDialog_Task_Type_Edit
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   4
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -187,9 +201,11 @@ Begin WebDialog WebDialog_Task_Type_Edit
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   5
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -217,8 +233,10 @@ Begin WebDialog WebDialog_Task_Type_Edit
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   6
+      TabStop         =   True
       Text            =   "Instructions:"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -248,8 +266,10 @@ Begin WebDialog WebDialog_Task_Type_Edit
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   7
+      TabStop         =   True
       Text            =   "Points:"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -280,9 +300,11 @@ Begin WebDialog WebDialog_Task_Type_Edit
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   8
+      TabStop         =   True
       Text            =   "1.0"
       TextAlignment   =   0
       Tooltip         =   ""
@@ -307,8 +329,10 @@ Begin WebDialog WebDialog_Task_Type_Edit
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   9
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   218
       Value           =   False
@@ -333,11 +357,13 @@ Begin WebDialog WebDialog_Task_Type_Edit
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   0
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   10
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   84
       Visible         =   True
@@ -363,8 +389,10 @@ Begin WebDialog WebDialog_Task_Type_Edit
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   11
+      TabStop         =   True
       Text            =   "Task group:"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -391,8 +419,10 @@ Begin WebDialog WebDialog_Task_Type_Edit
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   12
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   218
       Value           =   False
@@ -474,13 +504,7 @@ End
 	#tag Event
 		Sub Pressed()
 		  
-		  Var db As New MySQLCommunityServer
 		  
-		  db.Host = Physics_Tasking.DB_Host
-		  db.Port = Physics_Tasking.DB_Port
-		  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		  db.UserName = Physics_Tasking.DB_UserName
-		  db.Password = Physics_Tasking.DB_Password
 		  
 		  Try
 		    
@@ -585,7 +609,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub SelectionChanged(item as WebMenuItem)
+		Sub SelectionChanged(item As WebMenuItem)
 		  ENABLE_Modify_Button
 		End Sub
 	#tag EndEvent
@@ -598,6 +622,26 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Position"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="WebDialog.Positions"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Top"
+			"1 - Center"
+		#tag EndEnumValues
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ControlCount"
 		Visible=false

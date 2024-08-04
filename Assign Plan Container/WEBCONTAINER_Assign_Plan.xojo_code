@@ -685,7 +685,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Style.BackgroundColor = Session.COLOR_Central_Background
+		  Style.BackgroundColor = Design_Palette.COLOR_Central_Background
 		  
 		  
 		  selected_user_id = Points_WEBCONTAINER.GET_Random_Planner
@@ -697,13 +697,7 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub ASSIGN_Plan()
-		  Var db As New MySQLCommunityServer
 		  
-		  db.Host = Physics_Tasking.DB_Host
-		  db.Port = Physics_Tasking.DB_Port
-		  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		  db.UserName = Physics_Tasking.DB_UserName
-		  db.Password = Physics_Tasking.DB_Password
 		  
 		  Try
 		    

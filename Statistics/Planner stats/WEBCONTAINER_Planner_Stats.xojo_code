@@ -15,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -40,6 +41,7 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
@@ -71,6 +73,7 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   1
       TabStop         =   True
@@ -97,6 +100,9 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
       Height          =   300
       Index           =   -2147483648
       Indicator       =   0
+      IsGridVisible   =   False
+      IsXAxisVisible  =   False
+      IsYAxisVisible  =   False
       LabelCount      =   0
       LabelLastIndex  =   0
       Left            =   44
@@ -111,6 +117,7 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
       LockTop         =   True
       LockVertical    =   False
       Mode            =   0
+      PanelIndex      =   0
       PopoverBackgroundColor=   &c000000
       Scope           =   2
       TabIndex        =   2
@@ -128,6 +135,7 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
    End
    Begin WebThread WebThread_Populate_WebChart_User_Points
       DebugIdentifier =   ""
+      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Priority        =   5
@@ -155,6 +163,7 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
       LockTop         =   True
       LockVertical    =   False
       PanelCount      =   2
+      PanelIndex      =   0
       Scope           =   2
       SelectedPanelIndex=   1
       TabDefinition   =   "Plans\rTasks\rAssigned tasks"
@@ -171,8 +180,12 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
          ColumnCount     =   3
          ColumnWidths    =   ""
          ControlID       =   ""
+         DefaultRowHeight=   49
          Enabled         =   True
+         GridLineStyle   =   3
+         HasBorder       =   True
          HasHeader       =   True
+         HeaderHeight    =   0
          Height          =   440
          HighlightSortedColumn=   True
          Index           =   -2147483648
@@ -191,7 +204,7 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
          LockTop         =   True
          LockVertical    =   False
          NoRowsMessage   =   ""
-         PanelIndex      =   "1"
+         PanelIndex      =   1
          Parent          =   "WebTabPanel_Planner_Stats"
          ProcessingMessage=   ""
          RowCount        =   0
@@ -229,7 +242,7 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
          LockTop         =   True
          LockVertical    =   False
          Multiline       =   False
-         PanelIndex      =   "1"
+         PanelIndex      =   1
          Parent          =   "WebTabPanel_Planner_Stats"
          Scope           =   2
          TabIndex        =   0
@@ -249,8 +262,12 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
          ColumnCount     =   1
          ColumnWidths    =   ""
          ControlID       =   ""
+         DefaultRowHeight=   49
          Enabled         =   True
+         GridLineStyle   =   3
+         HasBorder       =   True
          HasHeader       =   True
+         HeaderHeight    =   0
          Height          =   440
          HighlightSortedColumn=   True
          Index           =   -2147483648
@@ -269,7 +286,7 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
          LockTop         =   True
          LockVertical    =   False
          NoRowsMessage   =   ""
-         PanelIndex      =   "0"
+         PanelIndex      =   0
          Parent          =   "WebTabPanel_Planner_Stats"
          ProcessingMessage=   ""
          RowCount        =   0
@@ -307,7 +324,7 @@ Begin WebContainer WEBCONTAINER_Planner_Stats
          LockTop         =   True
          LockVertical    =   False
          Multiline       =   False
-         PanelIndex      =   "0"
+         PanelIndex      =   0
          Parent          =   "WebTabPanel_Planner_Stats"
          Scope           =   2
          TabIndex        =   1
@@ -330,7 +347,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Session.COLOR_Central_Background2
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background2
 		  
 		End Sub
 	#tag EndEvent
@@ -647,6 +664,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

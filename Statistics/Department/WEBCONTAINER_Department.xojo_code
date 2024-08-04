@@ -15,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Department
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -27,8 +28,12 @@ Begin WebContainer WEBCONTAINER_Department
       ColumnCount     =   3
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   True
+      HeaderHeight    =   0
       Height          =   360
       HighlightSortedColumn=   True
       Index           =   -2147483648
@@ -46,6 +51,7 @@ Begin WebContainer WEBCONTAINER_Department
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -78,6 +84,7 @@ Begin WebContainer WEBCONTAINER_Department
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
@@ -109,6 +116,7 @@ Begin WebContainer WEBCONTAINER_Department
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   6
       TabStop         =   True
@@ -130,7 +138,7 @@ Begin WebContainer WEBCONTAINER_Department
       FontSize        =   0.0
       Height          =   38
       Index           =   -2147483648
-      indicator       =   0
+      Indicator       =   0
       Italic          =   False
       Left            =   281
       LockBottom      =   False
@@ -161,7 +169,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Session.COLOR_Central_Background2
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background2
 		  
 		  
 		End Sub
@@ -266,6 +274,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ControlCount"
 		Visible=false

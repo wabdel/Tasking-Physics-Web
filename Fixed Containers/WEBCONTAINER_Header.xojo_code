@@ -15,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Header
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -39,9 +40,11 @@ Begin WebContainer WEBCONTAINER_Header
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   0
       SVGData         =   ""
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       URL             =   ""
@@ -66,9 +69,11 @@ Begin WebContainer WEBCONTAINER_Header
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   0
       SVGData         =   ""
       TabIndex        =   1
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       URL             =   ""
@@ -96,8 +101,10 @@ Begin WebContainer WEBCONTAINER_Header
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   2
+      TabStop         =   True
       Text            =   "Date"
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -127,8 +134,10 @@ Begin WebContainer WEBCONTAINER_Header
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   3
+      TabStop         =   True
       Text            =   "Time"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -145,6 +154,7 @@ Begin WebContainer WEBCONTAINER_Header
       Index           =   -2147483648
       Location        =   0
       LockedInPosition=   False
+      PanelIndex      =   0
       Period          =   1000
       RunMode         =   2
       Scope           =   2
@@ -169,8 +179,10 @@ Begin WebContainer WEBCONTAINER_Header
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   4
+      TabStop         =   True
       Text            =   "Notes"
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -196,8 +208,10 @@ Begin WebContainer WEBCONTAINER_Header
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   5
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -223,8 +237,10 @@ Begin WebContainer WEBCONTAINER_Header
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   6
+      TabStop         =   True
       Text            =   "Built 0n :"
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -253,8 +269,11 @@ Begin WebContainer WEBCONTAINER_Header
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   7
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   153
       Visible         =   True
@@ -279,8 +298,11 @@ Begin WebContainer WEBCONTAINER_Header
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   8
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   153
       Visible         =   False
@@ -296,7 +318,7 @@ End
 		  
 		  ImageViewer_Hospital_Logo.Top = Me.Top - ImageViewer_Hospital_Logo.Height - 20
 		  
-		  Me.Style.BackgroundColor = Session.COLOR_Background
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  POPULATE_Date_Time
 		End Sub
 	#tag EndEvent
@@ -520,6 +542,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ControlCount"
 		Visible=false

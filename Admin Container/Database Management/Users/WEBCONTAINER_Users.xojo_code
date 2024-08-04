@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Users Implements WebDataSource
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   610
@@ -14,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Users Implements WebDataSource
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -26,14 +28,19 @@ Begin WebContainer WEBCONTAINER_Users Implements WebDataSource
       ColumnCount     =   9
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   True
+      HeaderHeight    =   0
       Height          =   524
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   20
       LockBottom      =   False
@@ -44,6 +51,7 @@ Begin WebContainer WEBCONTAINER_Users Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -52,6 +60,7 @@ Begin WebContainer WEBCONTAINER_Users Implements WebDataSource
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -77,8 +86,10 @@ Begin WebContainer WEBCONTAINER_Users Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Text            =   "Users = 0"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -95,6 +106,7 @@ Begin WebContainer WEBCONTAINER_Users Implements WebDataSource
       Index           =   -2147483648
       Location        =   0
       LockedInPosition=   False
+      PanelIndex      =   0
       Period          =   1000
       RunMode         =   2
       Scope           =   2
@@ -118,8 +130,11 @@ Begin WebContainer WEBCONTAINER_Users Implements WebDataSource
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   2
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   552
       Visible         =   True
@@ -145,8 +160,10 @@ Begin WebContainer WEBCONTAINER_Users Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   3
+      TabStop         =   True
       Text            =   "Double click a row to modify."
       TextAlignment   =   1
       TextColor       =   &cFF7E7900
@@ -552,7 +569,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub DoublePressed(row as integer, column as integer)
+		Sub DoublePressed(row As Integer, column As Integer)
 		  
 		  If row > Me.LastRowIndex Then Return
 		  
@@ -567,16 +584,10 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub CustomCellAction(row as Integer, column as Integer, identifier as string, value as variant)
+		Sub CustomCellAction(row As Integer, column As Integer, identifier As String, value As Variant)
 		  If identifier = "GroupButtonPressed" Then
 		    
-		    Var db As New MySQLCommunityServer
 		    
-		    db.Host = Physics_Tasking.DB_Host
-		    db.Port = Physics_Tasking.DB_Port
-		    db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		    db.UserName = Physics_Tasking.DB_UserName
-		    db.Password = Physics_Tasking.DB_Password
 		    
 		    Try
 		      
@@ -662,6 +673,22 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

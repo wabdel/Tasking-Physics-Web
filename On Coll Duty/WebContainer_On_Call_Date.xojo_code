@@ -1,10 +1,10 @@
 #tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Due_Plans
+Begin WebContainer WebContainer_On_Call_Date
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   120
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,64 +20,54 @@ Begin WebContainer WEBCONTAINER_Due_Plans
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   180
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin WebListBox Due_Plans_ListBox
-      ColumnCount     =   6
-      ColumnWidths    =   ""
-      ControlID       =   ""
-      DefaultRowHeight=   49
-      Enabled         =   True
-      GridLineStyle   =   3
-      HasBorder       =   True
-      HasHeader       =   True
-      HeaderHeight    =   0
-      Height          =   514
-      HighlightSortedColumn=   True
-      Index           =   -2147483648
-      Indicator       =   0
-      InitialValue    =   ""
-      LastAddedRowIndex=   0
-      LastColumnIndex =   0
-      LastRowIndex    =   0
-      Left            =   20
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      NoRowsMessage   =   "No data"
-      PanelIndex      =   0
-      ProcessingMessage=   "Processing"
-      RowCount        =   0
-      RowSelectionType=   1
-      Scope           =   2
-      SearchCriteria  =   ""
-      SelectedRowColor=   &c0272D300
-      SelectedRowIndex=   0
-      TabIndex        =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   20
-      Visible         =   True
-      Width           =   1200
-      _mPanelIndex    =   -1
-   End
-   Begin WebLabel Due_Plans_Label
+   Begin WebLabel Month_Label
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
-      Height          =   38
+      Height          =   30
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   1085
+      Left            =   137
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   True
+      LockLeft        =   False
+      LockRight       =   False
+      LockTop         =   False
+      LockVertical    =   True
+      Multiline       =   False
+      PanelIndex      =   0
+      Scope           =   2
+      TabIndex        =   0
+      TabStop         =   True
+      Text            =   "Jun"
+      TextAlignment   =   3
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   0
+      Underline       =   False
+      Visible         =   True
+      Width           =   35
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Date_Label
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   30
+      Index           =   -2147483648
+      Indicator       =   0
+      Italic          =   False
+      Left            =   106
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -90,17 +80,46 @@ Begin WebContainer WEBCONTAINER_Due_Plans
       Scope           =   2
       TabIndex        =   1
       TabStop         =   True
-      Text            =   "Plans = 0"
-      TextAlignment   =   3
+      Text            =   "23"
+      TextAlignment   =   2
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   542
+      Top             =   0
       Underline       =   False
       Visible         =   True
-      Width           =   135
+      Width           =   30
       _mPanelIndex    =   -1
    End
-   Begin WebTimer REFRESH_Timer
+   Begin WebButton Button_Action
+      AllowAutoDisable=   False
+      Cancel          =   False
+      Caption         =   "Assign"
+      ControlID       =   ""
+      Default         =   True
+      Enabled         =   True
+      Height          =   29
+      Index           =   -2147483648
+      Indicator       =   5
+      Left            =   44
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
+      Scope           =   2
+      TabIndex        =   2
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   46
+      Visible         =   True
+      Width           =   100
+      _mPanelIndex    =   -1
+   End
+   Begin WebTimer Timer_UPDATE
       ControlID       =   ""
       Enabled         =   True
       Index           =   -2147483648
@@ -108,8 +127,10 @@ Begin WebContainer WEBCONTAINER_Due_Plans
       LockedInPosition=   False
       PanelIndex      =   0
       Period          =   1000
-      RunMode         =   0
-      Scope           =   2
+      RunMode         =   2
+      Scope           =   0
+      TabIndex        =   3
+      TabStop         =   True
       _mPanelIndex    =   -1
    End
 End
@@ -118,52 +139,181 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background2
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
+		  Me.Style.BorderColor = Design_Palette.COLOR_Central_Background
+		  Me.Style.BorderThickness = 1
 		  
+		End Sub
+	#tag EndEvent
+
+	#tag Event
+		Sub Shown()
 		  
 		End Sub
 	#tag EndEvent
 
 
+	#tag Method, Flags = &h0
+		Sub DRAW_Buttom()
+		  
+		  
+		  Var sql As String = "SELECT user_id, users.initials as initials FROM physics_tasking.on_calls " _
+		  + "INNER JOIN physics_tasking.users USING(user_id) " _
+		  + "WHERE on_call_date = '" + mmy_date.SQLDate + "';"
+		  Var rs As Rowset = Physics_Tasking.DB_SELECT_Statement( sql)
+		  
+		  If rs.RowCount = 0 Then
+		    
+		    Button_Action.Indicator = WebUIControl.Indicators.Warning
+		    Button_Action.Outlined = False
+		    
+		  Else
+		    
+		    Button_Action.Indicator = WebUIControl.Indicators.Success
+		    Button_Action.Outlined = True
+		    'Button_Action.Caption = "Remove"
+		    Button_Action.Caption = rs.Column("initials").StringValue.Trim.Uppercase
+		  End If
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub DRAW_Date()
+		  
+		  
+		  DRAW_Buttom
+		  
+		  If is_Calinder_Month Then 
+		    Date_Label.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		    Month_Label.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		    Self.Style.BackgroundColor = Design_Palette.COLOR_Background
+		  Else
+		    
+		    Date_Label.Style.ForegroundColor = &c5E5E5E00
+		    Month_Label.Style.ForegroundColor = &c3E424B
+		    Self.Style.BackgroundColor = Design_Palette.COLOR_Background
+		    
+		    
+		  End If
+		  
+		  Select Case mmy_date.DayOfWeek
+		  Case 6, 7
+		    
+		    Self.Style.BackgroundColor =&c3E424B
+		    
+		  Else
+		    
+		    
+		  End Select
+		  
+		  Date_Label.Text = mmy_date.Day.ToString
+		  Date_Label.Top =  0
+		  Date_Label.Left = 180 - 5 - Date_Label.Width
+		  Month_Label.Visible = False
+		  
+		  If mmy_date.Day = 1 Then
+		    
+		    Month_Label.Text = Date_Module.Get_Month_Abbr( mmy_date.Month)
+		    Month_Label.Visible = True
+		    
+		    Date_Label.Left = Month_Label.Left - Date_Label.Width - 5
+		    
+		  End If
+		  
+		  Date_Label.Style.BackgroundColor = Self.Style.BackgroundColor
+		  Date_Label.Style.Value( "border") = "none;"
+		  Date_Label.Style.Value("border-radius") =  Date_Label.Width.ToString + "px;"
+		  
+		  If mmy_date.day <> DateTime.Now.Day Then Return
+		  If mmy_date.Month <> DateTime.Now.Month Then Return
+		  If mmy_date.year <> DateTime.Now.Year Then Return
+		  
+		  Date_Label.Style.BackgroundColor = &cFF3B3B
+		  Date_Label.Style.ForegroundColor = Color.Black
+		  Date_Label.Style.Value( "border") = "1px solid #FF3B3B;"
+		  Date_Label.Style.Value("border-radius") =  Date_Label.Width.ToString + "px;"
+		  
+		  
+		  
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+
 	#tag Property, Flags = &h21
-		Private Latest_UPDATE As DateTime
+		Private Calendar_month As DateTime
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		is_Calinder_Month As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private LATEST_UPDATE As DateTime
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mmy_date As DateTime
+	#tag EndProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  Return mmy_date
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mmy_date = value
+			  
+			  
+			End Set
+		#tag EndSetter
+		my_date As DateTime
+	#tag EndComputedProperty
+
+	#tag Property, Flags = &h21
+		Private user_id As Integer
 	#tag EndProperty
 
 
 #tag EndWindowCode
 
-#tag Events Due_Plans_ListBox
+#tag Events Month_Label
 	#tag Event
 		Sub Opening()
-		  Me.HasHeader = True
-		  Me.RowSelectionType = WebListBox.RowSelectionTypes.None
-		  Me.DataSource = New DuePlanDataSource
-		  Me.ReloadData
-		  Due_Plans_Label.Text = "Plans = " + Me.DataSource.RowCount.ToString
-		  Latest_UPDATE = App.last_database_update
-		  REFRESH_Timer.RunMode = WebTimer.RunModes.Multiple
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Due_Plans_Label
+#tag Events Date_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = App.Colour_Note
-		  
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events REFRESH_Timer
+#tag Events Button_Action
+	#tag Event
+		Sub Pressed()
+		  Var thedialog As New WebDialog_Assign_On_Call
+		  thedialog.d = mmy_date
+		  thedialog.Show
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Timer_UPDATE
 	#tag Event
 		Sub Run()
-		  If App.last_database_update <> Latest_UPDATE Then
+		  If LATEST_UPDATE <> APP.last_database_update Then
 		    
-		    Due_Plans_ListBox.ReloadData
-		    Due_Plans_Label.Text = "Plans = " + Due_Plans_ListBox.DataSource.RowCount.ToString
-		    Latest_UPDATE = App.last_database_update
+		    
+		    DRAW_Buttom
+		    
+		    LATEST_UPDATE = App.last_database_update
 		    
 		  End If
-		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -402,6 +552,14 @@ End
 		Group=""
 		InitialValue="250"
 		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="is_Calinder_Month"
+		Visible=false
+		Group="Behavior"
+		InitialValue="False"
+		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

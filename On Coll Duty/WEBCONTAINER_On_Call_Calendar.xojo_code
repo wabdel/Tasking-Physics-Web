@@ -1,5 +1,5 @@
 #tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Activity_Calendar
+Begin WebContainer WEBCONTAINER_On_Call_Calendar
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
@@ -173,7 +173,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Width           =   112
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Label1
+   Begin WebLabel Label_Date_Tiltle
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -206,7 +206,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Width           =   180
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Label1
+   Begin WebLabel Label_Date_Tiltle
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -239,7 +239,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Width           =   180
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Label1
+   Begin WebLabel Label_Date_Tiltle
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -272,7 +272,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Width           =   180
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Label1
+   Begin WebLabel Label_Date_Tiltle
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -305,7 +305,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Width           =   180
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Label1
+   Begin WebLabel Label_Date_Tiltle
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -338,7 +338,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Width           =   180
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Label1
+   Begin WebLabel Label_Date_Tiltle
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -358,7 +358,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       LockVertical    =   False
       Multiline       =   False
       PanelIndex      =   0
-      Scope           =   0
+      Scope           =   2
       TabIndex        =   10
       TabStop         =   True
       Text            =   "FRI"
@@ -371,7 +371,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Width           =   180
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Label1
+   Begin WebLabel Label_Date_Tiltle
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -404,187 +404,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Width           =   180
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
-      ControlCount    =   0
-      ControlID       =   ""
-      Enabled         =   True
-      Height          =   120
-      Index           =   0
-      Indicator       =   0
-      LayoutDirection =   0
-      LayoutType      =   0
-      Left            =   20
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      PanelIndex      =   0
-      Scope           =   2
-      ScrollDirection =   0
-      TabIndex        =   12
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   112
-      Visible         =   True
-      Width           =   180
-      _mDesignHeight  =   0
-      _mDesignWidth   =   0
-      _mPanelIndex    =   -1
-   End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
-      ControlCount    =   0
-      ControlID       =   ""
-      Enabled         =   True
-      Height          =   120
-      Index           =   1
-      Indicator       =   0
-      LayoutDirection =   0
-      LayoutType      =   0
-      Left            =   200
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      PanelIndex      =   0
-      Scope           =   2
-      ScrollDirection =   0
-      TabIndex        =   13
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   112
-      Visible         =   True
-      Width           =   180
-      _mDesignHeight  =   0
-      _mDesignWidth   =   0
-      _mPanelIndex    =   -1
-   End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
-      ControlCount    =   0
-      ControlID       =   ""
-      Enabled         =   True
-      Height          =   120
-      Index           =   2
-      Indicator       =   0
-      LayoutDirection =   0
-      LayoutType      =   0
-      Left            =   380
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      PanelIndex      =   0
-      Scope           =   2
-      ScrollDirection =   0
-      TabIndex        =   14
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   112
-      Visible         =   True
-      Width           =   180
-      _mDesignHeight  =   0
-      _mDesignWidth   =   0
-      _mPanelIndex    =   -1
-   End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
-      ControlCount    =   0
-      ControlID       =   ""
-      Enabled         =   True
-      Height          =   120
-      Index           =   3
-      Indicator       =   0
-      LayoutDirection =   0
-      LayoutType      =   0
-      Left            =   560
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      PanelIndex      =   0
-      Scope           =   2
-      ScrollDirection =   0
-      TabIndex        =   15
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   112
-      Visible         =   True
-      Width           =   180
-      _mDesignHeight  =   0
-      _mDesignWidth   =   0
-      _mPanelIndex    =   -1
-   End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
-      ControlCount    =   0
-      ControlID       =   ""
-      Enabled         =   True
-      Height          =   120
-      Index           =   4
-      Indicator       =   0
-      LayoutDirection =   0
-      LayoutType      =   0
-      Left            =   740
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      PanelIndex      =   0
-      Scope           =   2
-      ScrollDirection =   0
-      TabIndex        =   16
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   112
-      Visible         =   True
-      Width           =   180
-      _mDesignHeight  =   0
-      _mDesignWidth   =   0
-      _mPanelIndex    =   -1
-   End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
-      ControlCount    =   0
-      ControlID       =   ""
-      Enabled         =   True
-      Height          =   120
-      Index           =   5
-      Indicator       =   0
-      LayoutDirection =   0
-      LayoutType      =   0
-      Left            =   920
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      PanelIndex      =   0
-      Scope           =   2
-      ScrollDirection =   0
-      TabIndex        =   17
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   112
-      Visible         =   True
-      Width           =   180
-      _mDesignHeight  =   0
-      _mDesignWidth   =   0
-      _mPanelIndex    =   -1
-   End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
@@ -614,14 +434,193 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
+      ControlCount    =   0
+      ControlID       =   ""
+      Enabled         =   True
+      Height          =   120
+      Index           =   5
+      Indicator       =   0
+      LayoutDirection =   0
+      LayoutType      =   0
+      Left            =   920
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      PanelIndex      =   0
+      Scope           =   2
+      ScrollDirection =   0
+      TabIndex        =   17
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   112
+      Visible         =   True
+      Width           =   180
+      _mDesignHeight  =   0
+      _mDesignWidth   =   0
+      _mPanelIndex    =   -1
+   End
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
+      ControlCount    =   0
+      ControlID       =   ""
+      Enabled         =   True
+      Height          =   120
+      Index           =   4
+      Indicator       =   0
+      LayoutDirection =   0
+      LayoutType      =   0
+      Left            =   740
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      PanelIndex      =   0
+      Scope           =   2
+      ScrollDirection =   0
+      TabIndex        =   16
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   112
+      Visible         =   True
+      Width           =   180
+      _mDesignHeight  =   0
+      _mDesignWidth   =   0
+      _mPanelIndex    =   -1
+   End
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
+      ControlCount    =   0
+      ControlID       =   ""
+      Enabled         =   True
+      Height          =   120
+      Index           =   3
+      Indicator       =   0
+      LayoutDirection =   0
+      LayoutType      =   0
+      Left            =   560
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      PanelIndex      =   0
+      Scope           =   2
+      ScrollDirection =   0
+      TabIndex        =   15
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   112
+      Visible         =   True
+      Width           =   180
+      _mDesignHeight  =   0
+      _mDesignWidth   =   0
+      _mPanelIndex    =   -1
+   End
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
+      ControlCount    =   0
+      ControlID       =   ""
+      Enabled         =   True
+      Height          =   120
+      Index           =   2
+      Indicator       =   0
+      LayoutDirection =   0
+      LayoutType      =   0
+      Left            =   380
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      PanelIndex      =   0
+      Scope           =   2
+      ScrollDirection =   0
+      TabIndex        =   14
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   112
+      Visible         =   True
+      Width           =   180
+      _mDesignHeight  =   0
+      _mDesignWidth   =   0
+      _mPanelIndex    =   -1
+   End
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
+      ControlCount    =   0
+      ControlID       =   ""
+      Enabled         =   True
+      Height          =   120
+      Index           =   1
+      Indicator       =   0
+      LayoutDirection =   0
+      LayoutType      =   0
+      Left            =   200
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      PanelIndex      =   0
+      Scope           =   2
+      ScrollDirection =   0
+      TabIndex        =   13
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   112
+      Visible         =   True
+      Width           =   180
+      _mDesignHeight  =   0
+      _mDesignWidth   =   0
+      _mPanelIndex    =   -1
+   End
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
+      ControlCount    =   0
+      ControlID       =   ""
+      Enabled         =   True
+      Height          =   120
+      Index           =   0
+      Indicator       =   0
+      LayoutDirection =   0
+      LayoutType      =   0
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      PanelIndex      =   0
+      Scope           =   2
+      ScrollDirection =   0
+      TabIndex        =   12
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   112
+      Visible         =   True
+      Width           =   180
+      _mDesignHeight  =   0
+      _mDesignWidth   =   0
+      _mPanelIndex    =   -1
+   End
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   7
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   20
@@ -645,14 +644,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   8
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   200
@@ -676,14 +674,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   9
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   380
@@ -707,14 +704,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   10
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   560
@@ -738,14 +734,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   11
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   740
@@ -769,14 +764,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   12
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   920
@@ -800,14 +794,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   13
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   1100
@@ -831,14 +824,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   14
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   20
@@ -862,14 +854,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   15
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   200
@@ -893,14 +884,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   16
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   380
@@ -924,14 +914,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   17
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   560
@@ -955,14 +944,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   18
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   740
@@ -986,14 +974,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   19
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   920
@@ -1017,14 +1004,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   20
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   1100
@@ -1048,14 +1034,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   21
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   20
@@ -1079,14 +1064,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   22
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   200
@@ -1110,14 +1094,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   23
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   380
@@ -1141,14 +1124,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   24
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   560
@@ -1172,14 +1154,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   25
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   740
@@ -1203,14 +1184,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   26
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   920
@@ -1234,14 +1214,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   27
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   1100
@@ -1265,14 +1244,13 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   28
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   20
@@ -1289,21 +1267,20 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       TabIndex        =   40
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   588
+      Top             =   587
       Visible         =   True
       Width           =   180
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   29
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   200
@@ -1320,21 +1297,20 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       TabIndex        =   41
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   588
+      Top             =   587
       Visible         =   True
       Width           =   180
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   30
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   380
@@ -1351,21 +1327,20 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       TabIndex        =   42
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   588
+      Top             =   587
       Visible         =   True
       Width           =   180
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   31
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   560
@@ -1382,21 +1357,20 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       TabIndex        =   43
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   588
+      Top             =   587
       Visible         =   True
       Width           =   180
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   32
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   740
@@ -1413,21 +1387,20 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       TabIndex        =   44
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   588
+      Top             =   587
       Visible         =   True
       Width           =   180
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   33
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   920
@@ -1444,21 +1417,20 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       TabIndex        =   45
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   588
+      Top             =   587
       Visible         =   True
       Width           =   180
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   34
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   1100
@@ -1475,21 +1447,20 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       TabIndex        =   46
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   588
+      Top             =   587
       Visible         =   True
       Width           =   180
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   35
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   20
@@ -1506,21 +1477,20 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       TabIndex        =   47
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   707
+      Top             =   706
       Visible         =   True
       Width           =   180
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   36
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   200
@@ -1537,21 +1507,20 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       TabIndex        =   48
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   707
+      Top             =   706
       Visible         =   True
       Width           =   180
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   37
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   380
@@ -1568,21 +1537,20 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       TabIndex        =   49
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   707
+      Top             =   706
       Visible         =   True
       Width           =   180
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   38
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   560
@@ -1599,21 +1567,20 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       TabIndex        =   50
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   707
+      Top             =   706
       Visible         =   True
       Width           =   180
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   39
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   740
@@ -1630,21 +1597,20 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       TabIndex        =   51
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   707
+      Top             =   706
       Visible         =   True
       Width           =   180
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   40
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   920
@@ -1661,21 +1627,20 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       TabIndex        =   52
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   707
+      Top             =   706
       Visible         =   True
       Width           =   180
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebContainer_Calendar_Date Calendar_Date_Container
+   Begin WebContainer_On_Call_Date On_Call_Date_Container
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   120
       Index           =   41
       Indicator       =   0
-      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   1100
@@ -1692,11 +1657,40 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       TabIndex        =   53
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   707
+      Top             =   706
       Visible         =   True
       Width           =   180
       _mDesignHeight  =   0
       _mDesignWidth   =   0
+      _mPanelIndex    =   -1
+   End
+   Begin WebButton Button_Assign_Period
+      AllowAutoDisable=   False
+      Cancel          =   False
+      Caption         =   "Assign period"
+      ControlID       =   ""
+      Default         =   True
+      Enabled         =   True
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   6
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
+      Scope           =   0
+      TabIndex        =   54
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   13
+      Visible         =   True
+      Width           =   139
       _mPanelIndex    =   -1
    End
 End
@@ -1705,16 +1699,15 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background
 		  Calendar_Month = New DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
 		  
-		  POPULATE_Calendar
-		  UPDATE_Theme
 		End Sub
 	#tag EndEvent
 
 	#tag Event
 		Sub Shown()
-		  
+		  POPULATE_Calendar
 		End Sub
 	#tag EndEvent
 
@@ -1777,17 +1770,17 @@ End
 		  
 		  For i As Integer = 0 To 41 
 		    
-		    Calendar_Date_Container(i).my_date = d
+		    On_Call_Date_Container(i).my_date = d
 		    
 		    If d.Month = month Then
-		      Calendar_Date_Container(i).is_Calinder_Month = True
+		      On_Call_Date_Container(i).is_Calinder_Month = True
 		    Else
 		      
-		      Calendar_Date_Container(i).is_Calinder_Month = False
+		      On_Call_Date_Container(i).is_Calinder_Month = False
 		      
 		    End If
 		    
-		    Calendar_Date_Container(i).DRAW_Date
+		    On_Call_Date_Container(i).DRAW_Date
 		    
 		    d = d.AddInterval(0, 0, 1)
 		    
@@ -1796,6 +1789,7 @@ End
 		  ENABLE_Arrows
 		  
 		  
+		  Latest_UPDATE = App.last_database_update
 		  
 		End Sub
 	#tag EndMethod
@@ -1808,14 +1802,24 @@ End
 		  Month_Label.Style.ForegroundColor = Color.White
 		  
 		  
+		  For i As Integer = 0 To 6
+		    
+		    Label_Date_Tiltle(i).Style.ForegroundColor = Color.White
+		    
+		  Next
+		  
 		  
 		  
 		End Sub
 	#tag EndMethod
 
 
+	#tag Property, Flags = &h0
+		Calendar_Month As DateTime
+	#tag EndProperty
+
 	#tag Property, Flags = &h21
-		Private Calendar_Month As DateTime
+		Private Latest_UPDATE As DateTime
 	#tag EndProperty
 
 
@@ -1863,10 +1867,25 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Label1
+#tag Events Month_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Label_Date_Tiltle
 	#tag Event
 		Sub Opening(index as Integer)
 		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Button_Assign_Period
+	#tag Event
+		Sub Pressed()
+		  Var theDialog As New WebDialog_Assign_On_Call_Period
+		  theDialog.Show
 		End Sub
 	#tag EndEvent
 #tag EndEvents

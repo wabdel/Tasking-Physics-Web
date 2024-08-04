@@ -1,6 +1,7 @@
 #tag WebPage
 Begin WebDialog WebDialog_Plan_Type_Edit
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   355
@@ -15,6 +16,8 @@ Begin WebDialog WebDialog_Plan_Type_Edit
    LockRight       =   False
    LockTop         =   False
    LockVertical    =   False
+   PanelIndex      =   0
+   Position        =   0
    TabIndex        =   0
    Top             =   0
    Visible         =   True
@@ -41,8 +44,10 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Text            =   "Name:"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -73,9 +78,11 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -102,8 +109,11 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   2
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   297
       Visible         =   True
@@ -128,8 +138,11 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   3
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   297
       Visible         =   True
@@ -155,8 +168,10 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   5
+      TabStop         =   True
       Text            =   "Modify plan type"
       TextAlignment   =   2
       TextColor       =   &cFF7E7900
@@ -186,8 +201,10 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   6
+      TabStop         =   True
       Text            =   "Points:"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -218,9 +235,11 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   7
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -248,8 +267,10 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   8
+      TabStop         =   True
       Text            =   "No. of plans:"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -280,9 +301,11 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   9
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -329,7 +352,7 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       Enabled         =   True
       Height          =   38
       Index           =   -2147483648
-      indicator       =   0
+      Indicator       =   0
       InitialValue    =   ""
       LastAddedRowIndex=   0
       LastRowIndex    =   0
@@ -345,7 +368,7 @@ Begin WebDialog WebDialog_Plan_Type_Edit
       RowCount        =   0
       Scope           =   0
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   11
       TabStop         =   True
       Tooltip         =   ""
@@ -431,13 +454,7 @@ End
 	#tag Event
 		Sub Pressed()
 		  
-		  Var db As New MySQLCommunityServer
 		  
-		  db.Host = Physics_Tasking.DB_Host
-		  db.Port = Physics_Tasking.DB_Port
-		  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		  db.UserName = Physics_Tasking.DB_UserName
-		  db.Password = Physics_Tasking.DB_Password
 		  
 		  Try
 		    
@@ -535,7 +552,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub SelectionChanged(item as WebMenuItem)
+		Sub SelectionChanged(item As WebMenuItem)
 		  Plan_Type_Name_TextField.Enabled = True
 		  No_Of_Plans_TextField.Enabled = True
 		  Weight_TextField.Enabled = True
@@ -544,6 +561,34 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Position"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="WebDialog.Positions"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Top"
+			"1 - Center"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

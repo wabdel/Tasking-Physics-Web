@@ -1,6 +1,7 @@
 #tag WebPage
 Begin WebDialog Multiplier_WebDialog
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   588
@@ -15,13 +16,14 @@ Begin WebDialog Multiplier_WebDialog
    LockRight       =   False
    LockTop         =   False
    LockVertical    =   False
+   PanelIndex      =   0
+   Position        =   0
    TabIndex        =   0
    Top             =   0
    Visible         =   True
    Width           =   760
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Cancel_Button
       AllowAutoDisable=   False
@@ -41,8 +43,11 @@ Begin WebDialog Multiplier_WebDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   530
       Visible         =   True
@@ -67,8 +72,11 @@ Begin WebDialog Multiplier_WebDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   530
       Visible         =   True
@@ -94,8 +102,10 @@ Begin WebDialog Multiplier_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   2
+      TabStop         =   True
       Text            =   "count ="
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -126,9 +136,11 @@ Begin WebDialog Multiplier_WebDialog
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   3
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -156,8 +168,10 @@ Begin WebDialog Multiplier_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   4
+      TabStop         =   True
       Text            =   "Task :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -187,8 +201,10 @@ Begin WebDialog Multiplier_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   5
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -218,8 +234,10 @@ Begin WebDialog Multiplier_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   6
+      TabStop         =   True
       Text            =   "Machine :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -249,8 +267,10 @@ Begin WebDialog Multiplier_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   7
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -280,8 +300,10 @@ Begin WebDialog Multiplier_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   8
+      TabStop         =   True
       Text            =   "Instructions :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -311,9 +333,11 @@ Begin WebDialog Multiplier_WebDialog
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   9
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -341,8 +365,10 @@ Begin WebDialog Multiplier_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   10
+      TabStop         =   True
       Text            =   "Weight ="
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -372,8 +398,10 @@ Begin WebDialog Multiplier_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   11
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -403,8 +431,10 @@ Begin WebDialog Multiplier_WebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   12
+      TabStop         =   True
       Text            =   "Notes :"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -434,9 +464,11 @@ Begin WebDialog Multiplier_WebDialog
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
       TabIndex        =   13
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -533,13 +565,7 @@ End
 	#tag Event
 		Sub Pressed()
 		  
-		  Var db As New MySQLCommunityServer
 		  
-		  db.Host = Physics_Tasking.DB_Host
-		  db.Port = Physics_Tasking.DB_Port
-		  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		  db.UserName = Physics_Tasking.DB_UserName
-		  db.Password = Physics_Tasking.DB_Password
 		  
 		  Try
 		    
@@ -602,6 +628,34 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Position"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="WebDialog.Positions"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Top"
+			"1 - Center"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

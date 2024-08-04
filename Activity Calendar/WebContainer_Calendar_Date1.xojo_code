@@ -1,5 +1,5 @@
 #tag WebContainerControl
-Begin WebContainer WebContainer_Calendar_Date
+Begin WebContainer WebContainer_Calendar_Date1
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
@@ -90,53 +90,6 @@ Begin WebContainer WebContainer_Calendar_Date
       Width           =   30
       _mPanelIndex    =   -1
    End
-   Begin WebTimer Timer_Update
-      ControlID       =   ""
-      Enabled         =   True
-      Index           =   -2147483648
-      Location        =   0
-      LockedInPosition=   False
-      PanelIndex      =   0
-      Period          =   1000
-      RunMode         =   2
-      Scope           =   2
-      TabIndex        =   2
-      TabStop         =   True
-      _mPanelIndex    =   -1
-   End
-   Begin WebLabel Label_On_Call
-      Bold            =   False
-      ControlID       =   ""
-      Enabled         =   True
-      FontName        =   ""
-      FontSize        =   12.0
-      Height          =   25
-      Index           =   -2147483648
-      Indicator       =   ""
-      Italic          =   False
-      Left            =   2
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Multiline       =   False
-      PanelIndex      =   0
-      Scope           =   0
-      TabIndex        =   2
-      TabStop         =   True
-      Text            =   "IAD"
-      TextAlignment   =   2
-      TextColor       =   &c000000FF
-      Tooltip         =   ""
-      Top             =   2
-      Underline       =   False
-      Visible         =   True
-      Width           =   25
-      _mPanelIndex    =   -1
-   End
 End
 #tag EndWebContainerControl
 
@@ -144,125 +97,45 @@ End
 	#tag Event
 		Sub Opening()
 		  
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
-		  Me.Style.BorderColor = Design_Palette.COLOR_Central_Background
-		  Me.Style.BorderThickness = 1
 		  
 		End Sub
 	#tag EndEvent
 
 	#tag Event
 		Sub Shown()
-		  
+		  DRAW(d_Calendar_date, Calendar_month)
 		End Sub
 	#tag EndEvent
 
 
 	#tag Method, Flags = &h0
-		Sub DRAW_Date()
+		Sub DRAW(d as DateTime, m as DateTime)
+		  d_Calendar_date = d
+		  Calendar_month = m
 		  
-		  
-		  
-		  If is_Calinder_Month Then 
-		    Date_Label.Style.ForegroundColor = Design_Palette.COLOR_Foreground
-		    Month_Label.Style.ForegroundColor = Design_Palette.COLOR_Foreground
-		    Self.Style.BackgroundColor = Design_Palette.COLOR_Background
-		  Else
-		    
-		    Date_Label.Style.ForegroundColor = &c5E5E5E00
-		    Month_Label.Style.ForegroundColor = &c3E424B
-		    Self.Style.BackgroundColor = Design_Palette.COLOR_Background
-		    
-		    
-		  End If
-		  
-		  Select Case mmy_date.DayOfWeek
-		  Case 6, 7
-		    
-		    Self.Style.BackgroundColor =&c3E424B
-		    
-		  Else
-		    
-		    
-		  End Select
-		  
-		  Date_Label.Text = mmy_date.Day.ToString
+		  Date_Label.Text = d_Calendar_date.Day.ToString
+		  UPDATE_Theme
 		  Date_Label.Top =  0
 		  Date_Label.Left = 180 - 5 - Date_Label.Width
 		  Month_Label.Visible = False
 		  
-		  If mmy_date.Day = 1 Then
+		  If d_Calendar_date.Day = 1 Then
 		    
-		    Month_Label.Text = Date_Module.Get_Month_Abbr( mmy_date.Month)
+		    Month_Label.Text = Date_Module.Get_Month_Abbr( d_Calendar_date.Month)
+		    'Month_Label.Left = Self.Left + Self.Width - Month_Label.Width - 5
+		    'Month_Label.Top = Self.Top
 		    Month_Label.Visible = True
 		    
+		    'Date_Label.Top = Month_Label.Top
 		    Date_Label.Left = Month_Label.Left - Date_Label.Width - 5
 		    
 		  End If
 		  
-		  Date_Label.Style.BackgroundColor = Self.Style.BackgroundColor
-		  Date_Label.Style.Value( "border") = "none;"
-		  Date_Label.Style.Value("border-radius") =  Date_Label.Width.ToString + "px;"
 		  
-		  
-		  If mmy_date.day = DateTime.Now.Day AND _
-		    mmy_date.Month = DateTime.Now.Month AND _
-		    mmy_date.year = DateTime.Now.Year Then
-		    
-		    Date_Label.Style.BackgroundColor = &cFF3B3B
-		    Date_Label.Style.ForegroundColor = Color.Black
-		    Date_Label.Style.Value( "border") = "1px solid #FF3B3B;"
-		    Date_Label.Style.Value("border-radius") =  Date_Label.Width.ToString + "px;"
-		    
-		  End If
-		  
-		  DRAW_On_Call
-		  DRAW_Plans
-		  DRAW_Tasks
-		  
-		  
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub DRAW_On_Call()
-		  
-		  
-		  Var sql As String = "SELECT user_id, users.initials as initials FROM physics_tasking.on_calls " _
-		  + "INNER JOIN physics_tasking.users USING(user_id) " _
-		  + "WHERE on_call_date = '" + mmy_date.SQLDate + "';"
-		  Var rs As Rowset = Physics_Tasking.DB_SELECT_Statement( sql)
-		  
-		  If rs.RowCount = 0 Then
-		    
-		    Label_On_Call.Style.BorderColor = Self.Style.BackgroundColor
-		    Label_On_Call.Style.BackgroundColor = Self.Style.BackgroundColor
-		    
-		    Label_On_Call.Text = ""
-		    
-		  Else
-		    
-		    Label_On_Call.Text = rs.Column("initials").StringValue.Trim.Uppercase
-		    
-		    Label_On_Call.Style.BorderColor = &c76D6FF00
-		    Label_On_Call.Style.BorderThickness = 1
-		    Label_On_Call.Style.ForegroundColor = &c76D6FF00
-		    Label_On_Call.Style.BackgroundColor = Self.Style.BackgroundColor
-		    
-		    
-		  End If
-		  
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub DRAW_Plans()
 		  Var sql As String = "SELECT user_id, initials, COUNT(*) as total, SUM(is_completed) as completed, is_active " _
 		  + "FROM plans " _
 		  + "INNER JOIN users USING(user_id) " _
-		  + "WHERE DATE(due_date) = '"+ mmy_date.SQLDate + "' " _
+		  + "WHERE DATE(due_date) = '"+ d_Calendar_date.SQLDate + "' " _
 		  + "GROUP BY user_id"
 		  
 		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
@@ -272,14 +145,13 @@ End
 		  For i As Integer = Plan_Status_WEBCONTAINER.LastIndex To 0 Step -1
 		    
 		    Plan_Status_WEBCONTAINER(i).Close
-		    Plan_Status_WEBCONTAINER(i).UpdateBrowser
 		    
 		  Next
 		  
 		  Plan_Status_WEBCONTAINER.ResizeTo(-1)
 		  
-		  status_left_position = 5
-		  status_top_position = Date_Label.Height + 5
+		  Var status_left_position As Integer = Self.Left + 5
+		  Var status_top_position As Integer = Self.Top + Date_Label.Height + 5
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -294,7 +166,7 @@ End
 		    rs.Column("user_id").IntegerValue
 		    
 		    Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).date = _
-		    mmy_date
+		    d_Calendar_date
 		    
 		    status_left_position = status_left_position + _
 		    Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Width + 5
@@ -345,15 +217,6 @@ End
 		    
 		  End If
 		  
-		  
-		  
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub DRAW_Tasks()
-		  
 		  For i As Integer = Task_Status_WEBCONTAINER.LastIndex To 0 Step -1
 		    
 		    Task_Status_WEBCONTAINER(i).Close
@@ -362,13 +225,13 @@ End
 		  
 		  Task_Status_WEBCONTAINER.ResizeTo(-1)
 		  
-		  Var sql as String = "SELECT user_id, initials, COUNT(*) as total, SUM(is_completed) as completed " _
+		  sql = "SELECT user_id, initials, COUNT(*) as total, SUM(is_completed) as completed " _
 		  + "FROM scheduled_tasks " _
 		  + "INNER JOIN users USING(user_id) " _
-		  + "WHERE DATE(due_date) = '"+ mmy_date.SQLDate + "' " _
+		  + "WHERE DATE(due_date) = '"+ d_Calendar_date.SQLDate + "' " _
 		  + "GROUP BY user_id;"
 		  
-		  Var rs as RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -385,7 +248,7 @@ End
 		    
 		    
 		    Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).date = _
-		    mmy_date
+		    d_Calendar_date
 		    
 		    status_left_position = status_left_position + _
 		    Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Width + 7
@@ -419,6 +282,55 @@ End
 		    
 		  Wend
 		  
+		  UPDATE_Theme
+		  
+		  If d.day <> DateTime.Now.Day Then Return
+		  If d.Month <> DateTime.Now.Month Then Return
+		  If d.Year <> DateTime.Now.Year Then Return
+		  
+		  
+		  Date_Label.Style.BackgroundColor = &cFF3B3B
+		  Date_Label.Style.ForegroundColor = Color.Black
+		  Date_Label.Style.Value( "border") = "1px solid #FF3B3B;"
+		  Date_Label.Style.Value("border-radius") =  Date_Label.Width.ToString + "px;"
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub UPDATE_Theme()
+		  If d_Calendar_date.DayOfWeek > 5 Then
+		    
+		    Me.Style.BackgroundColor = &c363636
+		  Else
+		    
+		    Me.Style.BackgroundColor = &c242424
+		    
+		  End If
+		  
+		  Date_Label.Style = New WebStyle
+		  Month_Label.Style = New WebStyle
+		  If d_Calendar_date.Month <> Calendar_month.Month Or d_Calendar_date.Year <> Calendar_month.Year Then
+		    
+		    Date_Label.Style.Value("color") = "#FFFFFF,"
+		    Month_Label.Style.Value("color") = "#C9C9C9,"
+		    Month_Label.Italic = True
+		    Date_Label.Italic = True
+		    
+		  Else
+		    
+		    Date_Label.Style.Value("color") = "#EDEDED;"
+		    Month_Label.Style.Value("color") = "#EDEDED;"
+		    
+		  End If
+		  
+		  Me.Style.Value("border-style") =  "ridge;"
+		  Me.Style.Value("border-width") =  "1px;"
+		  Me.Style.Value("border-color") = "#525252;"
+		  'Me.Style.Value("border-color") =  Theme_Colors.Material_BaseLine.Secondary.Value("background-color").Replace(";", "")
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -427,43 +339,12 @@ End
 		Private Calendar_month As DateTime
 	#tag EndProperty
 
-	#tag Property, Flags = &h0
-		is_Calinder_Month As Boolean = False
-	#tag EndProperty
-
 	#tag Property, Flags = &h21
-		Private LATEST_UPDATE As DateTime
+		Private d_Calendar_date As DateTime
 	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mmy_date As DateTime
-	#tag EndProperty
-
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  Return mmy_date
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mmy_date = value
-			  
-			End Set
-		#tag EndSetter
-		my_date As DateTime
-	#tag EndComputedProperty
 
 	#tag Property, Flags = &h21
 		Private Plan_Status_WEBCONTAINER() As WEBCONTAINER_Plan_Status
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private status_left_position As Integer
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private status_top_position As Integer
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -473,21 +354,6 @@ End
 
 #tag EndWindowCode
 
-#tag Events Timer_Update
-	#tag Event
-		Sub Run()
-		  If LATEST_UPDATE <> app.last_database_update Then
-		    
-		    DRAW_On_Call
-		    DRAW_Plans
-		    DRAW_Tasks
-		    LATEST_UPDATE = app.last_database_update
-		    
-		    
-		  End If
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
 		Name="PanelIndex"
@@ -723,14 +589,6 @@ End
 		Group=""
 		InitialValue="250"
 		Type="Integer"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="is_Calinder_Month"
-		Visible=false
-		Group="Behavior"
-		InitialValue="False"
-		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

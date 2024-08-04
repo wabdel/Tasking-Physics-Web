@@ -2,13 +2,7 @@
 Protected Class CLASS_General_Information
 	#tag Method, Flags = &h0
 		Sub Save()
-		  Var db As New MySQLCommunityServer
 		  
-		  db.Host = Physics_Tasking.DB_Host
-		  db.Port = Physics_Tasking.DB_Port
-		  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		  db.UserName = Physics_Tasking.DB_UserName
-		  db.Password = Physics_Tasking.DB_Password
 		  
 		  Var sql As String = "SELECT * " _
 		  +"FROM general_information " _

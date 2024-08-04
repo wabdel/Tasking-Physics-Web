@@ -337,13 +337,7 @@ Protected Class CLASS_User_Record
 	#tag Method, Flags = &h0
 		Sub Save()
 		  Try
-		    Var db As New MySQLCommunityServer
 		    
-		    db.Host = Physics_Tasking.DB_Host
-		    db.Port = Physics_Tasking.DB_Port
-		    db.DatabaseName = Physics_Tasking.DB_DatabaseName
-		    db.UserName = Physics_Tasking.DB_UserName
-		    db.Password = Physics_Tasking.DB_Password
 		    
 		    If id = 0 Then
 		      
@@ -560,13 +554,7 @@ Protected Class CLASS_User_Record
 		#tag EndGetter
 		#tag Setter
 			Set
-			  Var db As New MySQLCommunityServer
 			  
-			  db.Host = Physics_Tasking.DB_Host
-			  db.Port = Physics_Tasking.DB_Port
-			  db.DatabaseName = Physics_Tasking.DB_DatabaseName
-			  db.UserName = Physics_Tasking.DB_UserName
-			  db.Password = Physics_Tasking.DB_Password
 			  
 			  
 			  Try

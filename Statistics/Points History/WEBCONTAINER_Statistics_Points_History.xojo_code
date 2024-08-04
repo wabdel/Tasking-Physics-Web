@@ -15,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Points_History
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -28,6 +29,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Points_History
       AutoCalculateYAxis=   False
       ControlID       =   ""
       DatasetCount    =   0
+      DatasetLastIndex=   0
       Enabled         =   True
       GridColor       =   &c000000AA
       HasAnimation    =   False
@@ -35,6 +37,11 @@ Begin WebContainer WEBCONTAINER_Statistics_Points_History
       Height          =   560
       Index           =   -2147483648
       Indicator       =   0
+      IsGridVisible   =   False
+      IsXAxisVisible  =   False
+      IsYAxisVisible  =   False
+      LabelCount      =   0
+      LabelLastIndex  =   0
       Left            =   20
       LegendColor     =   &c000000
       LegendFontName  =   ""
@@ -47,9 +54,11 @@ Begin WebContainer WEBCONTAINER_Statistics_Points_History
       LockTop         =   True
       LockVertical    =   False
       Mode            =   0
+      PanelIndex      =   0
       PopoverBackgroundColor=   &c000000
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Title           =   ""
       TitleColor      =   &c000000
       TitleFontName   =   ""
@@ -79,8 +88,10 @@ Begin WebContainer WEBCONTAINER_Statistics_Points_History
       LockTop         =   True
       LockVertical    =   False
       MaximumValue    =   100
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   292
       Value           =   50
@@ -90,6 +101,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Points_History
    End
    Begin WebThread Populate_Chart_Thread
       DebugIdentifier =   ""
+      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Priority        =   5
@@ -103,6 +115,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Points_History
       AutoCalculateYAxis=   False
       ControlID       =   ""
       DatasetCount    =   0
+      DatasetLastIndex=   0
       Enabled         =   True
       GridColor       =   &c000000AA
       HasAnimation    =   False
@@ -110,6 +123,11 @@ Begin WebContainer WEBCONTAINER_Statistics_Points_History
       Height          =   560
       Index           =   -2147483648
       Indicator       =   0
+      IsGridVisible   =   False
+      IsXAxisVisible  =   False
+      IsYAxisVisible  =   False
+      LabelCount      =   0
+      LabelLastIndex  =   0
       Left            =   40
       LegendColor     =   &c000000
       LegendFontName  =   ""
@@ -122,9 +140,11 @@ Begin WebContainer WEBCONTAINER_Statistics_Points_History
       LockTop         =   True
       LockVertical    =   False
       Mode            =   7
+      PanelIndex      =   0
       PopoverBackgroundColor=   &c000000
       Scope           =   2
       TabIndex        =   2
+      TabStop         =   True
       Title           =   ""
       TitleColor      =   &c000000
       TitleFontName   =   ""
@@ -150,7 +170,7 @@ End
 
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Session.COLOR_Central_Background2
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background2
 		  
 		  Planner.ResizeTo(-1)
 		  Var sql As String = "SELECT user_id FROM users " _
@@ -592,6 +612,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ControlCount"
 		Visible=false

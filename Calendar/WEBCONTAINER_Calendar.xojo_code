@@ -15,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Calendar
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -40,9 +41,11 @@ Begin WebContainer WEBCONTAINER_Calendar
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   0
       ScrollDirection =   0
       TabIndex        =   0
+      TabStop         =   True
       title           =   ""
       Tooltip         =   ""
       Top             =   0
@@ -86,6 +89,8 @@ End
 		    
 		  Next
 		  
+		  UpdateBrowser
+		  
 		  
 		  
 		  
@@ -105,6 +110,14 @@ End
 #tag EndWindowCode
 
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ControlCount"
 		Visible=false

@@ -15,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -27,14 +28,19 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   True
+      HeaderHeight    =   0
       Height          =   430
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   20
       LockBottom      =   False
@@ -45,6 +51,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   "No Data"
+      PanelIndex      =   0
       ProcessingMessage=   "Processing"
       RowCount        =   0
       RowSelectionType=   1
@@ -53,6 +60,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   104
       Visible         =   True
@@ -78,8 +86,10 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   1
+      TabStop         =   True
       Text            =   "Tasks = 0"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -96,6 +106,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       Index           =   -2147483648
       Location        =   0
       LockedInPosition=   False
+      PanelIndex      =   0
       Period          =   1000
       RunMode         =   2
       Scope           =   2
@@ -120,8 +131,10 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   2
+      TabStop         =   True
       Text            =   "Assigned Task"
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -149,11 +162,13 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   3
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   58
       Visible         =   True
@@ -179,8 +194,10 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   4
+      TabStop         =   True
       Text            =   "Machine"
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -208,11 +225,13 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   5
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   58
       Visible         =   True
@@ -238,8 +257,10 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   6
+      TabStop         =   True
       Text            =   "Due Date"
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -267,11 +288,13 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       RowCount        =   0
       Scope           =   2
       SelectedRowIndex=   0
-      SelectedRowValue=   ""
+      SelectedRowText =   ""
       TabIndex        =   7
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   58
       Visible         =   True
@@ -290,7 +313,7 @@ End
 
 	#tag Event
 		Sub Shown()
-		  Me.Style.BackgroundColor = Session.COLOR_Central_Background2
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background2
 		  
 		  Var sql As String = "CREATE OR REPLACE VIEW completed_assigned_tasks AS " _
 		  + "SELECT physics_tasking.scheduled_tasks.scheduled_task_id As scheduled_task_id, " _
@@ -873,7 +896,7 @@ End
 #tag EndEvents
 #tag Events Task_Type_PopupMenu
 	#tag Event
-		Sub SelectionChanged(item as WebMenuItem)
+		Sub SelectionChanged(item As WebMenuItem)
 		  Completed_Assigned_Tasks_ListBox.ReloadData
 		  
 		  'POPULATE_POPUPMENUS
@@ -882,7 +905,7 @@ End
 #tag EndEvents
 #tag Events Machine_PopupMenu
 	#tag Event
-		Sub SelectionChanged(item as WebMenuItem)
+		Sub SelectionChanged(item As WebMenuItem)
 		  Completed_Assigned_Tasks_ListBox.ReloadData
 		  
 		  'POPULATE_POPUPMENUS
@@ -891,7 +914,7 @@ End
 #tag EndEvents
 #tag Events Due_Date_PopupMenu
 	#tag Event
-		Sub SelectionChanged(item as WebMenuItem)
+		Sub SelectionChanged(item As WebMenuItem)
 		  Completed_Assigned_Tasks_ListBox.ReloadData
 		  
 		  'POPULATE_POPUPMENUS
@@ -899,6 +922,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ControlCount"
 		Visible=false

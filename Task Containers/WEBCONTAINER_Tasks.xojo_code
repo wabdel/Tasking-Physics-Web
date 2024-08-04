@@ -15,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Tasks
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -42,6 +43,7 @@ Begin WebContainer WEBCONTAINER_Tasks
       LockTop         =   True
       LockVertical    =   False
       PanelCount      =   2
+      PanelIndex      =   0
       Scope           =   2
       SelectedPanelIndex=   1
       TabDefinition   =   "Recent Tasks\rAssigned Tasks\rCompleted Assigned Tasks"
@@ -61,7 +63,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Session.COLOR_Central_Background
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background
 		  
 		  LOAD_TabPanel_Container( 0)
 		End Sub
@@ -115,6 +117,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ControlCount"
 		Visible=false

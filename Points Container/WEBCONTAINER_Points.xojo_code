@@ -304,7 +304,7 @@ End
 #tag Events Points_Avg_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Session.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		End Sub
 	#tag EndEvent
 #tag EndEvents

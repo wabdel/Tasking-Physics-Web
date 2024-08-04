@@ -15,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Logout
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -41,8 +42,11 @@ Begin WebContainer WEBCONTAINER_Logout
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   142
       Visible         =   True
@@ -68,8 +72,10 @@ Begin WebContainer WEBCONTAINER_Logout
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Text            =   "User"
       TextAlignment   =   1
       TextColor       =   &c00000000
@@ -99,8 +105,10 @@ Begin WebContainer WEBCONTAINER_Logout
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   2
+      TabStop         =   True
       Text            =   "Group"
       TextAlignment   =   1
       TextColor       =   &c00000000
@@ -130,8 +138,10 @@ Begin WebContainer WEBCONTAINER_Logout
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   3
+      TabStop         =   True
       Text            =   "Points = "
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -148,6 +158,7 @@ Begin WebContainer WEBCONTAINER_Logout
       Index           =   -2147483648
       Location        =   0
       LockedInPosition=   False
+      PanelIndex      =   0
       Period          =   1000
       RunMode         =   2
       Scope           =   2
@@ -172,8 +183,10 @@ Begin WebContainer WEBCONTAINER_Logout
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   4
+      TabStop         =   True
       Text            =   "Plan points (A) = "
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -203,8 +216,10 @@ Begin WebContainer WEBCONTAINER_Logout
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   5
+      TabStop         =   True
       Text            =   "Task points (A) = "
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -234,8 +249,10 @@ Begin WebContainer WEBCONTAINER_Logout
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   6
+      TabStop         =   True
       Text            =   "Plan points (R) = "
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -265,8 +282,10 @@ Begin WebContainer WEBCONTAINER_Logout
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   7
+      TabStop         =   True
       Text            =   "Task points (R) = "
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -296,8 +315,10 @@ Begin WebContainer WEBCONTAINER_Logout
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   8
+      TabStop         =   True
       Text            =   "0.00"
       TextAlignment   =   1
       TextColor       =   &c00000000
@@ -327,8 +348,10 @@ Begin WebContainer WEBCONTAINER_Logout
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   9
+      TabStop         =   True
       Text            =   "0.00"
       TextAlignment   =   1
       TextColor       =   &c00000000
@@ -358,8 +381,10 @@ Begin WebContainer WEBCONTAINER_Logout
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   10
+      TabStop         =   True
       Text            =   "0.00"
       TextAlignment   =   1
       TextColor       =   &c00000000
@@ -389,8 +414,10 @@ Begin WebContainer WEBCONTAINER_Logout
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   11
+      TabStop         =   True
       Text            =   "0.00"
       TextAlignment   =   1
       TextColor       =   &c00000000
@@ -420,8 +447,10 @@ Begin WebContainer WEBCONTAINER_Logout
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   12
+      TabStop         =   True
       Text            =   "0.00"
       TextAlignment   =   1
       TextColor       =   &c00000000
@@ -448,9 +477,11 @@ Begin WebContainer WEBCONTAINER_Logout
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   2
       SVGData         =   ""
       TabIndex        =   13
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       URL             =   ""
@@ -478,8 +509,10 @@ Begin WebContainer WEBCONTAINER_Logout
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   14
+      TabStop         =   True
       Text            =   "Untitled"
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -496,6 +529,7 @@ Begin WebContainer WEBCONTAINER_Logout
       Index           =   -2147483648
       Location        =   0
       LockedInPosition=   False
+      PanelIndex      =   0
       Period          =   1000
       RunMode         =   0
       Scope           =   2
@@ -508,7 +542,7 @@ End
 	#tag Event
 		Sub Opening()
 		  
-		  Self.Style.BackgroundColor = Session.COLOR_Background
+		  Self.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  
 		  
 		  Self.User_Label.Text = _
@@ -647,7 +681,7 @@ End
 #tag Events User_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Session.COLOR_Foreground 
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground 
 		  
 		  Me.Style.FontSize = 14
 		End Sub
@@ -656,7 +690,7 @@ End
 #tag Events Group_Label
 	#tag Event
 		Sub Shown()
-		  Me.Style.ForegroundColor = Session.COLOR_Foreground 
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground 
 		  Me.Style.Value("font-style") = "oblique 45deg;" 
 		  Me.Style.FontSize = 12
 		End Sub
@@ -665,7 +699,7 @@ End
 #tag Events Points_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Session.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -688,63 +722,63 @@ End
 #tag Events Acc_Plan_Points_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Session.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Acc_Task_Points_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Session.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Cur_Plan_Points_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Session.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Cur_Task_Points_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Session.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Points_Value_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Session.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Acc_Plan_Points_Value_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Session.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Acc_Task_Points_Value_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Session.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Cur_Plan_Points_Value_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Session.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Cur_Task_Points_Value_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Session.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -791,6 +825,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ControlCount"
 		Visible=false

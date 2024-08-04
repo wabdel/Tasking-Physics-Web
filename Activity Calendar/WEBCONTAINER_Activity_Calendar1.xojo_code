@@ -1,41 +1,40 @@
-#tag WebPage
-Begin WebDialog WebDialog_Task_Type_Add
+#tag WebContainerControl
+Begin WebContainer WEBCONTAINER_Activity_Calendar1
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   500
-   Index           =   -2147483648
+   Height          =   900
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
    Left            =   0
    LockBottom      =   False
    LockHorizontal  =   False
-   LockLeft        =   False
+   LockLeft        =   True
    LockRight       =   False
-   LockTop         =   False
+   LockTop         =   True
    LockVertical    =   False
    PanelIndex      =   0
-   Position        =   0
+   ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   800
+   Width           =   1300
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin WebLabel Title_Label
-      Bold            =   False
+   Begin WebButton Forward_Month_Button
+      AllowAutoDisable=   False
+      Cancel          =   False
+      Caption         =   ">"
       ControlID       =   ""
+      Default         =   False
       Enabled         =   True
-      FontName        =   ""
-      FontSize        =   24.0
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   0
-      Italic          =   False
-      Left            =   161
+      Indicator       =   1
+      Left            =   719
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -43,32 +42,28 @@ Begin WebDialog WebDialog_Task_Type_Add
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      Multiline       =   False
+      Outlined        =   False
       PanelIndex      =   0
       Scope           =   2
       TabIndex        =   0
       TabStop         =   True
-      Text            =   "Add task type"
-      TextAlignment   =   2
-      TextColor       =   &cFF7E7900
       Tooltip         =   ""
       Top             =   20
-      Underline       =   True
       Visible         =   True
-      Width           =   478
+      Width           =   40
       _mPanelIndex    =   -1
    End
-   Begin WebButton Cancel_Button
+   Begin WebButton Forward_Year_Button
       AllowAutoDisable=   False
-      Cancel          =   True
-      Caption         =   "Cancel"
+      Cancel          =   False
+      Caption         =   ">>"
       ControlID       =   ""
       Default         =   False
       Enabled         =   True
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   0
-      Left            =   680
+      Indicator       =   1
+      Left            =   767
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -82,22 +77,22 @@ Begin WebDialog WebDialog_Task_Type_Add
       TabIndex        =   1
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   442
+      Top             =   20
       Visible         =   True
-      Width           =   100
+      Width           =   50
       _mPanelIndex    =   -1
    End
-   Begin WebButton Add_Button
+   Begin WebButton Backward_Month_Button
       AllowAutoDisable=   False
       Cancel          =   False
-      Caption         =   "Add"
+      Caption         =   "<"
       ControlID       =   ""
-      Default         =   True
-      Enabled         =   False
+      Default         =   False
+      Enabled         =   True
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   7
-      Left            =   350
+      Indicator       =   1
+      Left            =   542
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -111,22 +106,22 @@ Begin WebDialog WebDialog_Task_Type_Add
       TabIndex        =   2
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   442
+      Top             =   20
       Visible         =   True
-      Width           =   100
+      Width           =   40
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Task_Type_Name_Label
-      Bold            =   False
+   Begin WebButton Backward_Year_Button
+      AllowAutoDisable=   False
+      Cancel          =   False
+      Caption         =   "<<"
       ControlID       =   ""
+      Default         =   False
       Enabled         =   True
-      FontName        =   ""
-      FontSize        =   0.0
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   ""
-      Italic          =   False
-      Left            =   53
+      Indicator       =   1
+      Left            =   484
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -134,33 +129,28 @@ Begin WebDialog WebDialog_Task_Type_Add
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      Multiline       =   False
+      Outlined        =   False
       PanelIndex      =   0
       Scope           =   2
       TabIndex        =   3
       TabStop         =   True
-      Text            =   "Name:"
-      TextAlignment   =   3
-      TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   150
-      Underline       =   False
+      Top             =   20
       Visible         =   True
-      Width           =   100
+      Width           =   50
       _mPanelIndex    =   -1
    End
-   Begin WebTextField Task_Type_Name_TextField
-      AllowAutoComplete=   False
-      AllowSpellChecking=   False
-      Caption         =   ""
+   Begin WebLabel Month_Label
+      Bold            =   False
       ControlID       =   ""
       Enabled         =   True
-      FieldType       =   0
+      FontName        =   ""
+      FontSize        =   0.0
       Height          =   38
-      Hint            =   "Enter task identifier"
       Index           =   -2147483648
-      Indicator       =   ""
-      Left            =   161
+      Indicator       =   0
+      Italic          =   False
+      Left            =   599
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -168,31 +158,32 @@ Begin WebDialog WebDialog_Task_Type_Add
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      MaximumCharactersAllowed=   0
+      Multiline       =   False
       PanelIndex      =   0
-      ReadOnly        =   False
       Scope           =   2
       TabIndex        =   4
       TabStop         =   True
-      Text            =   ""
-      TextAlignment   =   0
+      Text            =   "JAN 2023"
+      TextAlignment   =   2
+      TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   150
+      Top             =   20
+      Underline       =   False
       Visible         =   True
-      Width           =   541
+      Width           =   112
       _mPanelIndex    =   -1
    End
-   Begin WebTextArea Instructions_TextArea
-      AllowReturnKey  =   True
-      AllowSpellChecking=   False
-      Caption         =   ""
+   Begin WebLabel SUN_Label
+      Bold            =   False
       ControlID       =   ""
       Enabled         =   True
-      Height          =   128
-      Hint            =   "Type insturctions"
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
       Index           =   -2147483648
-      Indicator       =   ""
-      Left            =   161
+      Indicator       =   0
+      Italic          =   False
+      Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -200,21 +191,22 @@ Begin WebDialog WebDialog_Task_Type_Add
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      MaximumCharactersAllowed=   0
+      Multiline       =   False
       PanelIndex      =   0
-      ReadOnly        =   False
-      Scope           =   2
+      Scope           =   0
       TabIndex        =   5
       TabStop         =   True
-      Text            =   ""
-      TextAlignment   =   0
+      Text            =   "SUN"
+      TextAlignment   =   2
+      TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   276
+      Top             =   66
+      Underline       =   False
       Visible         =   True
-      Width           =   541
+      Width           =   180
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Instructions_Label
+   Begin WebLabel MON_Label
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -224,7 +216,7 @@ Begin WebDialog WebDialog_Task_Type_Add
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   53
+      Left            =   200
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -234,20 +226,20 @@ Begin WebDialog WebDialog_Task_Type_Add
       LockVertical    =   False
       Multiline       =   False
       PanelIndex      =   0
-      Scope           =   2
+      Scope           =   0
       TabIndex        =   6
       TabStop         =   True
-      Text            =   "Instructions:"
-      TextAlignment   =   3
+      Text            =   "MON"
+      TextAlignment   =   2
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   276
+      Top             =   66
       Underline       =   False
       Visible         =   True
-      Width           =   100
+      Width           =   180
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Weight_Label
+   Begin WebLabel TUE_Label
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -257,7 +249,7 @@ Begin WebDialog WebDialog_Task_Type_Add
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   53
+      Left            =   380
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -267,110 +259,20 @@ Begin WebDialog WebDialog_Task_Type_Add
       LockVertical    =   False
       Multiline       =   False
       PanelIndex      =   0
-      Scope           =   2
+      Scope           =   0
       TabIndex        =   7
       TabStop         =   True
-      Text            =   "Points:"
-      TextAlignment   =   3
+      Text            =   "TUE"
+      TextAlignment   =   2
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   214
+      Top             =   66
       Underline       =   False
       Visible         =   True
-      Width           =   100
+      Width           =   180
       _mPanelIndex    =   -1
    End
-   Begin WebTextField Weight_TextField
-      AllowAutoComplete=   False
-      AllowSpellChecking=   False
-      Caption         =   ""
-      ControlID       =   ""
-      Enabled         =   True
-      FieldType       =   3
-      Height          =   38
-      Hint            =   ""
-      Index           =   -2147483648
-      Indicator       =   0
-      Left            =   161
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      MaximumCharactersAllowed=   0
-      PanelIndex      =   0
-      ReadOnly        =   False
-      Scope           =   2
-      TabIndex        =   8
-      TabStop         =   True
-      Text            =   "1.0"
-      TextAlignment   =   0
-      Tooltip         =   ""
-      Top             =   214
-      Visible         =   True
-      Width           =   90
-      _mPanelIndex    =   -1
-   End
-   Begin WebCheckbox Has_Multiplier_Checkbox
-      Caption         =   "Has multiplier"
-      ControlID       =   ""
-      Enabled         =   True
-      Height          =   34
-      Indeterminate   =   False
-      Index           =   -2147483648
-      Indicator       =   ""
-      Left            =   350
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      PanelIndex      =   0
-      Scope           =   2
-      TabIndex        =   9
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   218
-      Value           =   False
-      Visible         =   True
-      Width           =   188
-      _mPanelIndex    =   -1
-   End
-   Begin WebPopupMenu Task_Group_PopupMenu
-      ControlID       =   ""
-      Enabled         =   True
-      Height          =   38
-      Index           =   -2147483648
-      Indicator       =   ""
-      InitialValue    =   ""
-      LastAddedRowIndex=   0
-      LastRowIndex    =   0
-      Left            =   161
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      PanelIndex      =   0
-      RowCount        =   0
-      Scope           =   0
-      SelectedRowIndex=   0
-      SelectedRowText =   ""
-      TabIndex        =   10
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   84
-      Visible         =   True
-      Width           =   352
-      _mPanelIndex    =   -1
-   End
-   Begin WebLabel Task_Group_Label
+   Begin WebLabel WED_Label
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -380,7 +282,7 @@ Begin WebDialog WebDialog_Task_Type_Add
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   53
+      Left            =   560
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -390,28 +292,30 @@ Begin WebDialog WebDialog_Task_Type_Add
       LockVertical    =   False
       Multiline       =   False
       PanelIndex      =   0
-      Scope           =   2
-      TabIndex        =   11
+      Scope           =   0
+      TabIndex        =   8
       TabStop         =   True
-      Text            =   "Task group:"
-      TextAlignment   =   3
+      Text            =   "WED"
+      TextAlignment   =   2
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   84
+      Top             =   66
       Underline       =   False
       Visible         =   True
-      Width           =   100
+      Width           =   180
       _mPanelIndex    =   -1
    End
-   Begin WebCheckbox Is_Schedulable_Checkbox
-      Caption         =   "Is schedulable"
+   Begin WebLabel THU_Label
+      Bold            =   False
       ControlID       =   ""
       Enabled         =   True
-      Height          =   34
-      Indeterminate   =   False
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
       Index           =   -2147483648
       Indicator       =   0
-      Left            =   571
+      Italic          =   False
+      Left            =   740
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -419,153 +323,308 @@ Begin WebDialog WebDialog_Task_Type_Add
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Multiline       =   False
       PanelIndex      =   0
-      Scope           =   2
-      TabIndex        =   12
+      Scope           =   0
+      TabIndex        =   9
       TabStop         =   True
+      Text            =   "THU"
+      TextAlignment   =   2
+      TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   218
-      Value           =   False
+      Top             =   66
+      Underline       =   False
       Visible         =   True
-      Width           =   188
+      Width           =   180
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel FRI_Label
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   0
+      Italic          =   False
+      Left            =   920
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      PanelIndex      =   0
+      Scope           =   0
+      TabIndex        =   10
+      TabStop         =   True
+      Text            =   "FRI"
+      TextAlignment   =   2
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   66
+      Underline       =   False
+      Visible         =   True
+      Width           =   180
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel SAT_Label
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   38
+      Index           =   -2147483648
+      Indicator       =   0
+      Italic          =   False
+      Left            =   1100
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      PanelIndex      =   0
+      Scope           =   0
+      TabIndex        =   11
+      TabStop         =   True
+      Text            =   "SAT"
+      TextAlignment   =   2
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   66
+      Underline       =   False
+      Visible         =   True
+      Width           =   180
+      _mPanelIndex    =   -1
+   End
+   Begin WebTimer REFRESH_Timer
+      ControlID       =   ""
+      Enabled         =   True
+      Index           =   -2147483648
+      Location        =   0
+      LockedInPosition=   False
+      PanelIndex      =   0
+      Period          =   1000
+      RunMode         =   0
+      Scope           =   2
       _mPanelIndex    =   -1
    End
 End
-#tag EndWebPage
+#tag EndWebContainerControl
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Calendar_Month = New DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
+		  DRAW_Date_WebContainers
+		  POPULATE_Calendar
+		  REFRESH_Timer.RunMode = WebTimer.RunModes.Multiple
+		  UPDATE_Theme
+		End Sub
+	#tag EndEvent
+
+	#tag Event
+		Sub Shown()
+		  
+		End Sub
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h21
-		Private Sub ENABLE_Add_Button()
-		  Add_Button.Indicator = WebUIControl.Indicators.Light
-		  Add_Button.Enabled = False
+		Private Sub DRAW_Date_WebContainers()
+		  Var left_position_Initial As Integer = Self.Left + 20
+		  Var top_position As Integer = Self.Top + SUN_Label.Top + SUN_Label.Height + 10
 		  
-		  If Task_Group_PopupMenu.SelectedRowIndex < 0  Then Return
+		  For row As Integer = 0 To 5
+		    
+		    Var left_position As Integer = left_position_Initial
+		    
+		    For column As Integer = 0 To 6
+		      
+		      Calendar_DATE_WEBCONTAINER.add( New WebContainer_Calendar_Date1)
+		      
+		      Calendar_DATE_WEBCONTAINER( Calendar_DATE_WEBCONTAINER.LastIndex).EmbedWithin( Self, _
+		      left_position + column * Calendar_DATE_WEBCONTAINER( Calendar_DATE_WEBCONTAINER.LastIndex).Width, _
+		      top_position + row * Calendar_DATE_WEBCONTAINER( Calendar_DATE_WEBCONTAINER.LastIndex).Height, _
+		      Calendar_DATE_WEBCONTAINER( Calendar_DATE_WEBCONTAINER.LastIndex).Width, _
+		      Calendar_DATE_WEBCONTAINER( Calendar_DATE_WEBCONTAINER.LastIndex).Height)
+		      
+		    Next
+		    
+		  Next
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub ENABLE_Arrows()
+		  If Calendar_Month.Month = DateTime.Now.Month + 1 _
+		    And Calendar_Month.Year = DateTime.Now.Year Then
+		    
+		    Forward_Month_Button.Enabled = False
+		    Forward_Month_Button.Visible = False
+		    
+		    Forward_Year_Button.Enabled = False
+		    Forward_Year_Button.Visible = False
+		    
+		  Else
+		    
+		    Forward_Month_Button.Enabled = True
+		    Forward_Month_Button.Visible = True
+		    
+		    Forward_Year_Button.Enabled = True
+		    Forward_Year_Button.Visible = True
+		    
+		  End If
 		  
-		  If Task_Type_Name_TextField.Text.IsEmpty Then Return
 		  
-		  If Weight_TextField.Text.IsEmpty Or Not Weight_TextField.Text.IsNumeric Then Return
+		  Backward_Month_Button.Enabled = True
+		  Backward_Month_Button.Visible = True
+		  
+		  Backward_Year_Button.Enabled = True
+		  Backward_Year_Button.Visible = True
+		  
+		  Me.SetFocus
 		  
 		  
-		  Add_Button.Indicator = WebUIControl.Indicators.Primary
-		  Add_Button.Enabled = True
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub POPULATE_Calendar()
+		  Month_Label.Text = Date_Module.Get_Month_Abbr( Calendar_Month.Month) + " " + Calendar_Month.Year.ToText
+		  
+		  
+		  
+		  Var d As DateTime = Calendar_Month
+		  
+		  While d.Day > 1
+		    
+		    d = d.SubtractInterval( 0, 0, 1)
+		    
+		  Wend
+		  
+		  While d.DayOfWeek > 1
+		    
+		    d = d.SubtractInterval( 0, 0, 1)
+		    
+		  Wend
+		  
+		  For i As Integer = 0 To Calendar_DATE_WEBCONTAINER.LastIndex
+		    
+		    Calendar_DATE_WEBCONTAINER(i).DRAW( d, Calendar_Month)
+		    
+		    d = d.AddInterval(0, 0, 1)
+		    
+		  Next
+		  
+		  ENABLE_Arrows
+		  
+		  For Each item As WebContainer_Calendar_Date1 In Calendar_DATE_WEBCONTAINER
+		    
+		    Item.UPDATE_Theme
+		    
+		  Next
+		  
+		  Latest_UPDATE = App.last_database_update
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub UPDATE_Theme()
+		  Me.Style.BackgroundColor = &c121212
+		  'Month_Label.Style = Theme_Colors.Material_BaseLine.On_Surface
+		  
+		  Month_Label.Style.ForegroundColor = Color.White
+		  
+		  
+		  SUN_Label.Style.ForegroundColor = Color.White
+		  MON_Label.Style.ForegroundColor = Color.White
+		  TUE_Label.Style.ForegroundColor = Color.White
+		  WED_Label.Style.ForegroundColor = Color.White
+		  THU_Label.Style.ForegroundColor = Color.White
+		  FRI_Label.Style.ForegroundColor = Color.White
+		  SAT_Label.Style.ForegroundColor = Color.White
+		  
 		  
 		  
 		End Sub
 	#tag EndMethod
 
 
+	#tag Property, Flags = &h0
+		Calendar_DATE_WEBCONTAINER() As WebContainer_Calendar_Date1
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		Calendar_Month As DateTime
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private Latest_UPDATE As DateTime
+	#tag EndProperty
+
+
 #tag EndWindowCode
 
-#tag Events Cancel_Button
+#tag Events Forward_Month_Button
 	#tag Event
 		Sub Pressed()
-		  Self.Close
+		  Calendar_Month = Calendar_Month.AddInterval(0, 1, 0)
+		  
+		  POPULATE_Calendar
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Add_Button
+#tag Events Forward_Year_Button
 	#tag Event
 		Sub Pressed()
+		  Calendar_Month = Calendar_Month.AddInterval(1, 0, 0)
+		  If Calendar_Month.SecondsFrom1970 > DateTime.Now.SecondsFrom1970 Then
+		    
+		    Calendar_Month = New DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
+		    
+		  End If
 		  
-		  
-		  
-		  Try
-		    
-		    If db.Connect Then
-		      
-		      
-		      Var ps As  PreparedSQLStatement = _
-		      db.Prepare("INSERT INTO physics_tasking.task_types " _
-		      + "(name, weight, has_multiplier, is_schedulable, instructions, task_group_id) " _
-		      + "VALUES ( ?, ?, ?, ?, ?, ?)")
-		      ps.BindType(0, MySQLPreparedStatement.MYSQL_TYPE_STRING)
-		      ps.BindType(1, MySQLPreparedStatement.MYSQL_TYPE_DOUBLE)
-		      ps.BindType(2, MySQLPreparedStatement.MYSQL_TYPE_TINY)
-		      ps.BindType(3, MySQLPreparedStatement.MYSQL_TYPE_TINY)
-		      ps.BindType(4, MySQLPreparedStatement.MYSQL_TYPE_BLOB)
-		      ps.BindType(5, MySQLPreparedStatement.MYSQL_TYPE_LONG)
-		      
-		      ps.ExecuteSQL( _
-		      Task_Type_Name_TextField.Text.Trim, _
-		      Weight_TextField.Text.ToDouble, _
-		      Has_Multiplier_Checkbox.Value, _
-		      Is_Schedulable_Checkbox.Value, _
-		      Instructions_TextArea.Text, _
-		      Task_Group_PopupMenu.RowTagAt( Task_Group_PopupMenu.SelectedRowIndex))
-		      
-		      App.last_database_update = DateTime.Now
-		      
-		      
-		      
-		    End If
-		    
-		    Self.Close
-		    
-		  Catch de As DatabaseException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
-		    theDialog.Show
-		    
-		  Catch noe As NilObjectException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
-		    theDialog.Show
-		    
-		  End Try
-		  
-		  
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub Opening()
-		  Add_Button.Indicator = WebUIControl.Indicators.Light
-		  Add_Button.Enabled = False
+		  POPULATE_Calendar
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Task_Type_Name_TextField
+#tag Events Backward_Month_Button
 	#tag Event
-		Sub TextChanged()
-		  ENABLE_Add_Button
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Has_Multiplier_Checkbox
-	#tag Event
-		Sub ValueChanged()
-		  ENABLE_Add_Button
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Task_Group_PopupMenu
-	#tag Event
-		Sub Opening()
-		  Var sql As String = "SELECT * FROM physics_tasking.task_groups " _
-		  + "ORDER BY name"
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		Sub Pressed()
+		  Calendar_Month = Calendar_Month.SubtractInterval(0, 1, 0)
 		  
-		  While Not rs.AfterLastRow
-		    
-		    Me.AddRow( rs.Column("name").StringValue.Trim.Uppercase)
-		    Me.RowTagAt( Me.LastAddedRowIndex) = rs.Column("task_group_id").IntegerValue
-		    
-		    rs.MoveToNextRow
-		    
-		  Wend
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub SelectionChanged(item As WebMenuItem)
-		  ENABLE_Add_Button
+		  POPULATE_Calendar
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Is_Schedulable_Checkbox
+#tag Events Backward_Year_Button
 	#tag Event
-		Sub ValueChanged()
-		  ENABLE_Add_Button
+		Sub Pressed()
+		  Calendar_Month = Calendar_Month.SubtractInterval(1, 0, 0)
+		  
+		  POPULATE_Calendar
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events REFRESH_Timer
+	#tag Event
+		Sub Run()
+		  If App.last_database_update <> Latest_UPDATE Then
+		    
+		    POPULATE_Calendar
+		    
+		  End If
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -577,18 +636,6 @@ End
 		InitialValue=""
 		Type="Integer"
 		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Position"
-		Visible=true
-		Group="Position"
-		InitialValue="0"
-		Type="WebDialog.Positions"
-		EditorType="Enum"
-		#tag EnumValues
-			"0 - Top"
-			"1 - Center"
-		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ControlCount"
@@ -603,14 +650,6 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue="-1"
-		Type="Integer"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Index"
-		Visible=false
-		Group="ID"
-		InitialValue="-2147483648"
 		Type="Integer"
 		EditorType=""
 	#tag EndViewProperty
@@ -663,87 +702,59 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Height"
-		Visible=true
-		Group="Behavior"
-		InitialValue="400"
-		Type="Integer"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="LayoutType"
-		Visible=true
-		Group="Behavior"
-		InitialValue="LayoutTypes.Fixed"
-		Type="LayoutTypes"
-		EditorType="Enum"
-		#tag EnumValues
-			"0 - Fixed"
-			"1 - Flex"
-		#tag EndEnumValues
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="LockBottom"
-		Visible=false
+		Visible=true
 		Group="Behavior"
-		InitialValue=""
+		InitialValue="False"
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockHorizontal"
-		Visible=false
+		Visible=true
 		Group="Behavior"
-		InitialValue=""
+		InitialValue="False"
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockLeft"
-		Visible=false
+		Visible=true
 		Group="Behavior"
-		InitialValue=""
+		InitialValue="True"
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockRight"
-		Visible=false
+		Visible=true
 		Group="Behavior"
-		InitialValue=""
+		InitialValue="False"
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockTop"
-		Visible=false
+		Visible=true
 		Group="Behavior"
-		InitialValue=""
+		InitialValue="True"
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockVertical"
-		Visible=false
+		Visible=true
 		Group="Behavior"
-		InitialValue=""
+		InitialValue="False"
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Visible"
-		Visible=false
+		Visible=true
 		Group="Behavior"
 		InitialValue=""
 		Type="Boolean"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Width"
-		Visible=true
-		Group="Behavior"
-		InitialValue="600"
-		Type="Integer"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -769,6 +780,20 @@ End
 		InitialValue=""
 		Type="String"
 		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ScrollDirection"
+		Visible=true
+		Group="Behavior"
+		InitialValue="ScrollDirections.None"
+		Type="WebContainer.ScrollDirections"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - None"
+			"1 - Horizontal"
+			"2 - Vertical"
+			"3 - Both"
+		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="TabIndex"
@@ -799,9 +824,21 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
+		Name="LayoutType"
+		Visible=true
+		Group="View"
+		InitialValue="LayoutTypes.Fixed"
+		Type="LayoutTypes"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Fixed"
+			"1 - Flex"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
 		Name="LayoutDirection"
 		Visible=true
-		Group="WebView"
+		Group="View"
 		InitialValue="LayoutDirections.LeftToRight"
 		Type="LayoutDirections"
 		EditorType="Enum"
@@ -811,5 +848,21 @@ End
 			"2 - TopToBottom"
 			"3 - BottomToTop"
 		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Width"
+		Visible=false
+		Group=""
+		InitialValue="250"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Height"
+		Visible=false
+		Group=""
+		InitialValue="250"
+		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior
