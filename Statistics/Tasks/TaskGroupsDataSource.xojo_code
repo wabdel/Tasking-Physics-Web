@@ -34,7 +34,7 @@ Implements WebDataSource
 		  Var sql As String = "SELECT COUNT(*) as c " _
 		  + "FROM physics_tasking.task_groups;" 
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  Return rs.Column("c").IntegerValue
@@ -57,7 +57,7 @@ Implements WebDataSource
 		  + "FROM physics_tasking.task_groups " _
 		  + "ORDER BY physics_tasking.task_groups.name ASC;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  Var s_all As New WebStyle
@@ -124,7 +124,7 @@ Implements WebDataSource
 		  + "FROM physics_tasking.task_groups " _
 		  + "ORDER BY physics_tasking.task_groups.name ASC;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("task_group_id").IntegerValue)
@@ -138,5 +138,47 @@ Implements WebDataSource
 	#tag EndMethod
 
 
+	#tag ViewBehavior
+		#tag ViewProperty
+			Name="Name"
+			Visible=true
+			Group="ID"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Index"
+			Visible=true
+			Group="ID"
+			InitialValue="-2147483648"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Super"
+			Visible=true
+			Group="ID"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Left"
+			Visible=true
+			Group="Position"
+			InitialValue="0"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Top"
+			Visible=true
+			Group="Position"
+			InitialValue="0"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+	#tag EndViewBehavior
 End Class
 #tag EndClass

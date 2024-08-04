@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Task_Types Implements WebDataSource
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   610
@@ -14,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Task_Types Implements WebDataSource
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -21,20 +23,24 @@ Begin WebContainer WEBCONTAINER_Task_Types Implements WebDataSource
    Width           =   950
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebListBox Task_types_ListBox
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   False
+      HeaderHeight    =   0
       Height          =   360
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   ""
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   0
       LockBottom      =   False
@@ -45,6 +51,7 @@ Begin WebContainer WEBCONTAINER_Task_Types Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -53,6 +60,7 @@ Begin WebContainer WEBCONTAINER_Task_Types Implements WebDataSource
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -77,8 +85,11 @@ Begin WebContainer WEBCONTAINER_Task_Types Implements WebDataSource
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   552
       Visible         =   True
@@ -104,9 +115,11 @@ Begin WebContainer WEBCONTAINER_Task_Types Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       MaximumCharactersAllowed=   0
+      PanelIndex      =   0
       ReadOnly        =   True
       Scope           =   2
       TabIndex        =   2
+      TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
@@ -134,8 +147,10 @@ Begin WebContainer WEBCONTAINER_Task_Types Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   3
+      TabStop         =   True
       Text            =   "Task types = 0"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -152,6 +167,7 @@ Begin WebContainer WEBCONTAINER_Task_Types Implements WebDataSource
       Index           =   -2147483648
       Location        =   0
       LockedInPosition=   False
+      PanelIndex      =   0
       Period          =   1000
       RunMode         =   2
       Scope           =   2
@@ -216,7 +232,7 @@ End
 		  Var sql As String = "SELECT COUNT(*) as c FROM physics_tasking.task_types " _
 		  + "WHERE task_group_id = " + task_group_id.ToString + ";"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  Return rs.Column("c").IntegerValue
@@ -245,7 +261,7 @@ End
 		    
 		  End Select
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -326,7 +342,7 @@ End
 		  + "WHERE task_group_id = " + task_group_id.ToString + " " _
 		  + "ORDER BY name;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("task_type_id").IntegerValue)
@@ -377,13 +393,13 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub Pressed(row as integer, column as integer)
+		Sub Pressed(row As Integer, column As Integer)
 		  If row > Me.RowCount - 1 Then Return
 		  
 		  Var sql as String = "SELECT instructions FROM physics_tasking.task_types " _
 		  + "WHERE task_type_id = " + Str(Me.RowTagAt(row)) + ";"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.RowCount = 1 Then
 		    
@@ -396,7 +412,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub DoublePressed(row as integer, column as integer)
+		Sub DoublePressed(row As Integer, column As Integer)
 		  If row > Me.RowCount - 1 Then Return
 		  
 		  Var theDialog As New WebDialog_Task_Type_Edit
@@ -445,6 +461,22 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

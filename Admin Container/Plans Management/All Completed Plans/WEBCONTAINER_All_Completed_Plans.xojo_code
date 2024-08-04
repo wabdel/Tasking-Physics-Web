@@ -232,7 +232,7 @@ End
 		  + "physics_tasking.plans.is_completed = 1 AND " _
 		  + "completion_date > '" + d_min.SubtractInterval( 0, 0, Physics_Tasking.Population_period_days).SQLDate  + "' " _
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  Return rs.Column("c").IntegerValue
@@ -264,7 +264,7 @@ End
 		  + "ORDER BY physics_tasking.plans.completion_date DESC, physics_tasking.patients.mrn ASC;"
 		  
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -345,7 +345,7 @@ End
 		  + "AND completion_date > '" + d_min.SubtractInterval( 0, 0, Physics_Tasking.Population_period_days).SQLDate  + "' " _
 		  + "ORDER BY physics_tasking.plans.completion_date DESC"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("plan_id").IntegerValue)
@@ -388,7 +388,12 @@ End
 		  Select Case column
 		  Case 5
 		    
-		    
+		    Var db As New MySQLCommunityServer
+		    db.Host = Physics_Tasking.db_host
+		    db.Port = Physics_Tasking.db_port
+		    db.DatabaseName = Physics_Tasking.db_name
+		    db.UserName = Physics_Tasking.db_username
+		    db.Password = Physics_Tasking.db_password
 		    
 		    Try
 		      
@@ -408,6 +413,9 @@ End
 		        My_Completed_Plans_Label.Text = "Plans = " + My_Completed_Plans_ListBox.DataSource.RowCount.ToString
 		        
 		      End If
+		      
+		      db.Close
+		      
 		    End Try
 		    
 		    

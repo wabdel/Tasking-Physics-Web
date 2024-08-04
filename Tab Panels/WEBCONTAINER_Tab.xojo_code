@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Tab
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   78
@@ -14,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Tab
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -21,7 +23,6 @@ Begin WebContainer WEBCONTAINER_Tab
    Width           =   200
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Tab_Button
       AllowAutoDisable=   False
@@ -41,8 +42,11 @@ Begin WebContainer WEBCONTAINER_Tab
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -58,6 +62,8 @@ End
 #tag Events Tab_Button
 	#tag Event
 		Sub Opening()
+		  Me.Indicator = WebUIControl.Indicators.Info
+		  Me.Style.ForegroundColor = Color.Black
 		  Me.Style.Value("box-shadow") = "0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)"
 		End Sub
 	#tag EndEvent
@@ -68,6 +74,22 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

@@ -188,6 +188,13 @@ End
 		    
 		    
 		    
+		    Var db As New MySQLCommunityServer
+		    db.Host = Physics_Tasking.db_host
+		    db.Port = Physics_Tasking.db_port
+		    db.DatabaseName = Physics_Tasking.db_name
+		    db.UserName = Physics_Tasking.db_username
+		    db.Password = Physics_Tasking.db_password
+		    
 		    Try
 		      
 		      If db.Connect Then
@@ -206,21 +213,13 @@ End
 		        My_Plans_Label.Text = "Plans = " + My_Due_Plans_ListBox.DataSource.RowCount.ToString
 		        
 		      End If
+		      
+		      db.Close
+		      
 		    End Try
 		    
 		  End If
 		  
-		  'If row > Me.RowCount - 1 Then Return
-		  '
-		  'Select Case column
-		  'Case 1
-		  '
-		  'Var theDialog As New Add_Task_WebDialog
-		  'theDialog.New_Task_Record = New Physics_Tasking.CLASS_Task_Record
-		  'theDialog.New_Task_Record.Task_Type_Record.id = Me.RowTagAt( row)
-		  'theDialog.Show
-		  '
-		  'End Select
 		End Sub
 	#tag EndEvent
 	#tag Event

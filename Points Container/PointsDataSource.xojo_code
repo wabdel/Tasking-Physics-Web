@@ -73,7 +73,7 @@ Implements WebDataSource
 		  + "FROM physics_tasking.points " _
 		  + "WHERE is_active = TRUE;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  
@@ -109,7 +109,7 @@ Implements WebDataSource
 		  + "FROM physics_tasking.points " _
 		  + "WHERE is_active = TRUE;"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  normalization = 0
 		  
@@ -177,7 +177,7 @@ Implements WebDataSource
 		    
 		  End Select
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  
@@ -318,7 +318,7 @@ Implements WebDataSource
 		      
 		    End Select
 		    
-		    Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		    Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		    
 		    While Not rs.AfterLastRow
 		      keys.Append( rs.Column("user_id").IntegerValue)
@@ -350,7 +350,7 @@ Implements WebDataSource
 		  + "INNER JOIN physics_tasking.users USING (user_id) " _
 		  + "ORDER BY total DESC"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("user_id").IntegerValue)

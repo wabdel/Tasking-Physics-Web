@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Replans_PieChart
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   500
@@ -14,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Replans_PieChart
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -23,15 +25,27 @@ Begin WebContainer WEBCONTAINER_Replans_PieChart
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
    Begin WebChart Replan_WebChart
+      AllowPopover    =   True
+      AutoCalculateYAxis=   False
       ControlID       =   ""
       DatasetCount    =   0
+      DatasetLastIndex=   0
       Enabled         =   True
+      GridColor       =   &c000000AA
       HasAnimation    =   False
       HasLegend       =   False
       Height          =   500
       Index           =   -2147483648
       Indicator       =   ""
+      IsGridVisible   =   False
+      IsXAxisVisible  =   False
+      IsYAxisVisible  =   False
+      LabelCount      =   0
+      LabelLastIndex  =   0
       Left            =   0
+      LegendColor     =   &c000000
+      LegendFontName  =   ""
+      LegendFontSize  =   0.0
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -40,9 +54,15 @@ Begin WebContainer WEBCONTAINER_Replans_PieChart
       LockTop         =   True
       LockVertical    =   False
       Mode            =   3
+      PanelIndex      =   0
+      PopoverBackgroundColor=   &c000000
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Title           =   ""
+      TitleColor      =   &c000000
+      TitleFontName   =   ""
+      TitleFontSize   =   0.0
       Tooltip         =   ""
       Top             =   0
       Visible         =   True
@@ -123,7 +143,7 @@ End
 		    
 		  End Select
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  Var data() As Double
 		  Var colors() As Color
@@ -158,7 +178,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub OverrideOptions(Options as JSONItem)
+		Sub OverrideOptions(options As JSONItem)
 		  Var legend As New JSONItem
 		  legend.Value("display") = True
 		  
@@ -169,6 +189,22 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

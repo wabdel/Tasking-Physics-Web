@@ -247,7 +247,7 @@ End
 		  + "WHERE physics_tasking.plans.is_completed = 0 " _
 		  + "ORDER BY physics_tasking.plans.due_date"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  Return  rs.Column("c").IntegerValue
@@ -286,7 +286,7 @@ End
 		  + "ORDER BY physics_tasking.plans.due_date, physics_tasking.patients.mrn ASC;"
 		  
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -394,7 +394,7 @@ End
 		  + "WHERE physics_tasking.plans.is_completed = 0 " _
 		  + "ORDER BY physics_tasking.plans.due_date"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("plan_id").IntegerValue)
@@ -438,7 +438,12 @@ End
 		  Select Case column
 		  Case 7
 		    
-		    
+		    Var db As New MySQLCommunityServer
+		    db.Host = Physics_Tasking.db_host
+		    db.Port = Physics_Tasking.db_port
+		    db.DatabaseName = Physics_Tasking.db_name
+		    db.UserName = Physics_Tasking.db_username
+		    db.Password = Physics_Tasking.db_password
 		    
 		    Try
 		      
@@ -458,6 +463,9 @@ End
 		        My_Plans_Label.Text = "Plans = " + My_Due_Plans_ListBox.DataSource.RowCount.ToString
 		        
 		      End If
+		      
+		      db.close
+		      
 		    End Try
 		    
 		  End Select

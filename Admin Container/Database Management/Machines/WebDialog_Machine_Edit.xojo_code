@@ -233,7 +233,7 @@ End
 		  + "WHERE LOWER(name) = '" _
 		  + Machine_Name_TextField.Text.Trim + "'"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.RowCount > 0 Then 
 		    
@@ -261,7 +261,7 @@ End
 			  
 			  Var sql As String = "SELECT * FROM machines " _
 			  + "WHERE machine_id = " + mmachine_id.ToString + ";"
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 			  
 			  
 			  Machine_Name_TextField.Text = rs.Column("name").StringValue.Trim
@@ -298,6 +298,12 @@ End
 	#tag Event
 		Sub Pressed()
 		  
+		  Var db As New MySQLCommunityServer
+		  db.Host = Physics_Tasking.db_host
+		  db.Port = Physics_Tasking.db_port
+		  db.DatabaseName = Physics_Tasking.db_name
+		  db.UserName = Physics_Tasking.db_username
+		  db.Password = Physics_Tasking.db_password
 		  
 		  
 		  Try
@@ -312,19 +318,15 @@ End
 		      ps.BindType(0, MySQLPreparedStatement.MYSQL_TYPE_STRING)
 		      ps.BindType(1, MySQLPreparedStatement.MYSQL_TYPE_LONG)
 		      
-		      
-		      
-		      
 		      ps.ExecuteSQL( _
 		      Machine_Name_TextField.Text.Trim, _
 		      machine_id )
 		      
 		      App.last_database_update = DateTime.Now
 		      
-		      
-		      
 		    End If
 		    
+		    db.close
 		    Self.Close
 		    
 		  Catch de As DatabaseException

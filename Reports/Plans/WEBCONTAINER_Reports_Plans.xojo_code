@@ -131,7 +131,7 @@ End
 		    + "GROUP BY YEAR(assignment_date) " _
 		    + "ORDER by YEAR(assignment_date);"
 		    
-		    rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		    rs = Physics_Tasking.SELECT_Statement( sql)
 		    
 		    While Not rs.AfterLastRow 
 		      
@@ -152,7 +152,7 @@ End
 		    + "GROUP BY QUARTER(assignment_date), YEAR(assignment_date) " _
 		    + "ORDER by YEAR(assignment_date), QUARTER(assignment_date);"
 		    
-		    rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		    rs = Physics_Tasking.SELECT_Statement( sql)
 		    
 		    While Not rs.AfterLastRow 
 		      
@@ -176,7 +176,7 @@ End
 		    + "GROUP BY MONTH(assignment_date), YEAR(assignment_date) " _
 		    + "ORDER BY YEAR(assignment_date), MONTH(assignment_date);"
 		    
-		    rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		    rs = Physics_Tasking.SELECT_Statement( sql)
 		    
 		    While Not rs.AfterLastRow 
 		      
@@ -199,7 +199,7 @@ End
 		    + "GROUP BY WEEK(assignment_date, 0), YEAR(assignment_date) " _
 		    + "ORDER BY YEAR(assignment_date), WEEK(assignment_date,0);"
 		    
-		    rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		    rs = Physics_Tasking.SELECT_Statement( sql)
 		    
 		    While Not rs.AfterLastRow 
 		      
@@ -234,7 +234,7 @@ End
 		  '+ "GROUP BY MONTH(assignment_date), YEAR(assignment_date) " _
 		  '+ "ORDER by YEAR(assignment_date), MONTH(assignment_date);"
 		  '
-		  'Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  'Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  '
 		  'Var data() As Double
 		  '

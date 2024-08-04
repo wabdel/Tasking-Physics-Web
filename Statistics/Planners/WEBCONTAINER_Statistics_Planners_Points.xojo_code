@@ -145,7 +145,7 @@ End
 		  
 		  Var sql As String ="SELECT user_id FROM points"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  
 		  While Not rs.AfterLastRow

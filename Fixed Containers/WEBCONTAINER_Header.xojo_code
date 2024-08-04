@@ -528,6 +528,8 @@ End
 #tag Events Directory_Button
 	#tag Event
 		Sub Pressed()
+		  Me.Indicator = WebUIControl.Indicators.Info
+		  Me.Style.ForegroundColor = Color.Black
 		  Var theDialog As New WebDialog_Directory
 		  theDialog.Show
 		End Sub

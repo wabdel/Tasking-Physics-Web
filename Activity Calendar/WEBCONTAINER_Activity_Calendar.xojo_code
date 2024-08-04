@@ -411,6 +411,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Height          =   120
       Index           =   0
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   20
@@ -441,6 +442,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Height          =   120
       Index           =   1
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   200
@@ -471,6 +473,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Height          =   120
       Index           =   2
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   380
@@ -501,6 +504,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Height          =   120
       Index           =   3
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   560
@@ -531,6 +535,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Height          =   120
       Index           =   4
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   740
@@ -561,6 +566,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Height          =   120
       Index           =   5
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   920
@@ -591,6 +597,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Height          =   120
       Index           =   6
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   1100
@@ -1705,6 +1712,8 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
+		  
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background
 		  Calendar_Month = New DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
 		  
 		  POPULATE_Calendar
@@ -1829,6 +1838,12 @@ End
 		  POPULATE_Calendar
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Indicator = WebUIControl.Indicators.Primary
+		  Me.Style.ForegroundColor = Color.White
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Forward_Year_Button
 	#tag Event
@@ -1843,6 +1858,12 @@ End
 		  POPULATE_Calendar
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Indicator = WebUIControl.Indicators.Primary
+		  Me.Style.ForegroundColor = Color.White
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Backward_Month_Button
 	#tag Event
@@ -1853,6 +1874,12 @@ End
 		  
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Indicator = WebUIControl.Indicators.Primary
+		  Me.Style.ForegroundColor = Color.White
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Backward_Year_Button
 	#tag Event
@@ -1860,6 +1887,12 @@ End
 		  Calendar_Month = Calendar_Month.SubtractInterval(1, 0, 0)
 		  
 		  POPULATE_Calendar
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Indicator = WebUIControl.Indicators.Primary
+		  Me.Style.ForegroundColor = Color.White
 		End Sub
 	#tag EndEvent
 #tag EndEvents

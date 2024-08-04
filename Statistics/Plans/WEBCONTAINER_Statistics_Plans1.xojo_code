@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Statistics_Plans1 Implements WebDataSource
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   600
@@ -14,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans1 Implements WebDataSource
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -21,20 +23,24 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans1 Implements WebDataSource
    Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebListBox Site_ListBox
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   True
+      HeaderHeight    =   0
       Height          =   520
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   20
       LockBottom      =   False
@@ -45,6 +51,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans1 Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -53,6 +60,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans1 Implements WebDataSource
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -60,6 +68,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans1 Implements WebDataSource
       _mPanelIndex    =   -1
    End
    Begin WEBCONTAINER_Statistics_Plans_PlanTypes Statistics_Plans_PlanTypes
+      ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   560
@@ -75,10 +84,12 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans1 Implements WebDataSource
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   2
       ScrollDirection =   0
       site_id         =   0
       TabIndex        =   1
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -106,8 +117,10 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans1 Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   2
+      TabStop         =   True
       Text            =   "Total = 0 "
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -168,7 +181,7 @@ End
 		  
 		  Var sql As String = "SELECT COUNT(*) as c " _
 		  + "FROM physics_tasking.plans; "
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  Return rs.Column("c").IntegerValue
@@ -203,7 +216,7 @@ End
 		  + "GROUP BY (site_id) " _
 		  + "ORDER BY site;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -268,7 +281,7 @@ End
 		  + "FROM physics_tasking.sites " _
 		  + "ORDER BY physics_tasking.sites.name"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("site_id").IntegerValue)
@@ -300,7 +313,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub Pressed(row as integer, column as integer)
+		Sub Pressed(row As Integer, column As Integer)
 		  Statistics_Plans_PlanTypes.site_id = Me.RowTagAt( row)
 		End Sub
 	#tag EndEvent
@@ -313,6 +326,22 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

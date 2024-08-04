@@ -321,7 +321,7 @@ End
 		  + "AND MONTH(DATE(due_date)) IN (1,2,3) " _
 		  + "AND physics_tasking.plans.physician_id is NOT NULL " 
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.Column("c").IntegerValue > 0 Then
 		    
@@ -340,7 +340,7 @@ End
 		  + "AND MONTH(DATE(due_date)) IN (4,5,6) " _
 		  + "AND physics_tasking.plans.physician_id is NOT NULL " 
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.Column("c").IntegerValue > 0 Then
 		    
@@ -360,7 +360,7 @@ End
 		  + "AND MONTH(DATE(due_date)) IN (7,8,9) " _
 		  + "AND physics_tasking.plans.physician_id is NOT NULL "
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.Column("c").IntegerValue > 0 Then
 		    
@@ -380,7 +380,7 @@ End
 		  + "AND MONTH(DATE(due_date)) IN (10,11,12) " _
 		  + "AND physics_tasking.plans.physician_id is NOT NULL " 
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.Column("c").IntegerValue > 0 Then
 		    
@@ -416,7 +416,7 @@ End
 		  
 		  
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  Return rs.Column("c").IntegerValue
@@ -453,7 +453,7 @@ End
 		  + "ORDER BY physics_tasking.plans.due_date ASC"
 		  
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -557,7 +557,7 @@ End
 		  + "AND YEAR(due_date) = " + PopupMenu_Year.RowTagAt( PopupMenu_Year.SelectedRowIndex) + " " _
 		  + "ORDER BY physics_tasking.plans.due_date ASC"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("plan_id").IntegerValue)
@@ -624,7 +624,7 @@ End
 		  
 		  
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -746,7 +746,7 @@ End
 		  + "GROUP BY y " _
 		  + "ORDER BY y DESC;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.RowCount < 1 Then Return
 		  

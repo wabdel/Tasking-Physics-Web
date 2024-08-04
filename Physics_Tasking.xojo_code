@@ -19,7 +19,7 @@ Protected Module Physics_Tasking
 		  + "WHERE is_retired = FALSE " _
 		  + "AND category_id In (2,3);"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  Physics_Tasking.EXECUTE_Statement(sql)
 		  
 		  
 		  
@@ -36,7 +36,7 @@ Protected Module Physics_Tasking
 		  + "AND category_id In (2,3);"
 		  
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  Physics_Tasking.EXECUTE_Statement(sql)
 		  
 		  
 		  sql = "CREATE OR REPLACE VIEW annual_task_points AS " _
@@ -51,7 +51,7 @@ Protected Module Physics_Tasking
 		  + "WHERE is_retired = FALSE " _
 		  + "AND category_id In (2,3);"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  Physics_Tasking.EXECUTE_Statement(sql)
 		  
 		  sql = "CREATE OR REPLACE VIEW recent_task_points AS " _
 		  + "SELECT user_id, " _
@@ -65,7 +65,7 @@ Protected Module Physics_Tasking
 		  + "WHERE is_retired = FALSE " _
 		  + "AND category_id In (2,3);"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  Physics_Tasking.EXECUTE_Statement(sql)
 		  
 		  sql = "CREATE OR REPLACE VIEW annual_scheduled_task_points AS " _
 		  + "SELECT user_id, " _
@@ -81,7 +81,7 @@ Protected Module Physics_Tasking
 		  + "WHERE is_retired = FALSE " _
 		  + "AND category_id IN (2,3);"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  Physics_Tasking.EXECUTE_Statement(sql)
 		  
 		  
 		  
@@ -99,7 +99,7 @@ Protected Module Physics_Tasking
 		  + "WHERE is_retired = FALSE " _
 		  + "AND category_id IN (2,3); "
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  Physics_Tasking.EXECUTE_Statement(sql)
 		  
 		  
 		  
@@ -126,7 +126,7 @@ Protected Module Physics_Tasking
 		  + "INNER JOIN users USING(user_id) " _
 		  + "ORDER BY total DESC;"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  Physics_Tasking.EXECUTE_Statement(sql)
 		  
 		  
 		End Sub
@@ -168,7 +168,7 @@ Protected Module Physics_Tasking
 		  + "WHERE is_retired = FALSE " _
 		  + "AND category_id In (2,3);"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  Physics_Tasking.EXECUTE_Statement(sql)
 		  
 		  
 		  
@@ -202,7 +202,7 @@ Protected Module Physics_Tasking
 		  + "AND category_id In (2,3);"
 		  
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  Physics_Tasking.EXECUTE_Statement(sql)
 		  
 		  
 		  sql = "CREATE OR REPLACE VIEW annual_task_points AS " _
@@ -217,7 +217,7 @@ Protected Module Physics_Tasking
 		  + "WHERE is_retired = FALSE " _
 		  + "AND category_id In (2,3);"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  Physics_Tasking.EXECUTE_Statement(sql)
 		  
 		  sql = "CREATE OR REPLACE VIEW recent_task_points AS " _
 		  + "SELECT user_id, " _
@@ -231,7 +231,7 @@ Protected Module Physics_Tasking
 		  + "WHERE is_retired = FALSE " _
 		  + "AND category_id In (2,3);"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  Physics_Tasking.EXECUTE_Statement(sql)
 		  
 		  sql = "CREATE OR REPLACE VIEW annual_scheduled_task_points AS " _
 		  + "SELECT user_id, " _
@@ -258,7 +258,7 @@ Protected Module Physics_Tasking
 		  + "WHERE is_retired = FALSE " _
 		  + "AND category_id IN (2,3);"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  Physics_Tasking.EXECUTE_Statement(sql)
 		  
 		  
 		  
@@ -287,7 +287,7 @@ Protected Module Physics_Tasking
 		  + "WHERE is_retired = FALSE " _
 		  + "AND category_id IN (2,3); "
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  Physics_Tasking.EXECUTE_Statement(sql)
 		  
 		  
 		  
@@ -314,7 +314,7 @@ Protected Module Physics_Tasking
 		  + "INNER JOIN users USING(user_id) " _
 		  + "ORDER BY total DESC;"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  Physics_Tasking.EXECUTE_Statement(sql)
 		  
 		  
 		End Sub
@@ -342,9 +342,14 @@ Protected Module Physics_Tasking
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub DB_EXECUTE_Statement(sql as String)
+		Sub EXECUTE_Statement(sql as String)
 		  
-		  
+		  Var db As New MySQLCommunityServer
+		  db.Host = Physics_Tasking.db_host
+		  db.Port = Physics_Tasking.db_port
+		  db.DatabaseName = Physics_Tasking.db_name
+		  db.UserName = Physics_Tasking.db_username
+		  db.Password = Physics_Tasking.db_password
 		  
 		  If Not sql.EndsWith(";") Then sql = sql + ";"
 		  
@@ -368,7 +373,7 @@ Protected Module Physics_Tasking
 		        
 		      Wend
 		      
-		      Physics_Tasking.DB_EXECUTE_Statement(sql)
+		      Physics_Tasking.EXECUTE_Statement(sql)
 		    Else
 		      
 		      Var theDialog As New MessageWebDialog
@@ -385,61 +390,6 @@ Protected Module Physics_Tasking
 		    
 		  End Try
 		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function DB_SELECT_Statement(sql as String) As RowSet
-		  
-		  
-		  
-		  If Not sql.EndsWith(";") Then sql = sql + ";"
-		  
-		  Try
-		    
-		    If db.Connect Then
-		      
-		      Var rs As RowSet = db.SelectSQL(sql)
-		      
-		      While rs = Nil
-		        
-		        rs  = db.SelectSQL(sql)
-		        
-		      Wend
-		      
-		      
-		      Return rs
-		      
-		    End If
-		    
-		    db.Close
-		    
-		  Catch de As DatabaseException
-		    
-		    If de.ErrorNumber = 48879 Then
-		      
-		      Var waitUntil As Integer = Ticks + 15
-		      
-		      While Ticks < waitUntil
-		        
-		      Wend
-		      
-		      Return Physics_Tasking.DB_SELECT_Statement(sql)
-		    Else
-		      
-		      Var theDialog As New MessageWebDialog
-		      theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
-		      theDialog.Show
-		      
-		    End If
-		    
-		  Catch noe As NilObjectException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
-		    theDialog.Show
-		    
-		  End Try
-		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -630,6 +580,64 @@ Protected Module Physics_Tasking
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub INSERT_Row(table as String, row as DatabaseRow)
+		  
+		  Var db As New MySQLCommunityServer
+		  db.Host = Physics_Tasking.db_host
+		  db.Port = Physics_Tasking.db_port
+		  db.DatabaseName = Physics_Tasking.db_name
+		  db.UserName = Physics_Tasking.db_username
+		  db.Password = Physics_Tasking.db_password
+		  
+		  
+		  
+		  
+		  Try
+		    
+		    If db.Connect Then
+		      
+		      
+		      db.AddRow( table, row)
+		      
+		    End If
+		    
+		    
+		    db.Close
+		    
+		  Catch de As DatabaseException
+		    
+		    If de.ErrorNumber = 48879 Then
+		      
+		      Var waitUntil As Integer = Ticks + 15
+		      
+		      While Ticks < waitUntil
+		        
+		      Wend
+		      
+		      If db.Connect Then
+		        
+		        db.AddRow( table, row)
+		        
+		      End If
+		    Else
+		      
+		      Var theDialog As New MessageWebDialog
+		      theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
+		      theDialog.Show
+		      
+		    End If
+		    
+		  Catch noe As NilObjectException
+		    
+		    Var theDialog As New MessageWebDialog
+		    theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
+		    theDialog.Show
+		    
+		  End Try
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub POPULATE_Groups()
 		  
 		  
@@ -645,7 +653,7 @@ Protected Module Physics_Tasking
 		  +"FROM physics_tasking.categories WHERE category_id NOT IN (" + id_list + ");"
 		  
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -692,7 +700,7 @@ Protected Module Physics_Tasking
 		  Var sql As String = "SELECT user_id " _
 		  +"FROM physics_tasking.users WHERE user_id NOT IN (" + id_list + ");"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  While Not rs.AfterLastRow
@@ -715,7 +723,12 @@ Protected Module Physics_Tasking
 	#tag Method, Flags = &h0
 		Function RETURN_Login_User_ID(login as String, password as String) As Integer
 		  
-		  
+		  Var db As New MySQLCommunityServer
+		  db.Host = Physics_Tasking.db_host
+		  db.Port = Physics_Tasking.db_port
+		  db.DatabaseName = Physics_Tasking.db_name
+		  db.UserName = Physics_Tasking.db_username
+		  db.Password = Physics_Tasking.db_password
 		  
 		  Try
 		    If db.Connect Then
@@ -763,6 +776,66 @@ Protected Module Physics_Tasking
 		    
 		  End Try
 		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function SELECT_Statement(sql as String) As RowSet
+		  Var db As New MySQLCommunityServer
+		  db.Host = Physics_Tasking.db_host
+		  db.Port = Physics_Tasking.db_port
+		  db.DatabaseName = Physics_Tasking.db_name
+		  db.UserName = Physics_Tasking.db_username
+		  db.Password = Physics_Tasking.db_password
+		  
+		  
+		  If Not sql.EndsWith(";") Then sql = sql + ";"
+		  
+		  Try
+		    
+		    If db.Connect Then
+		      
+		      Var rs As RowSet = db.SelectSQL(sql)
+		      
+		      While rs = Nil
+		        
+		        rs  = db.SelectSQL(sql)
+		        
+		      Wend
+		      
+		      
+		      Return rs
+		      
+		    End If
+		    
+		    db.Close
+		    
+		  Catch de As DatabaseException
+		    
+		    If de.ErrorNumber = 48879 Then
+		      
+		      Var waitUntil As Integer = Ticks + 15
+		      
+		      While Ticks < waitUntil
+		        
+		      Wend
+		      
+		      Return Physics_Tasking.SELECT_Statement(sql)
+		    Else
+		      
+		      Var theDialog As New MessageWebDialog
+		      theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
+		      theDialog.Show
+		      
+		    End If
+		    
+		  Catch noe As NilObjectException
+		    
+		    Var theDialog As New MessageWebDialog
+		    theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
+		    theDialog.Show
+		    
+		  End Try
 		End Function
 	#tag EndMethod
 
@@ -972,7 +1045,7 @@ Protected Module Physics_Tasking
 		  +"random_seed  INT UNSIGNED NOT NULL DEFAULT 17327, " _
 		  +"PRIMARY KEY (general_information_id));"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  
 		  
@@ -990,42 +1063,42 @@ Protected Module Physics_Tasking
 		  +"category_id INT AUTO_INCREMENT, " _
 		  +"name VARCHAR(50) NOT NULL UNIQUE, " _
 		  +"PRIMARY KEY (category_id));"
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  sql = "INSERT INTO physics_tasking.categories (name) " _
 		  +"SELECT * FROM (SELECT 'administrator') AS tmp " _
 		  +"WHERE Not EXISTS (SELECT name FROM physics_tasking.categories " _
 		  +"WHERE name = 'administrator') LIMIT 1"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  sql = "INSERT INTO physics_tasking.categories (name) " _
 		  +"SELECT * FROM (SELECT 'physicist') AS tmp " _
 		  +"WHERE Not EXISTS (SELECT name FROM physics_tasking.categories " _
 		  +"WHERE name = 'physicist') LIMIT 1"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  sql = "INSERT INTO physics_tasking.categories (name) " _
 		  +"SELECT * FROM (SELECT 'dosimetrist') AS tmp " _
 		  +"WHERE Not EXISTS (SELECT name FROM physics_tasking.categories " _
 		  +"WHERE name = 'dosimetrist') LIMIT 1"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  sql = "INSERT INTO physics_tasking.categories (name) " _
 		  +"SELECT * FROM (SELECT 'therapist') AS tmp " _
 		  +"WHERE Not EXISTS (SELECT name FROM physics_tasking.categories " _
 		  +"WHERE name = 'therapist') LIMIT 1"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  sql = "INSERT INTO physics_tasking.categories (name) " _
 		  +"SELECT * FROM (SELECT 'physician') AS tmp " _
 		  +"WHERE Not EXISTS (SELECT name FROM physics_tasking.categories " _
 		  +"WHERE name = 'physician') LIMIT 1"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  
 		  
@@ -1045,7 +1118,7 @@ Protected Module Physics_Tasking
 		  +"machine_id INT AUTO_INCREMENT, " _
 		  +"name VARCHAR(50) NOT NULL UNIQUE, " _
 		  +"PRIMARY KEY (machine_id));"
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		End Sub
 	#tag EndMethod
 
@@ -1061,7 +1134,7 @@ Protected Module Physics_Tasking
 		  +"FOREIGN KEY (user_id) REFERENCES users(user_id) " _
 		  +"ON UPDATE NO ACTION ON DELETE NO ACTION);"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  
 		  
@@ -1087,7 +1160,7 @@ Protected Module Physics_Tasking
 		  +"FOREIGN KEY (overtime_type_id) REFERENCES overtime_types(overtime_type_id) " _
 		  +"ON UPDATE NO ACTION ON DELETE NO ACTION);"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  
 		  
@@ -1104,69 +1177,69 @@ Protected Module Physics_Tasking
 		  +"name VARCHAR(100) NOT NULL, " _
 		  +"PRIMARY KEY (overtime_type_id));"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  sql = "INSERT INTO physics_tasking.overtime_types (name) " _
 		  +"SELECT * FROM (SELECT 'Other') AS tmp " _
 		  +"WHERE Not EXISTS (SELECT name FROM physics_tasking.overtime_types " _
 		  +"WHERE name = 'Other') LIMIT 1"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  sql = "INSERT INTO physics_tasking.overtime_types (name) " _
 		  +"SELECT * FROM (SELECT 'TrueBeam_Rose') AS tmp " _
 		  +"WHERE Not EXISTS (SELECT name FROM physics_tasking.overtime_types " _
 		  +"WHERE name = 'TrueBeam_Rose') LIMIT 1"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  sql = "INSERT INTO physics_tasking.overtime_types (name) " _
 		  +"SELECT * FROM (SELECT 'TrueBeam_Ocean') AS tmp " _
 		  +"WHERE Not EXISTS (SELECT name FROM physics_tasking.overtime_types " _
 		  +"WHERE name = 'TrueBeam_Ocean') LIMIT 1"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  sql = "INSERT INTO physics_tasking.overtime_types (name) " _
 		  +"SELECT * FROM (SELECT 'GammaMedPlus') AS tmp " _
 		  +"WHERE Not EXISTS (SELECT name FROM physics_tasking.overtime_types " _
 		  +"WHERE name = 'GammaMedPlus') LIMIT 1"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  sql = "INSERT INTO physics_tasking.overtime_types (name) " _
 		  +"SELECT * FROM (SELECT 'GE CT-Simulator') AS tmp " _
 		  +"WHERE Not EXISTS (SELECT name FROM physics_tasking.overtime_types " _
 		  +"WHERE name = 'GE CT-Simulator') LIMIT 1"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  sql = "INSERT INTO physics_tasking.overtime_types (name) " _
 		  +"SELECT * FROM (SELECT 'PSQA') AS tmp " _
 		  +"WHERE Not EXISTS (SELECT name FROM physics_tasking.overtime_types " _
 		  +"WHERE name = 'GE CT-Simulator') LIMIT 1"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  sql = "INSERT INTO physics_tasking.overtime_types (name) " _
 		  +"SELECT * FROM (SELECT 'Device Calibration') AS tmp " _
 		  +"WHERE Not EXISTS (SELECT name FROM physics_tasking.overtime_types " _
 		  +"WHERE name = 'Device Calibration') LIMIT 1"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  sql = "INSERT INTO physics_tasking.overtime_types (name) " _
 		  +"SELECT * FROM (SELECT 'Treatment Planning') AS tmp " _
 		  +"WHERE Not EXISTS (SELECT name FROM physics_tasking.overtime_types " _
 		  +"WHERE name = 'Treatment Planning') LIMIT 1"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  sql = "INSERT INTO physics_tasking.overtime_types (name) " _
 		  +"SELECT * FROM (SELECT 'Emergency Treatment') AS tmp " _
 		  +"WHERE Not EXISTS (SELECT name FROM physics_tasking.overtime_types " _
 		  +"WHERE name = 'Emergency Treatment') LIMIT 1"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		End Sub
 	#tag EndMethod
 
@@ -1182,7 +1255,7 @@ Protected Module Physics_Tasking
 		  +"mrn VARCHAR(15) NOT NULL UNIQUE, " _
 		  +"PRIMARY KEY (patient_id));"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  
 		  
@@ -1215,20 +1288,20 @@ Protected Module Physics_Tasking
 		  + "FOREIGN KEY (user_id) REFERENCES users(user_id) " _
 		  + "ON UPDATE NO ACTION ON DELETE NO ACTION);"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  
 		  // Add is_replan column
 		  
 		  sql = "SHOW COLUMNS FROM physics_tasking.plans "  _
 		  + "LIKE 'is_replan';"
-		  Var rs As RowSet= Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet= Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.RowCount = 0 Then
 		    
 		    sql = "ALTER TABLE physics_tasking.plans " _
 		    + "ADD COLUMN is_replan BOOLEAN NOT NULL DEFAULT FALSE;"
-		    Physics_Tasking.DB_EXECUTE_Statement( sql)
+		    Physics_Tasking.EXECUTE_Statement( sql)
 		    
 		  End If
 		  
@@ -1236,16 +1309,16 @@ Protected Module Physics_Tasking
 		  
 		  sql = "SHOW COLUMNS FROM physics_tasking.plans "  _
 		  + "LIKE 'physician_id';"
-		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.RowCount = 0 Then
 		    
 		    sql = "ALTER TABLE physics_tasking.plans " _
 		    + "ADD COLUMN physician_id INTEGER;"
-		    Physics_Tasking.DB_EXECUTE_Statement( sql)
+		    Physics_Tasking.EXECUTE_Statement( sql)
 		    sql = "ALTER TABLE physics_tasking.plans " _
 		    + "ADD FOREIGN KEY (physician_id) REFERENCES users(user_id);"
-		    Physics_Tasking.DB_EXECUTE_Statement( sql)
+		    Physics_Tasking.EXECUTE_Statement( sql)
 		    
 		  End If
 		  
@@ -1267,20 +1340,20 @@ Protected Module Physics_Tasking
 		  +"FOREIGN KEY (site_id) REFERENCES sites(site_id) " _
 		  +"ON UPDATE NO ACTION ON DELETE NO ACTION);"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  
 		  // Add no_of_plans column
 		  
 		  sql = "SHOW COLUMNS FROM physics_tasking.plan_types "  _
 		  + "LIKE 'no_of_plans';"
-		  Var rs As RowSet= Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet= Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.RowCount = 0 Then
 		    
 		    sql = "ALTER TABLE physics_tasking.plan_types " _
 		    + "ADD COLUMN no_of_plans INTEGER NOT NULL DEFAULT 1;"
-		    Physics_Tasking.DB_EXECUTE_Statement( sql)
+		    Physics_Tasking.EXECUTE_Statement( sql)
 		    
 		  End If
 		  
@@ -1316,7 +1389,7 @@ Protected Module Physics_Tasking
 		  + "ON UPDATE NO ACTION ON DELETE NO ACTION);"
 		  
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  
 		  
@@ -1337,7 +1410,7 @@ Protected Module Physics_Tasking
 		  +"is_uppercase BOOLEAN DEFAULT False, " _
 		  +"PRIMARY KEY (site_id));"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  
 		  sql = "INSERT INTO physics_tasking.sites (name) " _
@@ -1345,7 +1418,7 @@ Protected Module Physics_Tasking
 		  +"WHERE NOT EXISTS (SELECT name FROM physics_tasking.sites " _
 		  +"WHERE name = 'Brain') LIMIT 1"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  
 		  
@@ -1378,7 +1451,7 @@ Protected Module Physics_Tasking
 		  +"ON UPDATE NO ACTION ON DELETE NO ACTION);"
 		  
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  
 		  
@@ -1397,14 +1470,14 @@ Protected Module Physics_Tasking
 		  +"name VARCHAR(50) NOT NULL UNIQUE, " _
 		  +"PRIMARY KEY (task_group_id));"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  sql = "INSERT INTO physics_tasking.task_groups (name) " _
 		  +"SELECT * FROM (SELECT 'Administration') AS tmp " _
 		  +"WHERE NOT EXISTS (SELECT name FROM physics_tasking.task_groups " _
 		  +"WHERE name = 'Administration') LIMIT 1"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  
 		  
@@ -1432,32 +1505,32 @@ Protected Module Physics_Tasking
 		  +"FOREIGN KEY (task_group_id) REFERENCES task_groups(task_group_id) " _
 		  +"ON UPDATE NO ACTION ON DELETE NO ACTION);"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  // Add retired column
 		  
 		  sql = "SHOW COLUMNS FROM physics_tasking.task_types LIKE 'is_schedulable';"
-		  Var rs As RowSet= Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet= Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.RowCount = 0 Then
 		    
 		    sql = "ALTER TABLE physics_tasking.task_types " _
 		    + "ADD COLUMN is_schedulable BOOLEAN NOT NULL DEFAULT FALSE;"
-		    Physics_Tasking.DB_EXECUTE_Statement( sql)
+		    Physics_Tasking.EXECUTE_Statement( sql)
 		    
 		  End If
 		  
 		  
 		  sql = "SELECT * FROM physics_tasking.task_types WHERE task_type_id = 1;"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.Column("task_type_id").Value = Nil Then
 		    
 		    
 		    sql = "INSERT INTO physics_tasking.task_types (name, task_group_id, weight, has_multiplier, instructions) " _
 		    + "VALUES ('Assign task/plan', 1, 0.08, TRUE, 'Assigning a plan or task. ***Countable [number of plans and tasks]')"
-		    Physics_Tasking.DB_EXECUTE_Statement( sql)
+		    Physics_Tasking.EXECUTE_Statement( sql)
 		    
 		    
 		  End If
@@ -1477,7 +1550,7 @@ Protected Module Physics_Tasking
 		  + "PRIMARY KEY (timeback_id), " _
 		  + "FOREIGN KEY (user_id) REFERENCES users(user_id));"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  
 		  
@@ -1498,20 +1571,20 @@ Protected Module Physics_Tasking
 		  +"PRIMARY KEY (timelog_id), " _
 		  +"FOREIGN KEY (user_id) REFERENCES users(user_id));"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  
 		  // Add add_subtract column
 		  
 		  sql = "SHOW COLUMNS FROM physics_tasking.timelogs "  _
 		  + "LIKE 'add_subtract';"
-		  Var rs As RowSet= Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet= Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.RowCount = 0 Then
 		    
 		    sql = "ALTER TABLE physics_tasking.timelogs " _
 		    + "ADD COLUMN add_subtract DOUBLE NOT NULL DEFAULT 0;"
-		    Physics_Tasking.DB_EXECUTE_Statement( sql)
+		    Physics_Tasking.EXECUTE_Statement( sql)
 		    
 		  End If
 		End Sub
@@ -1541,18 +1614,18 @@ Protected Module Physics_Tasking
 		  +"FOREIGN KEY (category_id) REFERENCES categories(category_id) " _
 		  +"ON UPDATE NO ACTION ON DELETE NO ACTION);"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  // Add retired column
 		  
 		  sql = "SHOW COLUMNS FROM physics_tasking.users LIKE 'is_retired';"
-		  Var rs As RowSet= Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet= Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.RowCount = 0 Then
 		    
 		    sql = "ALTER TABLE physics_tasking.users " _
 		    + "ADD COLUMN is_retired BOOLEAN NOT NULL DEFAULT FALSE;"
-		    Physics_Tasking.DB_EXECUTE_Statement( sql)
+		    Physics_Tasking.EXECUTE_Statement( sql)
 		    
 		  End If
 		  
@@ -1562,11 +1635,10 @@ Protected Module Physics_Tasking
 		  sql = "SELECT * FROM physics_tasking.users WHERE " _
 		  +"login = 'admin'"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  If rs.RowCount = 0 Then
-		    
 		    
 		    
 		    Var row As New DatabaseRow
@@ -1584,28 +1656,11 @@ Protected Module Physics_Tasking
 		    row.Column("reset_password").BooleanValue = False
 		    
 		    
-		    Try
-		      
-		      If db.Connect Then
-		        db.AddRow( "physics_tasking.users", row)
-		        
-		      End If
-		      
-		      
-		    Catch de As DatabaseException
-		      
-		      Var theDialog As New MessageWebDialog
-		      theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
-		      theDialog.Show
-		      
-		    Catch noe As NilObjectException
-		      
-		      Var theDialog As New MessageWebDialog
-		      theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
-		      theDialog.Show
-		      
-		    End Try
+		    Physics_Tasking.INSERT_Row( "physics_tasking.users", row)
+		    
 		  End If
+		  
+		  
 		  
 		  
 		End Sub
@@ -1621,7 +1676,7 @@ Protected Module Physics_Tasking
 		  +"users_list VARCHAR(100) NOT NULL, "_
 		  +"PRIMARY KEY (vacation_date));"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement( sql)
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  
 		  
@@ -1655,6 +1710,26 @@ Protected Module Physics_Tasking
 
 
 	#tag Property, Flags = &h0
+		db_host As String = "127.0.0.1"
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		db_name As String = "physics_tasking"
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		db_password As String = "physics_tasking_user"
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		db_port As integer = 3306
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		db_username As String = "physics_tasking_user"
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		Groups() As Physics_Tasking.CLASS_Group_Record
 	#tag EndProperty
 
@@ -1670,6 +1745,12 @@ Protected Module Physics_Tasking
 			  
 			  
 			  
+			  Var db As New MySQLCommunityServer
+			  db.Host = Physics_Tasking.db_host
+			  db.Port = Physics_Tasking.db_port
+			  db.DatabaseName = Physics_Tasking.db_name
+			  db.UserName = Physics_Tasking.db_username
+			  db.Password = Physics_Tasking.db_password
 			  
 			  If db.Connect Then misDatabase_Online = True
 			  

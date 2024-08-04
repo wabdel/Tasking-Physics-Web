@@ -15,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -42,6 +43,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans
       LockTop         =   True
       LockVertical    =   False
       PanelCount      =   2
+      PanelIndex      =   0
       Scope           =   2
       SelectedPanelIndex=   0
       TabDefinition   =   "All planners\rPer planner"
@@ -58,8 +60,12 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans
          ColumnCount     =   1
          ColumnWidths    =   ""
          ControlID       =   ""
+         DefaultRowHeight=   49
          Enabled         =   True
+         GridLineStyle   =   3
+         HasBorder       =   True
          HasHeader       =   True
+         HeaderHeight    =   0
          Height          =   486
          HighlightSortedColumn=   True
          Index           =   -2147483648
@@ -78,7 +84,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans
          LockTop         =   True
          LockVertical    =   False
          NoRowsMessage   =   ""
-         PanelIndex      =   "0"
+         PanelIndex      =   0
          Parent          =   "WebTabPanel_Statistics_Plans"
          ProcessingMessage=   ""
          RowCount        =   0
@@ -111,7 +117,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans
          LockRight       =   False
          LockTop         =   True
          LockVertical    =   False
-         PanelIndex      =   "0"
+         PanelIndex      =   0
          Parent          =   "WebTabPanel_Statistics_Plans"
          Scope           =   2
          SVGColor        =   &cFFD47900
@@ -148,7 +154,7 @@ End
 		      + "AND site_id = " + WebListBox_All_Planners.RowTagAt( row) + " " _
 		      + "AND DATE(physics_tasking.plans.assignment_date) >=  '"  + d.SQLDate + "';"
 		      
-		      Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		      Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		      
 		      WebListBox_All_Planners.CellTextAt( row, column ) = Format( rs.Column("SUM").DoubleValue, "#0.00")
 		      
@@ -176,7 +182,7 @@ End
 		  + "GROUP BY user_id "  _
 		  + "ORDER BY initials"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  
 		  Me.ColumnCount = rs.RowCount + 1
@@ -203,7 +209,7 @@ End
 		  + "WHERE DATE(physics_tasking.plans.assignment_date) >= '"  + d.SQLDate + "' " _
 		  + "GROUP BY sites.name " _
 		  + "ORDER BY sites.name;"
-		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  rs = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -250,6 +256,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

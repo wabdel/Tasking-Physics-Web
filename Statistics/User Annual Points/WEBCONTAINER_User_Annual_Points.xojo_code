@@ -15,6 +15,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -27,14 +28,19 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   True
+      HeaderHeight    =   0
       Height          =   560
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   ""
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   32
       LockBottom      =   False
@@ -45,6 +51,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -53,6 +60,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   2
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -63,14 +71,19 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   True
+      HeaderHeight    =   0
       Height          =   489
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   232
       LockBottom      =   False
@@ -81,6 +94,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -89,6 +103,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   3
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -99,14 +114,19 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   True
+      HeaderHeight    =   0
       Height          =   489
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   565
       LockBottom      =   False
@@ -117,6 +137,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -125,6 +146,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   4
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -135,14 +157,19 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   True
+      HeaderHeight    =   0
       Height          =   489
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   898
       LockBottom      =   False
@@ -153,6 +180,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -161,6 +189,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   5
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -176,7 +205,7 @@ End
 		  'Planner.ResizeTo(-1)
 		  '
 		  'Var sql As String ="SELECT user_id FROM users WHERE is_retired = False AND category_id IN(2,3)"
-		  'Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  'Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  '
 		  '
 		  'Planner.ResizeTo(-1)
@@ -221,7 +250,7 @@ End
 		  '+ "WHERE user_id = " + item.id.ToString + " " _
 		  '+ "AND DATE(assignment_date) >= '"  + Year_First_Date.SQLDate + "';"
 		  '
-		  'rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  'rs = Physics_Tasking.SELECT_Statement(sql)
 		  '
 		  'Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 1) = _
 		  'Format( rs.Column("sum").DoubleValue, "#0.0")
@@ -235,7 +264,7 @@ End
 		  '+ "WHERE user_id = " + item.id.ToString +  " "_
 		  '+ "AND DATE(completion_date) >= '"  + Year_First_Date.SQLDate + "';"
 		  '
-		  'rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  'rs = Physics_Tasking.SELECT_Statement(sql)
 		  '
 		  'Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 2) = _
 		  'Format( rs.Column("sum").DoubleValue, "#0.0")
@@ -262,7 +291,7 @@ End
 		  '+ "AND DATE(completion_date) >= '"  + Year_First_Date.SQLDate + "';"
 		  '
 		  '
-		  'rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  'rs = Physics_Tasking.SELECT_Statement(sql)
 		  '
 		  'Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 3) = _
 		  'Format( rs.Column("sum").DoubleValue, "#0.0")
@@ -291,6 +320,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ControlCount"
 		Visible=false

@@ -436,7 +436,7 @@ End
 			  Var sql As String = "SELECT * FROM physics_tasking.scheduled_tasks " _
 			  + "WHERE scheduled_task_id = " + mscheduled_task_id.ToString
 			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 			  
 			  If rs.RowCount = 1 Then
 			    
@@ -470,7 +470,12 @@ End
 #tag Events Modify_Button
 	#tag Event
 		Sub Pressed()
-		  
+		  Var db As New MySQLCommunityServer
+		  db.Host = Physics_Tasking.db_host
+		  db.Port = Physics_Tasking.db_port
+		  db.DatabaseName = Physics_Tasking.db_name
+		  db.UserName = Physics_Tasking.db_username
+		  db.Password = Physics_Tasking.db_password
 		  
 		  
 		  
@@ -492,9 +497,6 @@ End
 		      ps.BindType(3, MySQLPreparedStatement.MYSQL_TYPE_DATE)
 		      ps.BindType(4, MySQLPreparedStatement.MYSQL_TYPE_LONG)
 		      
-		      
-		      
-		      
 		      ps.ExecuteSQL( _
 		      Schedulable_Tasks_PopupMenu.RowTagAt(Schedulable_Tasks_PopupMenu.SelectedRowIndex), _
 		      Machine_PopupMenu.RowTagAt( Machine_PopupMenu.SelectedRowIndex), _
@@ -502,13 +504,11 @@ End
 		      Due_Date_DatePicker.SelectedDate, _
 		      scheduled_task_id )
 		      
-		      
-		      
 		      App.last_database_update = DateTime.Now
-		      
 		      
 		    End If
 		    
+		    db.Close
 		    Self.Close
 		    
 		  Catch de As DatabaseException
@@ -543,7 +543,7 @@ End
 		  + "FROM machines " _
 		  + "ORDER BY name"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -568,7 +568,7 @@ End
 		  + "WHERE is_schedulable = TRUE " _
 		  + "ORDER BY name"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -593,7 +593,7 @@ End
 		  + "AND is_retired = FALSE " _
 		  + "ORDER BY first_name, family_name"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -648,7 +648,7 @@ End
 		    Var sql As String = "DELETE FROM physics_tasking.scheduled_tasks " _
 		    + "WHERE physics_tasking.scheduled_tasks.scheduled_task_id = " +scheduled_task_id.ToString + ";"
 		    
-		    Physics_Tasking.DB_EXECUTE_Statement(sql)
+		    Physics_Tasking.EXECUTE_Statement(sql)
 		    App.last_database_update = DateTime.Now
 		    
 		    

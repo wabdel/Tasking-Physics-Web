@@ -172,7 +172,7 @@ End
 		  + "AND user_id = " + user_id.ToString + " " _
 		  + "ORDER BY physics_tasking.plans.is_completed;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  Return  rs.Column("c").IntegerValue
@@ -211,7 +211,7 @@ End
 		  + "ORDER BY physics_tasking.plans.is_completed;"
 		  
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -309,7 +309,7 @@ End
 		  + "ORDER BY physics_tasking.plans.is_completed;"
 		  
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("plan_id").IntegerValue)

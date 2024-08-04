@@ -5,37 +5,40 @@ Protected Class CLASS_Patient_Record
 		  
 		  
 		  
-		  Try
+		  If id = 0 Then
 		    
-		    If id = 0 Then
-		      
-		      Var row As New DatabaseRow
-		      
-		      row.Column("first_name").StringValue = first_name
-		      row.Column("family_name").StringValue = family_name
-		      row.Column("mrn").StringValue = mrn
-		      
-		      
-		      
-		      If db.Connect Then
-		        
-		        db.AddRow("patients", row)
-		        
-		      End If
-		      
-		      db.Close
-		      
-		      Var sql as String  = "SELECT patient_id FROM physics_tasking.patients " _
-		      + "ORDER BY patient_id DESC LIMIT 1;"
-		      
-		      Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
-		      
-		      Mid = rs.Column("patient_id").IntegerValue
-		      
-		      
-		      
-		      
-		    Else
+		    Var row As New DatabaseRow
+		    
+		    row.Column("first_name").StringValue = first_name
+		    row.Column("family_name").StringValue = family_name
+		    row.Column("mrn").StringValue = mrn
+		    
+		    
+		    
+		    
+		    Physics_Tasking.INSERT_Row("patients", row)
+		    
+		    
+		    
+		    Var sql as String  = "SELECT patient_id FROM physics_tasking.patients " _
+		    + "ORDER BY patient_id DESC LIMIT 1;"
+		    
+		    Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
+		    
+		    Mid = rs.Column("patient_id").IntegerValue
+		    
+		    
+		    
+		    
+		  Else
+		    
+		    Var db As New MySQLCommunityServer
+		    db.Host = Physics_Tasking.db_host
+		    db.Port = Physics_Tasking.db_port
+		    db.DatabaseName = Physics_Tasking.db_name
+		    db.UserName = Physics_Tasking.db_username
+		    
+		    Try
 		      
 		      If db.Connect Then
 		        
@@ -56,29 +59,26 @@ Protected Class CLASS_Patient_Record
 		        mrn, _
 		        id)
 		        
-		        
-		        Return
-		        
-		        
-		        
 		      End If
 		      
-		    End If
+		    Catch de As DatabaseException
+		      
+		      Var theDialog As New MessageWebDialog
+		      theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
+		      theDialog.Show
+		      
+		    Catch noe As NilObjectException
+		      
+		      Var theDialog As New MessageWebDialog
+		      theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
+		      theDialog.Show
+		      
+		    End Try
 		    
-		    
-		  Catch de As DatabaseException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
-		    theDialog.Show
-		    
-		  Catch noe As NilObjectException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
-		    theDialog.Show
-		    
-		  End Try
+		  End If
+		  
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -158,7 +158,7 @@ Protected Class CLASS_Patient_Record
 			  Var sql As String = "SELECT * FROM physics_tasking.patients WHERE " _
 			  + "patient_id = " + value.ToString
 			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 			  
 			  
 			  If rs.RowCount = 1 Then
@@ -220,7 +220,7 @@ Protected Class CLASS_Patient_Record
 			  Var sql As String = "SELECT * FROM physics_tasking.patients WHERE " _
 			  + "mrn = '" + value + "';"
 			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 			  
 			  
 			  If rs.RowCount = 1 Then

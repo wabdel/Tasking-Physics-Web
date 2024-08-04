@@ -16,6 +16,8 @@ Begin WebDialog WebDialog_User_Tasks
    LockRight       =   False
    LockTop         =   False
    LockVertical    =   False
+   PanelIndex      =   0
+   Position        =   0
    TabIndex        =   0
    Top             =   0
    Visible         =   True
@@ -41,6 +43,8 @@ Begin WebDialog WebDialog_User_Tasks
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   0
       TabStop         =   True
@@ -54,8 +58,12 @@ Begin WebDialog WebDialog_User_Tasks
       ColumnCount     =   3
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   True
+      HeaderHeight    =   0
       Height          =   526
       HighlightSortedColumn=   True
       Index           =   -2147483648
@@ -73,6 +81,7 @@ Begin WebDialog WebDialog_User_Tasks
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -107,6 +116,7 @@ Begin WebDialog WebDialog_User_Tasks
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   2
       TabStop         =   True
@@ -139,6 +149,7 @@ Begin WebDialog WebDialog_User_Tasks
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   3
       TabStop         =   True
@@ -167,6 +178,7 @@ Begin WebDialog WebDialog_User_Tasks
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   2
       SVGColor        =   &cFFD47900
       SVGData         =   ""
@@ -197,7 +209,7 @@ Begin WebDialog WebDialog_User_Tasks
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
-      PanelIndex      =   "0"
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   5
       TabStop         =   True
@@ -227,7 +239,7 @@ End
 		  Var sql As String = "SELECT first_name, family_name FROM physics_tasking.users " _
 		  + "WHERE user_id = " + user_id.ToString + ";"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  If rs.RowCount = 1 Then
 		    
@@ -239,7 +251,7 @@ End
 		  sql = "SELECT name FROM physics_tasking.task_types " _
 		  + "WHERE task_type_id = " + task_type_id.ToString + ";"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  rs = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  If rs.RowCount = 1 Then
 		    
@@ -264,7 +276,7 @@ End
 		  + "AND DATE(physics_tasking.tasks.completion_date) >= '"  + d.SQLDate + "' " _
 		  + "ORDER BY completion_date DESC;"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  rs = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  Var sum As Double = 0.0
 		  
@@ -274,7 +286,7 @@ End
 		    WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 0) = _
 		    rs.Column("completion_date").DateTimeValue.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None)
 		    WebListBox_User_Tasks.CellTagAt( WebListBox_User_Tasks.LastAddedRowIndex, 0) = _
-		     rs.Column("completion_date").DateTimeValue.SecondsFrom1970
+		    rs.Column("completion_date").DateTimeValue.SecondsFrom1970
 		    
 		    WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 1) = rs.Column("c").IntegerValue.ToString
 		    WebListBox_User_Tasks.CellTextAt( WebListBox_User_Tasks.LastAddedRowIndex, 2) = Format( rs.Column("p").DoubleValue, "0.00")
@@ -297,7 +309,7 @@ End
 		  + "AND DATE(physics_tasking.scheduled_tasks.completion_date) >= '"  + d.SQLDate + "' " _
 		  + "ORDER BY completion_date DESC;"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  rs = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -421,6 +433,26 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Position"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="WebDialog.Positions"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Top"
+			"1 - Center"
+		#tag EndEnumValues
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ControlCount"
 		Visible=false

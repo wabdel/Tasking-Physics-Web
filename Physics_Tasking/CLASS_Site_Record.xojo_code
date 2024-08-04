@@ -20,7 +20,7 @@ Protected Class CLASS_Site_Record
 		  + "WHERE physics_tasking.sites.site_id = " + id.ToString +" " _
 		  + "AND assignment_date BETWEEN '" + d_initial.SQLDate + "' AND '" + d_final.SQLDate + "';"
 		  
-		  Return Physics_Tasking.DB_SELECT_Statement( sql)
+		  Return Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		End Function
@@ -30,33 +30,38 @@ Protected Class CLASS_Site_Record
 		Sub Save()
 		  
 		  
-		  Try
+		  
+		  If id = 0 Then
 		    
-		    If id = 0 Then
-		      
-		      
-		      
-		      Var row As New DatabaseRow
-		      
-		      row.Column("name").StringValue = name.Trim
-		      row.Column("is_uppercase").BooleanValue = is_Uppercase
-		      
-		      If db.Connect Then
-		        
-		        db.AddRow( "sites", row)
-		        
-		      End If
-		      db.Close
-		      
-		      Var sql as String = "SELECT site_id FROM physics_tasking.sites " _
-		      + "ORDER BY site_id DESC LIMIT 1;"
-		      
-		      Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
-		      
-		      Mid = rs.Column("site_id").IntegerValue
-		      
-		    Else
-		      
+		    
+		    
+		    Var row As New DatabaseRow
+		    
+		    row.Column("name").StringValue = name.Trim
+		    row.Column("is_uppercase").BooleanValue = is_Uppercase
+		    
+		    
+		    Physics_Tasking.INSERT_Row( "sites", row)
+		    
+		    
+		    
+		    Var sql as String = "SELECT site_id FROM physics_tasking.sites " _
+		    + "ORDER BY site_id DESC LIMIT 1;"
+		    
+		    Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
+		    
+		    Mid = rs.Column("site_id").IntegerValue
+		    
+		  Else
+		    
+		    Var db As New MySQLCommunityServer
+		    db.Host = Physics_Tasking.db_host
+		    db.Port = Physics_Tasking.db_port
+		    db.DatabaseName = Physics_Tasking.db_name
+		    db.UserName = Physics_Tasking.db_username
+		    db.Password = Physics_Tasking.db_password
+		    
+		    Try
 		      If db.Connect Then
 		        
 		        Var ps As  PreparedSQLStatement = _
@@ -73,21 +78,23 @@ Protected Class CLASS_Site_Record
 		        
 		        
 		      End If
-		    End If
-		    
-		  Catch de As DatabaseException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
-		    theDialog.Show
-		    
-		  Catch noe As NilObjectException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
-		    theDialog.Show
-		    
-		  End Try
+		      
+		    Catch de As DatabaseException
+		      
+		      Var theDialog As New MessageWebDialog
+		      theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
+		      theDialog.Show
+		      
+		    Catch noe As NilObjectException
+		      
+		      Var theDialog As New MessageWebDialog
+		      theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
+		      theDialog.Show
+		      
+		    End Try
+		  End If
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -105,7 +112,7 @@ Protected Class CLASS_Site_Record
 			  + "ON physics_tasking.plan_types.site_id = physics_tasking.sites.site_id " _
 			  + "WHERE physics_tasking.sites.site_id = " + id.ToString + ";"
 			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 			  
 			  
 			  mcount = rs.Column("COUNT(*)").IntegerValue
@@ -136,7 +143,7 @@ Protected Class CLASS_Site_Record
 			  +"FROM physics_tasking.sites " _
 			  +"WHERE site_id = "+Str(value)
 			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 			  
 			  If rs.RowCount = 1 Then
 			    

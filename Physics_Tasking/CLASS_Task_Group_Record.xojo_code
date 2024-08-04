@@ -4,33 +4,34 @@ Protected Class CLASS_Task_Group_Record
 		Sub Save()
 		  
 		  
-		  
-		  Try
+		  If id = 0 Then
 		    
-		    If id = 0 Then
-		      
-		      
-		      Var row As New DatabaseRow
-		      
-		      row.Column("name").StringValue = name.Trim.Lowercase.Trim
-		      
-		      If db.Connect Then
-		        db.AddRow( "task_groups", row)
-		      End If
-		      
-		      db.Close
-		      
-		      Var sql As String = "SELECT task_group_id FROM Physics_tasking.task_group " _
-		      + "ORDER BY task_group_id LIMIT 1;"
-		      Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
-		      
-		      Mid = rs.Column("task_group_id").IntegerValue
-		      
-		      
-		      
-		      
-		      
-		    Else
+		    
+		    Var row As New DatabaseRow
+		    
+		    row.Column("name").StringValue = name.Trim.Lowercase.Trim
+		    
+		    Physics_Tasking.INSERT_Row( "task_groups", row)
+		    
+		    Var sql As String = "SELECT task_group_id FROM Physics_tasking.task_group " _
+		    + "ORDER BY task_group_id LIMIT 1;"
+		    Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
+		    
+		    Mid = rs.Column("task_group_id").IntegerValue
+		    
+		    
+		    
+		    
+		    
+		  Else
+		    
+		    Var db As New MySQLCommunityServer
+		    db.Host = Physics_Tasking.db_host
+		    db.Port = Physics_Tasking.db_port
+		    db.DatabaseName = Physics_Tasking.db_name
+		    db.UserName = Physics_Tasking.db_username
+		    
+		    Try 
 		      
 		      If db.Connect Then
 		        
@@ -45,21 +46,23 @@ Protected Class CLASS_Task_Group_Record
 		        
 		      End If
 		      
-		    End If
+		    Catch de As DatabaseException
+		      
+		      Var theDialog As New MessageWebDialog
+		      theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
+		      theDialog.Show
+		      
+		    Catch noe As NilObjectException
+		      
+		      Var theDialog As New MessageWebDialog
+		      theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
+		      theDialog.Show
+		      
+		    End Try
 		    
-		  Catch de As DatabaseException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
-		    theDialog.Show
-		    
-		  Catch noe As NilObjectException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
-		    theDialog.Show
-		    
-		  End Try
+		  End If
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -79,7 +82,7 @@ Protected Class CLASS_Task_Group_Record
 			    +"FROM physics_tasking.task_groups " _
 			    +"WHERE task_group_id = " + value.ToString
 			    
-			    Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+			    Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 			    
 			    If rs.RowCount = 1 Then
 			      

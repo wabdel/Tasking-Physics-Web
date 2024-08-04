@@ -3,61 +3,46 @@ Protected Class CLASS_General_Information
 	#tag Method, Flags = &h0
 		Sub Save()
 		  
-		  
 		  Var sql As String = "SELECT * " _
 		  +"FROM general_information " _
 		  +"WHERE general_information_id = 1"
 		  
-		  Try
-		    Var rs As RowSet = db.SelectSQL(sql)
+		  
+		  
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
+		  
+		  If rs.RowCount = 1 Then
 		    
-		    If rs.RowCount = 1 Then
-		      
-		      
-		      rs.EditRow
-		      rs.Column("hospital_name").StringValue = hospital_name
-		      rs.Column("department_name").StringValue = department_name
-		      rs.Column("section_name").StringValue = section_name
-		      rs.Column("hospital_logo").Value = Hospital_Logo
-		      rs.SaveRow
-		      
-		      
-		      
-		    Else
-		      
-		      Var row As New DatabaseRow
-		      row.Column("hospital_name").StringValue = hospital_name
-		      row.Column("department_name").StringValue= department_name
-		      row.Column("section_name").StringValue = section_name
-		      row.Column("hospital_logo").PictureValue(Picture.Formats.PNG) = Hospital_Logo
-		      db.AddRow("general_information", row)
-		      
-		      sql = "SELECT general_information_id  FROM physics_tasking.general_information " _
-		      +"ORDER BY general_information_id DESC LIMIT 1;"
-		      
-		      rs = db.SelectSQL(sql)
-		      
-		      Mid = rs.Column("general_information_id").IntegerValue
-		      
-		      
-		    End If
-		  Catch de As DatabaseException
+		    
+		    rs.EditRow
+		    rs.Column("hospital_name").StringValue = hospital_name
+		    rs.Column("department_name").StringValue = department_name
+		    rs.Column("section_name").StringValue = section_name
+		    rs.Column("hospital_logo").Value = Hospital_Logo
+		    rs.SaveRow
 		    
 		    
 		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
-		    theDialog.Show
+		  Else
+		    
+		    Var row As New DatabaseRow
+		    row.Column("hospital_name").StringValue = hospital_name
+		    row.Column("department_name").StringValue= department_name
+		    row.Column("section_name").StringValue = section_name
+		    row.Column("hospital_logo").PictureValue(Picture.Formats.PNG) = Hospital_Logo
+		    Physics_Tasking.INSERT_Row("general_information", row)
+		    
+		    sql = "SELECT general_information_id  FROM physics_tasking.general_information " _
+		    +"ORDER BY general_information_id DESC LIMIT 1;"
+		    
+		    rs = Physics_Tasking.SELECT_Statement(sql)
+		    
+		    Mid = rs.Column("general_information_id").IntegerValue
 		    
 		    
-		    
-		  Catch noe As NilObjectException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
-		    theDialog.Show
-		    
-		  End Try
+		  End If
+		  
+		  
 		  
 		  
 		End Sub
@@ -88,7 +73,7 @@ Protected Class CLASS_General_Information
 			  Var sql As String = "SELECT * FROM physics_tasking.general_information " _
 			  + "WHERE general_information_id = " + value.ToString + ";"
 			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 			  
 			  Hospital_Name = rs.Column("hospital_name").StringValue
 			  department_name = rs.Column("department_name").StringValue

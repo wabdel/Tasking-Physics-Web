@@ -33,7 +33,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Enabled         =   True
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   0
+      Indicator       =   5
       Left            =   1080
       LockBottom      =   False
       LockedInPosition=   False
@@ -322,7 +322,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Enabled         =   True
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   1
+      Indicator       =   6
       InitialValue    =   ""
       LastAddedRowIndex=   0
       LastRowIndex    =   0
@@ -385,7 +385,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Enabled         =   False
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   2
+      Indicator       =   6
       InitialValue    =   ""
       LastAddedRowIndex=   0
       LastRowIndex    =   0
@@ -623,7 +623,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Enabled         =   True
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   1
+      Indicator       =   6
       InitialValue    =   ""
       LastAddedRowIndex=   0
       LastRowIndex    =   0
@@ -699,91 +699,75 @@ End
 		Private Sub ASSIGN_Plan()
 		  
 		  
-		  Try
+		  // Lets check if patient exists
+		  
+		  Var sql as String = "SELECT patient_id FROM physics_tasking.patients " _
+		  + "WHERE mrn = '" + MRN_TextField.Text.Trim + "';"
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
+		  
+		  If rs.RowCount = 0 Then
 		    
-		    If db.Connect Then
-		      
-		      // Lets check if patient exists
-		      
-		      Var sql as String = "SELECT patient_id FROM physics_tasking.patients " _
-		      + "WHERE mrn = '" + MRN_TextField.Text.Trim + "';"
-		      Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
-		      
-		      If rs.RowCount = 0 Then
-		        
-		        Var row As New DatabaseRow
-		        
-		        row.Column("mrn").StringValue = MRN_TextField.Text.Lowercase
-		        row.Column("first_name").StringValue = First_Name_TextField.Text.Trim.Titlecase
-		        row.Column("family_name").StringValue = Family_Name_TextField.Text.Trim.Uppercase
-		        
-		        db.AddRow("physics_tasking.patients", row)
-		        
-		        rs = Physics_Tasking.DB_SELECT_Statement( sql)
-		        
-		        
-		      End If
-		      
-		      
-		      // Add plan record
-		      
-		      
-		      Var row As New DatabaseRow
-		      
-		      row.Column("patient_id").IntegerValue = rs.Column("patient_id").IntegerValue
-		      row.Column("plan_type_id").IntegerValue = _
-		      Plan_Type_PopupMenu.RowTagAt( Plan_Type_PopupMenu.SelectedRowIndex)
-		      row.Column("assignment_date").DateTimeValue = DateTime.Now
-		      row.Column("due_date").DateTimeValue = Start_DatePicker.SelectedDate
-		      row.Column("is_replan").BooleanValue = _
-		      Is_replan_Checkbox.Value
-		      
-		      Select Case Planner_RadioGroup.SelectedIndex
-		      Case 0
-		        
-		        row.Column("user_id").IntegerValue = selected_user_id
-		        row.Column("notes").StringValue = "(Assigned randomly)"
-		        
-		      Else
-		        
-		        row.Column("user_id").IntegerValue  = Planner_PopupMenu.RowTagAt( Planner_PopupMenu.SelectedRowIndex)
-		        row.Column("notes").StringValue = "(Assigned manually by " + Session.Logged_in_User.full_name.ToText + ")" 
-		        
-		      End Select
-		      
-		      row.Column("assigned_by_id").IntegerValue = Session.Logged_in_User.id
-		      row.Column("physician_id").IntegerValue = Physician_PopupMenu.RowTagAt( Physician_PopupMenu.SelectedRowIndex)
-		      
-		      db.AddRow("physics_tasking.plans", row)
-		      
-		      
-		      Var Assign_Plan_Task As New DatabaseRow
-		      Assign_Plan_Task.Column("user_id").IntegerValue = Session.Logged_in_User.id
-		      Assign_Plan_Task.Column("task_type_id").IntegerValue = 1
-		      Assign_Plan_Task.Column("multiplier").IntegerValue = 1
-		      Assign_Plan_Task.Column("completion_date").DateTimeValue = DateTime.Now
-		      
-		      db.AddRow("physics_tasking.tasks", Assign_Plan_Task)
-		      
-		      App.last_database_update = DateTime.Now
-		      
-		    End If
 		    
-		    RESET_Assign_Plan
+		    Var row As New DatabaseRow
 		    
-		  Catch de As DatabaseException
+		    row.Column("mrn").StringValue = MRN_TextField.Text.Lowercase
+		    row.Column("first_name").StringValue = First_Name_TextField.Text.Trim.Titlecase
+		    row.Column("family_name").StringValue = Family_Name_TextField.Text.Trim.Uppercase
 		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
-		    theDialog.Show
+		    Physics_Tasking.INSERT_Row("physics_tasking.patients", row)
 		    
-		  Catch noe As NilObjectException
+		    rs = Physics_Tasking.SELECT_Statement( sql)
 		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
-		    theDialog.Show
 		    
-		  End Try
+		  End If
+		  
+		  
+		  // Add plan record
+		  
+		  
+		  Var row As New DatabaseRow
+		  
+		  row.Column("patient_id").IntegerValue = rs.Column("patient_id").IntegerValue
+		  row.Column("plan_type_id").IntegerValue = _
+		  Plan_Type_PopupMenu.RowTagAt( Plan_Type_PopupMenu.SelectedRowIndex)
+		  row.Column("assignment_date").DateTimeValue = DateTime.Now
+		  row.Column("due_date").DateTimeValue = Start_DatePicker.SelectedDate
+		  row.Column("is_replan").BooleanValue = _
+		  Is_replan_Checkbox.Value
+		  
+		  Select Case Planner_RadioGroup.SelectedIndex
+		  Case 0
+		    
+		    row.Column("user_id").IntegerValue = selected_user_id
+		    row.Column("notes").StringValue = "(Assigned randomly)"
+		    
+		  Else
+		    
+		    row.Column("user_id").IntegerValue  = Planner_PopupMenu.RowTagAt( Planner_PopupMenu.SelectedRowIndex)
+		    row.Column("notes").StringValue = "(Assigned manually by " + Session.Logged_in_User.full_name.ToText + ")" 
+		    
+		  End Select
+		  
+		  row.Column("assigned_by_id").IntegerValue = Session.Logged_in_User.id
+		  row.Column("physician_id").IntegerValue = Physician_PopupMenu.RowTagAt( Physician_PopupMenu.SelectedRowIndex)
+		  
+		  Physics_Tasking.INSERT_Row("physics_tasking.plans", row)
+		  
+		  
+		  Var Assign_Plan_Task As New DatabaseRow
+		  Assign_Plan_Task.Column("user_id").IntegerValue = Session.Logged_in_User.id
+		  Assign_Plan_Task.Column("task_type_id").IntegerValue = 1
+		  Assign_Plan_Task.Column("multiplier").IntegerValue = 1
+		  Assign_Plan_Task.Column("completion_date").DateTimeValue = DateTime.Now
+		  
+		  Physics_Tasking.INSERT_Row("physics_tasking.tasks", Assign_Plan_Task)
+		  
+		  App.last_database_update = DateTime.Now
+		  
+		  
+		  
+		  RESET_Assign_Plan
+		  
 		  
 		End Sub
 	#tag EndMethod
@@ -793,7 +777,8 @@ End
 		  
 		  
 		  Assign_Button.Enabled = False
-		  Assign_Button.Indicator = Indicators.Danger
+		  Assign_Button.Indicator = Indicators.Info
+		  Assign_Button.Style.ForegroundColor = Color.Black
 		  
 		  Planner_RadioGroup.Enabled = False
 		  Planner_RadioGroup.Visible = False
@@ -823,6 +808,7 @@ End
 		  
 		  Assign_Button.Enabled = True
 		  Assign_Button.Indicator = Indicators.Success
+		  Assign_Button.Style.ForegroundColor = Color.White
 		End Sub
 	#tag EndMethod
 
@@ -835,7 +821,7 @@ End
 		  + "AND is_retired = FALSE " _
 		  + "ORDER BY first_name, family_name;"
 		  
-		  Var rs As Rowset = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As Rowset = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -880,7 +866,7 @@ End
 		  + "AND physics_tasking.users.user_id NOT IN(" + selected_user_id.ToString + ") " _
 		  + "ORDER BY first_name, family_name;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  While Not rs.AfterLastRow
@@ -924,7 +910,7 @@ End
 		    + "WHERE site_id = " + Str(Site_PopupMenu.RowTagAt( Site_PopupMenu.SelectedRowIndex)) + " " _
 		    + "ORDER BY name;"
 		    
-		    Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		    Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		    
 		    While Not rs.AfterLastRow
 		      
@@ -954,7 +940,7 @@ End
 		  Var sql As String = "SELECT * FROM physics_tasking.sites " _
 		  + "ORDER BY name;"
 		  
-		  Var rs As Rowset = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As Rowset = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -1014,6 +1000,12 @@ End
 		  
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Indicator = WebUIControl.Indicators.Danger
+		  Me.Style.ForegroundColor = Color.Black
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Title_Label
 	#tag Event
@@ -1038,7 +1030,7 @@ End
 		  Var sql As String = "SELECT * FROM physics_tasking.patients " _
 		  + "WHERE physics_tasking.patients.mrn = '" + MRN_TextField.Text.Trim + "';"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.RowCount = 1 Then
 		    
@@ -1128,12 +1120,14 @@ End
 #tag Events Site_PopupMenu
 	#tag Event
 		Sub Opening()
-		  Me.Indicator = WebUIControl.Indicators.Primary
+		  Me.Indicator = WebUIControl.Indicators.Info
 		  POPULATE_Site_PopupMenu
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
+		  Me.Indicator = WebUIControl.Indicators.Success
+		  
 		  POPULATE_Plan_Type_PopupMenu( Me.RowTagAt( Me.SelectedRowIndex))
 		  ENABLE_ASSIGN_Button
 		End Sub
@@ -1149,12 +1143,16 @@ End
 #tag Events Plan_Type_PopupMenu
 	#tag Event
 		Sub Opening()
+		  Me.Indicator = WebUIControl.Indicators.Info
+		  
 		  POPULATE_Site_PopupMenu
 		  ENABLE_ASSIGN_Button
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
+		  Me.Indicator = WebUIControl.Indicators.Success
+		  
 		  Planner_RadioGroup.RemoveAllRows
 		  selected_user_id = Points_WEBCONTAINER.GET_Random_Planner
 		  
@@ -1182,7 +1180,7 @@ End
 		  + "AND physics_tasking.users.user_id = " + selected_user_id.ToString + " " _
 		  + "ORDER BY first_name, family_name;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  If rs.RowCount = 1 Then
@@ -1232,7 +1230,8 @@ End
 	#tag Event
 		Sub Opening()
 		  Me.Enabled = False
-		  Me.Indicator = Indicators.Danger
+		  Me.Indicator = Indicators.Info
+		  Me.Style.ForegroundColor = Color.Black
 		  
 		  
 		End Sub
@@ -1326,6 +1325,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
+		  Me.Indicator = WebUIControl.Indicators.Success
 		  ENABLE_ASSIGN_Button
 		End Sub
 	#tag EndEvent

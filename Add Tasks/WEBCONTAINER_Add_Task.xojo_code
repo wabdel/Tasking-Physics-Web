@@ -201,7 +201,7 @@ End
 		  sql = sql + "ORDER BY physics_tasking.task_groups.name, physics_tasking.task_types.name "
 		  
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  Var actionButtons() As GroupButtonItem
 		  actionButtons.Add(New GroupButtonItem("add", "Add"))
@@ -271,7 +271,7 @@ End
 		  
 		  sql = sql + "ORDER BY physics_tasking.task_groups.name, physics_tasking.task_types.name "
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("task_type_id").IntegerValue)

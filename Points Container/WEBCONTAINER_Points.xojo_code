@@ -142,7 +142,7 @@ End
 		  + "WHERE is_active = TRUE " _
 		  + "ORDER BY total DESC;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  Select Case rs.RowCount
 		  Case 0
@@ -246,7 +246,7 @@ End
 			  + "FROM physics_tasking.points " _
 			  + "WHERE is_active = TRUE;"
 			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 			  
 			  mPoints_Average = rs.Column("average").DoubleValue
 			  Return mPoints_Average
@@ -267,7 +267,7 @@ End
 			  + "FROM physics_tasking.points " _
 			  + "WHERE is_active = TRUE;"
 			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 			  
 			  mPoints_Stdev = rs.Column("standard_deviation").DoubleValue
 			  

@@ -189,7 +189,7 @@ End
 		  + "is_completed = TRUE " _
 		  + "GROUP BY m;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  Var Plans_Sum As Integer = 0
 		  Var Patients_Sum As Integer = 0
 		  
@@ -221,7 +221,7 @@ End
 		  + Str(Year_PopupMenu.RowTagAt( Year_PopupMenu.SelectedRowIndex)) + " AND " _
 		  + "is_completed = TRUE " 
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  rs = Physics_Tasking.SELECT_Statement(sql)
 		  Label_Total_Plans.Text = "Total Plans = " + Plans_Sum.ToString
 		  Label_Total_Patients.Text = "Total Patients = " + rs.Column("c").IntegerValue.ToString
 		  
@@ -255,7 +255,7 @@ End
 		  Var sql As String = "SELECT DISTINCT(YEAR(due_date)) AS y FROM physics_tasking.plans " _
 		  + "ORDER BY y DESC;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  While Not rs.AfterLastRow
 		    

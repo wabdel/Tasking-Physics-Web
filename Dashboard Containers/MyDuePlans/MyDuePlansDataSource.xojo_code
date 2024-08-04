@@ -86,7 +86,7 @@ Implements WebDataSource
 		  + "AND user_id = " + Session.Logged_in_User.id.ToString + " " _
 		  + "ORDER BY physics_tasking.plans.due_date"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  Return  rs.Column("c").IntegerValue
@@ -124,7 +124,7 @@ Implements WebDataSource
 		  + "ORDER BY physics_tasking.plans.due_date, physics_tasking.patients.mrn ASC;"
 		  
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  Var actionButtons() As GroupButtonItem
 		  actionButtons.Add(New GroupButtonItem("done", "Done"))
@@ -231,7 +231,7 @@ Implements WebDataSource
 		  + "AND user_id = " + Session.Logged_in_User.id.ToString + " " _
 		  + "ORDER BY physics_tasking.plans.due_date"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("plan_id").IntegerValue)

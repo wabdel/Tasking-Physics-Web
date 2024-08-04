@@ -162,7 +162,7 @@ End
 		  + "FROM physics_tasking.points " _
 		  + "WHERE is_active = TRUE;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  
@@ -196,7 +196,7 @@ End
 		  + "FROM physics_tasking.points " _
 		  + "WHERE is_active = TRUE;"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  Var normalization As Double = 0
 		  
@@ -224,7 +224,7 @@ End
 		  + "INNER JOIN physics_tasking.users USING (user_id) " _
 		  + "ORDER BY total DESC"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  While Not rs.AfterLastRow

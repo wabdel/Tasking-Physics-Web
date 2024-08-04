@@ -189,7 +189,12 @@ End
 		  Select Case column
 		  Case 7
 		    
-		    
+		    Var db As New MySQLCommunityServer
+		    db.Host = Physics_Tasking.db_host
+		    db.Port = Physics_Tasking.db_port
+		    db.DatabaseName = Physics_Tasking.db_name
+		    db.UserName = Physics_Tasking.db_username
+		    db.Password = Physics_Tasking.db_password
 		    
 		    Try
 		      
@@ -202,8 +207,6 @@ End
 		        
 		        db.ExecuteSQL(sql)
 		        
-		        
-		        
 		        Assigned_Tasks_ListBox.ReloadData
 		        Assigned_Tasks_Label.Text = "Tasks = " + Assigned_Tasks_ListBox.DataSource.RowCount.ToString
 		        
@@ -211,6 +214,9 @@ End
 		        Latest_Update = App.last_database_update
 		        
 		      End If
+		      
+		      db.Close
+		      
 		    End Try
 		    
 		  End Select

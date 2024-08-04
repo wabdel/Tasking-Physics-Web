@@ -233,7 +233,7 @@ End
 		  + "WHERE LOWER(name) = '" _
 		  + Task_Group_Name_TextField.Text.Trim.Lowercase + "'"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.RowCount > 0 Then 
 		    
@@ -269,6 +269,12 @@ End
 #tag Events Add_Button
 	#tag Event
 		Sub Pressed()
+		  Var db As New MySQLCommunityServer
+		  db.Host = Physics_Tasking.db_host
+		  db.Port = Physics_Tasking.db_port
+		  db.DatabaseName = Physics_Tasking.db_name
+		  db.UserName = Physics_Tasking.db_username
+		  db.Password = Physics_Tasking.db_password
 		  
 		  
 		  Try

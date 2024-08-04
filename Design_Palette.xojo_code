@@ -1,8 +1,27 @@
 #tag Module
 Protected Module Design_Palette
-	#tag Property, Flags = &h0
-		COLOR_Background As Color = &c33333300
-	#tag EndProperty
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  If Session.darkmode Then 
+			    
+			    mCOLOR_Background = &c18181800
+			    
+			  Else
+			    
+			    mCOLOR_Background = &cededed00
+			    
+			  End If
+			  Return mCOLOR_Background
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mCOLOR_Background = value
+			End Set
+		#tag EndSetter
+		COLOR_Background As Color
+	#tag EndComputedProperty
 
 	#tag Property, Flags = &h0
 		COLOR_Button_Dark As Color = &c2E3136
@@ -25,7 +44,7 @@ Protected Module Design_Palette
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		COLOR_Central_Background As Color = &c55555500
+		COLOR_Central_Background As Color = &c858585
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -33,7 +52,19 @@ Protected Module Design_Palette
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		COLOR_Date_Weekday As Color = &c35353500
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		COLOR_Date_Weekend As Color = &c54545400
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		COLOR_Foreground As Color = &cFFFEFE00
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mCOLOR_Background As Color = &c515151
 	#tag EndProperty
 
 
@@ -79,7 +110,7 @@ Protected Module Design_Palette
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="COLOR_Background"
+			Name="mCOLOR_Background"
 			Visible=false
 			Group="Behavior"
 			InitialValue="&c33333300"

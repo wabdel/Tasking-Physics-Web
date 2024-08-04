@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_User_Statistics_Points
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   600
@@ -14,6 +15,7 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Points
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -21,18 +23,29 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Points
    Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebChart Points_Chart
+      AllowPopover    =   True
+      AutoCalculateYAxis=   False
       ControlID       =   ""
       DatasetCount    =   0
+      DatasetLastIndex=   0
       Enabled         =   True
+      GridColor       =   &c000000AA
       HasAnimation    =   False
       HasLegend       =   False
       Height          =   560
       Index           =   -2147483648
       Indicator       =   0
+      IsGridVisible   =   False
+      IsXAxisVisible  =   False
+      IsYAxisVisible  =   False
+      LabelCount      =   0
+      LabelLastIndex  =   0
       Left            =   20
+      LegendColor     =   &c000000
+      LegendFontName  =   ""
+      LegendFontSize  =   0.0
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -41,9 +54,15 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Points
       LockTop         =   True
       LockVertical    =   False
       Mode            =   0
+      PanelIndex      =   0
+      PopoverBackgroundColor=   &c000000
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Title           =   ""
+      TitleColor      =   &c000000
+      TitleFontName   =   ""
+      TitleFontSize   =   0.0
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -53,6 +72,7 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Points
    End
    Begin WebThread Populate_Delta_Points_Chart_Thread
       DebugIdentifier =   ""
+      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Priority        =   5
@@ -63,6 +83,7 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Points
    End
    Begin WebThread Populate_Points_Chart_Thread
       DebugIdentifier =   ""
+      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Priority        =   5
@@ -131,7 +152,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub OverrideOptions(Options as JSONItem)
+		Sub OverrideOptions(options As JSONItem)
 		  '//Format Title
 		  Var title As New JSONItem
 		  title.Value("display") = True
@@ -222,7 +243,7 @@ End
 		  + "ORDER BY assignment_date ASC " _
 		  + "LIMIT 1;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  Var date_found As Boolean = False
 		  
@@ -241,7 +262,7 @@ End
 		  + "ORDER BY completion_date ASC " _
 		  + "LIMIT 1;"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  rs = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  If rs.RowCount = 1 Then 
 		    
@@ -269,7 +290,7 @@ End
 		  + "ORDER BY completion_date ASC " _
 		  + "LIMIT 1;"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  rs = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  If rs.RowCount = 1 Then 
 		    
@@ -359,7 +380,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub UserInterfaceUpdate(data() as Dictionary)
+		Sub UserInterfaceUpdate(data() As Dictionary)
 		  For Each arg As Dictionary In data
 		    If arg.HasKey("UIProgress") Then
 		      
@@ -382,7 +403,7 @@ End
 		  + "ORDER BY assignment_date ASC " _
 		  + "LIMIT 1;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  Var date_found As Boolean = False
 		  
@@ -401,7 +422,7 @@ End
 		  + "ORDER BY completion_date ASC " _
 		  + "LIMIT 1;"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  rs = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  If rs.RowCount = 1 Then 
 		    
@@ -428,7 +449,7 @@ End
 		  + "ORDER BY completion_date ASC " _
 		  + "LIMIT 1;"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  rs = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  If rs.RowCount = 1 Then 
 		    
@@ -567,7 +588,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub UserInterfaceUpdate(data() as Dictionary)
+		Sub UserInterfaceUpdate(data() As Dictionary)
 		  For Each arg As Dictionary In data
 		    If arg.HasKey("UIProgress") Then
 		      
@@ -585,6 +606,22 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

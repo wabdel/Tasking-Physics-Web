@@ -292,7 +292,7 @@ End
 		  + "AND YEAR(due_date) = " + Month_DatePicker.SelectedDate.Year.ToString + " " _
 		  + "ORDER BY physics_tasking.plans.due_date ASC"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  Return rs.Column("c").IntegerValue
@@ -328,7 +328,7 @@ End
 		  + "ORDER BY physics_tasking.plans.due_date ASC"
 		  
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -425,7 +425,7 @@ End
 		  + "ORDER BY physics_tasking.plans.due_date ASC"
 		  
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -520,7 +520,7 @@ End
 		  + "AND YEAR(due_date) = " + Month_DatePicker.SelectedDate.Year.ToString + " " _
 		  + "ORDER BY physics_tasking.plans.due_date ASC"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("plan_id").IntegerValue)
@@ -599,7 +599,7 @@ End
 		  
 		  
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    

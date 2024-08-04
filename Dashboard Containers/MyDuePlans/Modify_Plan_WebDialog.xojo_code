@@ -691,7 +691,7 @@ End
 		  + "AND is_retired = FALSE " _
 		  + "ORDER BY first_name, family_name;"
 		  
-		  Var rs As Rowset = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As Rowset = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -725,7 +725,7 @@ End
 		  + "WHERE category_id IN (2,3) " _
 		  + "AND is_retired = FALSE;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -750,7 +750,7 @@ End
 		  + "WHERE site_id = " + Str( Site_PopupMenu.RowTagAt( Site_PopupMenu.SelectedRowIndex)) + " " _
 		  + "ORDER BY name"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -797,7 +797,7 @@ End
 			  + "INNER JOIN physics_tasking.sites USING(site_id) " _
 			  + "WHERE plan_id = " + mplan_id.ToString + ";"
 			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 			  
 			  
 			  MRN_Value_Label.Text = rs.Column("mrn").StringValue.Trim
@@ -846,6 +846,12 @@ End
 		Sub Pressed()
 		  
 		  
+		  Var db As New MySQLCommunityServer
+		  db.Host = Physics_Tasking.db_host
+		  db.Port = Physics_Tasking.db_port
+		  db.DatabaseName = Physics_Tasking.db_name
+		  db.UserName = Physics_Tasking.db_username
+		  db.Password = Physics_Tasking.db_password
 		  
 		  
 		  Try
@@ -862,12 +868,11 @@ End
 		      
 		      db.ExecuteSQL(sql)
 		      
-		      
 		      App.last_database_update = DateTime.Now
-		      
 		      
 		    End If
 		    
+		    db.Close
 		    Self.Close
 		    
 		  Catch de As DatabaseException
@@ -938,7 +943,7 @@ End
 		  Var sql As String = "SELECT * FROM physics_tasking.sites " _
 		  + "ORDER BY name"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -1050,7 +1055,7 @@ End
 		    Var sql As String = "DELETE FROM physics_tasking.plans " _
 		    + "WHERE physics_tasking.plans.plan_id = " +plan_id.ToString + ";"
 		    
-		    Physics_Tasking.DB_EXECUTE_Statement(sql)
+		    Physics_Tasking.EXECUTE_Statement(sql)
 		    App.last_database_update = DateTime.Now
 		    
 		    

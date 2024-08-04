@@ -248,7 +248,7 @@ End
 		  + "GROUP BY physician_id " _
 		  + "ORDER BY initials;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  Var data() As Double
 		  Var labels() As String

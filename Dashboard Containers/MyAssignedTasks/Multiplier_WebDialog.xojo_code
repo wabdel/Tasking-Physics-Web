@@ -513,7 +513,7 @@ End
 			  + "INNER JOIN  physics_tasking.task_types USING(task_type_id) " _
 			  + "WHERE physics_tasking.scheduled_tasks.scheduled_task_id = " + mscheduled_task_id.ToString
 			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 			  
 			  
 			  If rs.RowCount = 1 Then
@@ -564,7 +564,12 @@ End
 #tag Events Complete_Button
 	#tag Event
 		Sub Pressed()
-		  
+		  Var db As New MySQLCommunityServer
+		  db.Host = Physics_Tasking.db_host
+		  db.Port = Physics_Tasking.db_port
+		  db.DatabaseName = Physics_Tasking.db_name
+		  db.UserName = Physics_Tasking.db_username
+		  db.Password = Physics_Tasking.db_password
 		  
 		  
 		  Try
@@ -596,9 +601,9 @@ End
 		      
 		      App.last_database_update = DateTime.Now
 		      
-		      
-		      
 		    End If
+		    
+		    db.close
 		    
 		    Self.Close
 		    

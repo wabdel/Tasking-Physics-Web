@@ -57,7 +57,7 @@ Inherits WebApplication
 		  + "FROM physics_tasking.points " _
 		  + "WHERE is_active = TRUE;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.Column("count").IntegerValue = 1 Then Return 1.0
 		  
@@ -77,7 +77,7 @@ Inherits WebApplication
 		  + "FROM physics_tasking.points " _
 		  + "WHERE is_active = TRUE;"
 		  
-		  Var rs_planners As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs_planners As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  Var id_probability As Double = 0
 		  
 		  While Not rs_planners.AfterLastRow
@@ -400,6 +400,22 @@ Inherits WebApplication
 			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Points_Plans_Condition"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Points_Schedulted_Tasks_Condition"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

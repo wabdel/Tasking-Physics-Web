@@ -190,7 +190,7 @@ End
 		    
 		  End Select
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  
 		  Var data() As Double
@@ -253,7 +253,7 @@ End
 		    
 		  End Select
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  
 		  Var data() As Double

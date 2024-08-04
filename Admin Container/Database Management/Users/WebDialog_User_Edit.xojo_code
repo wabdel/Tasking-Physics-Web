@@ -779,7 +779,7 @@ End
 			  Var sql As String = "SELECT * FROM physics_tasking.users " _
 			  + "WHERE user_id = " + muser_id.ToString
 			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 			  
 			  If rs.RowCount = 1 Then
 			    
@@ -799,7 +799,7 @@ End
 			    + "physics_tasking.categories " _
 			    + "ORDER BY name ASC"
 			    
-			    Var rs_groups As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+			    Var rs_groups As RowSet = Physics_Tasking.SELECT_Statement( sql)
 			    
 			    While Not rs_groups.AfterLastRow
 			      
@@ -908,6 +908,12 @@ End
 		Sub Pressed()
 		  
 		  
+		  Var db As New MySQLCommunityServer
+		  db.Host = Physics_Tasking.db_host
+		  db.Port = Physics_Tasking.db_port
+		  db.DatabaseName = Physics_Tasking.db_name
+		  db.UserName = Physics_Tasking.db_username
+		  db.Password = Physics_Tasking.db_password
 		  
 		  Try
 		    
@@ -935,9 +941,6 @@ End
 		      ps.BindType(7, MySQLPreparedStatement.MYSQL_TYPE_STRING)
 		      ps.BindType(8, MySQLPreparedStatement.MYSQL_TYPE_LONG)
 		      
-		      
-		      
-		      
 		      ps.ExecuteSQL( _
 		      First_Name_TextField.Text.Trim, _
 		      Family_Name_TextField.Text.Trim, _
@@ -955,6 +958,7 @@ End
 		      
 		    End If
 		    
+		    db.Close
 		    Self.Close
 		    
 		  Catch de As DatabaseException
@@ -984,7 +988,7 @@ End
 		  '+ "physics_tasking.categories " _
 		  '+ "ORDER BY name ASC"
 		  '
-		  'Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  'Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  '
 		  'While Not rs.AfterLastRow
 		  '

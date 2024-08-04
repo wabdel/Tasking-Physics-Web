@@ -138,7 +138,7 @@ End
 		  + "WHERE DATE(due_date) = '"+ d_Calendar_date.SQLDate + "' " _
 		  + "GROUP BY user_id"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  
@@ -231,7 +231,7 @@ End
 		  + "WHERE DATE(due_date) = '"+ d_Calendar_date.SQLDate + "' " _
 		  + "GROUP BY user_id;"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    

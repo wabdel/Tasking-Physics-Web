@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_Search_Patients Implements WebDataSource
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   600
@@ -14,6 +15,7 @@ Begin WebContainer WEBCONTAINER_Search_Patients Implements WebDataSource
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -21,20 +23,24 @@ Begin WebContainer WEBCONTAINER_Search_Patients Implements WebDataSource
    Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebListBox Patients_ListBox
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   True
+      HeaderHeight    =   0
       Height          =   437
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   20
       LockBottom      =   False
@@ -45,6 +51,7 @@ Begin WebContainer WEBCONTAINER_Search_Patients Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -53,6 +60,7 @@ Begin WebContainer WEBCONTAINER_Search_Patients Implements WebDataSource
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   78
       Visible         =   True
@@ -74,8 +82,10 @@ Begin WebContainer WEBCONTAINER_Search_Patients Implements WebDataSource
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Text            =   ""
       Tooltip         =   ""
       Top             =   20
@@ -102,8 +112,10 @@ Begin WebContainer WEBCONTAINER_Search_Patients Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   2
+      TabStop         =   True
       Text            =   "Patients = 0"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -120,12 +132,14 @@ Begin WebContainer WEBCONTAINER_Search_Patients Implements WebDataSource
       Index           =   -2147483648
       Location        =   0
       LockedInPosition=   False
+      PanelIndex      =   0
       Period          =   1000
       RunMode         =   0
       Scope           =   2
       _mPanelIndex    =   -1
    End
    Begin WEBCONTAINER_Search_Patients_Plans WEBCONTAINER_Search_Patients_Plans1
+      ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
       Height          =   600
@@ -141,10 +155,12 @@ Begin WebContainer WEBCONTAINER_Search_Patients Implements WebDataSource
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       patient_id      =   0
       Scope           =   2
       ScrollDirection =   0
       TabIndex        =   3
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   0
       Visible         =   True
@@ -215,7 +231,7 @@ End
 		    + "OR mrn LIKE '%"+Patients_SearchField.Text + "%' "
 		  End If
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  Return rs.Column("c").IntegerValue
@@ -253,7 +269,7 @@ End
 		  + "ORDER BY no_of_plans DESC; "
 		  
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -324,7 +340,7 @@ End
 		  sql = sql + "GROUP BY patient_id " _
 		  + "ORDER BY no_of_plans DESC; "
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("patient_id").IntegerValue)
@@ -355,7 +371,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub Pressed(row as integer, column as integer)
+		Sub Pressed(row As Integer, column As Integer)
 		  WEBCONTAINER_Search_Patients_Plans1.patient_id = Me.RowTagAt(row)
 		End Sub
 	#tag EndEvent
@@ -389,6 +405,22 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

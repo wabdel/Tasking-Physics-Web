@@ -33,7 +33,7 @@ Begin WebContainer WEBCONTAINER_Login
       Enabled         =   True
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   7
+      Indicator       =   6
       Left            =   190
       LockBottom      =   False
       LockedInPosition=   False
@@ -203,19 +203,17 @@ End
 		  
 		  If User_TextField.Text <> "" And Password_TextField.Text <> "" Then
 		    
-		    'Login_Button.Style.BackgroundColor = Design_Palette.COLOR_Button_Primary
-		    'Login_Button.Style.BorderColor = Session.COLOR_Button_Primary
-		    'Login_Button.Style.ForegroundColor = Color.White
+		    
 		    Login_Button.Indicator = WebUIControl.Indicators.Primary
+		    Login_Button.Style.ForegroundColor = Color.White
 		    Login_Button.Enabled = True
 		    Login_Button.Style.Value("box-shadow") = "0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)"
 		    
 		  Else
 		    
-		    'Login_Button.Style.BackgroundColor = Design_Palette.COLOR_Button_Info
-		    'Login_Button.Style.BorderColor = Session.COLOR_Button_Info
-		    'Login_Button.Style.ForegroundColor = Color.Black
+		    
 		    Login_Button.Indicator = WebUIControl.Indicators.Info
+		    Login_Button.Style.ForegroundColor = Color.Black
 		    Login_Button.Enabled = False
 		    Login_Button.Style.Value("box-shadow") = "none"
 		    
@@ -234,6 +232,12 @@ End
 	#tag Event
 		Sub Pressed()
 		  
+		  Var db As New MySQLCommunityServer
+		  db.Host = Physics_Tasking.db_host
+		  db.Port = Physics_Tasking.db_port
+		  db.DatabaseName = Physics_Tasking.db_name
+		  db.UserName = Physics_Tasking.db_username
+		  db.Password = Physics_Tasking.db_password
 		  
 		  Try
 		    
@@ -279,7 +283,7 @@ End
 		          Var sql As String = "UPDATE physics_tasking.users " _
 		          + "SET is_active = TRUE " _
 		          + "WHERE user_id = " + rs.Column("user_id").IntegerValue.ToString + ";"
-		          Physics_Tasking.DB_EXECUTE_Statement(sql)
+		          Physics_Tasking.EXECUTE_Statement(sql)
 		          
 		          App.last_database_update = DateTime.Now
 		          
@@ -369,7 +373,8 @@ End
 		Sub Opening()
 		  'Me.Style.AddTransition("width", 5, WebStyle.SpeedPatterns.EaseInOut, 0)
 		  'Me.Style.Value("width") = Me.Width.ToString + "px"
-		  
+		  Me.Indicator = WebUIControl.Indicators.Info
+		  Me.Style.ForegroundColor = Color.Black
 		  ENABLE_Login_Button
 		End Sub
 	#tag EndEvent

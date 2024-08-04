@@ -129,8 +129,6 @@ Begin WebContainer WebContainer_On_Call_Date
       Period          =   1000
       RunMode         =   2
       Scope           =   0
-      TabIndex        =   3
-      TabStop         =   True
       _mPanelIndex    =   -1
    End
 End
@@ -160,7 +158,7 @@ End
 		  Var sql As String = "SELECT user_id, users.initials as initials FROM physics_tasking.on_calls " _
 		  + "INNER JOIN physics_tasking.users USING(user_id) " _
 		  + "WHERE on_call_date = '" + mmy_date.SQLDate + "';"
-		  Var rs As Rowset = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As Rowset = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.RowCount = 0 Then
 		    

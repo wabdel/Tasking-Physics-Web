@@ -1,6 +1,7 @@
 #tag WebPage
 Begin WebDialog WebDialog_Directory Implements WebDataSource
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   574
@@ -15,13 +16,14 @@ Begin WebDialog WebDialog_Directory Implements WebDataSource
    LockRight       =   False
    LockTop         =   False
    LockVertical    =   False
+   PanelIndex      =   0
+   Position        =   0
    TabIndex        =   0
    Top             =   0
    Visible         =   True
    Width           =   948
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Close_Button
       AllowAutoDisable=   False
@@ -41,8 +43,11 @@ Begin WebDialog WebDialog_Directory Implements WebDataSource
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   516
       Visible         =   True
@@ -53,14 +58,19 @@ Begin WebDialog WebDialog_Directory Implements WebDataSource
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   False
+      HeaderHeight    =   0
       Height          =   488
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   ""
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   20
       LockBottom      =   False
@@ -71,6 +81,7 @@ Begin WebDialog WebDialog_Directory Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -79,6 +90,7 @@ Begin WebDialog WebDialog_Directory Implements WebDataSource
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   1
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -159,7 +171,7 @@ End
 		  + "is_retired = FALSE " _
 		  + "ORDER BY first_name, family_name;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -212,7 +224,7 @@ End
 		  + "is_retired = FALSE " _
 		  + "ORDER BY first_name, family_name;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("user_id").IntegerValue)
@@ -244,6 +256,34 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Position"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="WebDialog.Positions"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Top"
+			"1 - Center"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

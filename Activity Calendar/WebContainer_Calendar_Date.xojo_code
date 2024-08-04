@@ -100,8 +100,6 @@ Begin WebContainer WebContainer_Calendar_Date
       Period          =   1000
       RunMode         =   2
       Scope           =   2
-      TabIndex        =   2
-      TabStop         =   True
       _mPanelIndex    =   -1
    End
    Begin WebLabel Label_On_Call
@@ -144,7 +142,7 @@ End
 	#tag Event
 		Sub Opening()
 		  
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Date_Weekday
 		  Me.Style.BorderColor = Design_Palette.COLOR_Central_Background
 		  Me.Style.BorderThickness = 1
 		  
@@ -232,7 +230,7 @@ End
 		  Var sql As String = "SELECT user_id, users.initials as initials FROM physics_tasking.on_calls " _
 		  + "INNER JOIN physics_tasking.users USING(user_id) " _
 		  + "WHERE on_call_date = '" + mmy_date.SQLDate + "';"
-		  Var rs As Rowset = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As Rowset = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.RowCount = 0 Then
 		    
@@ -265,7 +263,7 @@ End
 		  + "WHERE DATE(due_date) = '"+ mmy_date.SQLDate + "' " _
 		  + "GROUP BY user_id"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  
@@ -307,9 +305,9 @@ End
 		    Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("color") = "white"
 		    Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("text-shadow") =  "2px 2px 4px #000000;"
 		    
-		    If status_left_position > Self.Left + Self.width - 10 - Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Width Then
+		    If status_left_position > 0 + Self.width - 10 - Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Width Then
 		      
-		      status_left_position = Self.Left + 5
+		      status_left_position = 5
 		      status_top_position = status_top_position + Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Height + 5
 		      
 		    End If
@@ -337,7 +335,7 @@ End
 		  Wend
 		  
 		  
-		  status_left_position = Self.Left + 5
+		  status_left_position = 5
 		  
 		  If Plan_Status_WEBCONTAINER.LastIndex > -1 Then
 		    
@@ -353,7 +351,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub DRAW_Tasks()
-		  
+		  status_left_position = 7
 		  For i As Integer = Task_Status_WEBCONTAINER.LastIndex To 0 Step -1
 		    
 		    Task_Status_WEBCONTAINER(i).Close
@@ -368,7 +366,7 @@ End
 		  + "WHERE DATE(due_date) = '"+ mmy_date.SQLDate + "' " _
 		  + "GROUP BY user_id;"
 		  
-		  Var rs as RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -399,9 +397,9 @@ End
 		    Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("text-shadow") =  "2px 2px 4px #000000;"
 		    
 		    
-		    If status_left_position > Self.Left + Self.width - 10 - Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Width Then
+		    If status_left_position > Self.width - 10 - Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Width Then
 		      
-		      status_left_position = Self.Left + 7
+		      status_left_position = 7
 		      status_top_position = status_top_position + Task_Status_WEBCONTAINER( Task_Status_WEBCONTAINER.LastIndex).Height + 5
 		      
 		    End If
@@ -448,6 +446,18 @@ End
 		#tag Setter
 			Set
 			  mmy_date = value
+			  Select Case mmy_date.DayOfWeek
+			  Case 6,7
+			    
+			    
+			    Self.Style.BackgroundColor = Design_Palette.COLOR_Date_Weekend
+			    
+			  Else
+			    
+			    Self.Style.BackgroundColor = Design_Palette.COLOR_Date_Weekday
+			    
+			  End Select
+			  
 			  
 			End Set
 		#tag EndSetter

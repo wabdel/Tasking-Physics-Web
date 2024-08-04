@@ -134,26 +134,29 @@ End
 	#tag Method, Flags = &h0
 		Sub CHECK_Database_Status()
 		  
-		  
-		  
-		  
-		  
-		  
-		  DB_Host_Label.Text = "DB_Host = " + db.Host
+		  Var db As New MySQLCommunityServer
+		  db.Host = Physics_Tasking.db_host
+		  db.Port = Physics_Tasking.db_port
+		  db.DatabaseName = Physics_Tasking.db_name
+		  db.UserName = Physics_Tasking.db_username
+		  db.Password = Physics_Tasking.db_password
 		  
 		  
 		  Try
 		    If db.Connect Then 
 		      
+		      DB_Host_Label.Text = "DB_Host = " + db.Host
 		      Label1.Text = "Connection is OK!!"
 		      
 		    End If
+		    
+		    db.Close
 		  Catch de As DatabaseException
 		    
 		    Label1.Text = de.ErrorNumber.ToString + " " + de.Message
 		    
 		  End Try
-		  db.Close
+		  
 		  
 		End Sub
 	#tag EndMethod

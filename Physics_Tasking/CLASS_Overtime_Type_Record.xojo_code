@@ -4,31 +4,36 @@ Protected Class CLASS_Overtime_Type_Record
 		Sub Save()
 		  
 		  
-		  Try
+		  
+		  If id = 0 Then
 		    
-		    If id = 0 Then
-		      
-		      
-		      Var row As New DatabaseRow
-		      
-		      row.Column("name").StringValue = name.Trim
-		      
-		      If db.Connect Then
-		        
-		        db.AddRow( "physics_tasking.overtime_types", row)
-		        
-		      End If
-		      
-		      db.Close
-		      
-		      Var sql As String = "SELECT overtime_type_id FROM physics_tasking.overtime_types " _
-		      + "ORDER by overtime_type_id DESC LIMIT 1;"
-		      
-		      Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
-		      
-		      Mid = rs.Column("overtime_type_id").IntegerValue
-		      
-		    Else
+		    
+		    Var row As New DatabaseRow
+		    
+		    row.Column("name").StringValue = name.Trim
+		    
+		    
+		    Physics_Tasking.INSERT_Row( "physics_tasking.overtime_types", row)
+		    
+		    
+		    
+		    Var sql As String = "SELECT overtime_type_id FROM physics_tasking.overtime_types " _
+		    + "ORDER by overtime_type_id DESC LIMIT 1;"
+		    
+		    Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
+		    
+		    Mid = rs.Column("overtime_type_id").IntegerValue
+		    
+		  Else
+		    
+		    Var db As New MySQLCommunityServer
+		    db.Host = Physics_Tasking.db_host
+		    db.Port = Physics_Tasking.db_port
+		    db.DatabaseName = Physics_Tasking.db_name
+		    db.UserName = Physics_Tasking.db_username
+		    db.Password = Physics_Tasking.db_password
+		    
+		    Try
 		      
 		      If db.Connect Then
 		        
@@ -45,22 +50,24 @@ Protected Class CLASS_Overtime_Type_Record
 		        
 		      End If
 		      
+		    Catch de As DatabaseException
 		      
-		    End If
+		      Var theDialog As New MessageWebDialog
+		      theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
+		      theDialog.Show
+		      
+		    Catch noe As NilObjectException
+		      
+		      Var theDialog As New MessageWebDialog
+		      theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
+		      theDialog.Show
+		      
+		    End Try
 		    
-		  Catch de As DatabaseException
 		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
-		    theDialog.Show
-		    
-		  Catch noe As NilObjectException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
-		    theDialog.Show
-		    
-		  End Try
+		  End If
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -80,7 +87,7 @@ Protected Class CLASS_Overtime_Type_Record
 			    +"FROM physics_tasking.overtime_types " _
 			    +"WHERE overtime_type_id = " + value.ToString
 			    
-			    Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+			    Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 			    
 			    If rs.RowCount = 1 Then
 			      

@@ -94,7 +94,7 @@ End
 		  + "GROUP BY MONTH(assignment_date), YEAR(assignment_date) " _
 		  + "ORDER by YEAR(assignment_date), MONTH(assignment_date);"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  Var data() As Double
 		  Var labels() As String
@@ -129,7 +129,7 @@ End
 		  '+ "GROUP BY MONTH(assignment_date), YEAR(assignment_date) " _
 		  '+ "ORDER by YEAR(assignment_date), MONTH(assignment_date);"
 		  '
-		  'Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  'Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  '
 		  'Var data() As Double
 		  '

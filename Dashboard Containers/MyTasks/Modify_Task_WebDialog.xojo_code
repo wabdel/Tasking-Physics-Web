@@ -690,7 +690,7 @@ End
 		  Var sql As String = "SELECT * FROM physics_tasking.task_types " _
 		  + "WHERE task_group_id = " + Str( Task_Groups_PopupMenu.RowTagAt( Task_Groups_PopupMenu.SelectedRowIndex)) + " " _
 		  + "ORDER BY name;" 
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  
 		  While Not rs.AfterLastRow
@@ -733,7 +733,7 @@ End
 			  + "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
 			  + "WHERE task_id = " + mtask_id.ToString + ";"
 			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 			  
 			  
 			  Task_DatePicker.SelectedDate = rs.Column("completion_date").DateTimeValue
@@ -794,7 +794,7 @@ End
 		  Task_Groups_PopupMenu.RemoveAllRows
 		  Var sql As String = "SELECT * FROM physics_tasking.task_groups " _
 		  + "ORDER BY name"
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  
 		  While Not rs.AfterLastRow
@@ -882,7 +882,12 @@ End
 #tag Events Modify_Button
 	#tag Event
 		Sub Pressed()
-		  
+		  Var db As New MySQLCommunityServer
+		  db.Host = Physics_Tasking.db_host
+		  db.Port = Physics_Tasking.db_port
+		  db.DatabaseName = Physics_Tasking.db_name
+		  db.UserName = Physics_Tasking.db_username
+		  db.Password = Physics_Tasking.db_password
 		  
 		  Try
 		    
@@ -902,8 +907,6 @@ End
 		      ps.BindType(3, MySQLPreparedStatement.MYSQL_TYPE_BLOB)
 		      ps.BindType(4, MySQLPreparedStatement.MYSQL_TYPE_LONG)
 		      
-		      
-		      
 		      ps.ExecuteSQL( _
 		      Task_Types_PopupMenu.RowTagAt( Task_Types_PopupMenu.SelectedRowIndex), _
 		      Multiplier_TextField.Text.ToInteger, _
@@ -913,10 +916,9 @@ End
 		      
 		      App.last_database_update = DateTime.Now
 		      
-		      
-		      
 		    End If
 		    
+		    db.close
 		    Self.Close
 		    
 		  Catch de As DatabaseException
@@ -962,7 +964,7 @@ End
 		    Var sql as String = "DELETE FROM physics_tasking.tasks " _
 		    + "WHERE physics_tasking.tasks.task_id = " +task_id.ToString + ";"
 		    
-		    Physics_Tasking.DB_EXECUTE_Statement(sql)
+		    Physics_Tasking.EXECUTE_Statement(sql)
 		    App.last_database_update = DateTime.Now
 		    
 		    

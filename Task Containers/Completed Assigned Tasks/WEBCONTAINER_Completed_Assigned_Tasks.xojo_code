@@ -334,7 +334,7 @@ End
 		  + "ORDER BY DATE(physics_tasking.scheduled_tasks.due_date) DESC, " _
 		  + "physics_tasking.scheduled_tasks.scheduled_task_id DESC;"
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  Physics_Tasking.EXECUTE_Statement(sql)
 		  
 		  
 		  Task_Type_PopupMenu.RemoveAllRows
@@ -349,7 +349,7 @@ End
 		  + "FROM physics_tasking.completed_assigned_tasks " _
 		  + "ORDER BY task_group_name;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -371,7 +371,7 @@ End
 		  + "FROM physics_tasking.completed_assigned_tasks " _
 		  + "ORDER BY machine_name"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -391,7 +391,7 @@ End
 		  + "FROM physics_tasking.completed_assigned_tasks " _
 		  + "ORDER BY due_date DESC"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -556,7 +556,7 @@ End
 		  + "physics_tasking.scheduled_tasks.scheduled_task_id DESC;"
 		  
 		  
-		  Physics_Tasking.DB_EXECUTE_Statement(sql)
+		  Physics_Tasking.EXECUTE_Statement(sql)
 		  
 		  
 		  Task_Type_PopupMenu.RemoveAllRows
@@ -571,7 +571,7 @@ End
 		  + "FROM physics_tasking.completed_assigned_tasks " _
 		  + "ORDER BY task_group_name;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -593,7 +593,7 @@ End
 		  + "FROM physics_tasking.completed_assigned_tasks " _
 		  + "ORDER BY machine_name"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -613,7 +613,7 @@ End
 		  + "FROM physics_tasking.completed_assigned_tasks " _
 		  + "ORDER BY due_date DESC"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -675,7 +675,7 @@ End
 		  + "WHERE is_completed = TRUE " _
 		  + "ORDER BY physics_tasking.scheduled_tasks.due_date DESC"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  Return rs.Column("c").IntegerValue
@@ -740,7 +740,7 @@ End
 		  sql = sql + "ORDER BY DATE(physics_tasking.scheduled_tasks.due_date) DESC, " _
 		  + "physics_tasking.scheduled_tasks.scheduled_task_id DESC;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  While Not rs.AfterLastRow
@@ -831,7 +831,7 @@ End
 		  sql = sql + "ORDER BY DATE(physics_tasking.scheduled_tasks.due_date) DESC, " _
 		  + "physics_tasking.scheduled_tasks.scheduled_task_id DESC;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("scheduled_task_id").IntegerValue)

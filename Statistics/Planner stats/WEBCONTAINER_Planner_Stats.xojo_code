@@ -367,7 +367,7 @@ End
 		  + "GROUP BY name " _
 		  + "ORDER BY name;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  
 		  Var sum As Double = 0
@@ -408,7 +408,7 @@ End
 		  Var sql as string = "SELECT user_id, first_name, family_name FROM physics_tasking.users " _
 		  + "WHERE category_id IN(2,3) " _
 		  + "AND is_retired = FALSE;"
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  While Not rs.AfterLastRow
 		    

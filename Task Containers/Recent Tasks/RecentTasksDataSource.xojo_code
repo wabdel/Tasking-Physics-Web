@@ -68,7 +68,7 @@ Implements WebDataSource
 		  + DateTime.Now.SubtractInterval( 0, 0, Physics_Tasking.Population_period_days).SQLDate  + "' " _
 		  + "ORDER BY physics_tasking.tasks.completion_date DESC"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  Return rs.Column("c").IntegerValue
@@ -111,7 +111,7 @@ Implements WebDataSource
 		  + "ORDER BY DATE(physics_tasking.tasks.completion_date) DESC, " _
 		  + "physics_tasking.tasks.task_id DESC;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    Var s As New WebStyle
@@ -191,7 +191,7 @@ Implements WebDataSource
 		  + DateTime.Now.SubtractInterval( 0, 0, Physics_Tasking.Population_period_days).SQLDate  + "' " _
 		  + "ORDER BY physics_tasking.tasks.completion_date DESC"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("task_id").IntegerValue)
@@ -217,7 +217,7 @@ Implements WebDataSource
 		  + DateTime.Now.SubtractInterval( 0, 0, Physics_Tasking.Population_period_days).SQLDate  + "' " _
 		  + "ORDER BY physics_tasking.tasks.completion_date DESC"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("task_id").IntegerValue)
@@ -231,5 +231,47 @@ Implements WebDataSource
 	#tag EndMethod
 
 
+	#tag ViewBehavior
+		#tag ViewProperty
+			Name="Name"
+			Visible=true
+			Group="ID"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Index"
+			Visible=true
+			Group="ID"
+			InitialValue="-2147483648"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Super"
+			Visible=true
+			Group="ID"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Left"
+			Visible=true
+			Group="Position"
+			InitialValue="0"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Top"
+			Visible=true
+			Group="Position"
+			InitialValue="0"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+	#tag EndViewBehavior
 End Class
 #tag EndClass

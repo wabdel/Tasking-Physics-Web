@@ -15,6 +15,7 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -41,8 +42,11 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   542
       Visible         =   True
@@ -53,8 +57,12 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   True
+      HeaderHeight    =   0
       Height          =   496
       HighlightSortedColumn=   True
       Index           =   -2147483648
@@ -72,6 +80,7 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   "Loading data"
       RowCount        =   0
       RowSelectionType=   1
@@ -80,6 +89,7 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   1
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -92,6 +102,7 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       Index           =   -2147483648
       Location        =   0
       LockedInPosition=   False
+      PanelIndex      =   0
       Period          =   1000
       RunMode         =   2
       Scope           =   2
@@ -116,8 +127,10 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   2
+      TabStop         =   True
       Text            =   "Double click an entry to edit."
       TextAlignment   =   0
       TextColor       =   &cFF7E7900
@@ -147,8 +160,10 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   3
+      TabStop         =   True
       Text            =   "Accumilated time = 0 min."
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -178,8 +193,10 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   4
+      TabStop         =   True
       Text            =   "Data listed is for the past 30 enteries."
       TextAlignment   =   0
       TextColor       =   &cFF7E7900
@@ -208,8 +225,11 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   5
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   542
       Visible         =   True
@@ -295,7 +315,7 @@ End
 		  + "WHERE user_id = " + Session.Logged_in_User.id.ToString + " " _
 		  + "ORDER BY physics_tasking.timelogs.time_in DESC"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  Var y_position As Integer = 0
 		  
@@ -445,7 +465,7 @@ End
 		  Var sql As String = "SELECT COUNT(*) as c FROM physics_tasking.timelogs " _
 		  + "WHERE user_id = " + Session.Logged_in_User.id.ToString + " LIMIT 30;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  Return rs.Column("c").IntegerValue
@@ -468,7 +488,7 @@ End
 		  + "WHERE user_id = " + Session.Logged_in_User.id.ToString + " " _
 		  + "ORDER BY physics_tasking.timelogs.time_in DESC LIMIT 30"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -564,7 +584,7 @@ End
 		  + "time_out IS NOT NULL;"
 		  
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		  rs = Physics_Tasking.SELECT_Statement( sql)
 		  '
 		  '
 		  'Return rs.Column("s").IntegerValue
@@ -594,7 +614,7 @@ End
 		  + "WHERE user_id = " + Session.Logged_in_User.id.ToString + " " _
 		  + "ORDER BY physics_tasking.timelogs.time_in DESC LIMIT 30"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("timelog_id").IntegerValue)
@@ -690,6 +710,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ControlCount"
 		Visible=false

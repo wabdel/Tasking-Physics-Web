@@ -753,7 +753,7 @@ End
 		  Var sql as String = "SELECT user_id FROM physics_tasking.users " _
 		  + "WHERE LOWER(login) = '" + Login_TextField.Text.Lowercase + "'"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  If rs.RowCount > 0 Then
 		    
@@ -852,54 +852,31 @@ End
 		Sub Pressed()
 		  
 		  
+		  Var row As New DatabaseRow
+		  
+		  row.Column("login").StringValue = Login_TextField.Text.Trim.Lowercase
+		  row.Column("first_name").StringValue = First_Name_TextField.Text.Trim.Titlecase
+		  row.Column("family_name").StringValue = Family_Name_TextField.Text.Trim.Uppercase
+		  row.Column("hospital_id").StringValue = Hospital_ID_TextField.Text.Trim.Lowercase
+		  row.Column("initials").StringValue = Initials_TextField.Text.Trim.Uppercase
+		  row.Column("email").StringValue = Email_TextField.Text.Trim.Lowercase
+		  row.Column("mobile").StringValue = Mobile_TextField.Text.Trim.Lowercase
+		  row.Column("extension").StringValue = Extension_TextField.Text.Trim.Lowercase
+		  row.Column("email").StringValue = Email_TextField.Text.Trim.Lowercase
+		  row.Column("is_active").BooleanValue = True
+		  row.Column("is_retired").BooleanValue = False
+		  row.Column("reset_password").BooleanValue = True
+		  row.Column("category_id").IntegerValue = _
+		  Group_PopupMenu.RowTagAt( Group_PopupMenu.SelectedRowIndex)
+		  
+		  row.Column("password").BlobValue = _
+		  Crypto.Hash("12345678", Crypto.Algorithm.SHA512) 
+		  
+		  Physics_Tasking.INSERT_Row("users", row)
+		  
+		  App.last_database_update = DateTime.Now
 		  
 		  
-		  
-		  Try
-		    
-		    If db.Connect Then
-		      
-		      Var row As New DatabaseRow
-		      
-		      row.Column("login").StringValue = Login_TextField.Text.Trim.Lowercase
-		      row.Column("first_name").StringValue = First_Name_TextField.Text.Trim.Titlecase
-		      row.Column("family_name").StringValue = Family_Name_TextField.Text.Trim.Uppercase
-		      row.Column("hospital_id").StringValue = Hospital_ID_TextField.Text.Trim.Lowercase
-		      row.Column("initials").StringValue = Initials_TextField.Text.Trim.Uppercase
-		      row.Column("email").StringValue = Email_TextField.Text.Trim.Lowercase
-		      row.Column("mobile").StringValue = Mobile_TextField.Text.Trim.Lowercase
-		      row.Column("extension").StringValue = Extension_TextField.Text.Trim.Lowercase
-		      row.Column("email").StringValue = Email_TextField.Text.Trim.Lowercase
-		      row.Column("is_active").BooleanValue = True
-		      row.Column("is_retired").BooleanValue = False
-		      row.Column("reset_password").BooleanValue = True
-		      row.Column("category_id").IntegerValue = _
-		      Group_PopupMenu.RowTagAt( Group_PopupMenu.SelectedRowIndex)
-		      
-		      row.Column("password").BlobValue = _
-		      Crypto.Hash("12345678", Crypto.Algorithm.SHA512) 
-		      
-		      db.AddRow("users", row)
-		      
-		      App.last_database_update = DateTime.Now
-		      
-		    End If
-		    
-		    Self.Close
-		    
-		  Catch de As DatabaseException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
-		    theDialog.Show
-		    
-		  Catch noe As NilObjectException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
-		    theDialog.Show
-		    
-		  End Try
 		  
 		End Sub
 	#tag EndEvent
@@ -913,7 +890,7 @@ End
 		  + "physics_tasking.categories " _
 		  + "ORDER BY name ASC"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    

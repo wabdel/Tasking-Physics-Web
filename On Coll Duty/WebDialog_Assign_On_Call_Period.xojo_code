@@ -181,7 +181,7 @@ Begin WebDialog WebDialog_Assign_On_Call_Period
       Enabled         =   True
       Height          =   38
       Index           =   -2147483648
-      indicator       =   0
+      Indicator       =   0
       InitialValue    =   ""
       LatestDate      =   ""
       Left            =   391
@@ -243,7 +243,7 @@ Begin WebDialog WebDialog_Assign_On_Call_Period
       FontSize        =   0.0
       Height          =   38
       Index           =   1
-      indicator       =   0
+      Indicator       =   0
       Italic          =   False
       Left            =   391
       LockBottom      =   False
@@ -295,7 +295,7 @@ End
 		  + "WHERE category_id IN (2,3) " _
 		  + "AND is_retired = FALSE " _
 		  + "ORDER BY first_name;"
-		  Var rs As Rowset = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As Rowset = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  If rs.RowCount = 0 Then Return
 		  
@@ -333,7 +333,7 @@ End
 		    Var sql As String = "SELECT * FROM physics_tasking.on_calls " _
 		    + "WHERE on_call_date = '" + d.SQLDate + "';"
 		    
-		    Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		    Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		    
 		    If rs.RowCount = 0 Then
 		      
@@ -342,7 +342,7 @@ End
 		      row.Column("on_call_date").DateTimeValue = d
 		      row.Column("user_id").IntegerValue = PopupMenu_Users_List.RowTagAt( PopupMenu_Users_List.SelectedRowIndex)
 		      
-		      db.AddRow( "physics_tasking.on_calls", row)
+		      Physics_Tasking.INSERT_Row( "physics_tasking.on_calls", row)
 		      
 		      
 		    Else

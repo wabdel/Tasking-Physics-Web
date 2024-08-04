@@ -396,7 +396,7 @@ End
 		  + "WHERE user_id NOT IN (1) " _
 		  + "ORDER BY first_name, family_name;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  Return rs.Column("c").IntegerValue
@@ -427,7 +427,7 @@ End
 		  + "WHERE user_id NOT IN (1) " _
 		  + "ORDER BY first_name, family_name;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  Var active_buttons() As GroupButtonItem
 		  active_buttons.Add(New GroupButtonItem("yes", "Yes", "success"))
@@ -540,7 +540,7 @@ End
 		  + "WHERE user_id NOT IN (1) " _
 		  + "ORDER BY first_name, family_name;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("user_id").IntegerValue)
@@ -588,6 +588,12 @@ End
 		  If identifier = "GroupButtonPressed" Then
 		    
 		    
+		    Var db As New MySQLCommunityServer
+		    db.Host = Physics_Tasking.db_host
+		    db.Port = Physics_Tasking.db_port
+		    db.DatabaseName = Physics_Tasking.db_name
+		    db.UserName = Physics_Tasking.db_username
+		    db.Password = Physics_Tasking.db_password
 		    
 		    Try
 		      

@@ -420,73 +420,50 @@ End
 		Private Sub ASSIGN_Scheduled_Tasks()
 		  
 		  
-		  Try
+		  // Let check if patient exists
+		  
+		  For i As Integer = 0 To Assign_Tasks_ListBox.LastRowIndex
 		    
-		    If db.Connect Then
+		    
+		    If Assign_Tasks_ListBox.CellTagAt(i,1) = True Then
 		      
-		      // Let check if patient exists
+		      Var row As New DatabaseRow
 		      
-		      For i As Integer = 0 To Assign_Tasks_ListBox.LastRowIndex
-		        
-		        
-		        If Assign_Tasks_ListBox.CellTagAt(i,1) = True Then
-		          
-		          Var row As New DatabaseRow
-		          
-		          row.Column("task_type_id").IntegerValue = Assign_Tasks_ListBox.RowTagAt( i)
-		          
-		          row.Column("machine_id").IntegerValue = Machine_PopupMenu.RowTagAt( Machine_PopupMenu.SelectedRowIndex)
-		          
-		          row.Column("user_id").IntegerValue = Staff_PopupMenu.RowTagAt( Staff_PopupMenu.SelectedRowIndex)
-		          
-		          row.Column("assigned_by_id").IntegerValue = Session.Logged_in_User.id
-		          
-		          row.Column("assignment_date").DateTimeValue = DateTime.Now
-		          row.Column("due_date").DateTimeValue = Due_DatePicker.SelectedDate
-		          
-		          row.Column("notes").StringValue = "(Assigned manually by " + Session.Logged_in_User.full_name.ToText + ")" 
-		          
-		          row.Column("multiplier").IntegerValue = 0
-		          db.AddRow("physics_tasking.scheduled_tasks", row)
-		          
-		          
-		          Var Assign_scheduled_Task As New DatabaseRow
-		          Assign_scheduled_Task.Column("user_id").IntegerValue = Session.Logged_in_User.id
-		          Assign_scheduled_Task.Column("task_type_id").IntegerValue = 1
-		          Assign_scheduled_Task.Column("multiplier").IntegerValue = 1
-		          Assign_scheduled_Task.Column("completion_date").DateTimeValue = DateTime.Now
-		          Assign_scheduled_Task.Column("notes").StringValue = "Assigned " _
-		          + Assign_Tasks_ListBox.CellTextAt( i, 0) + " - " _
-		          + Machine_PopupMenu.RowValueAt( Machine_PopupMenu.SelectedRowIndex) + "/ to " _
-		          + Staff_PopupMenu.RowValueAt( Staff_PopupMenu.SelectedRowIndex)
-		          db.AddRow("physics_tasking.tasks", Assign_scheduled_Task)
-		          
-		          App.last_database_update = DateTime.Now
-		          
-		        End If
-		        
-		      Next
-		      App.last_database_update = DateTime.Now
-		      POPULATE_Task_Group
-		      Machine_PopupMenu.SelectedRowIndex = -1
-		      Staff_PopupMenu.SelectedRowIndex = -1
-		      Due_DatePicker.SelectedDate = DateTime.Now
-		      Assign_Tasks_ListBox.RemoveAllRows
+		      row.Column("task_type_id").IntegerValue = Assign_Tasks_ListBox.RowTagAt( i)
+		      row.Column("machine_id").IntegerValue = Machine_PopupMenu.RowTagAt( Machine_PopupMenu.SelectedRowIndex)
+		      row.Column("user_id").IntegerValue = Staff_PopupMenu.RowTagAt( Staff_PopupMenu.SelectedRowIndex)
+		      row.Column("assigned_by_id").IntegerValue = Session.Logged_in_User.id
+		      row.Column("assignment_date").DateTimeValue = DateTime.Now
+		      row.Column("due_date").DateTimeValue = Due_DatePicker.SelectedDate
+		      row.Column("notes").StringValue = "(Assigned manually by " + Session.Logged_in_User.full_name.ToText + ")" 
+		      row.Column("multiplier").IntegerValue = 0
+		      
+		      Physics_Tasking.INSERT_Row("physics_tasking.scheduled_tasks", row)
+		      
+		      
+		      Var Assign_scheduled_Task As New DatabaseRow
+		      
+		      Assign_scheduled_Task.Column("user_id").IntegerValue = Session.Logged_in_User.id
+		      Assign_scheduled_Task.Column("task_type_id").IntegerValue = 1
+		      Assign_scheduled_Task.Column("multiplier").IntegerValue = 1
+		      Assign_scheduled_Task.Column("completion_date").DateTimeValue = DateTime.Now
+		      Assign_scheduled_Task.Column("notes").StringValue = "Assigned " _
+		      + Assign_Tasks_ListBox.CellTextAt( i, 0) + " - " _
+		      + Machine_PopupMenu.RowValueAt( Machine_PopupMenu.SelectedRowIndex) + "/ to " _
+		      + Staff_PopupMenu.RowValueAt( Staff_PopupMenu.SelectedRowIndex)
+		      
+		      Physics_Tasking.INSERT_Row("physics_tasking.tasks", Assign_scheduled_Task)
+		      
+		      
 		    End If
 		    
-		  Catch de As DatabaseException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
-		    theDialog.Show
-		    
-		  Catch noe As NilObjectException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
-		    theDialog.Show
-		    
-		  End Try
+		  Next
+		  App.last_database_update = DateTime.Now
+		  POPULATE_Task_Group
+		  Machine_PopupMenu.SelectedRowIndex = -1
+		  Staff_PopupMenu.SelectedRowIndex = -1
+		  Due_DatePicker.SelectedDate = DateTime.Now
+		  Assign_Tasks_ListBox.RemoveAllRows
 		  
 		End Sub
 	#tag EndMethod
@@ -547,7 +524,7 @@ End
 		  + Str(Task_Group_PopupMenu.RowTagAt(Task_Group_PopupMenu.SelectedRowIndex)) + " " _
 		  + "ORDER BY physics_tasking.task_types.name;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  
@@ -590,7 +567,7 @@ End
 		  + "WHERE is_schedulable = True " _
 		  + "GROUP BY task_group_id; "
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  While Not rs.AfterLastRow
@@ -803,7 +780,7 @@ End
 		  + "FROM machines " _
 		  + "ORDER BY name"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -842,7 +819,7 @@ End
 		  + "AND is_retired = FALSE " _
 		  + "ORDER BY first_name, family_name"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  While Not rs.AfterLastRow
 		    

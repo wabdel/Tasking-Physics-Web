@@ -131,7 +131,7 @@ End
 		  + "GROUP BY site_id " _
 		  + "ORDER BY name; "
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  Var data() As Double
 		  Var labels() As String

@@ -18,7 +18,7 @@ Protected Class CLASS_User_Record
 		  + "AND datediff( '"  + Set_Date.SQLDate + "' , DATE(completion_date)) >= 0 " _
 		  + "AND datediff( '"  + Set_Date.SQLDate + "' , DATE(completion_date)) <= 365;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.RowCount = 1 Then Return rs.Column("sum").DoubleValue
 		  
@@ -38,7 +38,7 @@ Protected Class CLASS_User_Record
 		  + "AND datediff( '"  + Set_Date.SQLDate + "' , DATE(assignment_date)) >= 0 " _
 		  + "AND datediff( '"  + Set_Date.SQLDate + "' , DATE(assignment_date)) <= 365;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  If rs.RowCount = 1 Then Return rs.Column("sum").DoubleValue
@@ -68,11 +68,11 @@ Protected Class CLASS_User_Record
 		  + "AND datediff( '"  + Set_Date.SQLDate + "' , DATE(completion_date)) >= 0 " _
 		  + "AND datediff( '"  + Set_Date.SQLDate + "' , DATE(completion_date)) <= 365;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While rs = Nil
 		    
-		    rs = Physics_Tasking.DB_SELECT_Statement( sql)
+		    rs = Physics_Tasking.SELECT_Statement( sql)
 		    
 		    
 		  Wend
@@ -90,7 +90,7 @@ Protected Class CLASS_User_Record
 		  + "DATE(assignment_date) >= '" + d_min.SQLDate + "' AND " _
 		  + "DATE(assignment_date) <= '" + d_max.SQLDate + "'"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  Return rs.Column("COUNT(*)").IntegerValue
 		  
@@ -105,7 +105,7 @@ Protected Class CLASS_User_Record
 		  + "DATE(completion_date) >= '" + d_min.SQLDate + "' AND " _
 		  + "DATE(completion_date) <= '" + d_max.SQLDate + "'"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  Return rs.Column("COUNT(*)").IntegerValue
 		  
@@ -133,7 +133,7 @@ Protected Class CLASS_User_Record
 		  + "physics_tasking.plans.user_id = " + id.ToString +" AND " _
 		  + "assignment_date BETWEEN '" + d_initial.SQLDate + "' AND '" + d_final.SQLDate + "';"
 		  
-		  Return Physics_Tasking.DB_SELECT_Statement( sql)
+		  Return Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		End Function
@@ -166,7 +166,7 @@ Protected Class CLASS_User_Record
 		  + "physics_tasking.plans.user_id = " + id.ToString +" AND " _
 		  + " assignment_date BETWEEN '" + d_initial.SQLDate + "' AND '" + d_final.SQLDate + "';"
 		  
-		  Return Physics_Tasking.DB_SELECT_Statement( sql)
+		  Return Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		End Function
@@ -185,7 +185,7 @@ Protected Class CLASS_User_Record
 		  + "AND datediff('" + Set_date.SQLDate + "', DATE(completion_date)) <= " + Physics_Tasking.Points_period_days.ToString + " " _
 		  + "AND datediff('" + Set_date.SQLDate + "', DATE(completion_date)) >= 0;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  If rs.RowCount = 1 Then Return rs.Column("sum").DoubleValue
 		  
@@ -213,7 +213,7 @@ Protected Class CLASS_User_Record
 		  + "AND datediff('" + Set_Date.SQLDate + "', DATE(assignment_date)) >= 0) ;"
 		  
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.RowCount = 1 Then Return rs.Column("sum").DoubleValue
 		  
@@ -251,7 +251,7 @@ Protected Class CLASS_User_Record
 		  + "OR plans.is_completed = false);"
 		  
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  If rs.RowCount = 1 Then Return rs.Column("sum").DoubleValue
 		  
@@ -284,7 +284,7 @@ Protected Class CLASS_User_Record
 		  + " AND datediff('" + Set_date.SQLDate + "', DATE(completion_date)) <= " + Physics_Tasking.Points_period_days.ToString _
 		  + " AND datediff('" + Set_date.SQLDate + "', DATE(completion_date)) >= 0;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  If rs.RowCount = 1 Then Return rs.Column("sum").DoubleValue
 		  
@@ -325,7 +325,7 @@ Protected Class CLASS_User_Record
 		  + "MONTH(completion_date) = " + month.ToString + " AND " _
 		  + "user_id = " + id.ToString
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  
 		  Return rs.Column("COUNT(*)").IntegerValue
@@ -336,47 +336,46 @@ Protected Class CLASS_User_Record
 
 	#tag Method, Flags = &h0
 		Sub Save()
-		  Try
+		  
+		  
+		  
+		  If id = 0 Then
 		    
 		    
-		    If id = 0 Then
-		      
-		      Var row As New DatabaseRow
-		      
-		      row.Column("login").StringValue = login.Trim.Lowercase
-		      row.Column("first_name").StringValue = firstName.Trim.Titlecase
-		      row.Column("family_name").StringValue = familyName.Trim.Uppercase
-		      row.Column("initials").StringValue = initials.Trim.Lowercase
-		      row.Column("hospital_id").StringValue = hospital_id.Trim.Lowercase
-		      row.Column("email").StringValue = email.Trim
-		      row.Column("mobile").StringValue = mobile.Trim
-		      row.Column("extension").StringValue = extension.Trim
-		      row.Column("category_id").IntegerValue = Group.id
-		      row.Column("password").BlobValue = _
-		      Crypto.Hash("12345678", Crypto.Algorithm.SHA512)
-		      row.Column("is_active").BooleanValue = True
-		      row.Column("reset_password").BooleanValue = True
-		      row.Column("is_retired").BooleanValue = False
-		      
-		      db.AddRow("physics_tasking.users", row)
-		      
-		      
-		      
-		      Var sql As String = "SELECT user_id FROM physics_tasking.users " _
-		      + "ORDER BY user_id DESC LIMIT 1;"
-		      
-		      If db.Connect Then
-		        Var rs As RowSet = db.SelectSQL( sql)
-		        Mid = rs.Column("user_id").IntegerValue
-		        
-		      End If
-		      
-		      Return
-		      
-		    Else
-		      
-		      
-		      
+		    Var row As New DatabaseRow
+		    
+		    row.Column("login").StringValue = login.Trim.Lowercase
+		    row.Column("first_name").StringValue = firstName.Trim.Titlecase
+		    row.Column("family_name").StringValue = familyName.Trim.Uppercase
+		    row.Column("initials").StringValue = initials.Trim.Lowercase
+		    row.Column("hospital_id").StringValue = hospital_id.Trim.Lowercase
+		    row.Column("email").StringValue = email.Trim
+		    row.Column("mobile").StringValue = mobile.Trim
+		    row.Column("extension").StringValue = extension.Trim
+		    row.Column("category_id").IntegerValue = Group.id
+		    row.Column("password").BlobValue = _
+		    Crypto.Hash("12345678", Crypto.Algorithm.SHA512)
+		    row.Column("is_active").BooleanValue = True
+		    row.Column("reset_password").BooleanValue = True
+		    row.Column("is_retired").BooleanValue = False
+		    
+		    Physics_Tasking.INSERT_Row("physics_tasking.users", row)
+		    
+		    Var sql As String = "SELECT user_id FROM physics_tasking.users " _
+		    + "ORDER BY user_id DESC LIMIT 1;"
+		    
+		    Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
+		    Mid = rs.Column("user_id").IntegerValue
+		    
+		  Else
+		    
+		    Var db As New MySQLCommunityServer
+		    db.Host = Physics_Tasking.db_host
+		    db.Port = Physics_Tasking.db_port
+		    db.DatabaseName = Physics_Tasking.db_name
+		    db.UserName = Physics_Tasking.db_username
+		    db.Password = Physics_Tasking.db_password
+		    Try
 		      If db.Connect Then
 		        
 		        Var ps As  PreparedSQLStatement = _
@@ -408,11 +407,6 @@ Protected Class CLASS_User_Record
 		        ps.BindType(11, MySQLPreparedStatement.MYSQL_TYPE_LONG)
 		        ps.BindType(12, MySQLPreparedStatement.MYSQL_TYPE_LONG)
 		        
-		        
-		        
-		        'If resetPassword Then _
-		        'password = Crypto.Hash("12345678", Crypto.Algorithm.SHA512)
-		        
 		        ps.ExecuteSQL(firstName, _
 		        familyName, _
 		        initials, _
@@ -428,28 +422,27 @@ Protected Class CLASS_User_Record
 		        id )
 		        
 		        
-		        Return
-		        
-		        
-		        
 		      End If
+		    Catch de As DatabaseException
 		      
-		    End If
+		      Var theDialog As New MessageWebDialog
+		      theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
+		      theDialog.Show
+		      
+		      
+		    Catch noe As NilObjectException
+		      
+		      Var theDialog As New MessageWebDialog
+		      theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
+		      theDialog.Show
+		      
+		    End Try
 		    
-		  Catch de As DatabaseException
 		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
-		    theDialog.Show
-		    
-		    
-		  Catch noe As NilObjectException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
-		    theDialog.Show
-		    
-		  End Try
+		  End If
+		  
+		  
+		  
 		  
 		End Sub
 	#tag EndMethod
@@ -554,8 +547,12 @@ Protected Class CLASS_User_Record
 		#tag EndGetter
 		#tag Setter
 			Set
-			  
-			  
+			  Var db As New MySQLCommunityServer
+			  db.Host = Physics_Tasking.db_host
+			  db.Port = Physics_Tasking.db_port
+			  db.DatabaseName = Physics_Tasking.db_name
+			  db.UserName = Physics_Tasking.db_username
+			  db.Password = Physics_Tasking.db_password
 			  
 			  Try
 			    
@@ -589,6 +586,9 @@ Protected Class CLASS_User_Record
 			      
 			      
 			    End If
+			    
+			    db.close
+			    
 			  Catch de As DatabaseException
 			    
 			    Var theDialog As New MessageWebDialog
@@ -650,7 +650,7 @@ Protected Class CLASS_User_Record
 			  +"FROM physics_tasking.users " _
 			  +"WHERE user_id = " + Mid.ToString
 			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 			  
 			  misActive = rs.Column("is_active").BooleanValue
 			  
@@ -672,7 +672,7 @@ Protected Class CLASS_User_Record
 			  +"FROM physics_tasking.users " _
 			  +"WHERE user_id = " + Mid.ToString
 			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 			  
 			  misRetired = rs.Column("is_retired").BooleanValue
 			  
@@ -737,7 +737,7 @@ Protected Class CLASS_User_Record
 			  + "AND physics_tasking.plans.is_completed = false;"
 			  
 			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 			  
 			  If rs.RowCount = 1 Then
 			    

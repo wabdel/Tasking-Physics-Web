@@ -94,7 +94,7 @@ Implements WebDataSource
 		  + "ORDER BY DATE(physics_tasking.scheduled_tasks.due_date) DESC, " _
 		  + "physics_tasking.scheduled_tasks.scheduled_task_id DESC;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  Var actionButtons() As GroupButtonItem
 		  actionButtons.Add(New GroupButtonItem("undo", "Undo"))
@@ -157,7 +157,7 @@ Implements WebDataSource
 		  + "ORDER BY DATE(physics_tasking.scheduled_tasks.due_date) DESC, " _
 		  + "physics_tasking.scheduled_tasks.scheduled_task_id DESC;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    keys.Append( rs.Column("scheduled_task_id").IntegerValue)

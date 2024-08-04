@@ -678,7 +678,7 @@ End
 			  + "INNER JOIN physics_tasking.task_groups USING(task_group_id) " _
 			  + "WHERE physics_tasking.task_types.task_type_id = " +mTask_Type_id.ToString
 			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 			  
 			  While Not rs.AfterLastRow
 			    
@@ -728,6 +728,12 @@ End
 #tag Events Add_Button
 	#tag Event
 		Sub Pressed()
+		  Var db As New MySQLCommunityServer
+		  db.Host = Physics_Tasking.db_host
+		  db.Port = Physics_Tasking.db_port
+		  db.DatabaseName = Physics_Tasking.db_name
+		  db.UserName = Physics_Tasking.db_username
+		  db.Password = Physics_Tasking.db_password
 		  
 		  
 		  Try

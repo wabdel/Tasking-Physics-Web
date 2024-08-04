@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_User_Statistics_Plans
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   600
@@ -14,6 +15,7 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Plans
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -21,20 +23,24 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Plans
    Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebListBox Site_ListBox
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   False
+      HeaderHeight    =   0
       Height          =   560
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   20
       LockBottom      =   False
@@ -45,6 +51,7 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Plans
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -53,6 +60,7 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Plans
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   0
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -63,14 +71,19 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Plans
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   False
+      HeaderHeight    =   0
       Height          =   560
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   419
       LockBottom      =   False
@@ -81,6 +94,7 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Plans
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -89,6 +103,7 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Plans
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   1
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -99,14 +114,19 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Plans
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   False
+      HeaderHeight    =   0
       Height          =   560
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   819
       LockBottom      =   False
@@ -117,6 +137,7 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Plans
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -125,6 +146,7 @@ Begin WebContainer WEBCONTAINER_User_Statistics_Plans
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   2
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -160,7 +182,7 @@ End
 		  + "AND plan_type_id = " + plan_type_id.ToString + " " _
 		  + "ORDER BY physics_tasking.plans.assignment_date DESC;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -204,7 +226,7 @@ End
 		  + "GROUP BY plan_type_id " _
 		  + "ORDER BY name; "
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -248,7 +270,7 @@ End
 		  + "GROUP BY site_id " _
 		  + "ORDER BY name; "
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -283,7 +305,7 @@ End
 
 #tag Events Site_ListBox
 	#tag Event
-		Sub SelectionChanged(Rows() as Integer)
+		Sub SelectionChanged(rows() As Integer)
 		  Plan_Type_ListBox.Enabled = True
 		  Patients_ListBox.RemoveAllRows
 		  POPULATE_Plan_Type_ListBox( Me.RowTagAt( Me.SelectedRowIndex))
@@ -313,7 +335,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub Pressed(row as integer, column as integer)
+		Sub Pressed(row As Integer, column As Integer)
 		  Patients_ListBox.Enabled = True
 		  POPULATE_Patient_ListBox( Me.RowTagAt( Me.SelectedRowIndex))
 		End Sub
@@ -332,6 +354,22 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

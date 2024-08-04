@@ -16,6 +16,8 @@ Begin WebDialog WebDialog_User_Plans
    LockRight       =   False
    LockTop         =   False
    LockVertical    =   False
+   PanelIndex      =   0
+   Position        =   0
    TabIndex        =   0
    Top             =   0
    Visible         =   True
@@ -41,6 +43,8 @@ Begin WebDialog WebDialog_User_Plans
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   0
       TabStop         =   True
@@ -54,8 +58,12 @@ Begin WebDialog WebDialog_User_Plans
       ColumnCount     =   3
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   True
+      HeaderHeight    =   0
       Height          =   526
       HighlightSortedColumn=   True
       Index           =   -2147483648
@@ -73,6 +81,7 @@ Begin WebDialog WebDialog_User_Plans
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -107,6 +116,7 @@ Begin WebDialog WebDialog_User_Plans
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   2
       TabStop         =   True
@@ -139,6 +149,7 @@ Begin WebDialog WebDialog_User_Plans
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   3
       TabStop         =   True
@@ -167,6 +178,7 @@ Begin WebDialog WebDialog_User_Plans
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      PanelIndex      =   0
       Scope           =   2
       SVGColor        =   &cFFD47900
       SVGData         =   ""
@@ -227,7 +239,7 @@ End
 		  Var sql As String = "SELECT first_name, family_name FROM physics_tasking.users " _
 		  + "WHERE user_id = " + user_id.ToString + ";"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  If rs.RowCount = 1 Then
 		    
@@ -239,7 +251,7 @@ End
 		  sql = "SELECT name, is_uppercase FROM physics_tasking.sites " _
 		  + "WHERE site_id = " + site_id.ToString + ";"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  rs = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  If rs.RowCount = 1 Then
 		    
@@ -281,7 +293,7 @@ End
 		  + "AND DATE(physics_tasking.plans.assignment_date) >= '"  + d.SQLDate + "'" _
 		  + "ORDER BY assignment_date DESC;"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  rs = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  Var sum As Double = 0
 		  
@@ -351,6 +363,26 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Position"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="WebDialog.Positions"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Top"
+			"1 - Center"
+		#tag EndEnumValues
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ControlCount"
 		Visible=false

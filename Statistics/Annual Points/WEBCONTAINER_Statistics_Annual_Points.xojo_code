@@ -86,7 +86,7 @@ End
 		  Planner.ResizeTo(-1)
 		  
 		  Var sql As String ="SELECT user_id FROM users WHERE is_retired = False AND category_id IN(2,3)"
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  
 		  Planner.ResizeTo(-1)
@@ -131,7 +131,7 @@ End
 		    + "WHERE user_id = " + item.id.ToString + " " _
 		    + "AND DATE(assignment_date) >= '"  + Year_First_Date.SQLDate + "';"
 		    
-		    rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		    rs = Physics_Tasking.SELECT_Statement(sql)
 		    
 		    Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 1) = _
 		    Format( rs.Column("sum").DoubleValue, "#0.0")
@@ -145,7 +145,7 @@ End
 		    + "WHERE user_id = " + item.id.ToString +  " "_
 		    + "AND DATE(completion_date) >= '"  + Year_First_Date.SQLDate + "';"
 		    
-		    rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		    rs = Physics_Tasking.SELECT_Statement(sql)
 		    
 		    Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 2) = _
 		    Format( rs.Column("sum").DoubleValue, "#0.0")
@@ -172,7 +172,7 @@ End
 		    + "AND DATE(completion_date) >= '"  + Year_First_Date.SQLDate + "';"
 		    
 		    
-		    rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		    rs = Physics_Tasking.SELECT_Statement(sql)
 		    
 		    Planner_Annual_Points_ListBox.CellTextAt( Planner_Annual_Points_ListBox.LastAddedRowIndex, 3) = _
 		    Format( rs.Column("sum").DoubleValue, "#0.0")

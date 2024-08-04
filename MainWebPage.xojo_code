@@ -53,9 +53,6 @@ End
 
 	#tag Event
 		Sub Shown()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
-		  
-		  
 		  
 		  Header_Container = New WEBCONTAINER_Header
 		  Header_Container.Locktop = True

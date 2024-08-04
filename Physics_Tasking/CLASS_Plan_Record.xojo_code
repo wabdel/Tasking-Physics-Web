@@ -38,39 +38,41 @@ Protected Class CLASS_Plan_Record
 		  
 		  
 		  
-		  
-		  Try
+		  If id = 0 Then
 		    
-		    If id = 0 Then
-		      
-		      If db.Connect Then
-		        Var row As New DatabaseRow
-		        
-		        row.Column("patient_id").IntegerValue = Patient_Record.id
-		        row.Column("plan_type_id").IntegerValue = Plan_Type_Record.id
-		        row.Column("user_id").IntegerValue = User_Record.id
-		        row.Column("assignment_date").DateTimeValue = Assignment_Date
-		        row.Column("assigned_by_id").IntegerValue = Assigned_by_User_Record.id
-		        row.Column("due_date").DateValue = mDue_Date
-		        row.Column("is_completed").BooleanValue = False
-		        row.Column("notes").BlobValue = notes
-		        
-		        db.AddRow("plans", row)
-		      End If
-		      db.Close
-		      
-		      
-		      
-		      Var sql As String = "SELECT plan_id FROM physics_tasking.plans " _
-		      + "ORDER by plan_id LIMIT 1;"
-		      
-		      Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
-		      
-		      Mid = rs.Column("plan_id").IntegerValue
-		      
-		      
-		      
-		    Else
+		    Var row As New DatabaseRow
+		    
+		    row.Column("patient_id").IntegerValue = Patient_Record.id
+		    row.Column("plan_type_id").IntegerValue = Plan_Type_Record.id
+		    row.Column("user_id").IntegerValue = User_Record.id
+		    row.Column("assignment_date").DateTimeValue = Assignment_Date
+		    row.Column("assigned_by_id").IntegerValue = Assigned_by_User_Record.id
+		    row.Column("due_date").DateValue = mDue_Date
+		    row.Column("is_completed").BooleanValue = False
+		    row.Column("notes").BlobValue = notes
+		    
+		    Physics_Tasking.INSERT_Row("plans", row)
+		    
+		    
+		    
+		    
+		    Var sql As String = "SELECT plan_id FROM physics_tasking.plans " _
+		    + "ORDER by plan_id LIMIT 1;"
+		    
+		    Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
+		    
+		    Mid = rs.Column("plan_id").IntegerValue
+		    
+		    
+		    
+		  Else
+		    Var db As New MySQLCommunityServer
+		    db.Host = Physics_Tasking.db_host
+		    db.Port = Physics_Tasking.db_port
+		    db.DatabaseName = Physics_Tasking.db_name
+		    db.UserName = Physics_Tasking.db_username
+		    db.Password = Physics_Tasking.db_password
+		    Try
 		      
 		      If db.Connect Then
 		        
@@ -136,28 +138,29 @@ Protected Class CLASS_Plan_Record
 		          
 		        End If
 		        
-		        Return
+		        
 		        
 		        
 		        
 		      End If
+		    Catch de As DatabaseException
 		      
-		    End If
+		      Var theDialog As New MessageWebDialog
+		      theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
+		      theDialog.Show
+		      
+		      
+		    Catch noe As NilObjectException
+		      
+		      Var theDialog As New MessageWebDialog
+		      theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
+		      theDialog.Show
+		      
+		    End Try
 		    
-		  Catch de As DatabaseException
 		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + de.ErrorNumber.ToString + ") " + de.Message + "."
-		    theDialog.Show
-		    
-		    
-		  Catch noe As NilObjectException
-		    
-		    Var theDialog As New MessageWebDialog
-		    theDialog.Message_Label.Text = "Database error: (" + noe.ErrorNumber.ToString + ") " + noe.Message + "."
-		    theDialog.Show
-		    
-		  End Try
+		  End If
+		  
 		  
 		  
 		  
@@ -185,7 +188,7 @@ Protected Class CLASS_Plan_Record
 			  +"FROM physics_tasking.plans " _
 			  +"WHERE plan_id = " + Mid.ToString + ";"
 			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 			  
 			  mDue_Date = rs.Column("due_date").DateTimeValue
 			  Return mDue_Date
@@ -213,7 +216,7 @@ Protected Class CLASS_Plan_Record
 			  +"FROM physics_tasking.plans " _
 			  +"WHERE plan_id = " + value.ToString + ";"
 			  
-			  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+			  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 			  
 			  If rs.RowCount = 1 Then
 			    

@@ -177,7 +177,7 @@ End
 		  + "WHERE category_id IN (2,3) " _
 		  + "ORDER BY initials"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -332,7 +332,7 @@ End
 		  + "ORDER BY assignment_date ASC " _
 		  + "LIMIT 1;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  Var date_found As Boolean = False
 		  Var d As DateTime
@@ -350,7 +350,7 @@ End
 		  + "ORDER BY completion_date ASC " _
 		  + "LIMIT 1;"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  rs = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  If rs.Column("d").DateTimeValue <> Nil Then 
 		    
@@ -379,7 +379,7 @@ End
 		  + "ORDER BY completion_date ASC " _
 		  + "LIMIT 1;"
 		  
-		  rs = Physics_Tasking.DB_SELECT_Statement(sql)
+		  rs = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  If rs.Column("d").DateTimeValue <> Nil Then 
 		    

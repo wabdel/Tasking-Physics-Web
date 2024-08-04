@@ -586,7 +586,7 @@ End
 		  + "WHERE user_id = " + Session.Logged_in_User.id.ToString + " " _
 		  + "AND is_completed = FALSE;"
 		  
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement(sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
 		  
 		  Select Case rs.Column("c").IntegerValue
 		  Case 0

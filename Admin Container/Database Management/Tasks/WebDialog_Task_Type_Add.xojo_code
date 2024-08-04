@@ -468,6 +468,12 @@ End
 		Sub Pressed()
 		  
 		  
+		  Var db As New MySQLCommunityServer
+		  db.Host = Physics_Tasking.db_host
+		  db.Port = Physics_Tasking.db_port
+		  db.DatabaseName = Physics_Tasking.db_name
+		  db.UserName = Physics_Tasking.db_username
+		  db.Password = Physics_Tasking.db_password
 		  
 		  Try
 		    
@@ -495,10 +501,9 @@ End
 		      
 		      App.last_database_update = DateTime.Now
 		      
-		      
-		      
 		    End If
 		    
+		    db.Close
 		    Self.Close
 		    
 		  Catch de As DatabaseException
@@ -544,7 +549,7 @@ End
 		Sub Opening()
 		  Var sql As String = "SELECT * FROM physics_tasking.task_groups " _
 		  + "ORDER BY name"
-		  Var rs As RowSet = Physics_Tasking.DB_SELECT_Statement( sql)
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
 		  While Not rs.AfterLastRow
 		    
