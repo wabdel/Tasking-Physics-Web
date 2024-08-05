@@ -151,7 +151,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background2
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
 		End Sub
 	#tag EndEvent
 
@@ -166,8 +166,7 @@ End
 #tag Events My_Plans_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style = Session.WEBSTYLE_Label
-		  
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -262,8 +261,7 @@ End
 #tag Events Note_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Color.White
-		  
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Note
 		End Sub
 	#tag EndEvent
 #tag EndEvents

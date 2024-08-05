@@ -137,8 +137,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
-		  Me.Style.BorderColor = Design_Palette.COLOR_Central_Background
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
 		  Me.Style.BorderThickness = 1
 		  
 		End Sub
@@ -162,12 +161,12 @@ End
 		  
 		  If rs.RowCount = 0 Then
 		    
-		    Button_Action.Indicator = WebUIControl.Indicators.Warning
+		    Button_Action.Style = Design_Palette.STYLE_BUTTON_Disabled
 		    Button_Action.Outlined = False
 		    
 		  Else
 		    
-		    Button_Action.Indicator = WebUIControl.Indicators.Success
+		    Button_Action.Style = Design_Palette.STYLE_BUTTON_Unpressed
 		    Button_Action.Outlined = True
 		    'Button_Action.Caption = "Remove"
 		    Button_Action.Caption = rs.Column("initials").StringValue.Trim.Uppercase
@@ -298,6 +297,11 @@ End
 		  Var thedialog As New WebDialog_Assign_On_Call
 		  thedialog.d = mmy_date
 		  thedialog.Show
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
 		End Sub
 	#tag EndEvent
 #tag EndEvents

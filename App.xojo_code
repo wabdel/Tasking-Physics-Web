@@ -258,10 +258,6 @@ Inherits WebApplication
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		Colour_Note As Color = &cFFDF0000
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
 		Colour_Title As Color = &cFEACA700
 	#tag EndProperty
 
@@ -370,14 +366,6 @@ Inherits WebApplication
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="Colour_Note"
-			Visible=false
-			Group="Behavior"
-			InitialValue="&c05e17700"
-			Type="Color"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="Colour_Title"
 			Visible=false
 			Group="Behavior"
@@ -407,7 +395,7 @@ Inherits WebApplication
 			Group="Behavior"
 			InitialValue=""
 			Type="String"
-			EditorType=""
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Points_Schedulted_Tasks_Condition"
@@ -415,7 +403,7 @@ Inherits WebApplication
 			Group="Behavior"
 			InitialValue=""
 			Type="String"
-			EditorType=""
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

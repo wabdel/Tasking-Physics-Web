@@ -1,6 +1,7 @@
 #tag WebPage
 Begin WebDialog SessionWarningDialog
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   195
@@ -15,13 +16,14 @@ Begin WebDialog SessionWarningDialog
    LockRight       =   False
    LockTop         =   False
    LockVertical    =   False
+   PanelIndex      =   0
+   Position        =   0
    TabIndex        =   0
    Top             =   141
    Visible         =   True
    Width           =   300
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebLabel InfoLabel
       Bold            =   False
@@ -42,8 +44,10 @@ Begin WebDialog SessionWarningDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   True
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   0
+      TabStop         =   True
       Text            =   "Your session has been idle for too long. If you want to stay connected, you must click OK."
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -72,8 +76,11 @@ Begin WebDialog SessionWarningDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   1
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   139
       Visible         =   True
@@ -91,12 +98,24 @@ End
 		End Sub
 	#tag EndEvent
 
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
+		End Sub
+	#tag EndEvent
+
 
 #tag EndWindowCode
 
 #tag Events InfoLabel
 	#tag Event
 		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Shown()
 		  Me.Text = "Your session has been idle for " + Format(Session.session_Idle_timeout,"0") + " seconds. If you want to stay logged-in, you must click the OK button."
 		End Sub
 	#tag EndEvent
@@ -107,8 +126,41 @@ End
 		  Self.Close
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Position"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="WebDialog.Positions"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Top"
+			"1 - Center"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

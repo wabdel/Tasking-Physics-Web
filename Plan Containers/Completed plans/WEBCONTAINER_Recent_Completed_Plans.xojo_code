@@ -151,7 +151,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
 		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
@@ -167,7 +167,7 @@ End
 #tag Events Recent_Completed_Plans_ListBox
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Secondary
 		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		  
 		  Me.HasHeader = True
@@ -184,7 +184,6 @@ End
 #tag Events Completed_Plans_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent

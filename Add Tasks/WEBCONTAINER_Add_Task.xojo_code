@@ -132,7 +132,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Style.BackgroundColor = Design_Palette.COLOR_Central_Background
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  
 		End Sub
 	#tag EndEvent
@@ -295,7 +295,7 @@ End
 #tag Events Search_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = App.Colour_Title
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -306,10 +306,16 @@ End
 		  Tasks_ListBox.ReloadData
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Tasks_ListBox
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  Me.HasHeader = True
 		  Me.RowSelectionType = WebListBox.RowSelectionTypes.None
 		  Me.DataSource = Self

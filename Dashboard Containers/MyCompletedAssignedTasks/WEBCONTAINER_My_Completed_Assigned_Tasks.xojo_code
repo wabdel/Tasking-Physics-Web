@@ -149,6 +149,13 @@ End
 #tag EndWebContainerControl
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		End Sub
+	#tag EndEvent
+
+
 	#tag Property, Flags = &h21
 		Private Latest_UPDATE As DateTime
 	#tag EndProperty
@@ -159,8 +166,8 @@ End
 #tag Events Tasks_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Color.White
-		  'Me.Text = "AssignTasks = " +  Self.RowCount.ToString
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -246,7 +253,7 @@ End
 #tag Events Note_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Color.Orange
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Note
 		End Sub
 	#tag EndEvent
 #tag EndEvents

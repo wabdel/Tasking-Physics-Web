@@ -642,8 +642,7 @@ End
 #tag Events Users_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.Value("font-style") = "oblique 14deg;"
-		  Me.Style.ForegroundColor = Color.White
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_On_Primary
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -669,11 +668,16 @@ End
 		  theDialog.Show
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Note_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = &cFC666500
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Note
 		  
 		End Sub
 	#tag EndEvent

@@ -681,8 +681,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Primary_Variant
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_On_Primary_Variant
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
 		End Sub
 	#tag EndEvent
 #tag EndEvents

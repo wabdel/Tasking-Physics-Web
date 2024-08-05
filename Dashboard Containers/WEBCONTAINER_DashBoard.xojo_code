@@ -125,8 +125,8 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Primary
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Primary
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents

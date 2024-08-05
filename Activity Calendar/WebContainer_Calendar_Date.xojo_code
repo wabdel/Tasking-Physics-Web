@@ -161,7 +161,7 @@ End
 		  
 		  
 		  If is_Calender_Month Then
-		     
+		    
 		    Date_Label.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		    Month_Label.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		    Self.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
@@ -417,22 +417,9 @@ End
 		      
 		    End If
 		    
-		    Var c1 As String
-		    Var c2 As String
-		    
-		    
-		    If Session.darkmode Then
-		      
-		      c1 = "#018786"
-		      c2 = "#CF6679"
-		      
-		      
-		      
-		    Else
-		      
-		      c1 = "#018786"
-		      c2 = "#B00020"
-		    End If
+		    Var c1 As String = "#" +Design_Palette.COLOR_Primary.ToString.Right(6)
+		    Var c2 As String = "#" +Design_Palette.COLOR_Error.ToString.Right(6)
+		    Var c3 As String = "#" +Design_Palette.COLOR_Warning.ToString.Right(6)
 		    
 		    Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Style.Value("background") = _
 		    "linear-gradient(to right, " + c1 + " 0%, " _

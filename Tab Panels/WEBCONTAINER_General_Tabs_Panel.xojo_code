@@ -171,14 +171,12 @@ End
 		  For Each item As WEBCONTAINER_Tab In Tab_Container
 		    If item.Tab_Button.Caption <> button_caption Then
 		      
-		      item.Tab_Button.Style.BackgroundColor = Design_Palette.COLOR_Primary
-		      item.Tab_Button.Style.ForegroundColor = Design_Palette.COLOR_On_Primary
+		      item.Tab_Button.Style = Design_Palette.STYLE_BUTTON_Unpressed
 		      
 		    Else
 		      
 		      
-		      item.Tab_Button.Style.BackgroundColor = Design_Palette.COLOR_Primary_Variant
-		      item.Tab_Button.Style.ForegroundColor = Design_Palette.COLOR_On_Primary_Variant
+		      item.Tab_Button.Style = Design_Palette.STYLE_BUTTON_Pressed
 		      
 		    End If
 		  Next item

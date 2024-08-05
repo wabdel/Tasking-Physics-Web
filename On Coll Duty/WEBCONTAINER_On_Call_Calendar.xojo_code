@@ -411,6 +411,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   6
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   1100
@@ -441,6 +442,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   5
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   920
@@ -471,6 +473,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   4
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   740
@@ -501,6 +504,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   3
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   560
@@ -531,6 +535,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   2
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   380
@@ -561,6 +566,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   1
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   200
@@ -591,6 +597,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   0
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   20
@@ -621,6 +628,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   7
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   20
@@ -651,6 +659,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   8
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   200
@@ -681,6 +690,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   9
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   380
@@ -711,6 +721,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   10
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   560
@@ -741,6 +752,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   11
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   740
@@ -771,6 +783,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   12
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   920
@@ -801,6 +814,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   13
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   1100
@@ -831,6 +845,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   14
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   20
@@ -861,6 +876,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   15
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   200
@@ -891,6 +907,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   16
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   380
@@ -921,6 +938,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   17
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   560
@@ -951,6 +969,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   18
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   740
@@ -981,6 +1000,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   19
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   920
@@ -1011,6 +1031,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   20
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   1100
@@ -1041,6 +1062,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   21
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   20
@@ -1071,6 +1093,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   22
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   200
@@ -1101,6 +1124,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   23
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   380
@@ -1131,6 +1155,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   24
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   560
@@ -1161,6 +1186,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   25
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   740
@@ -1191,6 +1217,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   26
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   920
@@ -1221,6 +1248,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   27
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   1100
@@ -1251,6 +1279,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   28
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   20
@@ -1281,6 +1310,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   29
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   200
@@ -1311,6 +1341,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   30
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   380
@@ -1341,6 +1372,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   31
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   560
@@ -1371,6 +1403,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   32
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   740
@@ -1401,6 +1434,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   33
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   920
@@ -1431,6 +1465,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   34
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   1100
@@ -1461,6 +1496,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   35
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   20
@@ -1491,6 +1527,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   36
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   200
@@ -1521,6 +1558,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   37
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   380
@@ -1551,6 +1589,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   38
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   560
@@ -1581,6 +1620,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   39
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   740
@@ -1611,6 +1651,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   40
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   920
@@ -1641,6 +1682,7 @@ Begin WebContainer WEBCONTAINER_On_Call_Calendar
       Height          =   120
       Index           =   41
       Indicator       =   0
+      is_Calinder_Month=   False
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   1100
@@ -1699,7 +1741,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  Calendar_Month = New DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
 		  
 		End Sub
@@ -1833,6 +1875,11 @@ End
 		  POPULATE_Calendar
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Forward_Year_Button
 	#tag Event
@@ -1847,6 +1894,11 @@ End
 		  POPULATE_Calendar
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Backward_Month_Button
 	#tag Event
@@ -1855,6 +1907,11 @@ End
 		  
 		  POPULATE_Calendar
 		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -1866,18 +1923,23 @@ End
 		  POPULATE_Calendar
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Month_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Label_Date_Tiltle
 	#tag Event
 		Sub Opening(index as Integer)
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -1886,6 +1948,11 @@ End
 		Sub Pressed()
 		  Var theDialog As New WebDialog_Assign_On_Call_Period
 		  theDialog.Show
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
 		End Sub
 	#tag EndEvent
 #tag EndEvents

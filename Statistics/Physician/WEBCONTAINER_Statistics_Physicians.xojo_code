@@ -418,7 +418,7 @@ End
 #tag Events Total_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = App.Colour_Note
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Note
 		End Sub
 	#tag EndEvent
 #tag EndEvents

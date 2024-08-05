@@ -4,7 +4,7 @@ Begin WebDialog Database_WebDialog
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   400
+   Height          =   239
    Index           =   -2147483648
    Indicator       =   0
    LayoutDirection =   0
@@ -21,7 +21,7 @@ Begin WebDialog Database_WebDialog
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   600
+   Width           =   472
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -35,7 +35,7 @@ Begin WebDialog Database_WebDialog
       Height          =   38
       Index           =   -2147483648
       Indicator       =   0
-      Left            =   480
+      Left            =   177
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -49,7 +49,7 @@ Begin WebDialog Database_WebDialog
       TabIndex        =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   342
+      Top             =   181
       Visible         =   True
       Width           =   100
       _mPanelIndex    =   -1
@@ -84,7 +84,7 @@ Begin WebDialog Database_WebDialog
       Top             =   20
       Underline       =   False
       Visible         =   True
-      Width           =   560
+      Width           =   343
       _mPanelIndex    =   -1
    End
    Begin WebLabel Label1
@@ -117,7 +117,7 @@ Begin WebDialog Database_WebDialog
       Top             =   104
       Underline       =   False
       Visible         =   True
-      Width           =   549
+      Width           =   421
       _mPanelIndex    =   -1
    End
 End
@@ -126,6 +126,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  CHECK_Database_Status
 		End Sub
 	#tag EndEvent
@@ -168,6 +169,25 @@ End
 	#tag Event
 		Sub Pressed()
 		  Self.Close
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events DB_Host_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Label1
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents

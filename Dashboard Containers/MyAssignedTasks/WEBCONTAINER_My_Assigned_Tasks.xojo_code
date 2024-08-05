@@ -1,6 +1,7 @@
 #tag WebContainerControl
 Begin WebContainer WEBCONTAINER_My_Assigned_Tasks
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   600
@@ -14,6 +15,7 @@ Begin WebContainer WEBCONTAINER_My_Assigned_Tasks
    LockRight       =   False
    LockTop         =   True
    LockVertical    =   False
+   PanelIndex      =   0
    ScrollDirection =   0
    TabIndex        =   0
    Top             =   0
@@ -21,7 +23,6 @@ Begin WebContainer WEBCONTAINER_My_Assigned_Tasks
    Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebLabel Tasks_Label
       Bold            =   False
@@ -42,8 +43,10 @@ Begin WebContainer WEBCONTAINER_My_Assigned_Tasks
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   0
+      TabStop         =   True
       Text            =   "Tasks = 0"
       TextAlignment   =   3
       TextColor       =   &c00000000
@@ -58,14 +61,19 @@ Begin WebContainer WEBCONTAINER_My_Assigned_Tasks
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
+      HasBorder       =   True
       HasHeader       =   True
+      HeaderHeight    =   0
       Height          =   514
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
       InitialValue    =   ""
       LastAddedRowIndex=   0
+      LastColumnIndex =   0
       LastRowIndex    =   0
       Left            =   20
       LockBottom      =   False
@@ -76,6 +84,7 @@ Begin WebContainer WEBCONTAINER_My_Assigned_Tasks
       LockTop         =   True
       LockVertical    =   False
       NoRowsMessage   =   ""
+      PanelIndex      =   0
       ProcessingMessage=   ""
       RowCount        =   0
       RowSelectionType=   1
@@ -84,6 +93,7 @@ Begin WebContainer WEBCONTAINER_My_Assigned_Tasks
       SelectedRowColor=   &c0272D300
       SelectedRowIndex=   0
       TabIndex        =   2
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
@@ -96,6 +106,7 @@ Begin WebContainer WEBCONTAINER_My_Assigned_Tasks
       Index           =   -2147483648
       Location        =   0
       LockedInPosition=   False
+      PanelIndex      =   0
       Period          =   1000
       RunMode         =   2
       Scope           =   2
@@ -120,8 +131,10 @@ Begin WebContainer WEBCONTAINER_My_Assigned_Tasks
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   3
+      TabStop         =   True
       Text            =   "Double click a row to edit."
       TextAlignment   =   1
       TextColor       =   &c00000000
@@ -136,6 +149,13 @@ End
 #tag EndWebContainerControl
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		End Sub
+	#tag EndEvent
+
+
 	#tag Property, Flags = &h21
 		Private Latest_UPDATE As DateTime
 	#tag EndProperty
@@ -146,8 +166,7 @@ End
 #tag Events Tasks_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Color.White
-		  'Me.Text = "AssignTasks = " +  Self.RowCount.ToString
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -162,7 +181,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub DoublePressed(row as integer, column as integer)
+		Sub DoublePressed(row As Integer, column As Integer)
 		  If row > Me.RowCount - 1 Then Return
 		  
 		  Select Case column
@@ -176,7 +195,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub CustomCellAction(row as Integer, column as Integer, identifier as string, value as variant)
+		Sub CustomCellAction(row As Integer, column As Integer, identifier As String, value As Variant)
 		  If identifier = "GroupButtonPressed" Then
 		    
 		    Var dialog As New Multiplier_WebDialog
@@ -234,11 +253,27 @@ End
 #tag Events Note_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Color.Orange
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Note
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

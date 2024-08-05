@@ -1,5 +1,65 @@
 #tag Module
 Protected Module Design_Palette
+	#tag Method, Flags = &h0
+		Function STYLE_BUTTON_Disabled() As WebStyle
+		  Var s As New WebStyle
+		  
+		  s.BackgroundColor = Design_Palette.COLOR_Error
+		  s.ForegroundColor = Design_Palette.COLOR_On_Error
+		  s.BorderColor = Design_Palette.COLOR_Error
+		  Return s
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function STYLE_BUTTON_Pressed() As WebStyle
+		  Var s As New WebStyle
+		  
+		  s.BackgroundColor = Design_Palette.COLOR_Primary_Variant
+		  s.ForegroundColor = Design_Palette.COLOR_On_Primary_Variant
+		  s.BorderColor = Design_Palette.COLOR_Primary_Variant
+		  Return s
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function STYLE_BUTTON_Unpressed() As WebStyle
+		  Var s As New WebStyle
+		  
+		  s.BackgroundColor = Design_Palette.COLOR_Primary
+		  s.ForegroundColor = Design_Palette.COLOR_On_Primary
+		  s.BorderColor = Design_Palette.COLOR_Primary
+		  's.Value("box-shadow") = "0 8px 16px 0 rgba(255,255,255,0.2), 0 6px 20px 0 rgba(255,255,255,0.19)"
+		  
+		  Return s
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function STYLE_POPUPMENU_Emply() As WebStyle
+		  Var s As New WebStyle
+		  
+		  s.BackgroundColor = Design_Palette.COLOR_Error
+		  s.ForegroundColor = Design_Palette.COLOR_On_Error
+		  
+		  
+		  Return s
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function STYLE_POPUPMENU_Selected() As WebStyle
+		  Var s As New WebStyle
+		  
+		  s.BackgroundColor = Design_Palette.COLOR_Primary
+		  s.ForegroundColor = Design_Palette.COLOR_On_Primary
+		  
+		  
+		  Return s
+		End Function
+	#tag EndMethod
+
+
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
@@ -126,7 +186,7 @@ Protected Module Design_Palette
 			    
 			  End If
 			  
-			  
+			  Return mCOLOR_Note
 			End Get
 		#tag EndGetter
 		#tag Setter
@@ -512,6 +572,10 @@ Protected Module Design_Palette
 		Private mCOLOR_Warning As Color = &c55966A
 	#tag EndProperty
 
+	#tag Property, Flags = &h21
+		Private mStyle_Popupbar_unselected As webstyle
+	#tag EndProperty
+
 
 	#tag ViewBehavior
 		#tag ViewProperty
@@ -708,6 +772,62 @@ Protected Module Design_Palette
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="COLOR_Secondary"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c000000"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_Note"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c000000"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_On_Error"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c000000"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_On_Warning"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c000000"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_Pass"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c000000"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_Surface_3"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c000000"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_Surface_Secondary"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c000000"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_Warning"
 			Visible=false
 			Group="Behavior"
 			InitialValue="&c000000"

@@ -1,6 +1,7 @@
 #tag WebPage
 Begin WebDialog MessageWebDialog
    Compatibility   =   ""
+   ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
    Height          =   170
@@ -15,13 +16,14 @@ Begin WebDialog MessageWebDialog
    LockRight       =   False
    LockTop         =   False
    LockVertical    =   False
+   PanelIndex      =   0
+   Position        =   0
    TabIndex        =   0
    Top             =   0
    Visible         =   True
    Width           =   600
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebLabel Message_Label
       Bold            =   False
@@ -42,8 +44,10 @@ Begin WebDialog MessageWebDialog
       LockTop         =   True
       LockVertical    =   False
       Multiline       =   False
+      PanelIndex      =   0
       Scope           =   0
       TabIndex        =   0
+      TabStop         =   True
       Text            =   "Untitled"
       TextAlignment   =   0
       TextColor       =   &c00000000
@@ -64,7 +68,7 @@ Begin WebDialog MessageWebDialog
       Height          =   38
       Index           =   -2147483648
       Indicator       =   1
-      Left            =   480
+      Left            =   250
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -72,8 +76,11 @@ Begin WebDialog MessageWebDialog
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
+      Outlined        =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   1
+      TabStop         =   True
       Tooltip         =   ""
       Top             =   112
       Visible         =   True
@@ -85,22 +92,62 @@ End
 
 #tag WindowCode
 	#tag Event
-		Sub Dismissed()
-		  
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		End Sub
 	#tag EndEvent
 
 
 #tag EndWindowCode
 
+#tag Events Message_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events OK_Button
 	#tag Event
 		Sub Pressed()
 		  Self.Close
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="PanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Position"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="WebDialog.Positions"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Top"
+			"1 - Center"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="_mPanelIndex"
 		Visible=false

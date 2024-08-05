@@ -70,9 +70,8 @@ End
 #tag Events Tab_Button
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Primary
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Primary
-		  Me.Style.Value("box-shadow") = "0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)"
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		  
 		End Sub
 	#tag EndEvent
 	#tag Event

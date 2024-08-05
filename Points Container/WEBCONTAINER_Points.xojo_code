@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Points
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   300
+   Height          =   376
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -34,7 +34,7 @@ Begin WebContainer WEBCONTAINER_Points
       HasBorder       =   True
       HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   214
+      Height          =   290
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
@@ -94,7 +94,7 @@ Begin WebContainer WEBCONTAINER_Points
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   242
+      Top             =   318
       Underline       =   False
       Visible         =   True
       Width           =   309
@@ -116,6 +116,12 @@ End
 #tag EndWebContainerControl
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		End Sub
+	#tag EndEvent
+
 	#tag Event
 		Sub Shown()
 		  Latest_UPDATE = App.last_database_update
@@ -304,7 +310,8 @@ End
 #tag Events Points_Avg_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Note
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents

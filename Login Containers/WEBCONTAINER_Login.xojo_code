@@ -207,16 +207,14 @@ End
 		  If User_TextField.Text <> "" And Password_TextField.Text <> "" Then
 		    
 		    
-		    Login_Button.Style.BackgroundColor = Design_Palette.COLOR_Primary_Variant
-		    Login_Button.Style.ForegroundColor = Design_Palette.COLOR_On_Primary_Variant
+		    Login_Button.Style = Design_Palette.STYLE_BUTTON_Unpressed
 		    Login_Button.Enabled = True
 		    'Login_Button.Style.Value("box-shadow") = "0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)"
 		    
 		  Else
 		    
+		    Login_Button.Style = Design_Palette.STYLE_BUTTON_Disabled
 		    
-		    Login_Button.Style.BackgroundColor = Design_Palette.COLOR_Primary
-		    Login_Button.Style.ForegroundColor = Design_Palette.COLOR_On_Primary
 		    Login_Button.Enabled = False
 		    'Login_Button.Style.Value("box-shadow") = "none"
 		    
@@ -376,9 +374,7 @@ End
 		Sub Opening()
 		  'Me.Style.AddTransition("width", 5, WebStyle.SpeedPatterns.EaseInOut, 0)
 		  'Me.Style.Value("width") = Me.Width.ToString + "px"
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Primary
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_On_Primary
-		  Me.Style.BorderColor = Design_Palette.COLOR_Border
+		  Me.Style = Design_Palette.STYLE_BUTTON_Disabled
 		  ENABLE_Login_Button
 		End Sub
 	#tag EndEvent

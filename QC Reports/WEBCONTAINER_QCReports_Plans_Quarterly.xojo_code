@@ -236,6 +236,13 @@ End
 #tag EndWebContainerControl
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		End Sub
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h21
 		Private Function ColumnData() As WebListboxColumnData()
 		  // Part of the WebDataSource interface.
@@ -663,10 +670,16 @@ End
 		  Session.GoToURL(Patient_List_File.URL)
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Plans_ListBox
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Secondary
 		  Me.HasHeader = True
 		  Me.RowSelectionType = WebListBox.RowSelectionTypes.None
 		  'Me.DataSource = Self
@@ -714,7 +727,8 @@ End
 #tag Events Plans_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style = Session.WEBSTYLE_Label
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		  
 		  If PopupMenu_Year.SelectedRowIndex > -1 Then 
 		    
 		    Me.Text = "Patients = " + Self.RowCount.ToString
@@ -726,6 +740,7 @@ End
 #tag Events PopupMenu_Year
 	#tag Event
 		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
 		  Me.RemoveAllRows
 		  
 		  Var d As DateTime = DateTime.Now
@@ -772,6 +787,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  LOAD_RadioGroup_Quarters
 		End Sub
 	#tag EndEvent
@@ -779,13 +795,14 @@ End
 #tag Events Label_Year
 	#tag Event
 		Sub Opening()
-		  Me.Style = Session.WEBSTYLE_Label
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events RadioGroup_Quarters
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_On_Background
 		  Me.RemoveAllRows
 		  
 		  Me.Add("Q1")

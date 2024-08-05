@@ -115,14 +115,14 @@ Begin WebDialog Add_Task_WebDialog
       Width           =   683
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Task_Type_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   0
       Indicator       =   0
       Italic          =   False
       Left            =   20
@@ -148,14 +148,14 @@ Begin WebDialog Add_Task_WebDialog
       Width           =   108
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Task_Group_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   1
       Indicator       =   0
       Italic          =   False
       Left            =   20
@@ -209,14 +209,14 @@ Begin WebDialog Add_Task_WebDialog
       Width           =   120
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Date_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   2
       Indicator       =   0
       Italic          =   False
       Left            =   20
@@ -242,14 +242,14 @@ Begin WebDialog Add_Task_WebDialog
       Width           =   108
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Multiplier_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   5
       Indicator       =   0
       Italic          =   False
       Left            =   267
@@ -374,14 +374,14 @@ Begin WebDialog Add_Task_WebDialog
       Width           =   437
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Notes_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   6
       Indicator       =   0
       Italic          =   False
       Left            =   383
@@ -407,14 +407,14 @@ Begin WebDialog Add_Task_WebDialog
       Width           =   100
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Description_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   7
       Indicator       =   0
       Italic          =   False
       Left            =   714
@@ -505,14 +505,14 @@ Begin WebDialog Add_Task_WebDialog
       Width           =   478
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Weight_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   3
       Indicator       =   0
       Italic          =   False
       Left            =   20
@@ -571,14 +571,14 @@ Begin WebDialog Add_Task_WebDialog
       Width           =   116
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Points_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   4
       Indicator       =   0
       Italic          =   False
       Left            =   20
@@ -643,7 +643,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  
 		  
 		  
@@ -724,6 +724,11 @@ End
 		  Self.Close
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Add_Button
 	#tag Event
@@ -790,6 +795,11 @@ End
 		  
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Disabled
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Task_DatePicker
 	#tag Event
@@ -813,6 +823,13 @@ End
 		    
 		  End If
 		  Points_TextField.Text = Format( Weight_TextField.Text.ToDouble * Multiplier_TextField.Text.ToDouble, "#0.00")
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Title_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Primary
 		End Sub
 	#tag EndEvent
 #tag EndEvents

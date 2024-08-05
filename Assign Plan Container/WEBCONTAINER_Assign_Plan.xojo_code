@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   500
+   Height          =   900
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1200
+   Width           =   1300
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -119,14 +119,14 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Width           =   131
       _mPanelIndex    =   -1
    End
-   Begin WebLabel MRN_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   0
       Indicator       =   0
       Italic          =   False
       Left            =   31
@@ -185,14 +185,14 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Width           =   244
       _mPanelIndex    =   -1
    End
-   Begin WebLabel First_Name_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   1
       Indicator       =   0
       Italic          =   False
       Left            =   31
@@ -251,14 +251,14 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Width           =   244
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Family_Name_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   2
       Indicator       =   0
       Italic          =   False
       Left            =   31
@@ -284,14 +284,14 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Width           =   130
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Site_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   3
       Indicator       =   0
       Italic          =   False
       Left            =   720
@@ -347,14 +347,14 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Width           =   345
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Plan_Type_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   4
       Indicator       =   0
       Italic          =   False
       Left            =   720
@@ -525,14 +525,14 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Width           =   121
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Start_Date_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   5
       Indicator       =   0
       Italic          =   False
       Left            =   720
@@ -585,14 +585,14 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Width           =   146
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Physician_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   6
       Indicator       =   0
       Italic          =   False
       Left            =   720
@@ -652,12 +652,12 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
-      Height          =   300
+      Height          =   376
       Index           =   -2147483648
       Indicator       =   0
       LayoutDirection =   0
       LayoutType      =   0
-      Left            =   20
+      Left            =   31
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -667,12 +667,12 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockVertical    =   False
       PanelIndex      =   0
       Random_Planner_ID=   0
-      Scope           =   2
+      Scope           =   0
       ScrollDirection =   0
       TabIndex        =   22
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   199
+      Top             =   233
       Visible         =   True
       Width           =   650
       _mDesignHeight  =   0
@@ -685,7 +685,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Style.BackgroundColor = Design_Palette.COLOR_Central_Background
+		  Style.BackgroundColor = Design_Palette.COLOR_Background
 		  
 		  
 		  selected_user_id = Points_WEBCONTAINER.GET_Random_Planner
@@ -969,11 +969,18 @@ End
 		  First_Name_TextField.Text = ""
 		  Family_Name_TextField.Text = ""
 		  Start_DatePicker.SelectedDate = DateTime.Now
+		  
 		  Plan_Type_PopupMenu.RemoveAllRows
+		  Plan_Type_PopupMenu.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  
+		  Planner_PopupMenu.Style = Design_Palette.STYLE_POPUPMENU_Emply
 		  Planner_PopupMenu.RemoveAllRows
 		  POPULATE_Site_PopupMenu
+		  
 		  Planner_PopupMenu.Visible = False
 		  POPULATE_Physician_POPUPMENU
+		  Plan_Type_PopupMenu.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  
 		  Is_replan_Checkbox.Value = False
 		  selected_user_id = Points_WEBCONTAINER.GET_Random_Planner
 		  ENABLE_ASSIGN_Button
@@ -1002,15 +1009,14 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Indicator = WebUIControl.Indicators.Danger
-		  Me.Style.ForegroundColor = Color.Black
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Title_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Color.White
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		  Me.FontSize = 20
 		End Sub
 	#tag EndEvent
@@ -1064,10 +1070,10 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events MRN_Label
+#tag Events Label1
 	#tag Event
-		Sub Opening()
-		  Me.Style.ForegroundColor = Color.White
+		Sub Opening(index as Integer)
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -1080,13 +1086,6 @@ End
 	#tag Event
 		Sub TextChanged()
 		  ENABLE_ASSIGN_Button
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events First_Name_Label
-	#tag Event
-		Sub Opening()
-		  Me.Style.ForegroundColor = Color.White
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -1103,47 +1102,26 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Family_Name_Label
-	#tag Event
-		Sub Opening()
-		  Me.Style.ForegroundColor = Color.White
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Site_Label
-	#tag Event
-		Sub Opening()
-		  Me.Style.ForegroundColor = Color.White
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events Site_PopupMenu
 	#tag Event
 		Sub Opening()
-		  Me.Indicator = WebUIControl.Indicators.Info
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
 		  POPULATE_Site_PopupMenu
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
-		  Me.Indicator = WebUIControl.Indicators.Success
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  
 		  POPULATE_Plan_Type_PopupMenu( Me.RowTagAt( Me.SelectedRowIndex))
 		  ENABLE_ASSIGN_Button
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Plan_Type_Label
-	#tag Event
-		Sub Opening()
-		  Me.Style.ForegroundColor = Color.White
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events Plan_Type_PopupMenu
 	#tag Event
 		Sub Opening()
-		  Me.Indicator = WebUIControl.Indicators.Info
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
 		  
 		  POPULATE_Site_PopupMenu
 		  ENABLE_ASSIGN_Button
@@ -1151,7 +1129,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
-		  Me.Indicator = WebUIControl.Indicators.Success
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  
 		  Planner_RadioGroup.RemoveAllRows
 		  selected_user_id = Points_WEBCONTAINER.GET_Random_Planner
@@ -1230,8 +1208,7 @@ End
 	#tag Event
 		Sub Opening()
 		  Me.Enabled = False
-		  Me.Indicator = Indicators.Info
-		  Me.Style.ForegroundColor = Color.Black
+		  Me.Style = Design_Palette.STYLE_BUTTON_Disabled
 		  
 		  
 		End Sub
@@ -1249,7 +1226,7 @@ End
 #tag Events Planner_RadioGroup
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Color.White
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 	#tag Event
@@ -1279,7 +1256,14 @@ End
 #tag Events Planner_PopupMenu
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  ENABLE_ASSIGN_Button
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -1292,32 +1276,17 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Start_Date_Label
-	#tag Event
-		Sub Opening()
-		  Me.Style.ForegroundColor = Color.White
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events Is_replan_Checkbox
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Color.White
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Physician_Label
-	#tag Event
-		Sub Opening()
-		  Me.Style.ForegroundColor = Color.White
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Physician_PopupMenu
 	#tag Event
 		Sub Opening()
-		  Me.Indicator = WebUIControl.Indicators.Info
-		  
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
 		  POPULATE_Physician_POPUPMENU
 		  
 		  
@@ -1325,7 +1294,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
-		  Me.Indicator = WebUIControl.Indicators.Success
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  ENABLE_ASSIGN_Button
 		End Sub
 	#tag EndEvent

@@ -112,14 +112,14 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       Scope           =   2
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Task_Type_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   0
       Indicator       =   ""
       Italic          =   False
       Left            =   20
@@ -175,14 +175,14 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       Width           =   645
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Machine_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   1
       Indicator       =   0
       Italic          =   False
       Left            =   678
@@ -238,14 +238,14 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       Width           =   145
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Due_Date_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   2
       Indicator       =   0
       Italic          =   False
       Left            =   836
@@ -307,13 +307,13 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
 		  
 		End Sub
 	#tag EndEvent
 
 	#tag Event
 		Sub Shown()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background2
 		  
 		  Var sql As String = "CREATE OR REPLACE VIEW completed_assigned_tasks AS " _
 		  + "SELECT physics_tasking.scheduled_tasks.scheduled_task_id As scheduled_task_id, " _
@@ -874,7 +874,7 @@ End
 #tag Events Completed_Assigned_Tasks_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = App.Colour_Note
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		  
 		End Sub
 	#tag EndEvent
@@ -894,30 +894,55 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events Label1
+	#tag Event
+		Sub Opening(index as Integer)
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events Task_Type_PopupMenu
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  Completed_Assigned_Tasks_ListBox.ReloadData
 		  
 		  'POPULATE_POPUPMENUS
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Machine_PopupMenu
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  Completed_Assigned_Tasks_ListBox.ReloadData
 		  
 		  'POPULATE_POPUPMENUS
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Due_Date_PopupMenu
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  Completed_Assigned_Tasks_ListBox.ReloadData
 		  
 		  'POPULATE_POPUPMENUS
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
 		End Sub
 	#tag EndEvent
 #tag EndEvents
