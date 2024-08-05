@@ -1713,11 +1713,11 @@ End
 	#tag Event
 		Sub Opening()
 		  
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  Calendar_Month = New DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
 		  
 		  POPULATE_Calendar
-		  UPDATE_Theme
+		  
 		End Sub
 	#tag EndEvent
 
@@ -1786,36 +1786,25 @@ End
 		  
 		  For i As Integer = 0 To 41 
 		    
-		    Calendar_Date_Container(i).my_date = d
+		    
 		    
 		    If d.Month = month Then
-		      Calendar_Date_Container(i).is_Calinder_Month = True
+		      
+		      Calendar_Date_Container(i).is_Calender_Month = True
+		      
 		    Else
 		      
-		      Calendar_Date_Container(i).is_Calinder_Month = False
+		      Calendar_Date_Container(i).is_Calender_Month = False
 		      
 		    End If
 		    
-		    Calendar_Date_Container(i).DRAW_Date
+		    Calendar_Date_Container(i).my_date = d
 		    
 		    d = d.AddInterval(0, 0, 1)
 		    
 		  Next
 		  
 		  ENABLE_Arrows
-		  
-		  
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub UPDATE_Theme()
-		  Me.Style.BackgroundColor = &c121212
-		  'Month_Label.Style = Theme_Colors.Material_BaseLine.On_Surface
-		  
-		  Month_Label.Style.ForegroundColor = Color.White
-		  
 		  
 		  
 		  

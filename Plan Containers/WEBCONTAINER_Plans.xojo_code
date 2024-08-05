@@ -63,7 +63,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  
 		  LOAD_TabPanel_Container( 0)
 		End Sub
@@ -110,6 +110,12 @@ End
 	#tag Event
 		Sub PanelChanged()
 		  LOAD_TabPanel_Container(Me.SelectedPanelIndex)
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Primary
 		End Sub
 	#tag EndEvent
 #tag EndEvents

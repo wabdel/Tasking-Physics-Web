@@ -286,7 +286,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  
 		  ImageViewer_Hospital_Logo.Top = Me.Top - ImageViewer_Hospital_Logo.Height - 20
 		  

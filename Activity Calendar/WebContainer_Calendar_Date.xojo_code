@@ -142,8 +142,7 @@ End
 	#tag Event
 		Sub Opening()
 		  
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Date_Weekday
-		  Me.Style.BorderColor = Design_Palette.COLOR_Central_Background
+		  Me.Style.BorderColor = Design_Palette.COLOR_On_Background
 		  Me.Style.BorderThickness = 1
 		  
 		End Sub
@@ -161,14 +160,19 @@ End
 		  
 		  
 		  
-		  If is_Calinder_Month Then 
-		    Date_Label.Style.ForegroundColor = Design_Palette.COLOR_Foreground
-		    Month_Label.Style.ForegroundColor = Design_Palette.COLOR_Foreground
-		    Self.Style.BackgroundColor = Design_Palette.COLOR_Background
+		  If is_Calender_Month Then
+		     
+		    Date_Label.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		    Month_Label.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		    Self.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		    
 		  Else
 		    
-		    Date_Label.Style.ForegroundColor = &c5E5E5E00
-		    Month_Label.Style.ForegroundColor = &c3E424B
+		    Date_Label.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		    Month_Label.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		    
+		    Date_Label.Style.ForegroundColor = &c969696
+		    Month_Label.Style.ForegroundColor = &c969696
 		    Self.Style.BackgroundColor = Design_Palette.COLOR_Background
 		    
 		    
@@ -177,7 +181,7 @@ End
 		  Select Case mmy_date.DayOfWeek
 		  Case 6, 7
 		    
-		    Self.Style.BackgroundColor =&c3E424B
+		    Self.Style.BackgroundColor = Design_Palette.COLOR_Surface_Secondary
 		    
 		  Else
 		    
@@ -206,10 +210,10 @@ End
 		  If mmy_date.day = DateTime.Now.Day AND _
 		    mmy_date.Month = DateTime.Now.Month AND _
 		    mmy_date.year = DateTime.Now.Year Then
-		    
-		    Date_Label.Style.BackgroundColor = Design_Palette.COLOR_Error
-		    Date_Label.Style.ForegroundColor = Color.Black
-		    Date_Label.Style.Value( "border") = "1px solid #FF3B3B;"
+		    Var c1 As String = "#" +Design_Palette.COLOR_Primary.ToString.Right(6)
+		    Date_Label.Style.BackgroundColor = Design_Palette.COLOR_Primary
+		    Date_Label.Style.ForegroundColor = Design_Palette.COLOR_On_Primary
+		    Date_Label.Style.Value( "border") = "1px solid  " + c1 + ";"
 		    Date_Label.Style.Value("border-radius") =  Date_Label.Width.ToString + "px;"
 		    
 		  End If
@@ -312,22 +316,11 @@ End
 		      
 		    End If
 		    
-		    Var c1 As String
-		    Var c2 As String
+		    Var c1 As String = "#" +Design_Palette.COLOR_Primary.ToString.Right(6)
+		    Var c2 As String = "#" +Design_Palette.COLOR_Error.ToString.Right(6)
+		    Var c3 As String = "#" +Design_Palette.COLOR_Warning.ToString.Right(6)
 		    
 		    
-		    If Session.darkmode Then
-		      
-		      c1 = "#018786"
-		      c2 = "#CF6679"
-		      
-		      
-		      
-		    Else
-		      
-		      c1 = "#018786"
-		      c2 = "#B00020"
-		    End If
 		    
 		    If rs.Column("is_active").BooleanValue Then
 		      Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Style.Value("background") = _
@@ -335,13 +328,16 @@ End
 		      + c1 + " " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
 		      + c2 + " " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
 		      + c2 + " 100%);"
+		      
+		      
 		    Else
 		      
 		      Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Style.Value("background") = _
 		      "linear-gradient(to right, " + c1 + " 0%, " _
 		      + c1 +"  " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
-		      +"#f4c430 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
-		      + "#f4c430 100%);"
+		      + c3 +"  "  + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
+		      + c3 + " 100%);"
+		      
 		      
 		    End If
 		    
@@ -460,7 +456,7 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		is_Calinder_Month As Boolean = False
+		is_Calender_Month As Boolean = False
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -480,17 +476,7 @@ End
 		#tag Setter
 			Set
 			  mmy_date = value
-			  Select Case mmy_date.DayOfWeek
-			  Case 6,7
-			    
-			    
-			    Self.Style.BackgroundColor = Design_Palette.COLOR_Date_Weekend
-			    
-			  Else
-			    
-			    Self.Style.BackgroundColor = Design_Palette.COLOR_Date_Weekday
-			    
-			  End Select
+			  DRAW_Date
 			  
 			  
 			End Set
@@ -770,7 +756,7 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="is_Calinder_Month"
+		Name="is_Calender_Month"
 		Visible=false
 		Group="Behavior"
 		InitialValue="False"

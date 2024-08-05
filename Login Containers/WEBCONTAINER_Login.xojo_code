@@ -191,7 +191,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Self.Style.BackgroundColor = Design_Palette.COLOR_Surface
+		  Self.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  Self.Style.BorderColor = Design_Palette.COLOR_Border
 		  Self.Style.BorderThickness = 2
 		  Self.Style.Value("border-radius") = "15px;"

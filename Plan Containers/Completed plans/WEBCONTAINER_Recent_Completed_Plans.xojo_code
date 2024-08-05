@@ -151,7 +151,8 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background2
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 
@@ -166,6 +167,9 @@ End
 #tag Events Recent_Completed_Plans_ListBox
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		  
 		  Me.HasHeader = True
 		  Me.RowSelectionType = WebListBox.RowSelectionTypes.None
 		  Me.DataSource = New RecentCompletedPlansDataSource
@@ -180,15 +184,15 @@ End
 #tag Events Completed_Plans_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = App.Colour_Note
-		  
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Note_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = App.Colour_Note
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Note
 		  
 		End Sub
 	#tag EndEvent

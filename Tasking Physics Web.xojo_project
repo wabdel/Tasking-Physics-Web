@@ -284,6 +284,7 @@ DebuggerCommandLine=
 UseGDIPlus=False
 UseBuildsFolder=True
 HiDPI=True
+DarkMode=True
 CopyRedistNextToWindowsEXE=False
 IncludePDB=False
 WinUIFramework=False

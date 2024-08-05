@@ -17,7 +17,7 @@ Implements WebDataSource
 		  col.Heading = "MRN" // the name that appears above the column
 		  col.Sortable = True // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "80"
+		  col.Width = "70"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
@@ -25,7 +25,7 @@ Implements WebDataSource
 		  col.Heading = "Full Name" // the name that appears above the column
 		  col.Sortable = True // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "200"
+		  col.Width = "170"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
@@ -33,7 +33,7 @@ Implements WebDataSource
 		  col.Heading = "Site" // the name that appears above the column
 		  col.Sortable = True // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "100"
+		  col.Width = "80"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
@@ -41,7 +41,7 @@ Implements WebDataSource
 		  col.Heading = "Plan Type" // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "280"
+		  col.Width = "230"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
@@ -49,7 +49,7 @@ Implements WebDataSource
 		  col.Heading = "Due Date" // the name that appears above the column
 		  col.Sortable = True // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "250"
+		  col.Width = "210"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
@@ -57,7 +57,7 @@ Implements WebDataSource
 		  col.Heading = "Planner" // the name that appears above the column
 		  col.Sortable = True // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "100"
+		  col.Width = "70"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
@@ -65,7 +65,7 @@ Implements WebDataSource
 		  col.Heading = "Physician" // the name that appears above the column
 		  col.Sortable = True // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "100"
+		  col.Width = "80"
 		  cols.Add(col)
 		  
 		  Return cols// Part of the WebDataSource interface.
@@ -192,16 +192,24 @@ Implements WebDataSource
 		    Select Case Physics_Tasking.Days_To_Start_Date( rs.Column("due_date").DateValue)
 		    Case Is <= 1
 		      
-		      s.BackgroundColor = Theme_Colors.Color_Palette.Fail //Color.Red
-		      s.Bold = True
+		      's.BackgroundColor = Theme_Colors.Color_Palette.Fail //Color.Red
+		      s.BackgroundColor = Design_Palette.COLOR_Error
+		      s.ForegroundColor = Design_Palette.COLOR_On_Error
+		      's.Bold = True
 		      
 		    Case 2 To 3
 		      
-		      s.BackgroundColor = Theme_Colors.Color_Palette.Caution //Color.Orange
-		      s.Bold = True
 		      
-		    Case Is > 3
+		      s.BackgroundColor = Design_Palette.COLOR_Warning
+		      s.ForegroundColor = Design_Palette.COLOR_On_Warning
 		      
+		      's.BackgroundColor = Theme_Colors.Color_Palette.Caution //Color.Orange
+		      's.Bold = True
+		      
+		    Else
+		      
+		      s.BackgroundColor = Design_Palette.COLOR_Background
+		      s.ForegroundColor = Design_Palette.COLOR_On_Background
 		      
 		    End Select
 		    
