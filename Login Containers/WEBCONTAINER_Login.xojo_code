@@ -191,7 +191,10 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Self.Style.BackgroundColor = Design_Palette.COLOR_Background
+		  Self.Style.BackgroundColor = Design_Palette.COLOR_Surface
+		  Self.Style.BorderColor = Design_Palette.COLOR_Border
+		  Self.Style.BorderThickness = 2
+		  Self.Style.Value("border-radius") = "15px;"
 		End Sub
 	#tag EndEvent
 
@@ -204,18 +207,18 @@ End
 		  If User_TextField.Text <> "" And Password_TextField.Text <> "" Then
 		    
 		    
-		    Login_Button.Indicator = WebUIControl.Indicators.Primary
-		    Login_Button.Style.ForegroundColor = Color.White
+		    Login_Button.Style.BackgroundColor = Design_Palette.COLOR_Primary_Variant
+		    Login_Button.Style.ForegroundColor = Design_Palette.COLOR_On_Primary_Variant
 		    Login_Button.Enabled = True
-		    Login_Button.Style.Value("box-shadow") = "0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)"
+		    'Login_Button.Style.Value("box-shadow") = "0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)"
 		    
 		  Else
 		    
 		    
-		    Login_Button.Indicator = WebUIControl.Indicators.Info
-		    Login_Button.Style.ForegroundColor = Color.Black
+		    Login_Button.Style.BackgroundColor = Design_Palette.COLOR_Primary
+		    Login_Button.Style.ForegroundColor = Design_Palette.COLOR_On_Primary
 		    Login_Button.Enabled = False
-		    Login_Button.Style.Value("box-shadow") = "none"
+		    'Login_Button.Style.Value("box-shadow") = "none"
 		    
 		  End If
 		  
@@ -373,8 +376,9 @@ End
 		Sub Opening()
 		  'Me.Style.AddTransition("width", 5, WebStyle.SpeedPatterns.EaseInOut, 0)
 		  'Me.Style.Value("width") = Me.Width.ToString + "px"
-		  Me.Indicator = WebUIControl.Indicators.Info
-		  Me.Style.ForegroundColor = Color.Black
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Primary
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_On_Primary
+		  Me.Style.BorderColor = Design_Palette.COLOR_Border
 		  ENABLE_Login_Button
 		End Sub
 	#tag EndEvent
@@ -382,14 +386,14 @@ End
 #tag Events User_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Password_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents

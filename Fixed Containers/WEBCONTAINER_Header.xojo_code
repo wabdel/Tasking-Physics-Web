@@ -280,45 +280,17 @@ Begin WebContainer WEBCONTAINER_Header
       Width           =   100
       _mPanelIndex    =   -1
    End
-   Begin WebButton Calendar_Button
-      AllowAutoDisable=   False
-      Cancel          =   False
-      Caption         =   "Calendar"
-      ControlID       =   ""
-      Default         =   False
-      Enabled         =   False
-      Height          =   38
-      Index           =   -2147483648
-      Indicator       =   6
-      Left            =   704
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Outlined        =   False
-      PanelIndex      =   0
-      Scope           =   2
-      TabIndex        =   8
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   153
-      Visible         =   False
-      Width           =   100
-      _mPanelIndex    =   -1
-   End
 End
 #tag EndWebContainerControl
 
 #tag WindowCode
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface
 		  
 		  ImageViewer_Hospital_Logo.Top = Me.Top - ImageViewer_Hospital_Logo.Height - 20
 		  
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
+		  
 		  POPULATE_Date_Time
 		End Sub
 	#tag EndEvent
@@ -424,7 +396,7 @@ End
 #tag Events Date_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Color.White 
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -437,9 +409,7 @@ End
 		  
 		  'Me.Style.Value("font") = "1.2em Fira Sans, sans-serif;"
 		  Me.Style.Value("font-style") = "oblique 14deg;"
-		  Me.Style.ForegroundColor = Color.White 
-		  
-		  
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		  'Font-variation-settings: 'slnt' 14;
 		  
 		End Sub
@@ -455,6 +425,7 @@ End
 #tag Events Notes_Label
 	#tag Event
 		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		  Me.Text = ""
 		End Sub
 	#tag EndEvent
@@ -528,18 +499,15 @@ End
 #tag Events Directory_Button
 	#tag Event
 		Sub Pressed()
-		  Me.Indicator = WebUIControl.Indicators.Info
-		  Me.Style.ForegroundColor = Color.Black
+		  
 		  Var theDialog As New WebDialog_Directory
 		  theDialog.Show
 		End Sub
 	#tag EndEvent
-#tag EndEvents
-#tag Events Calendar_Button
 	#tag Event
-		Sub Pressed()
-		  Var theDialog As New WEBDIALOG_Calendar
-		  theDialog.Show
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Primary
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Primary
 		End Sub
 	#tag EndEvent
 #tag EndEvents

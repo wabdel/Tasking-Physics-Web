@@ -1840,8 +1840,8 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Indicator = WebUIControl.Indicators.Primary
-		  Me.Style.ForegroundColor = Color.White
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Primary
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Primary
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -1860,14 +1860,15 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Indicator = WebUIControl.Indicators.Primary
-		  Me.Style.ForegroundColor = Color.White
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Primary
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Primary
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Backward_Month_Button
 	#tag Event
 		Sub Pressed()
+		  
 		  Calendar_Month = Calendar_Month.SubtractInterval(0, 1, 0)
 		  
 		  POPULATE_Calendar
@@ -1876,8 +1877,8 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Indicator = WebUIControl.Indicators.Primary
-		  Me.Style.ForegroundColor = Color.White
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Primary
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Primary
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -1891,8 +1892,8 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Indicator = WebUIControl.Indicators.Primary
-		  Me.Style.ForegroundColor = Color.White
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Primary
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Primary
 		End Sub
 	#tag EndEvent
 #tag EndEvents

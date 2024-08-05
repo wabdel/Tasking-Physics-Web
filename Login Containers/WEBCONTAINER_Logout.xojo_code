@@ -542,8 +542,10 @@ End
 	#tag Event
 		Sub Opening()
 		  
-		  Self.Style.BackgroundColor = Design_Palette.COLOR_Background
-		  
+		  Self.Style.BackgroundColor = Design_Palette.COLOR_Surface
+		  Self.Style.BorderColor = Design_Palette.COLOR_Border
+		  Self.Style.BorderThickness = 2
+		  Self.Style.Value("border-radius") = "15px;"
 		  
 		  Self.User_Label.Text = _
 		  Session.Logged_in_User.full_name
@@ -677,12 +679,17 @@ End
 		  Session.LOGIN_User(-1)
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Primary_Variant
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_On_Primary_Variant
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events User_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground 
-		  
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		  Me.Style.FontSize = 14
 		End Sub
 	#tag EndEvent
@@ -699,7 +706,7 @@ End
 #tag Events Points_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -722,63 +729,63 @@ End
 #tag Events Acc_Plan_Points_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Acc_Task_Points_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Cur_Plan_Points_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Cur_Task_Points_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Points_Value_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Acc_Plan_Points_Value_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Acc_Task_Points_Value_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Cur_Plan_Points_Value_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Cur_Task_Points_Value_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents

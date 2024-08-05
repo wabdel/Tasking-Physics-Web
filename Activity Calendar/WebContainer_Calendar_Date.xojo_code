@@ -207,7 +207,7 @@ End
 		    mmy_date.Month = DateTime.Now.Month AND _
 		    mmy_date.year = DateTime.Now.Year Then
 		    
-		    Date_Label.Style.BackgroundColor = &cFF3B3B
+		    Date_Label.Style.BackgroundColor = Design_Palette.COLOR_Error
 		    Date_Label.Style.ForegroundColor = Color.Black
 		    Date_Label.Style.Value( "border") = "1px solid #FF3B3B;"
 		    Date_Label.Style.Value("border-radius") =  Date_Label.Width.ToString + "px;"
@@ -312,17 +312,34 @@ End
 		      
 		    End If
 		    
+		    Var c1 As String
+		    Var c2 As String
+		    
+		    
+		    If Session.darkmode Then
+		      
+		      c1 = "#018786"
+		      c2 = "#CF6679"
+		      
+		      
+		      
+		    Else
+		      
+		      c1 = "#018786"
+		      c2 = "#B00020"
+		    End If
+		    
 		    If rs.Column("is_active").BooleanValue Then
 		      Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Style.Value("background") = _
-		      "linear-gradient(to right, #009051 0%, " _
-		      +"#009051 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
-		      +"#941100 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
-		      + "#941100 100%);"
+		      "linear-gradient(to right, " + c1 + " 0%, " _
+		      + c1 + " " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
+		      + c2 + " " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
+		      + c2 + " 100%);"
 		    Else
 		      
 		      Plan_Status_WEBCONTAINER(Plan_Status_WEBCONTAINER.LastIndex).Style.Value("background") = _
-		      "linear-gradient(to right, #009051 0%, " _
-		      +"#009051 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
+		      "linear-gradient(to right, " + c1 + " 0%, " _
+		      + c1 +"  " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
 		      +"#f4c430 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
 		      + "#f4c430 100%);"
 		      
@@ -404,11 +421,28 @@ End
 		      
 		    End If
 		    
+		    Var c1 As String
+		    Var c2 As String
+		    
+		    
+		    If Session.darkmode Then
+		      
+		      c1 = "#018786"
+		      c2 = "#CF6679"
+		      
+		      
+		      
+		    Else
+		      
+		      c1 = "#018786"
+		      c2 = "#B00020"
+		    End If
+		    
 		    Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Style.Value("background") = _
-		    "linear-gradient(to right, #009051 0%, " _
-		    +"#009051 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
-		    +"#941100 " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
-		    + "#941100 100%);"
+		    "linear-gradient(to right, " + c1 + " 0%, " _
+		    + c1 + " " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
+		    + c2 + " " + Format(rs.Column("completed").IntegerValue / rs.Column("total").IntegerValue, "00%") + ", " _
+		    + c2 + " 0 100%);"
 		    Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Style.Value("box-shadow") =  "1px 1px 1px lightblue;"
 		    
 		    Task_Status_WEBCONTAINER(Task_Status_WEBCONTAINER.LastIndex).Style.Value("border-radius") =  "50px 50px;"

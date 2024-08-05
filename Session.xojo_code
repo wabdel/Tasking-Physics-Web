@@ -11,7 +11,7 @@ Inherits WebSession
 #tag EndSession
 	#tag Event
 		Sub Opening()
-		  
+		  darkmode = True
 		  DEFINE_WebStyles
 		  Self.UserTimeout = 0
 		  

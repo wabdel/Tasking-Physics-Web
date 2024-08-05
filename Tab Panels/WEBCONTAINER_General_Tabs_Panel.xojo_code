@@ -171,18 +171,15 @@ End
 		  For Each item As WEBCONTAINER_Tab In Tab_Container
 		    If item.Tab_Button.Caption <> button_caption Then
 		      
-		      'item.Tab_Button.Style.BackgroundColor = Design_Palette.COLOR_Button_Info
-		      'item.Tab_Button.Style.BorderColor = Session.COLOR_Button_Info
-		      'item.Tab_Button.Style.ForegroundColor = Color.Black
-		      Item.Tab_Button.Indicator = WebUIControl.Indicators.Info
-		      item.Tab_Button.Style.ForegroundColor = Color.Black
+		      item.Tab_Button.Style.BackgroundColor = Design_Palette.COLOR_Primary
+		      item.Tab_Button.Style.ForegroundColor = Design_Palette.COLOR_On_Primary
+		      
 		    Else
 		      
-		      'item.Tab_Button.Style.BackgroundColor = Design_Palette.COLOR_Button_Primary
-		      'Item.Tab_Button.Style.BorderColor = Session.COLOR_Button_Primary
-		      'item.Tab_Button.Style.ForegroundColor = Color.White
-		      Item.Tab_Button.Indicator = WebUIControl.Indicators.Primary
-		      item.Tab_Button.Style.ForegroundColor = Color.White
+		      
+		      item.Tab_Button.Style.BackgroundColor = Design_Palette.COLOR_Primary_Variant
+		      item.Tab_Button.Style.ForegroundColor = Design_Palette.COLOR_On_Primary_Variant
+		      
 		    End If
 		  Next item
 		  If Central_Container <> Nil Then
