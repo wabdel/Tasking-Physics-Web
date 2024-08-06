@@ -206,6 +206,13 @@ End
 #tag EndWebContainerControl
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		End Sub
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h21
 		Private Function ColumnData() As WebListboxColumnData()
 		  // Part of the WebDataSource interface.
@@ -222,7 +229,7 @@ End
 		  col.Heading = "MRN" // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "80"
+		  col.Width = "70"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
@@ -230,7 +237,7 @@ End
 		  col.Heading = "Full Name" // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "180"
+		  col.Width = "170"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
@@ -238,7 +245,7 @@ End
 		  col.Heading = "Site" // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "120"
+		  col.Width = "80"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
@@ -246,7 +253,7 @@ End
 		  col.Heading = "Plan Type" // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "320"
+		  col.Width = "230"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
@@ -254,7 +261,7 @@ End
 		  col.Heading = "Due Date" // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "220"
+		  col.Width = "200"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
@@ -262,7 +269,7 @@ End
 		  col.Heading = "Planner" // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "80"
+		  col.Width = "70"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
@@ -371,99 +378,6 @@ End
 		    
 		    row.Value("planner_initials") = rs.Column("planner_initials").StringValue.Trim.Uppercase
 		    
-		    
-		    If rs.Column("physician_initials").Value = Nil Then
-		      cellRenderer = New WebListBoxStyleRenderer(s, "NULL")
-		      
-		    Else
-		      cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("physician_initials").StringValue.Trim)
-		      
-		      
-		    End If
-		    row.Value("physician_initials") = cellRenderer
-		    
-		    
-		    rows.Add(row)
-		    
-		    rs.MoveToNextRow
-		  Wend
-		  rs.Close
-		  
-		  Plans_Label.Text = "Plans = " + Plans_ListBox.DataSource.RowCount.ToString
-		  
-		  Return rows
-		  
-		  
-		  
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function RowData1(RowCount as Integer, RowOffset as Integer, SortColumns as String) As WebListboxRowData()
-		  // Part of the WebDataSource interface.
-		  
-		  Var rows() As WebListboxRowData
-		  Var sql As String = "SELECT physics_tasking.plans.plan_id AS plan_id, " _
-		  + "physics_tasking.patients.mrn AS mrn, " _
-		  + "physics_tasking.patients.first_name AS first_name, " _
-		  + "physics_tasking.patients.family_name AS family_name, " _
-		  + "physics_tasking.plan_types.name AS plan_type_name, " _
-		  + "physics_tasking.sites.name As site, " _
-		  + "physics_tasking.sites.is_uppercase AS is_uppercase, " _
-		  + "physics_tasking.plans.due_date AS due_date, " _
-		  + "physics_tasking.users.initials AS physician_initials " _
-		  + "FROM physics_tasking.plans " _
-		  + "INNER JOIN physics_tasking.patients USING (patient_id) " _
-		  + "INNER JOIN physics_tasking.plan_types USING (plan_type_id) " _
-		  + "INNER JOIN physics_tasking.sites USING (site_id) " _
-		  + "LEFT OUTER JOIN physics_tasking.users ON physics_tasking.plans.physician_id = physics_tasking.users.user_id " _
-		  + "WHERE physics_tasking.plans.is_completed = 1 " _
-		  + "AND MONTH(due_date)  = " + Month_DatePicker.SelectedDate.Month.ToString  + " " _
-		  + "AND YEAR(due_date) = " + Month_DatePicker.SelectedDate.Year.ToString + " " _
-		  + "ORDER BY physics_tasking.plans.due_date ASC"
-		  
-		  
-		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
-		  
-		  While Not rs.AfterLastRow
-		    
-		    Var s As New WebStyle
-		    
-		    
-		    Var row As New WebListBoxRowData
-		    row.PrimaryKey = rs.Column("plan_id").IntegerValue
-		    row.tag = rs.Column("plan_id").IntegerValue
-		    
-		    Var cellRenderer As New WebListBoxStyleRenderer(s, rs.Column("mrn").StringValue.Trim)
-		    row.Value("mrn") = cellRenderer
-		    
-		    cellRenderer = New WebListBoxStyleRenderer(s, _
-		    rs.Column("first_name").StringValue.Trim.Titlecase + " " _
-		    + rs.Column("family_name").StringValue.Trim.Uppercase)
-		    row.Value("full_name") = cellRenderer
-		    
-		    If rs.Column("is_uppercase").BooleanValue Then
-		      
-		      cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("site").StringValue.Trim.Uppercase)
-		      
-		    Else
-		      
-		      cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("site").StringValue.Trim.Titlecase)
-		      
-		    End If
-		    
-		    row.Value("site") = cellRenderer
-		    
-		    cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("plan_type_name").StringValue.Trim)
-		    row.Value("plan_type") = cellRenderer
-		    
-		    Var due_date As DateTime = rs.Column("due_date").DateTimeValue
-		    cellRenderer = New WebListBoxStyleRenderer(s, _
-		    due_date.ToString(Locale.Current, DateTime.FormatStyles.Full, DateTime.FormatStyles.None))
-		    
-		    row.Value("due_date") = cellRenderer
 		    
 		    If rs.Column("physician_initials").Value = Nil Then
 		      cellRenderer = New WebListBoxStyleRenderer(s, "NULL")
@@ -696,7 +610,7 @@ End
 #tag Events Info_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style = Session.WEBSTYLE_Label
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Note
 		End Sub
 	#tag EndEvent
 #tag EndEvents

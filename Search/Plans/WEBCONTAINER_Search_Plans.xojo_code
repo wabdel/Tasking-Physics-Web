@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Search_Plans Implements WebDataSource
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_Search_Plans Implements WebDataSource
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   1220
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -163,16 +163,16 @@ Begin WebContainer WEBCONTAINER_Search_Plans Implements WebDataSource
       _mPanelIndex    =   -1
    End
    Begin WebListBox Plans_ListBox
-      ColumnCount     =   1
+      ColumnCount     =   0
       ColumnWidths    =   ""
       ControlID       =   ""
       DefaultRowHeight=   49
       Enabled         =   True
       GridLineStyle   =   3
       HasBorder       =   True
-      HasHeader       =   False
+      HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   401
+      Height          =   608
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   ""
@@ -200,9 +200,9 @@ Begin WebContainer WEBCONTAINER_Search_Plans Implements WebDataSource
       TabIndex        =   4
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   133
+      Top             =   158
       Visible         =   True
-      Width           =   1200
+      Width           =   1180
       _mPanelIndex    =   -1
    End
    Begin WebLabel Plans_Label
@@ -215,7 +215,7 @@ Begin WebContainer WEBCONTAINER_Search_Plans Implements WebDataSource
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   1074
+      Left            =   1054
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -232,7 +232,7 @@ Begin WebContainer WEBCONTAINER_Search_Plans Implements WebDataSource
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   542
+      Top             =   112
       Underline       =   False
       Visible         =   True
       Width           =   146
@@ -271,6 +271,13 @@ End
 #tag EndWebContainerControl
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		End Sub
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h21
 		Private Function ColumnData() As WebListboxColumnData()
 		  // Part of the WebDataSource interface.
@@ -646,6 +653,8 @@ End
 #tag Events Sites_PopupMenu
 	#tag Event
 		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  
 		  Me.RemoveAllRows
 		  
 		  Me.AddRow("All")
@@ -681,6 +690,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  POPULATE_Plan_Types_POPUPMENU
 		End Sub
 	#tag EndEvent
@@ -688,7 +698,7 @@ End
 #tag Events Sitess_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style = Session.WEBSTYLE_Label
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -709,7 +719,7 @@ End
 #tag Events Plan_Type_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style = Session.WEBSTYLE_Label
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		  Me.Visible = False
 		  Me.Enabled = False
 		End Sub
@@ -718,6 +728,7 @@ End
 #tag Events Plans_ListBox
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Secondary
 		  Me.HasHeader = True
 		  Me.RowSelectionType = WebListBox.RowSelectionTypes.None
 		  Me.DataSource = Self
@@ -728,7 +739,7 @@ End
 #tag Events Plans_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style = Session.WEBSTYLE_Label
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -823,6 +834,11 @@ End
 		  Session.WebFile_Download.ForceDownload = False
 		  
 		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
 		End Sub
 	#tag EndEvent
 #tag EndEvents

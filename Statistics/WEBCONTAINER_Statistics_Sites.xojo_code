@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Sites
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   687
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Sites
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   1220
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -62,7 +62,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Sites
       GridColor       =   &c000000AA
       HasAnimation    =   False
       HasLegend       =   False
-      Height          =   492
+      Height          =   601
       Index           =   -2147483648
       Indicator       =   0
       IsGridVisible   =   False
@@ -92,9 +92,9 @@ Begin WebContainer WEBCONTAINER_Statistics_Sites
       TitleFontName   =   ""
       TitleFontSize   =   0.0
       Tooltip         =   ""
-      Top             =   88
+      Top             =   66
       Visible         =   True
-      Width           =   1200
+      Width           =   1180
       _mMode          =   0
       _mPanelIndex    =   -1
    End
@@ -108,7 +108,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Sites
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   993
+      Left            =   973
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -125,7 +125,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Sites
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   42
+      Top             =   20
       Underline       =   False
       Visible         =   True
       Width           =   227
@@ -135,6 +135,12 @@ End
 #tag EndWebContainerControl
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		End Sub
+	#tag EndEvent
+
 	#tag Event
 		Sub Shown()
 		  POPULATE_Chart

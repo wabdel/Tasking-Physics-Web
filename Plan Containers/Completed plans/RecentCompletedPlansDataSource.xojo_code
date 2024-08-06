@@ -49,7 +49,7 @@ Implements WebDataSource
 		  col.Heading = "Completed On" // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "210"
+		  col.Width = "200"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData

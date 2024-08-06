@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Review
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_Review
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   1220
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -97,7 +97,7 @@ Begin WebContainer WEBCONTAINER_Review
       GridColor       =   &c000000AA
       HasAnimation    =   False
       HasLegend       =   True
-      Height          =   300
+      Height          =   462
       Index           =   -2147483648
       Indicator       =   ""
       IsGridVisible   =   False
@@ -105,7 +105,7 @@ Begin WebContainer WEBCONTAINER_Review
       IsYAxisVisible  =   False
       LabelCount      =   0
       LabelLastIndex  =   0
-      Left            =   44
+      Left            =   20
       LegendColor     =   &c000000
       LegendFontName  =   ""
       LegendFontSize  =   0.0
@@ -127,9 +127,9 @@ Begin WebContainer WEBCONTAINER_Review
       TitleFontName   =   ""
       TitleFontSize   =   0.0
       Tooltip         =   ""
-      Top             =   92
+      Top             =   205
       Visible         =   True
-      Width           =   400
+      Width           =   594
       _mMode          =   ""
       _mPanelIndex    =   -1
    End
@@ -182,7 +182,7 @@ Begin WebContainer WEBCONTAINER_Review
       HasBorder       =   True
       HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   187
+      Height          =   280
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   ""
@@ -190,7 +190,7 @@ Begin WebContainer WEBCONTAINER_Review
       LastAddedRowIndex=   0
       LastColumnIndex =   0
       LastRowIndex    =   0
-      Left            =   542
+      Left            =   631
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -210,9 +210,9 @@ Begin WebContainer WEBCONTAINER_Review
       TabIndex        =   4
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   80
+      Top             =   112
       Visible         =   True
-      Width           =   669
+      Width           =   569
       _mPanelIndex    =   -1
    End
    Begin WebListBox WebListBox_Tasks
@@ -225,7 +225,7 @@ Begin WebContainer WEBCONTAINER_Review
       HasBorder       =   True
       HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   203
+      Height          =   280
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
@@ -233,7 +233,7 @@ Begin WebContainer WEBCONTAINER_Review
       LastAddedRowIndex=   0
       LastColumnIndex =   0
       LastRowIndex    =   0
-      Left            =   542
+      Left            =   631
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -253,9 +253,9 @@ Begin WebContainer WEBCONTAINER_Review
       TabIndex        =   5
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   333
+      Top             =   486
       Visible         =   True
-      Width           =   669
+      Width           =   569
       _mPanelIndex    =   -1
    End
    Begin WebLabel WebLabel_Plan_Points
@@ -268,7 +268,7 @@ Begin WebContainer WEBCONTAINER_Review
       Index           =   -2147483648
       Indicator       =   ""
       Italic          =   False
-      Left            =   1111
+      Left            =   1100
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -285,7 +285,7 @@ Begin WebContainer WEBCONTAINER_Review
       TextAlignment   =   3
       TextColor       =   &c000000FF
       Tooltip         =   ""
-      Top             =   275
+      Top             =   66
       Underline       =   False
       Visible         =   True
       Width           =   100
@@ -301,7 +301,7 @@ Begin WebContainer WEBCONTAINER_Review
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   1111
+      Left            =   1100
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -318,7 +318,7 @@ Begin WebContainer WEBCONTAINER_Review
       TextAlignment   =   3
       TextColor       =   &c000000FF
       Tooltip         =   ""
-      Top             =   544
+      Top             =   440
       Underline       =   False
       Visible         =   True
       Width           =   100
@@ -383,6 +383,8 @@ End
 #tag Events PopupMenu_Planners
 	#tag Event
 		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  
 		  Me.RemoveAllRows
 		  
 		  Var sql as string = "SELECT user_id, first_name, family_name FROM physics_tasking.users " _
@@ -404,6 +406,8 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
+		  
 		  WebThread_Populate_WebChart_User_Points.Stop
 		  
 		  WebChart_User_Points.RemoveAllDatasets
@@ -421,7 +425,8 @@ End
 #tag Events LABEL_Planner
 	#tag Event
 		Sub Opening()
-		  Me.TextColor = Color.White
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -632,6 +637,20 @@ End
 		  POPULATE_Tasks_ListBox
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events WebListBox_Plans
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Secondary
+		  
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events WebListBox_Tasks
 	#tag Event
@@ -640,6 +659,22 @@ End
 		  Me.HeaderAt(0) = "Task"
 		  Me.HeaderAt(1) = "Count"
 		  Me.HeaderAt(2) = "Points"
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events WebLabel_Plan_Points
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events WebLabel_Task_Points
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents

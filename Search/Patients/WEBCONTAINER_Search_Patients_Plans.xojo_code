@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Search_Patients_Plans Implements WebDataSource
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   654
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,21 +20,21 @@ Begin WebContainer WEBCONTAINER_Search_Patients_Plans Implements WebDataSource
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   620
+   Width           =   590
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
    Begin WebListBox Plans_ListBox
-      ColumnCount     =   1
+      ColumnCount     =   0
       ColumnWidths    =   ""
       ControlID       =   ""
       DefaultRowHeight=   49
       Enabled         =   True
       GridLineStyle   =   3
       HasBorder       =   True
-      HasHeader       =   False
+      HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   446
+      Height          =   654
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   ""
@@ -42,7 +42,7 @@ Begin WebContainer WEBCONTAINER_Search_Patients_Plans Implements WebDataSource
       LastAddedRowIndex=   0
       LastColumnIndex =   0
       LastRowIndex    =   0
-      Left            =   20
+      Left            =   0
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -62,9 +62,9 @@ Begin WebContainer WEBCONTAINER_Search_Patients_Plans Implements WebDataSource
       TabIndex        =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   79
+      Top             =   0
       Visible         =   True
-      Width           =   580
+      Width           =   590
       _mPanelIndex    =   -1
    End
    Begin WebTimer REFRESH_Timer
@@ -281,6 +281,7 @@ End
 #tag Events Plans_ListBox
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Secondary
 		  Me.HasHeader = True
 		  Me.RowSelectionType = WebListBox.RowSelectionTypes.None
 		  Me.DataSource = Self

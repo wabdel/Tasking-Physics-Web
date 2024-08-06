@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   1220
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -34,7 +34,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       HasBorder       =   True
       HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   560
+      Height          =   746
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   ""
@@ -42,7 +42,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       LastAddedRowIndex=   0
       LastColumnIndex =   0
       LastRowIndex    =   0
-      Left            =   32
+      Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -77,7 +77,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       HasBorder       =   True
       HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   489
+      Height          =   746
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
@@ -85,7 +85,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       LastAddedRowIndex=   0
       LastColumnIndex =   0
       LastRowIndex    =   0
-      Left            =   232
+      Left            =   220
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -120,7 +120,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       HasBorder       =   True
       HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   489
+      Height          =   746
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
@@ -128,7 +128,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       LastAddedRowIndex=   0
       LastColumnIndex =   0
       LastRowIndex    =   0
-      Left            =   565
+      Left            =   553
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -163,7 +163,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       HasBorder       =   True
       HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   489
+      Height          =   746
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
@@ -171,7 +171,7 @@ Begin WebContainer WEBCONTAINER_User_Annual_Points
       LastAddedRowIndex=   0
       LastColumnIndex =   0
       LastRowIndex    =   0
-      Left            =   898
+      Left            =   886
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -312,10 +312,35 @@ End
 #tag Events Users_ListBox
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Secondary
 		  Me.ColumnCount = 2
 		  Me.HasHeader = True
 		  Me.HeaderAt(0) = "Initials"
 		  Me.HeaderAt(1) = "Points"
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ListBox2
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Secondary
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ListBox3
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Secondary
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ListBox4
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Secondary
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents

@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Tasks
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Tasks
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   1220
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -29,7 +29,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Tasks
       ControlID       =   ""
       Enabled         =   True
       HasBorder       =   True
-      Height          =   560
+      Height          =   746
       Index           =   -2147483648
       Indicator       =   ""
       LayoutDirection =   0
@@ -52,7 +52,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Tasks
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
-      Width           =   1200
+      Width           =   1180
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
@@ -66,7 +66,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Tasks
          HasBorder       =   True
          HasHeader       =   True
          HeaderHeight    =   0
-         Height          =   486
+         Height          =   672
          HighlightSortedColumn=   True
          Index           =   -2147483648
          Indicator       =   0
@@ -98,7 +98,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Tasks
          Tooltip         =   ""
          Top             =   74
          Visible         =   True
-         Width           =   1160
+         Width           =   1140
          _mPanelIndex    =   -1
       End
       Begin WebProgressWheel ProgressWheel1
@@ -135,6 +135,13 @@ End
 #tag EndWebContainerControl
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
+		End Sub
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h21
 		Private Sub POPULATE_WebListBox_All_Planners()
 		  ProgressWheel1.Visible = True
@@ -199,9 +206,17 @@ End
 
 #tag EndWindowCode
 
+#tag Events WebTabPanel_Tasks
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events WebListBox_All_Planners
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Secondary
 		  Me.RemoveAllRows
 		  
 		  Var d As DateTime = DateTime.Now.SubtractInterval(1,0.0)

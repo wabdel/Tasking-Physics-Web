@@ -55,7 +55,7 @@ Begin WebDialog WebDialog_User_Tasks
       _mPanelIndex    =   -1
    End
    Begin WebListBox WebListBox_User_Tasks
-      ColumnCount     =   3
+      ColumnCount     =   0
       ColumnWidths    =   ""
       ControlID       =   ""
       DefaultRowHeight=   49
@@ -217,7 +217,7 @@ Begin WebDialog WebDialog_User_Tasks
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   20
+      Top             =   56
       Underline       =   False
       Visible         =   True
       Width           =   340
@@ -410,11 +410,16 @@ End
 		  
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Close
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events WebLabel_Name
 	#tag Event
 		Sub Opening()
-		  Me.TextColor = Color.White
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -424,11 +429,16 @@ End
 		  me.TextColor = Color.Yellow
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events WebLabel_Total_Points
 	#tag Event
 		Sub Opening()
-		  Me.TextColor = Color.White
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents

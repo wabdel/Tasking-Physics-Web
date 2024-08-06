@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Physicians_Monthly
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Physicians_Monthly
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   1220
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -60,7 +60,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Physicians_Monthly
       Index           =   -2147483648
       Indicator       =   ""
       InitialValue    =   "Patients\nPlans"
-      Left            =   1052
+      Left            =   1032
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -90,7 +90,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Physicians_Monthly
       GridColor       =   &c000000AA
       HasAnimation    =   False
       HasLegend       =   False
-      Height          =   492
+      Height          =   678
       Index           =   -2147483648
       Indicator       =   0
       IsGridVisible   =   False
@@ -122,7 +122,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Physicians_Monthly
       Tooltip         =   ""
       Top             =   88
       Visible         =   True
-      Width           =   1200
+      Width           =   1180
       _mMode          =   0
       _mPanelIndex    =   -1
    End
@@ -136,7 +136,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Physicians_Monthly
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   506
+      Left            =   497
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -262,11 +262,21 @@ End
 		  POPULATE_Chart
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Data_RadioGroup
 	#tag Event
 		Sub SelectionChanged(button As WebRadioButton)
 		  POPULATE_Chart
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -346,6 +356,13 @@ End
 		  options.value("scaleShowValues") = True
 		  'System.DebugLog(Options.ToString)
 		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Total_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents

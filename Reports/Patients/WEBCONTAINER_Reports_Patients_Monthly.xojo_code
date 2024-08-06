@@ -81,7 +81,7 @@ Begin WebContainer WEBCONTAINER_Reports_Patients_Monthly Implements WebDataSourc
       Width           =   247
       _mPanelIndex    =   -1
    End
-   Begin WebListBox Plans_ListBox
+   Begin WebListBox Patients_ListBox
       ColumnCount     =   1
       ColumnWidths    =   ""
       ControlID       =   ""
@@ -136,7 +136,7 @@ Begin WebContainer WEBCONTAINER_Reports_Patients_Monthly Implements WebDataSourc
       Scope           =   2
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Plans_Label
+   Begin WebLabel Patients_Label
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
@@ -159,7 +159,7 @@ Begin WebContainer WEBCONTAINER_Reports_Patients_Monthly Implements WebDataSourc
       Scope           =   2
       TabIndex        =   3
       TabStop         =   True
-      Text            =   "Plans = 0"
+      Text            =   "Patients = 0"
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
@@ -173,6 +173,13 @@ End
 #tag EndWebContainerControl
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		End Sub
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h21
 		Private Function ColumnData() As WebListboxColumnData()
 		  // Part of the WebDataSource interface.
@@ -270,8 +277,6 @@ End
 		  Wend
 		  rs.Close
 		  
-		  Plans_Label.Text = "Plans = " + Plans_ListBox.DataSource.RowCount.ToString
-		  
 		  Return rows
 		  
 		  
@@ -336,14 +341,16 @@ End
 #tag Events Month_DatePicker
 	#tag Event
 		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		  Me.SelectedDate = DateTime.Now
-		  Plans_ListBox.ReloadData
+		  Patients_ListBox.ReloadData
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub DateChanged(selectedDate As DateTime)
-		  Plans_ListBox.ReloadData
-		  Plans_Label.Text = "Plans = " + Self.RowCount.ToString
+		  Patients_ListBox.ReloadData
+		  Patients_Label.Text = "Patients = " + Patients_ListBox.DataSource.RowCount.ToString
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -396,13 +403,14 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Plans_ListBox
+#tag Events Patients_ListBox
 	#tag Event
 		Sub Opening()
 		  Me.HasHeader = True
 		  Me.RowSelectionType = WebListBox.RowSelectionTypes.None
 		  Me.DataSource = Self
-		  Me.ReloadData
+		  'Me.ReloadData
+		  
 		  Latest_Update = DateTime.Now
 		End Sub
 	#tag EndEvent
@@ -433,8 +441,8 @@ End
 		  
 		  If App.last_database_update <> Latest_UPDATE Then
 		    
-		    Plans_ListBox.ReloadData
-		    Plans_Label.Text = "Plans = " + Plans_ListBox.DataSource.RowCount.ToString
+		    Patients_ListBox.ReloadData
+		    Patients_Label.Text = "Patients = " + Patients_ListBox.DataSource.RowCount.ToString
 		    Latest_UPDATE = App.last_database_update
 		    
 		  End If
@@ -442,7 +450,7 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Plans_Label
+#tag Events Patients_Label
 	#tag Event
 		Sub Opening()
 		  Me.Style = Session.WEBSTYLE_Label

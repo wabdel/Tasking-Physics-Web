@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Points_History
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Points_History
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   1220
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -34,7 +34,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Points_History
       GridColor       =   &c000000AA
       HasAnimation    =   False
       HasLegend       =   False
-      Height          =   560
+      Height          =   746
       Index           =   -2147483648
       Indicator       =   0
       IsGridVisible   =   False
@@ -66,7 +66,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Points_History
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
-      Width           =   1200
+      Width           =   1180
       _mMode          =   0
       _mPanelIndex    =   -1
    End
@@ -109,52 +109,6 @@ Begin WebContainer WEBCONTAINER_Statistics_Points_History
       StackSize       =   0
       ThreadID        =   0
       ThreadState     =   0
-   End
-   Begin WebChart Points_Chart_old
-      AllowPopover    =   True
-      AutoCalculateYAxis=   False
-      ControlID       =   ""
-      DatasetCount    =   0
-      DatasetLastIndex=   0
-      Enabled         =   True
-      GridColor       =   &c000000AA
-      HasAnimation    =   False
-      HasLegend       =   False
-      Height          =   560
-      Index           =   -2147483648
-      Indicator       =   0
-      IsGridVisible   =   False
-      IsXAxisVisible  =   False
-      IsYAxisVisible  =   False
-      LabelCount      =   0
-      LabelLastIndex  =   0
-      Left            =   40
-      LegendColor     =   &c000000
-      LegendFontName  =   ""
-      LegendFontSize  =   0.0
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Mode            =   7
-      PanelIndex      =   0
-      PopoverBackgroundColor=   &c000000
-      Scope           =   2
-      TabIndex        =   2
-      TabStop         =   True
-      Title           =   ""
-      TitleColor      =   &c000000
-      TitleFontName   =   ""
-      TitleFontSize   =   0.0
-      Tooltip         =   ""
-      Top             =   40
-      Visible         =   False
-      Width           =   1200
-      _mMode          =   0
-      _mPanelIndex    =   -1
    End
 End
 #tag EndWebContainerControl
@@ -516,98 +470,6 @@ End
 		      Next i
 		    End If
 		  Next
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Points_Chart_old
-	#tag Event
-		Sub Opening()
-		  Me.Style.BackgroundColor = Color.White
-		  
-		  
-		  
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub OverrideOptions(options As JSONItem)
-		  '//Format Title
-		  Var title As New JSONItem
-		  title.Value("display") = True
-		  title.Value("text") = "Points"
-		  title.Value("fontSize") = 24
-		  Options.Value("title") = title
-		  
-		  Var legend As New JSONItem
-		  legend.Value("display") = True
-		  legend.Value("fontColor") = "rgb(255, 99, 132)"
-		  Options.Value("legend") = legend
-		  
-		  
-		  Var elements As New JSONItem
-		  Var point As New JSONItem
-		  point.Value("display") = True
-		  point.Value("radius") = 3
-		  elements.Value("point") = point
-		  Options.Value("elements") = elements
-		  
-		  //Format Axis
-		  Var injectionyAxes As New JSONItem
-		  Var injectionxAxes As New JSONItem
-		  Var injectionScales As New JSONItem
-		  
-		  '//Format yAxis
-		  Var injectionyValue As New JSONItem
-		  Var injectionyTicks As New JSONItem
-		  Var injectionyTitle As New JSONItem
-		  Var injectionyScaleLabel As New JSONItem
-		  
-		  
-		  
-		  injectionyValue.value("min") = 0
-		  injectionyTicks.value("ticks") = injectionyValue
-		  
-		  
-		  injectionyTitle.Value("display") = True
-		  injectionyTitle.Value("labelString") =  "Points"
-		  injectionyTitle.Value("fontSize") = 20
-		  
-		  injectionyTicks.Value("scaleLabel") = injectionyTitle
-		  
-		  injectionyAxes.add injectionyTicks
-		  injectionScales.value("yAxes") = injectionyAxes
-		  
-		  
-		  '//Format xAxis
-		  
-		  Var injectionxValue As New JSONItem
-		  Var injectionxType As New JSONItem
-		  Var injectionxTime As New JSONItem
-		  Var injectionxMonth As New JSONItem
-		  Var injectionxDisplayFormats As New JSONItem
-		  Var injectionxTicks As New JSONItem
-		  Var injectionxTitle As New JSONItem
-		  Var injectionxScaleLabel As New JSONItem
-		  
-		  injectionxTicks.value("type") = "time"
-		  
-		  injectionxMonth.Value("second") =  "DD MMM YYYY"
-		  injectionxDisplayFormats.Value("unit") = "second"
-		  injectionxDisplayFormats.Value("displayFormats") = injectionxMonth
-		  
-		  injectionxTicks.Value("time") = injectionxDisplayFormats
-		  
-		  injectionxTitle.Value("display") = True
-		  injectionxTitle.Value("labelString") =  "Date"
-		  injectionxTitle.Value("fontSize") = 20
-		  injectionxTicks.Value("scaleLabel") = injectionxTitle
-		  injectionxTicks.value("distribution") = "linear"
-		  injectionxAxes.add injectionxTicks
-		  injectionScales.value("xAxes") = injectionxAxes
-		  
-		  
-		  options.value("scales") = injectionScales
-		  'System.DebugLog(Options.ToString)
-		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents

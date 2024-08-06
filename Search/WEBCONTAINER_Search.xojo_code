@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Search
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   700
+   Height          =   900
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -29,12 +29,12 @@ Begin WebContainer WEBCONTAINER_Search
       ControlID       =   ""
       Enabled         =   True
       HasBorder       =   True
-      Height          =   660
+      Height          =   860
       Index           =   -2147483648
       Indicator       =   0
       LayoutDirection =   0
       LayoutType      =   0
-      Left            =   40
+      Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -50,7 +50,7 @@ Begin WebContainer WEBCONTAINER_Search
       TabIndex        =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   40
+      Top             =   20
       Visible         =   True
       Width           =   1260
       _mDesignHeight  =   0
@@ -72,7 +72,7 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub LOAD_TabPanel_Container(index as Integer)
-		  Var left_postion As Integer = WebTabPanel_Search.Left +5
+		  Var left_position As Integer = WebTabPanel_Search.Left + 10
 		  Var top_position As Integer = WebTabPanel_Search.Top + 50
 		  
 		  If Panel_Container <> Nil Then
@@ -93,7 +93,7 @@ End
 		  End
 		  
 		  Panel_Container.EmbedWithin( WebTabPanel_Search, _
-		  left_postion, top_position, _
+		  left_position, top_position, _
 		  Panel_Container.Width, Panel_Container.Height)
 		End Sub
 	#tag EndMethod
@@ -110,6 +110,11 @@ End
 	#tag Event
 		Sub PanelChanged()
 		  LOAD_TabPanel_Container(Me.SelectedPanelIndex)
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents

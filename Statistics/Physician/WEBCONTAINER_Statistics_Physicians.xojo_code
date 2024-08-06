@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Physicians
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Physicians
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   1220
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -90,7 +90,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Physicians
       GridColor       =   &c000000AA
       HasAnimation    =   False
       HasLegend       =   False
-      Height          =   468
+      Height          =   654
       Index           =   -2147483648
       Indicator       =   0
       IsGridVisible   =   False
@@ -122,7 +122,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Physicians
       Tooltip         =   ""
       Top             =   112
       Visible         =   True
-      Width           =   1200
+      Width           =   1180
       _mMode          =   0
       _mPanelIndex    =   -1
    End
@@ -330,7 +330,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Color.White
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -418,7 +418,7 @@ End
 #tag Events Total_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_Note
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -426,8 +426,7 @@ End
 	#tag Event
 		Sub Opening()
 		  Me.Style.FontSize = 28
-		  Me.Style.ForegroundColor = Color.White
-		  Me.Style.Underline = True
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents

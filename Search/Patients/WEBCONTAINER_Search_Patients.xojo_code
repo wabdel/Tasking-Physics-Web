@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Search_Patients Implements WebDataSource
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_Search_Patients Implements WebDataSource
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   1220
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -34,7 +34,7 @@ Begin WebContainer WEBCONTAINER_Search_Patients Implements WebDataSource
       HasBorder       =   True
       HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   437
+      Height          =   654
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
@@ -62,9 +62,9 @@ Begin WebContainer WEBCONTAINER_Search_Patients Implements WebDataSource
       TabIndex        =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   78
+      Top             =   112
       Visible         =   True
-      Width           =   600
+      Width           =   590
       _mPanelIndex    =   -1
    End
    Begin WebSearchField Patients_SearchField
@@ -103,7 +103,7 @@ Begin WebContainer WEBCONTAINER_Search_Patients Implements WebDataSource
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   474
+      Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -117,10 +117,10 @@ Begin WebContainer WEBCONTAINER_Search_Patients Implements WebDataSource
       TabIndex        =   2
       TabStop         =   True
       Text            =   "Patients = 0"
-      TextAlignment   =   3
+      TextAlignment   =   1
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   542
+      Top             =   66
       Underline       =   False
       Visible         =   True
       Width           =   146
@@ -138,16 +138,16 @@ Begin WebContainer WEBCONTAINER_Search_Patients Implements WebDataSource
       Scope           =   2
       _mPanelIndex    =   -1
    End
-   Begin WEBCONTAINER_Search_Patients_Plans WEBCONTAINER_Search_Patients_Plans1
+   Begin WEBCONTAINER_Search_Patients_Plans WEBCONTAINER_Search_Patients_Plans1 Implements WebDataSource
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
-      Height          =   600
+      Height          =   654
       Index           =   -2147483648
       Indicator       =   0
       LayoutDirection =   0
       LayoutType      =   0
-      Left            =   620
+      Left            =   618
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -162,9 +162,9 @@ Begin WebContainer WEBCONTAINER_Search_Patients Implements WebDataSource
       TabIndex        =   3
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   0
+      Top             =   112
       Visible         =   True
-      Width           =   620
+      Width           =   590
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
@@ -173,6 +173,13 @@ End
 #tag EndWebContainerControl
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		End Sub
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h21
 		Private Function ColumnData() As WebListboxColumnData()
 		  // Part of the WebDataSource interface.
@@ -189,7 +196,7 @@ End
 		  col.Heading = "MRN" // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "100"
+		  col.Width = "70"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
@@ -197,7 +204,7 @@ End
 		  col.Heading = "Full Name" // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "400"
+		  col.Width = "210"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData

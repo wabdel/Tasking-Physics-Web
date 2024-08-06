@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Annual_Points
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Annual_Points
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   1220
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -34,7 +34,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Annual_Points
       HasBorder       =   True
       HasHeader       =   False
       HeaderHeight    =   0
-      Height          =   506
+      Height          =   746
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
@@ -62,9 +62,9 @@ Begin WebContainer WEBCONTAINER_Statistics_Annual_Points
       TabIndex        =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   41
+      Top             =   20
       Visible         =   True
-      Width           =   803
+      Width           =   1180
       _mPanelIndex    =   -1
    End
 End
@@ -202,6 +202,8 @@ End
 #tag Events Planner_Annual_Points_ListBox
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Secondary
+		  
 		  Me.HasHeader = True
 		  Me.ColumnCount = 5
 		  

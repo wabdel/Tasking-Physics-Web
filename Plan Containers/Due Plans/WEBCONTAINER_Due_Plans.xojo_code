@@ -25,7 +25,7 @@ Begin WebContainer WEBCONTAINER_Due_Plans
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
    Begin WebListBox Due_Plans_ListBox
-      ColumnCount     =   6
+      ColumnCount     =   0
       ColumnWidths    =   ""
       ControlID       =   ""
       DefaultRowHeight=   49
