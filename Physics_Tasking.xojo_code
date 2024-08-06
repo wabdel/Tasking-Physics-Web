@@ -1247,7 +1247,7 @@ Protected Module Physics_Tasking
 		Private Sub UPDATE_Patients()
 		  
 		  
-		  // Create Plan Table
+		  // Create patients Table
 		  Var sql As String = "CREATE TABLE IF NOT EXISTS physics_tasking.patients (" _
 		  +"patient_id INT AUTO_INCREMENT, " _
 		  +"first_name VARCHAR(50), " _
@@ -1259,7 +1259,22 @@ Protected Module Physics_Tasking
 		  
 		  
 		  
+		  //Add indexes
 		  
+		  sql = "SELECT COUNT(1) IndexIsThere FROM INFORMATION_SCHEMA.STATISTICS " _
+		  + "WHERE table_schema='physics_tasking' AND table_name='patients' AND index_name='idx_mrn';"
+		  
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
+		  
+		  If rs.Column( "IndexIsThere").IntegerValue = 0 Then
+		    
+		    sql = "CREATE INDEX idx_mrn " _
+		    + "ON physics_tasking.patients (mrn);"
+		    
+		    Physics_Tasking.EXECUTE_Statement( sql)
+		    
+		    
+		  End If
 		End Sub
 	#tag EndMethod
 
@@ -1360,6 +1375,58 @@ Protected Module Physics_Tasking
 		  
 		  
 		  
+		  //Add indexes
+		  
+		  sql = "SELECT COUNT(1) IndexIsThere FROM INFORMATION_SCHEMA.STATISTICS " _
+		  + "WHERE table_schema='physics_tasking' AND table_name='plan_types' AND index_name='idx_plan_type_name_and_site_id';"
+		  
+		  rs = Physics_Tasking.SELECT_Statement( sql)
+		  
+		  If rs.Column( "IndexIsThere").IntegerValue = 0 Then
+		    
+		    sql = "CREATE INDEX idx_plan_type_name_and_site_id " _
+		    + "ON physics_tasking.plan_types (site_id, name);"
+		    
+		    Physics_Tasking.EXECUTE_Statement( sql)
+		    
+		    
+		    
+		    
+		  End If
+		  
+		  
+		  sql = "SELECT COUNT(1) IndexIsThere FROM INFORMATION_SCHEMA.STATISTICS " _
+		  + "WHERE table_schema='physics_tasking' AND table_name='plan_types' AND index_name='idx_plan_type_name';"
+		  
+		  rs = Physics_Tasking.SELECT_Statement( sql)
+		  
+		  If rs.Column( "IndexIsThere").IntegerValue = 0 Then
+		    
+		    sql = "CREATE INDEX idx_task_type_name " _
+		    + "ON physics_tasking.plan_types ( name);"
+		    
+		    Physics_Tasking.EXECUTE_Statement( sql)
+		    
+		    
+		  End If
+		  
+		  
+		  sql = "SELECT COUNT(1) IndexIsThere FROM INFORMATION_SCHEMA.STATISTICS " _
+		  + "WHERE table_schema='physics_tasking' AND table_name='plan_types' AND index_name='idx_site_id';"
+		  
+		  rs = Physics_Tasking.SELECT_Statement( sql)
+		  
+		  If rs.Column( "IndexIsThere").IntegerValue = 0 Then
+		    
+		    sql = "CREATE INDEX idx_site_id " _
+		    + "ON physics_tasking.plan_types ( site_id);"
+		    
+		    Physics_Tasking.EXECUTE_Statement( sql)
+		    
+		    
+		  End If
+		  
+		  
 		  
 		End Sub
 	#tag EndMethod
@@ -1424,6 +1491,24 @@ Protected Module Physics_Tasking
 		  
 		  
 		  
+		  //Add indexes
+		  
+		  sql = "SELECT COUNT(1) IndexIsThere FROM INFORMATION_SCHEMA.STATISTICS " _
+		  + "WHERE table_schema='physics_tasking' AND table_name='sites' AND index_name='idx_site_name';"
+		  
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
+		  
+		  If rs.Column( "IndexIsThere").IntegerValue = 0 Then
+		    
+		    sql = "CREATE INDEX idx_site_name " _
+		    + "ON physics_tasking.sites (name);"
+		    
+		    Physics_Tasking.EXECUTE_Statement( sql)
+		    
+		    
+		    
+		    
+		  End If
 		  
 		  
 		  
@@ -1534,6 +1619,60 @@ Protected Module Physics_Tasking
 		    
 		    
 		  End If
+		  //Add indexes
+		  
+		  sql = "SELECT COUNT(1) IndexIsThere FROM INFORMATION_SCHEMA.STATISTICS " _
+		  + "WHERE table_schema='physics_tasking' AND table_name='task_types' AND index_name='idx_task_type_name_and_group_id';"
+		  
+		  rs = Physics_Tasking.SELECT_Statement( sql)
+		  
+		  If rs.Column( "IndexIsThere").IntegerValue = 0 Then
+		    
+		    sql = "CREATE INDEX idx_task_type_name_and_group_id " _
+		    + "ON physics_tasking.task_types (task_group_id, name);"
+		    
+		    Physics_Tasking.EXECUTE_Statement( sql)
+		    
+		    
+		    
+		    
+		  End If
+		  
+		  
+		  sql = "SELECT COUNT(1) IndexIsThere FROM INFORMATION_SCHEMA.STATISTICS " _
+		  + "WHERE table_schema='physics_tasking' AND table_name='task_types' AND index_name='idx_task_type_name';"
+		  
+		  rs = Physics_Tasking.SELECT_Statement( sql)
+		  
+		  If rs.Column( "IndexIsThere").IntegerValue = 0 Then
+		    
+		    sql = "CREATE INDEX idx_task_type_name " _
+		    + "ON physics_tasking.task_types ( name);"
+		    
+		    Physics_Tasking.EXECUTE_Statement( sql)
+		    
+		    
+		  End If
+		  
+		  
+		  sql = "SELECT COUNT(1) IndexIsThere FROM INFORMATION_SCHEMA.STATISTICS " _
+		  + "WHERE table_schema='physics_tasking' AND table_name='task_types' AND index_name='idx_task_group_id';"
+		  
+		  rs = Physics_Tasking.SELECT_Statement( sql)
+		  
+		  If rs.Column( "IndexIsThere").IntegerValue = 0 Then
+		    
+		    sql = "CREATE INDEX idx_task_group_id " _
+		    + "ON physics_tasking.task_types ( task_group_id);"
+		    
+		    Physics_Tasking.EXECUTE_Statement( sql)
+		    
+		    
+		  End If
+		  
+		  
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -1662,7 +1801,28 @@ Protected Module Physics_Tasking
 		  
 		  
 		  
+		  //ADD Index
 		  
+		  
+		  //sorting users_initials
+		  
+		  
+		  sql = "SELECT COUNT(1) IndexIsThere FROM INFORMATION_SCHEMA.STATISTICS " _
+		  + "WHERE table_schema='physics_tasking' AND table_name='users' AND index_name='idx_user_initials';"
+		  
+		  rs = Physics_Tasking.SELECT_Statement( sql)
+		  
+		  If rs.Column( "IndexIsThere").IntegerValue = 0 Then
+		    
+		    sql = "CREATE INDEX idx_user_initials " _
+		    + "ON physics_tasking.users (initials);"
+		    
+		    Physics_Tasking.EXECUTE_Statement( sql)
+		    
+		    
+		    
+		    
+		  End If
 		End Sub
 	#tag EndMethod
 
@@ -1855,6 +2015,46 @@ Protected Module Physics_Tasking
 			Group="Behavior"
 			InitialValue=""
 			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="db_host"
+			Visible=false
+			Group="Behavior"
+			InitialValue="127.0.0.1"
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="db_name"
+			Visible=false
+			Group="Behavior"
+			InitialValue="physics_tasking"
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="db_password"
+			Visible=false
+			Group="Behavior"
+			InitialValue="physics_tasking_user"
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="db_port"
+			Visible=false
+			Group="Behavior"
+			InitialValue="3306"
+			Type="integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="db_username"
+			Visible=false
+			Group="Behavior"
+			InitialValue="physics_tasking_user"
+			Type="String"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

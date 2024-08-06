@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Add_Task Implements WebDataSource
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   500
+   Height          =   900
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -93,7 +93,7 @@ Begin WebContainer WEBCONTAINER_Add_Task Implements WebDataSource
       HasBorder       =   True
       HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   398
+      Height          =   798
       HighlightSortedColumn=   False
       Index           =   -2147483648
       Indicator       =   0
@@ -308,14 +308,14 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		  Me.Style = Design_Palette.STYLE_TEXTFIELD
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Tasks_ListBox
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Secondary
 		  Me.HasHeader = True
 		  Me.RowSelectionType = WebListBox.RowSelectionTypes.None
 		  Me.DataSource = Self

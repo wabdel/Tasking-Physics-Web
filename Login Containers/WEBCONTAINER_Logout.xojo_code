@@ -129,7 +129,7 @@ Begin WebContainer WEBCONTAINER_Logout
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   330
+      Left            =   234
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -146,7 +146,7 @@ Begin WebContainer WEBCONTAINER_Logout
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   155
+      Top             =   152
       Underline       =   False
       Visible         =   True
       Width           =   140
@@ -306,7 +306,7 @@ Begin WebContainer WEBCONTAINER_Logout
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   478
+      Left            =   382
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -323,10 +323,10 @@ Begin WebContainer WEBCONTAINER_Logout
       TextAlignment   =   1
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   155
+      Top             =   152
       Underline       =   False
       Visible         =   True
-      Width           =   96
+      Width           =   133
       _mPanelIndex    =   -1
    End
    Begin WebLabel Acc_Plan_Points_Value_Label
@@ -689,7 +689,7 @@ End
 	#tag Event
 		Sub Opening()
 		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
-		  Me.Style.FontSize = 14
+		  Me.Style.FontSize = 16
 		End Sub
 	#tag EndEvent
 #tag EndEvents

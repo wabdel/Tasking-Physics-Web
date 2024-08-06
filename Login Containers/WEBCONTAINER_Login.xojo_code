@@ -399,11 +399,21 @@ End
 		  ENABLE_Login_Button
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_TEXTFIELD
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Password_TextField
 	#tag Event
 		Sub TextChanged()
 		  ENABLE_Login_Button
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_TEXTFIELD
 		End Sub
 	#tag EndEvent
 #tag EndEvents
