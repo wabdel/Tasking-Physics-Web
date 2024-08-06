@@ -86,10 +86,10 @@ Begin WebDialog Add_Task_WebDialog
    Begin WebTextArea Notes_TextArea
       AllowReturnKey  =   True
       AllowSpellChecking=   False
-      Caption         =   ""
+      Caption         =   "Notes:"
       ControlID       =   ""
       Enabled         =   True
-      Height          =   115
+      Height          =   139
       Hint            =   ""
       Index           =   -2147483648
       Indicator       =   0
@@ -110,7 +110,7 @@ Begin WebDialog Add_Task_WebDialog
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
-      Top             =   383
+      Top             =   359
       Visible         =   True
       Width           =   683
       _mPanelIndex    =   -1
@@ -374,79 +374,13 @@ Begin WebDialog Add_Task_WebDialog
       Width           =   437
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Label1
-      Bold            =   False
-      ControlID       =   ""
-      Enabled         =   True
-      FontName        =   ""
-      FontSize        =   0.0
-      Height          =   38
-      Index           =   6
-      Indicator       =   0
-      Italic          =   False
-      Left            =   383
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Multiline       =   False
-      PanelIndex      =   0
-      Scope           =   2
-      TabIndex        =   11
-      TabStop         =   True
-      Text            =   "Notes"
-      TextAlignment   =   1
-      TextColor       =   &c00000000
-      Tooltip         =   ""
-      Top             =   337
-      Underline       =   False
-      Visible         =   True
-      Width           =   100
-      _mPanelIndex    =   -1
-   End
-   Begin WebLabel Label1
-      Bold            =   False
-      ControlID       =   ""
-      Enabled         =   True
-      FontName        =   ""
-      FontSize        =   0.0
-      Height          =   38
-      Index           =   7
-      Indicator       =   0
-      Italic          =   False
-      Left            =   714
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Multiline       =   False
-      PanelIndex      =   0
-      Scope           =   2
-      TabIndex        =   12
-      TabStop         =   True
-      Text            =   "Instruction:"
-      TextAlignment   =   3
-      TextColor       =   &c00000000
-      Tooltip         =   ""
-      Top             =   72
-      Underline       =   False
-      Visible         =   True
-      Width           =   100
-      _mPanelIndex    =   -1
-   End
    Begin WebTextArea Description_TextArea
       AllowReturnKey  =   True
       AllowSpellChecking=   False
-      Caption         =   ""
+      Caption         =   "Instructions:"
       ControlID       =   ""
       Enabled         =   True
-      Height          =   220
+      Height          =   244
       Hint            =   ""
       Index           =   -2147483648
       Indicator       =   0
@@ -467,7 +401,7 @@ Begin WebDialog Add_Task_WebDialog
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
-      Top             =   118
+      Top             =   94
       Visible         =   True
       Width           =   437
       _mPanelIndex    =   -1
@@ -801,6 +735,21 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events Notes_TextArea
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Label1
+	#tag Event
+		Sub Opening(index as Integer)
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events Task_DatePicker
 	#tag Event
 		Sub DateChanged(selectedDate As DateTime)
@@ -823,6 +772,14 @@ End
 		    
 		  End If
 		  Points_TextField.Text = Format( Weight_TextField.Text.ToDouble * Multiplier_TextField.Text.ToDouble, "#0.00")
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Description_TextArea
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents

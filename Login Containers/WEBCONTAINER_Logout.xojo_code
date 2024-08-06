@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_Logout
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   666
+   Width           =   594
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -164,14 +164,14 @@ Begin WebContainer WEBCONTAINER_Logout
       Scope           =   2
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Acc_Plan_Points_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   0
       Indicator       =   0
       Italic          =   False
       Left            =   330
@@ -197,14 +197,14 @@ Begin WebContainer WEBCONTAINER_Logout
       Width           =   140
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Acc_Task_Points_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   1
       Indicator       =   0
       Italic          =   False
       Left            =   330
@@ -230,14 +230,14 @@ Begin WebContainer WEBCONTAINER_Logout
       Width           =   140
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Cur_Plan_Points_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   2
       Indicator       =   0
       Italic          =   False
       Left            =   330
@@ -263,14 +263,14 @@ Begin WebContainer WEBCONTAINER_Logout
       Width           =   140
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Cur_Task_Points_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   3
       Indicator       =   0
       Italic          =   False
       Left            =   330
@@ -326,7 +326,7 @@ Begin WebContainer WEBCONTAINER_Logout
       Top             =   155
       Underline       =   False
       Visible         =   True
-      Width           =   176
+      Width           =   96
       _mPanelIndex    =   -1
    End
    Begin WebLabel Acc_Plan_Points_Value_Label
@@ -359,7 +359,7 @@ Begin WebContainer WEBCONTAINER_Logout
       Top             =   20
       Underline       =   False
       Visible         =   True
-      Width           =   140
+      Width           =   96
       _mPanelIndex    =   -1
    End
    Begin WebLabel Acc_Task_Points_Value_Label
@@ -392,7 +392,7 @@ Begin WebContainer WEBCONTAINER_Logout
       Top             =   53
       Underline       =   False
       Visible         =   True
-      Width           =   140
+      Width           =   96
       _mPanelIndex    =   -1
    End
    Begin WebLabel Cur_Plan_Points_Value_Label
@@ -425,7 +425,7 @@ Begin WebContainer WEBCONTAINER_Logout
       Top             =   86
       Underline       =   False
       Visible         =   True
-      Width           =   140
+      Width           =   96
       _mPanelIndex    =   -1
    End
    Begin WebLabel Cur_Task_Points_Value_Label
@@ -458,7 +458,7 @@ Begin WebContainer WEBCONTAINER_Logout
       Top             =   119
       Underline       =   False
       Visible         =   True
-      Width           =   140
+      Width           =   96
       _mPanelIndex    =   -1
    End
    Begin WebImageViewer Preferences_ImageViewer
@@ -650,16 +650,16 @@ End
 		    
 		  Else
 		    
-		    Acc_Task_Points_Label.Visible = False
+		    Label1(0).Visible = False
 		    Acc_Task_Points_Value_Label.Visible = False
 		    
-		    Acc_Plan_Points_Label.Visible = False
+		    Label1(1).Visible = False
 		    Acc_Plan_Points_Value_Label.Visible = False
 		    
-		    Cur_Task_Points_Label.Visible = False
+		    Label1(2).Visible = False
 		    Cur_Task_Points_Value_Label.Visible = False
 		    
-		    Cur_Plan_Points_Label.Visible = False
+		    Label1(3).Visible = False
 		    Cur_Plan_Points_Value_Label.Visible = False
 		    
 		    Points_Label.Visible = False
@@ -681,7 +681,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		  Me.Style = Design_Palette.STYLE_BUTTON_Close
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -705,7 +705,9 @@ End
 #tag Events Points_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Note
+		  Me.Style.Bold = True
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -725,30 +727,9 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Acc_Plan_Points_Label
+#tag Events Label1
 	#tag Event
-		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Acc_Task_Points_Label
-	#tag Event
-		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Cur_Plan_Points_Label
-	#tag Event
-		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Cur_Task_Points_Label
-	#tag Event
-		Sub Opening()
+		Sub Opening(index as Integer)
 		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
@@ -756,7 +737,9 @@ End
 #tag Events Points_Value_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Note
+		  Me.Style.Bold = True
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents

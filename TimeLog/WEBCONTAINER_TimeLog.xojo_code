@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_TimeLog
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   700
+   Height          =   900
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -29,12 +29,12 @@ Begin WebContainer WEBCONTAINER_TimeLog
       ControlID       =   ""
       Enabled         =   True
       HasBorder       =   True
-      Height          =   660
+      Height          =   860
       Index           =   -2147483648
       Indicator       =   0
       LayoutDirection =   0
       LayoutType      =   0
-      Left            =   40
+      Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -50,7 +50,7 @@ Begin WebContainer WEBCONTAINER_TimeLog
       TabIndex        =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   40
+      Top             =   20
       Visible         =   True
       Width           =   1260
       _mDesignHeight  =   0
@@ -63,7 +63,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  
 		  LOAD_TabPanel_Container( 0)
 		End Sub

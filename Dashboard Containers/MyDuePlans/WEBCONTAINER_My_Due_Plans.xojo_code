@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_My_Due_Plans
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_My_Due_Plans
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   1220
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -34,7 +34,7 @@ Begin WebContainer WEBCONTAINER_My_Due_Plans
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   1120
+      Left            =   1078
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -51,14 +51,14 @@ Begin WebContainer WEBCONTAINER_My_Due_Plans
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   542
+      Top             =   20
       Underline       =   False
       Visible         =   True
-      Width           =   100
+      Width           =   122
       _mPanelIndex    =   -1
    End
    Begin WebListBox My_Due_Plans_ListBox
-      ColumnCount     =   6
+      ColumnCount     =   0
       ColumnWidths    =   ""
       ControlID       =   ""
       DefaultRowHeight=   49
@@ -67,7 +67,7 @@ Begin WebContainer WEBCONTAINER_My_Due_Plans
       HasBorder       =   True
       HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   514
+      Height          =   700
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
@@ -95,9 +95,9 @@ Begin WebContainer WEBCONTAINER_My_Due_Plans
       TabIndex        =   1
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   20
+      Top             =   66
       Visible         =   True
-      Width           =   1200
+      Width           =   1180
       _mPanelIndex    =   -1
    End
    Begin WebTimer Update_Timer
@@ -139,7 +139,7 @@ Begin WebContainer WEBCONTAINER_My_Due_Plans
       TextAlignment   =   1
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   542
+      Top             =   20
       Underline       =   False
       Visible         =   True
       Width           =   650

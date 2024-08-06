@@ -103,7 +103,8 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.ModalBackgroundColor = Theme_Colors.Material_BaseLine.Surface_Variant.Value("background-color").Replace(";", "")
+		  Me.ModalBackgroundColor = "#" +Design_Palette.COLOR_Background.ToString.Right(6)
+		  
 		End Sub
 	#tag EndEvent
 

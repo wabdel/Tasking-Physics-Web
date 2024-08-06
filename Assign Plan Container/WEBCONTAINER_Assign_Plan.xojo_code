@@ -109,7 +109,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
-      TabIndex        =   3
+      TabIndex        =   20
       TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
@@ -140,7 +140,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Multiline       =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   4
+      TabIndex        =   2
       TabStop         =   True
       Text            =   "MRN :"
       TextAlignment   =   3
@@ -175,7 +175,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
-      TabIndex        =   5
+      TabIndex        =   3
       TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
@@ -206,7 +206,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Multiline       =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   6
+      TabIndex        =   4
       TabStop         =   True
       Text            =   "First Name :"
       TextAlignment   =   3
@@ -241,7 +241,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
-      TabIndex        =   7
+      TabIndex        =   5
       TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
@@ -272,7 +272,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Multiline       =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   8
+      TabIndex        =   6
       TabStop         =   True
       Text            =   "Family Name :"
       TextAlignment   =   3
@@ -305,7 +305,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Multiline       =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   9
+      TabIndex        =   7
       TabStop         =   True
       Text            =   "Site :"
       TextAlignment   =   3
@@ -339,7 +339,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Scope           =   2
       SelectedRowIndex=   0
       SelectedRowText =   ""
-      TabIndex        =   10
+      TabIndex        =   8
       TabStop         =   True
       Tooltip         =   ""
       Top             =   66
@@ -368,7 +368,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Multiline       =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   11
+      TabIndex        =   9
       TabStop         =   True
       Text            =   "Plan Type :"
       TextAlignment   =   3
@@ -402,7 +402,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Scope           =   2
       SelectedRowIndex=   0
       SelectedRowText =   ""
-      TabIndex        =   12
+      TabIndex        =   10
       TabStop         =   True
       Tooltip         =   ""
       Top             =   112
@@ -431,7 +431,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Outlined        =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   13
+      TabIndex        =   11
       TabStop         =   True
       Tooltip         =   ""
       Top             =   442
@@ -458,7 +458,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       PanelIndex      =   0
       Scope           =   2
       SelectedIndex   =   0
-      TabIndex        =   14
+      TabIndex        =   12
       TabStop         =   True
       Tooltip         =   ""
       Top             =   311
@@ -489,7 +489,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Scope           =   2
       SelectedRowIndex=   0
       SelectedRowText =   ""
-      TabIndex        =   15
+      TabIndex        =   13
       TabStop         =   True
       Tooltip         =   ""
       Top             =   379
@@ -517,7 +517,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockVertical    =   False
       PanelIndex      =   0
       Scope           =   0
-      TabIndex        =   16
+      TabIndex        =   14
       TabStop         =   True
       Tooltip         =   ""
       Top             =   158
@@ -546,7 +546,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Multiline       =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   17
+      TabIndex        =   15
       TabStop         =   True
       Text            =   "Start Date :"
       TextAlignment   =   3
@@ -576,7 +576,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       LockVertical    =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   19
+      TabIndex        =   16
       TabStop         =   True
       Tooltip         =   ""
       Top             =   158
@@ -606,7 +606,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Multiline       =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   20
+      TabIndex        =   17
       TabStop         =   True
       Text            =   "Physician :"
       TextAlignment   =   3
@@ -640,7 +640,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Scope           =   2
       SelectedRowIndex=   0
       SelectedRowText =   ""
-      TabIndex        =   21
+      TabIndex        =   18
       TabStop         =   True
       Tooltip         =   ""
       Top             =   243
@@ -669,7 +669,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Random_Planner_ID=   0
       Scope           =   0
       ScrollDirection =   0
-      TabIndex        =   22
+      TabIndex        =   19
       TabStop         =   True
       Tooltip         =   ""
       Top             =   233
@@ -975,11 +975,14 @@ End
 		  
 		  Planner_PopupMenu.Style = Design_Palette.STYLE_POPUPMENU_Emply
 		  Planner_PopupMenu.RemoveAllRows
-		  POPULATE_Site_PopupMenu
 		  
+		  Site_PopupMenu.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  POPULATE_Site_PopupMenu
 		  Planner_PopupMenu.Visible = False
+		  
 		  POPULATE_Physician_POPUPMENU
-		  Plan_Type_PopupMenu.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  Physician_PopupMenu.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  
 		  
 		  Is_replan_Checkbox.Value = False
 		  selected_user_id = Points_WEBCONTAINER.GET_Random_Planner
@@ -1024,7 +1027,7 @@ End
 #tag Events MRN_TextField
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Color.Yellow
+		  Me.Style = Design_Palette.STYLE_TEXTFIELD
 		End Sub
 	#tag EndEvent
 	#tag Event
@@ -1080,7 +1083,7 @@ End
 #tag Events First_Name_TextField
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Color.Yellow
+		  Me.Style = Design_Palette.STYLE_TEXTFIELD
 		End Sub
 	#tag EndEvent
 	#tag Event
@@ -1092,8 +1095,7 @@ End
 #tag Events Family_Name_TextField
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Color.Yellow
-		  
+		  Me.Style = Design_Palette.STYLE_TEXTFIELD
 		End Sub
 	#tag EndEvent
 	#tag Event

@@ -58,10 +58,10 @@ Begin WebDialog MessageWebDialog
       Width           =   560
       _mPanelIndex    =   -1
    End
-   Begin WebButton OK_Button
+   Begin WebButton Button_Close
       AllowAutoDisable=   False
       Cancel          =   True
-      Caption         =   "OK"
+      Caption         =   "Close"
       ControlID       =   ""
       Default         =   True
       Enabled         =   True
@@ -93,7 +93,8 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
+		  Me.ModalBackgroundColor = "#" +Design_Palette.COLOR_Background.ToString.Right(6)
+		  
 		End Sub
 	#tag EndEvent
 
@@ -107,7 +108,7 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events OK_Button
+#tag Events Button_Close
 	#tag Event
 		Sub Pressed()
 		  Self.Close
@@ -115,7 +116,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		  Me.Style = Design_Palette.STYLE_BUTTON_Close
 		End Sub
 	#tag EndEvent
 #tag EndEvents

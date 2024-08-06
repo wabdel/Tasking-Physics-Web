@@ -113,14 +113,14 @@ Begin WebDialog Modify_Plan_WebDialog
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
-      Begin WebLabel MRN_Label
+      Begin WebLabel Label1
          Bold            =   False
          ControlID       =   ""
          Enabled         =   True
          FontName        =   ""
          FontSize        =   0.0
          Height          =   38
-         Index           =   -2147483648
+         Index           =   0
          Indicator       =   0
          Italic          =   False
          Left            =   54
@@ -148,14 +148,14 @@ Begin WebDialog Modify_Plan_WebDialog
          Width           =   80
          _mPanelIndex    =   -1
       End
-      Begin WebLabel Patient_Name_Label
+      Begin WebLabel Label1
          Bold            =   False
          ControlID       =   ""
          Enabled         =   True
          FontName        =   ""
          FontSize        =   0.0
          Height          =   38
-         Index           =   -2147483648
+         Index           =   2
          Indicator       =   0
          Italic          =   False
          Left            =   54
@@ -282,14 +282,14 @@ Begin WebDialog Modify_Plan_WebDialog
       Width           =   150
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Due_Date_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   1
       Indicator       =   0
       Italic          =   False
       Left            =   510
@@ -315,14 +315,14 @@ Begin WebDialog Modify_Plan_WebDialog
       Width           =   100
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Plan_Type_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   4
       Indicator       =   0
       Italic          =   False
       Left            =   34
@@ -408,14 +408,14 @@ Begin WebDialog Modify_Plan_WebDialog
       Width           =   312
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Site_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   3
       Indicator       =   0
       Italic          =   False
       Left            =   34
@@ -474,14 +474,14 @@ Begin WebDialog Modify_Plan_WebDialog
       Width           =   478
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Planner_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   6
       Indicator       =   0
       Italic          =   False
       Left            =   465
@@ -564,14 +564,14 @@ Begin WebDialog Modify_Plan_WebDialog
       Width           =   146
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Physician_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   5
       Indicator       =   0
       Italic          =   False
       Left            =   456
@@ -680,6 +680,14 @@ End
 #tag EndWebPage
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.ModalBackgroundColor = "#" +Design_Palette.COLOR_Background.ToString.Right(6)
+		  
+		End Sub
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h21
 		Private Sub POPULATE_Physician_PopupMenu()
 		  Physician_PopupMenu.Indicator = WebUIControl.Indicators.Info
@@ -836,8 +844,8 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub Shown()
-		  Me.Indicator = WebUIControl.Indicators.Primary
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Close
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -896,7 +904,35 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  me.Indicator = WebUIControl.Indicators.Success
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Rectangle1
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Label1
+	#tag Event
+		Sub Opening(index as Integer)
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Primary
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Patient_Name_Value_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events MRN_Value_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -938,6 +974,8 @@ End
 #tag Events Site_PopupMenu
 	#tag Event
 		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  
 		  Me.RemoveAllRows
 		  
 		  Var sql As String = "SELECT * FROM physics_tasking.sites " _
@@ -967,55 +1005,77 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  POPULATE_Plan_Type_PopupMenu
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Title_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Planner_PopupMenu
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
+		  
+		  
 		  If Plan_Type_PopupMenu.SelectedRowIndex >= 0 Then
-		    
+		    Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		    Modify_Button.Enabled = True
-		    Modify_Button.Indicator = WebUIControl.Indicators.Primary
+		    
 		    
 		  Else
-		    
+		    Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
 		    Modify_Button.Enabled = False
-		    Modify_Button.Indicator = WebUIControl.Indicators.Light
 		    
 		  End If
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Is_replan_Checkbox
 	#tag Event
 		Sub Opening()
-		  'Me.Style.ForegroundColor = Color.White
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Physician_PopupMenu
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
+		  
+		  
 		  If Plan_Type_PopupMenu.SelectedRowIndex >= 0 Then
-		    
+		    Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
 		    Modify_Button.Enabled = True
-		    Modify_Button.Indicator = WebUIControl.Indicators.Primary
 		    
 		  Else
 		    
+		    Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		    Modify_Button.Enabled = False
-		    Modify_Button.Indicator = WebUIControl.Indicators.Light
 		    
 		  End If
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Delete_Button
 	#tag Event
 		Sub Opening()
-		  me.Indicator = WebUIControl.Indicators.Danger
+		  Me.Style = Design_Palette.STYLE_BUTTON_Disabled
 		  
 		  If Session.Logged_in_User.Group.id = 1 Then
 		    

@@ -312,12 +312,25 @@ End
 #tag EndWebPage
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.ModalBackgroundColor = "#" +Design_Palette.COLOR_Background.ToString.Right(6)
+		  
+		End Sub
+	#tag EndEvent
+
+
 #tag EndWindowCode
 
 #tag Events Cancel_Button
 	#tag Event
 		Sub Pressed()
 		  Self.Close
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Close
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -382,11 +395,44 @@ End
 		  
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Title_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Date_DatePicker
 	#tag Event
 		Sub Opening()
 		  Me.SelectedDate = DateTime.Now
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Date_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Rectangle1
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Time_In_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Primary
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -420,6 +466,13 @@ End
 		  
 		  Time_in.Text = Format(h, "00") + " : " + Format( 15*m, "00")
 		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Time_in
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents

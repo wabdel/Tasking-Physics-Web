@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   1220
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -34,7 +34,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       HasBorder       =   True
       HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   430
+      Height          =   654
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
@@ -62,9 +62,9 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       TabIndex        =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   104
+      Top             =   112
       Visible         =   True
-      Width           =   1200
+      Width           =   1180
       _mPanelIndex    =   -1
    End
    Begin WebLabel Completed_Assigned_Tasks_Label
@@ -77,7 +77,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   1094
+      Left            =   1084
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -94,7 +94,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   542
+      Top             =   66
       Underline       =   False
       Visible         =   True
       Width           =   126
@@ -142,7 +142,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       Top             =   20
       Underline       =   False
       Visible         =   True
-      Width           =   645
+      Width           =   263
       _mPanelIndex    =   -1
    End
    Begin WebPopupMenu Task_Type_PopupMenu
@@ -170,9 +170,9 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       TabIndex        =   3
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   58
+      Top             =   66
       Visible         =   True
-      Width           =   645
+      Width           =   629
       _mPanelIndex    =   -1
    End
    Begin WebLabel Label1
@@ -185,7 +185,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       Index           =   1
       Indicator       =   0
       Italic          =   False
-      Left            =   678
+      Left            =   657
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -202,7 +202,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   12
+      Top             =   20
       Underline       =   False
       Visible         =   True
       Width           =   145
@@ -217,7 +217,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       InitialValue    =   ""
       LastAddedRowIndex=   0
       LastRowIndex    =   0
-      Left            =   678
+      Left            =   657
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -233,7 +233,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       TabIndex        =   5
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   58
+      Top             =   66
       Visible         =   True
       Width           =   145
       _mPanelIndex    =   -1
@@ -248,7 +248,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       Index           =   2
       Indicator       =   0
       Italic          =   False
-      Left            =   836
+      Left            =   810
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -265,7 +265,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   12
+      Top             =   20
       Underline       =   False
       Visible         =   True
       Width           =   150
@@ -280,7 +280,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       InitialValue    =   ""
       LastAddedRowIndex=   0
       LastRowIndex    =   0
-      Left            =   836
+      Left            =   810
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -296,7 +296,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       TabIndex        =   7
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   58
+      Top             =   66
       Visible         =   True
       Width           =   150
       _mPanelIndex    =   -1

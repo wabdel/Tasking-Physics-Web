@@ -45,7 +45,7 @@ Begin WebContainer WEBCONTAINER_Login
       Outlined        =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   0
+      TabIndex        =   4
       TabStop         =   True
       Tooltip         =   ""
       Top             =   127
@@ -74,7 +74,7 @@ Begin WebContainer WEBCONTAINER_Login
       Multiline       =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   1
+      TabIndex        =   0
       TabStop         =   True
       Text            =   "User :"
       TextAlignment   =   3
@@ -107,7 +107,7 @@ Begin WebContainer WEBCONTAINER_Login
       Multiline       =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   2
+      TabIndex        =   1
       TabStop         =   True
       Text            =   "Password :"
       TextAlignment   =   3
@@ -142,7 +142,7 @@ Begin WebContainer WEBCONTAINER_Login
       PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
-      TabIndex        =   3
+      TabIndex        =   2
       TabStop         =   True
       Text            =   ""
       TextAlignment   =   1
@@ -175,7 +175,7 @@ Begin WebContainer WEBCONTAINER_Login
       PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
-      TabIndex        =   4
+      TabIndex        =   3
       TabStop         =   True
       Text            =   ""
       TextAlignment   =   1

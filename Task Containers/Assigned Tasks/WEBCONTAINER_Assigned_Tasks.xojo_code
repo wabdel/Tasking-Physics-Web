@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Assigned_Tasks
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_Assigned_Tasks
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   1220
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -34,7 +34,7 @@ Begin WebContainer WEBCONTAINER_Assigned_Tasks
       HasBorder       =   True
       HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   514
+      Height          =   700
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
@@ -62,9 +62,9 @@ Begin WebContainer WEBCONTAINER_Assigned_Tasks
       TabIndex        =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   20
+      Top             =   66
       Visible         =   True
-      Width           =   1200
+      Width           =   1180
       _mPanelIndex    =   -1
    End
    Begin WebLabel Assigned_Tasks_Label
@@ -77,7 +77,7 @@ Begin WebContainer WEBCONTAINER_Assigned_Tasks
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   1094
+      Left            =   1066
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -94,7 +94,7 @@ Begin WebContainer WEBCONTAINER_Assigned_Tasks
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   542
+      Top             =   20
       Underline       =   False
       Visible         =   True
       Width           =   126

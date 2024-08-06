@@ -1,6 +1,62 @@
 #tag Module
 Protected Module Design_Palette
 	#tag Method, Flags = &h0
+		Function Blend_Colors(bg as Color, w as Double, fg as Color) As Color
+		  '// background, 50% green
+		  'Var bg = New Color { R = 0.00, G = 1.00, B = 0.00, A = 0.50 };
+		  '// paint, 50% red
+		  'Var fg = New Color { R = 1.00, G = 0.00, B = 0.00, A = 0.50 };
+		  '// The result
+		  'Var r = New Color();
+		  '
+		  '
+		  'r.A = 1 - (1 - fg.A) * (1 - bg.A); // 0.75
+		  'r.R = fg.R * fg.A / r.A + bg.R * bg.A * (1 - fg.A) / r.A; // 0.67
+		  'r.G = fg.G * fg.A / r.A + bg.G * bg.A * (1 - fg.A) / r.A; // 0.33
+		  'r.B = fg.B * fg.A / r.A + bg.B * bg.A * (1 - fg.A) / r.A; // 0.00
+		  
+		  'Var fga As Double = fg.Alpha / 255.0
+		  'Var fgr As Double = fg.Red / 255.0
+		  'Var fgg As Double = fg.Green / 255.0
+		  'Var fgb As Double = fg.Blue / 255.0
+		  '
+		  'Var bga As Double = bg.Alpha / 255.0
+		  'Var bgr As Double = bg.Red / 255.0
+		  'Var bgg As Double = bg.Green / 255.0
+		  'Var bgb As Double = bg.Blue / 255.0
+		  '
+		  'Var alpha As Double = 1 - ( 1 - fga) * ( 1 - fgb)
+		  ' 
+		  '
+		  'Var Red As Double = fgr * fga / alpha + bgr * bga * ( 1 - fga) / alpha
+		  '
+		  'Var Green As Double = fgg * fga / alpha + bgg * bga * ( 1 - fga) / alpha
+		  '
+		  'Var Blue As Double = fgb * fga / alpha + bgb * bga * ( 1 - fga) / alpha
+		  
+		  
+		  
+		  Var Red As Double = fg.Red * w + bg.Red *( 1 - w)
+		  Var Green As Double = fg.Green * w + bg.Green *( 1 - w)
+		  Var Blue As Double = fg.Blue * w + bg.Blue *( 1 - w)
+		  Var Alpha As Double = fg.Alpha * w + bg.Alpha *( 1 - w)
+		  
+		  Return Color.RGB(  Red,  Green, Blue, alpha)
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function STYLE_BUTTON_Close() As WebStyle
+		  Var s As New WebStyle
+		  
+		  s.BackgroundColor = Design_Palette.COLOR_Secondary
+		  s.ForegroundColor = Design_Palette.COLOR_On_Secondary
+		  s.BorderColor = Design_Palette.COLOR_Error
+		  Return s
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function STYLE_BUTTON_Disabled() As WebStyle
 		  Var s As New WebStyle
 		  
@@ -54,6 +110,17 @@ Protected Module Design_Palette
 		  s.BackgroundColor = Design_Palette.COLOR_Primary
 		  s.ForegroundColor = Design_Palette.COLOR_On_Primary
 		  
+		  
+		  Return s
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function STYLE_TEXTFIELD() As WebStyle
+		  Var s As New WebStyle
+		  
+		  s.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		  s.ForegroundColor = Design_Palette.COLOR_On_Background
 		  
 		  Return s
 		End Function
@@ -253,6 +320,8 @@ Protected Module Design_Palette
 			    
 			    
 			    mCOLOR_On_Primary = &c00000000
+			    
+			    
 			  Else
 			    
 			    mCOLOR_On_Primary = &cFFFFFF00
@@ -274,8 +343,8 @@ Protected Module Design_Palette
 			Get
 			  If Session.darkmode Then
 			    
-			    mCOLOR_On_Primary_Variant = &cFFFFFF00
-			    
+			    'mCOLOR_On_Primary_Variant = &cFFFFFF00
+			    mCOLOR_Primary_Variant = &c5d6af6
 			  Else
 			    
 			    mCOLOR_On_Primary_Variant = &c00000000
@@ -290,6 +359,58 @@ Protected Module Design_Palette
 			End Set
 		#tag EndSetter
 		COLOR_On_Primary_Variant As Color
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  If Session.darkmode Then
+			    
+			    mCOLOR_On_Secondary = &c333333
+			    
+			  Else
+			    
+			    
+			    mCOLOR_On_Secondary = &c333333
+			    
+			  End If
+			  
+			  
+			  Return mCOLOR_On_Secondary
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mCOLOR_On_Secondary = value
+			End Set
+		#tag EndSetter
+		COLOR_On_Secondary As Color
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  If Session.darkmode Then
+			    
+			    mCOLOR_On_Secondary_Variant = &c333333
+			    
+			  Else
+			    
+			    mCOLOR_On_Secondary_Variant = &cFFFFFF
+			    
+			    
+			    
+			  End If
+			  
+			  Return mCOLOR_On_Secondary_Variant
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mCOLOR_On_Secondary_Variant = value
+			End Set
+		#tag EndSetter
+		COLOR_On_Secondary_Variant As Color
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -345,8 +466,8 @@ Protected Module Design_Palette
 			Get
 			  If Session.darkmode Then
 			    
-			    mCOLOR_Primary = &cBB86FC00
-			    
+			    'mCOLOR_Primary = &cBB86FC00
+			    mCOLOR_Primary = &c5ad3ff
 			  Else
 			    
 			    mCOLOR_Primary = &c6200EE00
@@ -391,8 +512,8 @@ Protected Module Design_Palette
 			Get
 			  If Session.darkmode Then
 			    
-			    mCOLOR_Secondary = &c03DAC600
-			    
+			    'mCOLOR_Secondary = &c03DAC600
+			    mCOLOR_Secondary = &CE56A6A
 			  Else
 			    
 			    mCOLOR_Secondary = &c03DAC600
@@ -415,36 +536,42 @@ Protected Module Design_Palette
 			Get
 			  If Session.darkmode Then
 			    
-			    mCOLOR_Surface_3 = &c403252
+			    mCOLOR_Secondary_Variant = &c03DAC6
 			    
 			  Else
 			    
 			    
+			    mCOLOR_Secondary_Variant = &c018786
+			    
 			  End If
-			  Return mCOLOR_Surface_3
+			  
+			  
+			  Return mCOLOR_Secondary_Variant
 			End Get
 		#tag EndGetter
 		#tag Setter
 			Set
-			  mCOLOR_Surface_3 = value
+			  mCOLOR_Secondary_Variant = value
 			End Set
 		#tag EndSetter
-		COLOR_Surface_3 As Color
+		COLOR_Secondary_Variant As Color
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  If Session.darkmode Then
-			    
-			    'mCOLOR_Surface = &c12121200
-			    mCOLOR_Surface_Primary = &c211D2700
-			    'mCOLOR_Surface = &c40325200
-			  Else
-			    
-			    mCOLOR_Surface_Primary = &cFFFFFF
-			    
-			  End If
+			  'If Session.darkmode Then
+			  '
+			  ''mCOLOR_Surface = &c12121200
+			  'mCOLOR_Surface_Primary = &c211D2700
+			  ''mCOLOR_Surface = &c40325200
+			  'Else
+			  '
+			  'mCOLOR_Surface_Primary = &cFFFFFF
+			  '
+			  'End If
+			  
+			  mCOLOR_Surface_Primary = Blend_Colors( COLOR_Background, 0.08, COLOR_Primary)
 			  
 			  Return mCOLOR_Surface_Primary
 			End Get
@@ -460,15 +587,43 @@ Protected Module Design_Palette
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
+			  'If Session.darkmode Then
+			  '
+			  'mCOLOR_Surface_3 = &c403252
+			  '
+			  'Else
+			  '
+			  '
+			  'End If
 			  
-			  If Session.darkmode Then
-			    
-			    mCOLOR_Surface_Secondary = &c112422
-			    
-			  Else
-			    
-			    
-			  End If
+			  mCOLOR_Surface_Primary_2 = Blend_Colors( COLOR_Background, 0.16, COLOR_Primary)
+			  
+			  Return mCOLOR_Surface_Primary_2
+			  
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mCOLOR_Surface_Primary_2 = value
+			End Set
+		#tag EndSetter
+		COLOR_Surface_Primary_2 As Color
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  '
+			  'If Session.darkmode Then
+			  '
+			  'mCOLOR_Surface_Secondary = &c112422
+			  '
+			  'Else
+			  '
+			  '
+			  'End If
+			  
+			  mCOLOR_Surface_Secondary = Blend_Colors( COLOR_Background, 0.08, COLOR_Secondary)
 			  Return mCOLOR_Surface_Secondary
 			End Get
 		#tag EndGetter
@@ -478,6 +633,32 @@ Protected Module Design_Palette
 			End Set
 		#tag EndSetter
 		COLOR_Surface_Secondary As Color
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  'If Session.darkmode Then
+			  '
+			  'mCOLOR_Surface_3 = &c403252
+			  '
+			  'Else
+			  '
+			  '
+			  'End If
+			  
+			  mCOLOR_Surface_Secondary_2 = Blend_Colors( COLOR_Background, 0.16, COLOR_Secondary)
+			  
+			  Return mCOLOR_Surface_Secondary_2
+			  
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mCOLOR_Surface_Secondary = value
+			End Set
+		#tag EndSetter
+		COLOR_Surface_Secondary_2 As Color
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -537,6 +718,14 @@ Protected Module Design_Palette
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
+		Private mCOLOR_On_Secondary As Color = &c006EF8
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mCOLOR_On_Secondary_Variant As Color = &c54545400
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private mCOLOR_On_Warning As Color = &cFFFEFE00
 	#tag EndProperty
 
@@ -557,7 +746,7 @@ Protected Module Design_Palette
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private mCOLOR_Surface_3 As Color = &cFFFEFE00
+		Private mCOLOR_Secondary_Variant As Color = &c35353500
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -565,7 +754,15 @@ Protected Module Design_Palette
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
+		Private mCOLOR_Surface_Primary_2 As Color = &cFFFEFE00
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private mCOLOR_Surface_Secondary As Color = &cFFFEFE00
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mCOLOR_Surface_Secondary_2 As Color = &cFFFEFE00
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -811,7 +1008,7 @@ Protected Module Design_Palette
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="COLOR_Surface_3"
+			Name="COLOR_Surface_Primary_2"
 			Visible=false
 			Group="Behavior"
 			InitialValue="&c000000"

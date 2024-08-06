@@ -96,6 +96,7 @@ End
 		    Header_Container.Left + Header_Container.Width, 0, _
 		    Login_Container.Width, Login_Container.Height)
 		    
+		    Login_Container.SetFocus
 		  Else
 		    
 		    If Login_Container <> Nil Then

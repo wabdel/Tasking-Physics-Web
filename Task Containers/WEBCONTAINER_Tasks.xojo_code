@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Tasks
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   700
+   Height          =   900
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -29,7 +29,7 @@ Begin WebContainer WEBCONTAINER_Tasks
       ControlID       =   ""
       Enabled         =   True
       HasBorder       =   True
-      Height          =   660
+      Height          =   860
       Index           =   -2147483648
       Indicator       =   0
       LayoutDirection =   0

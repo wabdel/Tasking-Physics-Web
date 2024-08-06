@@ -84,14 +84,14 @@ Begin WebDialog Modify_Task_WebDialog
       Width           =   437
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Task_Group_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   0
       Indicator       =   0
       Italic          =   False
       Left            =   20
@@ -147,14 +147,14 @@ Begin WebDialog Modify_Task_WebDialog
       Width           =   437
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Task_Type_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   1
       Indicator       =   0
       Italic          =   False
       Left            =   20
@@ -208,14 +208,14 @@ Begin WebDialog Modify_Task_WebDialog
       Width           =   125
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Date_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   2
       Indicator       =   0
       Italic          =   False
       Left            =   20
@@ -241,14 +241,14 @@ Begin WebDialog Modify_Task_WebDialog
       Width           =   108
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Multiplier_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   5
       Indicator       =   0
       Italic          =   False
       Left            =   267
@@ -307,14 +307,14 @@ Begin WebDialog Modify_Task_WebDialog
       Width           =   75
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Notes_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   6
       Indicator       =   0
       Italic          =   True
       Left            =   383
@@ -434,46 +434,13 @@ Begin WebDialog Modify_Task_WebDialog
       Width           =   478
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Instructions_Label
-      Bold            =   False
-      ControlID       =   ""
-      Enabled         =   True
-      FontName        =   ""
-      FontSize        =   0.0
-      Height          =   38
-      Index           =   -2147483648
-      Indicator       =   0
-      Italic          =   True
-      Left            =   714
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Multiline       =   False
-      PanelIndex      =   0
-      Scope           =   2
-      TabIndex        =   13
-      TabStop         =   True
-      Text            =   "Instructions:"
-      TextAlignment   =   0
-      TextColor       =   &c00000000
-      Tooltip         =   ""
-      Top             =   72
-      Underline       =   False
-      Visible         =   True
-      Width           =   100
-      _mPanelIndex    =   -1
-   End
    Begin WebTextArea Instructions_TextArea
       AllowReturnKey  =   True
       AllowSpellChecking=   False
-      Caption         =   ""
+      Caption         =   "Instructions"
       ControlID       =   ""
       Enabled         =   True
-      Height          =   220
+      Height          =   244
       Hint            =   ""
       Index           =   -2147483648
       Indicator       =   0
@@ -494,19 +461,19 @@ Begin WebDialog Modify_Task_WebDialog
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
-      Top             =   118
+      Top             =   94
       Visible         =   True
       Width           =   437
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Weight_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   3
       Indicator       =   0
       Italic          =   False
       Left            =   20
@@ -565,14 +532,14 @@ Begin WebDialog Modify_Task_WebDialog
       Width           =   116
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Points_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   4
       Indicator       =   0
       Italic          =   False
       Left            =   20
@@ -684,6 +651,14 @@ End
 #tag EndWebPage
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.ModalBackgroundColor = "#" +Design_Palette.COLOR_Background.ToString.Right(6)
+		  
+		End Sub
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h21
 		Private Sub POPULATE_Task_Types_PopupMenu()
 		  Task_Types_PopupMenu.RemoveAllRows
@@ -782,15 +757,23 @@ End
 		  Self.Close
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Close
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Task_Groups_PopupMenu
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
+		  
 		  POPULATE_Task_Types_PopupMenu
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
 		  Task_Groups_PopupMenu.RemoveAllRows
 		  Var sql As String = "SELECT * FROM physics_tasking.task_groups " _
 		  + "ORDER BY name"
@@ -808,20 +791,34 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events Label1
+	#tag Event
+		Sub Opening(index as Integer)
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events Task_Types_PopupMenu
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
 		  If Me.SelectedRowIndex >= 0 Then
+		    Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		    
 		    Modify_Button.Enabled = True
-		    Modify_Button.Indicator = WebUIControl.Indicators.Primary
 		    
 		  Else
 		    
+		    Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		    
 		    Modify_Button.Enabled = False
-		    Modify_Button.Indicator = WebUIControl.Indicators.Light 
 		    
 		  End If
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -937,6 +934,19 @@ End
 		  
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Instructions_TextArea
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Delete_Button
 	#tag Event
@@ -951,6 +961,11 @@ End
 		  
 		  dialog.Show
 		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Disabled
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -974,6 +989,11 @@ End
 		    
 		    MessageBox("Cancel")
 		  End Select
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Error
 		End Sub
 	#tag EndEvent
 #tag EndEvents
