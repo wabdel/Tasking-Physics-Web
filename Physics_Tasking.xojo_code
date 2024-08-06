@@ -1389,9 +1389,6 @@ Protected Module Physics_Tasking
 		    
 		    Physics_Tasking.EXECUTE_Statement( sql)
 		    
-		    
-		    
-		    
 		  End If
 		  
 		  
@@ -1402,7 +1399,7 @@ Protected Module Physics_Tasking
 		  
 		  If rs.Column( "IndexIsThere").IntegerValue = 0 Then
 		    
-		    sql = "CREATE INDEX idx_task_type_name " _
+		    sql = "CREATE INDEX idx_plan_type_name " _
 		    + "ON physics_tasking.plan_types ( name);"
 		    
 		    Physics_Tasking.EXECUTE_Statement( sql)
@@ -2023,7 +2020,7 @@ Protected Module Physics_Tasking
 			Group="Behavior"
 			InitialValue="127.0.0.1"
 			Type="String"
-			EditorType=""
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="db_name"
@@ -2031,7 +2028,7 @@ Protected Module Physics_Tasking
 			Group="Behavior"
 			InitialValue="physics_tasking"
 			Type="String"
-			EditorType=""
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="db_password"
@@ -2039,7 +2036,7 @@ Protected Module Physics_Tasking
 			Group="Behavior"
 			InitialValue="physics_tasking_user"
 			Type="String"
-			EditorType=""
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="db_port"
@@ -2055,7 +2052,7 @@ Protected Module Physics_Tasking
 			Group="Behavior"
 			InitialValue="physics_tasking_user"
 			Type="String"
-			EditorType=""
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Module

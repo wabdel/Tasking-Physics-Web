@@ -132,18 +132,9 @@ End
 		    
 		    Var s As New WebStyle
 		    
-		    Select Case rs.Column("is_completed").BooleanValue
-		    Case False
-		      
-		      s.ForegroundColor = Theme_Colors.Color_Palette.Fail
-		      s.Bold = True
-		      
-		    Case True
-		      
-		      's.BackgroundColor = Theme_Colors.Color_Palette.Pass //Color.Orange
-		      s.Bold = True
-		      
-		    End Select
+		    s.Bold = True
+		    
+		    If Not rs.Column("is_completed").BooleanValue Then s.ForegroundColor = Design_Palette.COLOR_Error
 		    
 		    Assigned_Tasks_ListBox.AddRow("")
 		    Assigned_Tasks_ListBox.RowTagAt( Assigned_Tasks_ListBox.LastAddedRowIndex) = rs.Column("scheduled_task_id").IntegerValue

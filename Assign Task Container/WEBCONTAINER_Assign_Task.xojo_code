@@ -410,7 +410,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Style.BackgroundColor = Design_Palette.COLOR_Central_Background
+		  Style.BackgroundColor = Design_Palette.COLOR_Background
 		  
 		End Sub
 	#tag EndEvent

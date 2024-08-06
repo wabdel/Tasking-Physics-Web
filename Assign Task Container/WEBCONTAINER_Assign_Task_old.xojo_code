@@ -455,7 +455,7 @@ End
 
 	#tag Event
 		Sub Shown()
-		  Style.BackgroundColor = Design_Palette.COLOR_Central_Background
+		  Style.BackgroundColor = Design_Palette.COLOR_Background
 		  
 		End Sub
 	#tag EndEvent

@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Reports_Patients_Monthly Implements WebDataSourc
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   714
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_Reports_Patients_Monthly Implements WebDataSourc
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   1220
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -62,7 +62,7 @@ Begin WebContainer WEBCONTAINER_Reports_Patients_Monthly Implements WebDataSourc
       Height          =   38
       Index           =   -2147483648
       Indicator       =   6
-      Left            =   496
+      Left            =   487
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -76,7 +76,7 @@ Begin WebContainer WEBCONTAINER_Reports_Patients_Monthly Implements WebDataSourc
       TabIndex        =   1
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   656
+      Top             =   20
       Visible         =   True
       Width           =   247
       _mPanelIndex    =   -1
@@ -91,7 +91,7 @@ Begin WebContainer WEBCONTAINER_Reports_Patients_Monthly Implements WebDataSourc
       HasBorder       =   True
       HasHeader       =   False
       HeaderHeight    =   0
-      Height          =   436
+      Height          =   700
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
@@ -119,9 +119,9 @@ Begin WebContainer WEBCONTAINER_Reports_Patients_Monthly Implements WebDataSourc
       TabIndex        =   2
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   212
+      Top             =   66
       Visible         =   True
-      Width           =   1200
+      Width           =   1180
       _mPanelIndex    =   -1
    End
    Begin WebTimer REFRESH_Timer
@@ -146,7 +146,7 @@ Begin WebContainer WEBCONTAINER_Reports_Patients_Monthly Implements WebDataSourc
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   1120
+      Left            =   1100
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -163,7 +163,7 @@ Begin WebContainer WEBCONTAINER_Reports_Patients_Monthly Implements WebDataSourc
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   656
+      Top             =   20
       Underline       =   False
       Visible         =   True
       Width           =   100

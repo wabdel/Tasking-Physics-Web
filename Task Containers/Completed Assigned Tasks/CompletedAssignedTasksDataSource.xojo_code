@@ -71,10 +71,20 @@ Implements WebDataSource
 		  Var d As DateTime = DateTime.Now
 		  Var d_min As DateTime = New DateTime( d.Year, d.Month, d.Day)
 		  
+		  'Var sql As String = "SELECT COUNT(*) as c " _
+		  '+ "FROM physics_tasking.scheduled_tasks " _
+		  '+ "WHERE is_completed = TRUE " _
+		  '+ "ORDER BY physics_tasking.scheduled_tasks.due_date DESC"
+		  
+		  
 		  Var sql As String = "SELECT COUNT(*) as c " _
 		  + "FROM physics_tasking.scheduled_tasks " _
-		  + "WHERE is_completed = TRUE " _
-		  + "ORDER BY physics_tasking.scheduled_tasks.due_date DESC"
+		  + "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
+		  + "INNER JOIN physics_tasking.machines USING(machine_id) " _
+		  + "INNER Join physics_tasking.task_groups Using(task_group_id) " _
+		  + "INNER Join physics_tasking.users Using(user_id) " _
+		  + "WHERE physics_tasking.scheduled_tasks.is_completed = TRUE;"
+		  
 		  
 		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  

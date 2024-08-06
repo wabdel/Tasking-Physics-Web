@@ -170,7 +170,7 @@ End
 
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background2
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
 		  
 		  Planner.ResizeTo(-1)
 		  Var sql As String = "SELECT user_id FROM users " _

@@ -117,21 +117,26 @@ Implements WebDataSource
 		    Select Case Physics_Tasking.Days_To_Start_Date( rs.Column("due_date").DateValue)
 		    Case Is <= 6
 		      
-		      s.BackgroundColor = Theme_Colors.Color_Palette.Fail //Color.Red
+		      s.BackgroundColor = Design_Palette.COLOR_Error //Color.Red
+		      s.ForegroundColor = Design_Palette.COLOR_On_Error
 		      s.Bold = True
 		      
 		    Case Is <= 13
 		      
-		      s.BackgroundColor = Theme_Colors.Color_Palette.Caution //Color.Orange
+		      s.BackgroundColor = Design_Palette.COLOR_Warning //Color.Orange
+		      s.ForegroundColor = Design_Palette.COLOR_On_Warning
 		      s.Bold = True
 		      
 		    Case Is <= 20
 		      
-		      s.BackgroundColor = Color.Yellow //Color.Orange
+		      s.BackgroundColor = Design_Palette.COLOR_Note 
+		      s.ForegroundColor = Design_Palette.COLOR_On_Error
 		      s.Bold = True
 		      
-		    Case Is > 3
+		    Else
 		      
+		      s.BackgroundColor = Design_Palette.COLOR_Background
+		      s.ForegroundColor = Design_Palette.COLOR_On_Background
 		      
 		    End Select
 		    

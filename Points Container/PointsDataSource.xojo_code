@@ -187,16 +187,7 @@ Implements WebDataSource
 		    
 		    s.FontSize = 15
 		    
-		    Select Case rs.Column("is_active").BooleanValue
-		    Case False
-		      
-		      s.BackgroundColor = Theme_Colors.Color_Palette.Caution //Color.Red
-		      
-		      
-		    Case False
-		      
-		      
-		    End Select
+		    If Not rs.Column("is_active").BooleanValue Then s.BackgroundColor = Design_Palette.COLOR_Error
 		    
 		    
 		    Var row As New WebListBoxRowData

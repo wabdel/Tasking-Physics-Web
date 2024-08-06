@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_QCReports_Plans_Quarterly Implements WebDataSour
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_QCReports_Plans_Quarterly Implements WebDataSour
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   1220
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -34,7 +34,7 @@ Begin WebContainer WEBCONTAINER_QCReports_Plans_Quarterly Implements WebDataSour
       Height          =   38
       Index           =   -2147483648
       Indicator       =   6
-      Left            =   496
+      Left            =   534
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -48,7 +48,7 @@ Begin WebContainer WEBCONTAINER_QCReports_Plans_Quarterly Implements WebDataSour
       TabIndex        =   1
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   542
+      Top             =   20
       Visible         =   True
       Width           =   247
       _mPanelIndex    =   -1
@@ -63,7 +63,7 @@ Begin WebContainer WEBCONTAINER_QCReports_Plans_Quarterly Implements WebDataSour
       HasBorder       =   True
       HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   436
+      Height          =   700
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   ""
@@ -91,9 +91,9 @@ Begin WebContainer WEBCONTAINER_QCReports_Plans_Quarterly Implements WebDataSour
       TabIndex        =   2
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   85
+      Top             =   66
       Visible         =   True
-      Width           =   1200
+      Width           =   1180
       _mPanelIndex    =   -1
    End
    Begin WebTimer REFRESH_Timer
@@ -118,7 +118,7 @@ Begin WebContainer WEBCONTAINER_QCReports_Plans_Quarterly Implements WebDataSour
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   1120
+      Left            =   1100
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -135,7 +135,7 @@ Begin WebContainer WEBCONTAINER_QCReports_Plans_Quarterly Implements WebDataSour
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   542
+      Top             =   20
       Underline       =   False
       Visible         =   True
       Width           =   100
@@ -150,7 +150,7 @@ Begin WebContainer WEBCONTAINER_QCReports_Plans_Quarterly Implements WebDataSour
       InitialValue    =   ""
       LastAddedRowIndex=   0
       LastRowIndex    =   0
-      Left            =   147
+      Left            =   128
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -181,7 +181,7 @@ Begin WebContainer WEBCONTAINER_QCReports_Plans_Quarterly Implements WebDataSour
       Index           =   -2147483648
       Indicator       =   ""
       Italic          =   False
-      Left            =   39
+      Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -207,12 +207,12 @@ Begin WebContainer WEBCONTAINER_QCReports_Plans_Quarterly Implements WebDataSour
    Begin WebRadioGroup RadioGroup_Quarters
       ControlID       =   ""
       Enabled         =   True
-      Height          =   60
+      Height          =   38
       Horizontal      =   True
       Index           =   -2147483648
       Indicator       =   ""
       InitialValue    =   "Q1\nQ2\nQ3\nQ4"
-      Left            =   629
+      Left            =   310
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -228,7 +228,7 @@ Begin WebContainer WEBCONTAINER_QCReports_Plans_Quarterly Implements WebDataSour
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
-      Width           =   350
+      Width           =   216
       _mInitialValue  =   "Option 1\rOption 2"
       _mPanelIndex    =   -1
    End

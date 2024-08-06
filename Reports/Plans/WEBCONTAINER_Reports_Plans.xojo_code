@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Reports_Plans
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_Reports_Plans
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   1220
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -34,7 +34,7 @@ Begin WebContainer WEBCONTAINER_Reports_Plans
       GridColor       =   &c000000AA
       HasAnimation    =   False
       HasLegend       =   False
-      Height          =   500
+      Height          =   694
       Index           =   -2147483648
       Indicator       =   0
       IsGridVisible   =   False
@@ -64,21 +64,21 @@ Begin WebContainer WEBCONTAINER_Reports_Plans
       TitleFontName   =   ""
       TitleFontSize   =   0.0
       Tooltip         =   ""
-      Top             =   80
+      Top             =   72
       Visible         =   True
-      Width           =   1200
+      Width           =   1180
       _mMode          =   0
       _mPanelIndex    =   -1
    End
    Begin WebRadioGroup Period_RadioGroup
       ControlID       =   ""
       Enabled         =   True
-      Height          =   60
+      Height          =   44
       Horizontal      =   True
       Index           =   -2147483648
       Indicator       =   ""
       InitialValue    =   "Yearly\nQuarterly\nMonthly\nWeekly"
-      Left            =   447
+      Left            =   433
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -92,9 +92,9 @@ Begin WebContainer WEBCONTAINER_Reports_Plans
       TabIndex        =   1
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   12
+      Top             =   20
       Visible         =   True
-      Width           =   488
+      Width           =   357
       _mInitialValue  =   "Option 1\rOption 2"
       _mPanelIndex    =   -1
    End
@@ -104,7 +104,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background2
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
 		  
 		  
 		  POPULATE_Plans_Chart

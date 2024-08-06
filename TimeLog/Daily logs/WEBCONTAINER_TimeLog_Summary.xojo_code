@@ -393,15 +393,15 @@ End
 		      Select Case rs.Column("time_in").DateTimeValue.DayOfWeek
 		      Case 6, 7
 		        
-		        g.DrawingColor = Theme_Colors.Color_Palette.Pass
+		        g.DrawingColor = Design_Palette.COLOR_Primary
 		        
 		      Else
 		        
 		        If h < 9 Then
-		          g.DrawingColor = Theme_Colors.Color_Palette.Fail
+		          g.DrawingColor = Design_Palette.COLOR_Error
 		          
 		        Else
-		          g.DrawingColor = Theme_Colors.Color_Palette.Pass
+		          g.DrawingColor = Design_Palette.COLOR_Primary
 		          
 		          
 		        End If
@@ -532,16 +532,17 @@ End
 		      Select Case rs.Column("time_in").DateTimeValue.DayOfWeek
 		      Case 6, 7
 		        
-		        s.BackgroundColor = Theme_Colors.Color_Palette.Pass
+		        s.BackgroundColor = Design_Palette.COLOR_Primary
 		        
 		      Else
 		        
 		        If h < 9 Then
-		          s.BackgroundColor = Theme_Colors.Color_Palette.Fail
+		          
+		          s.BackgroundColor = Design_Palette.COLOR_Error
 		          
 		        Else
-		          s.BackgroundColor = Theme_Colors.Color_Palette.Pass
 		          
+		          s.BackgroundColor = Design_Palette.COLOR_Primary
 		          
 		        End If
 		        

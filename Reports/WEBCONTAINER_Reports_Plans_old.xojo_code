@@ -76,7 +76,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Central_Background2
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
 		  
 		  
 		  POPULATE_Plans_Chart

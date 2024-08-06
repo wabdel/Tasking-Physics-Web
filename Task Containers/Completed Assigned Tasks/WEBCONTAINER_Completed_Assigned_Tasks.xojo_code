@@ -77,7 +77,7 @@ Begin WebContainer WEBCONTAINER_Completed_Assigned_Tasks Implements WebDataSourc
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   1084
+      Left            =   1074
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -670,13 +670,44 @@ End
 		  Var d As DateTime = DateTime.Now
 		  Var d_min As DateTime = New DateTime( d.Year, d.Month, d.Day)
 		  
-		  Var sql As String = "SELECT COUNT(*) as c " _
+		  'Var sql As String = "SELECT COUNT(*) as c " _
+		  '+ "FROM physics_tasking.scheduled_tasks " _
+		  '+ "WHERE is_completed = TRUE " _
+		  '+ "ORDER BY physics_tasking.scheduled_tasks.due_date DESC"
+		  '
+		  
+		  
+		  
+		  Var sql As String = "SELECT COUNT(*) AS c " _
 		  + "FROM physics_tasking.scheduled_tasks " _
-		  + "WHERE is_completed = TRUE " _
-		  + "ORDER BY physics_tasking.scheduled_tasks.due_date DESC"
+		  + "INNER JOIN physics_tasking.task_types USING(task_type_id) " _
+		  + "INNER JOIN physics_tasking.machines USING(machine_id) " _
+		  + "INNER JOIN physics_tasking.task_groups USING(task_group_id) " _
+		  + "INNER JOIN physics_tasking.users USING(user_id) " _
+		  + "WHERE physics_tasking.scheduled_tasks.is_completed = TRUE " 
+		  
+		  If Task_Type_PopupMenu.SelectedRowIndex > 0 Then
+		    
+		    sql = sql + "AND physics_tasking.task_groups.task_group_id = " _
+		    + Str(Task_Type_PopupMenu.RowTagAt( Task_Type_PopupMenu.SelectedRowIndex)) + " "
+		    
+		  End If
+		  
+		  If Machine_PopupMenu.SelectedRowIndex > 0 Then
+		    
+		    sql = sql + "AND physics_tasking.machines.machine_id = " _
+		    + Str(Machine_PopupMenu.RowTagAt( Machine_PopupMenu.SelectedRowIndex)) + " "
+		    
+		  End If
+		  
+		  If Due_Date_PopupMenu.SelectedRowIndex > 0 Then
+		    
+		    sql = sql + "AND physics_tasking.scheduled_tasks.due_date = '" _
+		    + Due_Date_PopupMenu.RowTagAt( Due_Date_PopupMenu.SelectedRowIndex) + "' "
+		    
+		  End If
 		  
 		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
-		  
 		  
 		  Return rs.Column("c").IntegerValue
 		  // Part of the WebDataSource interface.
@@ -859,7 +890,7 @@ End
 		  Me.DataSource = Self
 		  'Me.DataSource = New CompletedAssignedTasksDataSource
 		  Me.ReloadData
-		  'Completed_Assigned_Tasks_Label.Text = "Tasks = " + Me.DataSource.RowCount.ToString
+		  Completed_Assigned_Tasks_Label.Text = "Tasks = " + Me.DataSource.RowCount.ToString
 		  
 		  'Me.ColumnCount = 5
 		  'Me.HeaderAt(0) = "Assigned Task"
@@ -906,6 +937,7 @@ End
 		Sub SelectionChanged(item As WebMenuItem)
 		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  Completed_Assigned_Tasks_ListBox.ReloadData
+		  Completed_Assigned_Tasks_Label.Text = "Tasks = " + Completed_Assigned_Tasks_ListBox.DataSource.RowCount.ToString
 		  
 		  'POPULATE_POPUPMENUS
 		End Sub
@@ -921,6 +953,7 @@ End
 		Sub SelectionChanged(item As WebMenuItem)
 		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  Completed_Assigned_Tasks_ListBox.ReloadData
+		  Completed_Assigned_Tasks_Label.Text = "Tasks = " + Completed_Assigned_Tasks_ListBox.DataSource.RowCount.ToString
 		  
 		  'POPULATE_POPUPMENUS
 		End Sub
@@ -936,8 +969,9 @@ End
 		Sub SelectionChanged(item As WebMenuItem)
 		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  Completed_Assigned_Tasks_ListBox.ReloadData
+		  Completed_Assigned_Tasks_Label.Text = "Tasks = " + Completed_Assigned_Tasks_ListBox.DataSource.RowCount.ToString
 		  
-		  'POPULATE_POPUPMENUS
+		  
 		End Sub
 	#tag EndEvent
 	#tag Event
