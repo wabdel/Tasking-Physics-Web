@@ -46,6 +46,34 @@ Protected Module Design_Palette
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub SET_COLOR_THEME(Theme_Name as String)
+		  Select Case Theme_Name
+		  Case "Dark"
+		    
+		    COLOR_Background = &c12121200
+		    COLOR_On_Background = &cFFFFFF00
+		    
+		    
+		    
+		    
+		    
+		    
+		  Case "Light"
+		    
+		    COLOR_Background = &cFFFFFF00
+		    COLOR_On_Background = &c00000000
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		  End Select
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function STYLE_BUTTON_Close() As WebStyle
 		  Var s As New WebStyle
 		  
@@ -127,28 +155,9 @@ Protected Module Design_Palette
 	#tag EndMethod
 
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  If Session.darkmode Then
-			    
-			    mCOLOR_Background = &c12121200
-			    
-			  Else
-			    
-			    mCOLOR_Background = &cFFFFFF00
-			    
-			  End If
-			  Return mCOLOR_Background
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_Background = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_Background As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
@@ -175,14 +184,6 @@ Protected Module Design_Palette
 		#tag EndSetter
 		COLOR_Border As Color
 	#tag EndComputedProperty
-
-	#tag Property, Flags = &h0
-		COLOR_Button_Dark As Color = &c2E3136
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		COLOR_Button_Info As Color = &c00CAED
-	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		COLOR_Button_Light As Color = &cFAFAFA
@@ -264,31 +265,9 @@ Protected Module Design_Palette
 		COLOR_Note As Color
 	#tag EndComputedProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  If Session.darkmode Then
-			    
-			    mCOLOR_On_Background = &cFFFFFF00
-			    
-			  Else
-			    
-			    mCOLOR_On_Background = &c00000000
-			    
-			  End If
-			  
-			  
-			  
-			  Return mCOLOR_On_Background
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_On_Background = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_On_Background As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
@@ -667,11 +646,11 @@ Protected Module Design_Palette
 			  If Session.darkmode Then
 			    
 			    'mCOLOR_Warning = &cD1840000
-			    mCOLOR_Warning = &cD4D40300
+			    mCOLOR_Warning = &cF8D153
 			  Else
 			    
 			    'mCOLOR_Warning = &cFFC56100
-			    mCOLOR_Warning = &cFFA500
+			    mCOLOR_Warning = &cF8D153
 			    
 			  End If
 			  Return mCOLOR_Warning
@@ -684,10 +663,6 @@ Protected Module Design_Palette
 		#tag EndSetter
 		COLOR_Warning As Color
 	#tag EndComputedProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_Background As Color = &c515151
-	#tag EndProperty
 
 	#tag Property, Flags = &h21
 		Private mCOLOR_Border As Color
@@ -816,7 +791,7 @@ Protected Module Design_Palette
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="COLOR_Button_Dark"
+			Name="COLOR_Background"
 			Visible=false
 			Group="Behavior"
 			InitialValue="&c2E3136"
@@ -824,7 +799,7 @@ Protected Module Design_Palette
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="COLOR_Button_Info"
+			Name="COLOR_On_Background"
 			Visible=false
 			Group="Behavior"
 			InitialValue="&c00CAED"
@@ -876,14 +851,6 @@ Protected Module Design_Palette
 			Visible=false
 			Group="Behavior"
 			InitialValue="&cFFFEFE00"
-			Type="Color"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="COLOR_Background"
-			Visible=false
-			Group="Behavior"
-			InitialValue="&c000000"
 			Type="Color"
 			EditorType=""
 		#tag EndViewProperty
@@ -945,14 +912,6 @@ Protected Module Design_Palette
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="COLOR_On_Primary_Variant"
-			Visible=false
-			Group="Behavior"
-			InitialValue="&c000000"
-			Type="Color"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="COLOR_On_Background"
 			Visible=false
 			Group="Behavior"
 			InitialValue="&c000000"
@@ -1025,6 +984,38 @@ Protected Module Design_Palette
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="COLOR_Warning"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c000000"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_On_Secondary"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c000000"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_On_Secondary_Variant"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c000000"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_Secondary_Variant"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c000000"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_Surface_Secondary_2"
 			Visible=false
 			Group="Behavior"
 			InitialValue="&c000000"

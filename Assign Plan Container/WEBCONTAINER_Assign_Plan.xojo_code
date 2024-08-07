@@ -33,7 +33,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Enabled         =   True
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   5
+      Indicator       =   6
       Left            =   1080
       LockBottom      =   False
       LockedInPosition=   False
@@ -472,7 +472,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
       Enabled         =   False
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   5
+      Indicator       =   6
       InitialValue    =   ""
       LastAddedRowIndex=   0
       LastRowIndex    =   0
@@ -1107,13 +1107,12 @@ End
 #tag Events Site_PopupMenu
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  POPULATE_Site_PopupMenu
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  
 		  POPULATE_Plan_Type_PopupMenu( Me.RowTagAt( Me.SelectedRowIndex))
 		  ENABLE_ASSIGN_Button
@@ -1123,7 +1122,7 @@ End
 #tag Events Plan_Type_PopupMenu
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  
 		  POPULATE_Site_PopupMenu
 		  ENABLE_ASSIGN_Button
@@ -1131,7 +1130,6 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  
 		  Planner_RadioGroup.RemoveAllRows
 		  selected_user_id = Points_WEBCONTAINER.GET_Random_Planner
@@ -1210,7 +1208,7 @@ End
 	#tag Event
 		Sub Opening()
 		  Me.Enabled = False
-		  Me.Style = Design_Palette.STYLE_BUTTON_Disabled
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
 		  
 		  
 		End Sub
@@ -1258,13 +1256,12 @@ End
 #tag Events Planner_PopupMenu
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  ENABLE_ASSIGN_Button
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  
 		End Sub
 	#tag EndEvent
@@ -1288,7 +1285,7 @@ End
 #tag Events Physician_PopupMenu
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  POPULATE_Physician_POPUPMENU
 		  
 		  
@@ -1296,7 +1293,6 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		  ENABLE_ASSIGN_Button
 		End Sub
 	#tag EndEvent

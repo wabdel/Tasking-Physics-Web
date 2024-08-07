@@ -109,7 +109,9 @@ Implements WebDataSource
 		  + "WHERE physics_tasking.tasks.completion_date >= '" _
 		  + DateTime.Now.SubtractInterval( 0, 0, Physics_Tasking.Population_period_days).SQLDate  + "' " _
 		  + "ORDER BY DATE(physics_tasking.tasks.completion_date) DESC, " _
-		  + "physics_tasking.tasks.task_id DESC;"
+		  + "physics_tasking.tasks.task_id DESC "
+		  
+		  sql = sql + " LIMIT " + rowOffset.ToString + ", " + rowCount.ToString
 		  
 		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  

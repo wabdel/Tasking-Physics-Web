@@ -298,6 +298,7 @@ End
 #tag Events Points_ListBox
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Secondary
 		  Me.HasHeader = True
 		  Me.RowSelectionType = WebListBox.RowSelectionTypes.None
 		  Me.DataSource = New PointsDataSource
