@@ -504,7 +504,19 @@ End
 		    
 		  End If
 		  
-		  sql = sql + "ORDER BY DATE(physics_tasking.plans.completion_date) DESC, physics_tasking.patients.mrn ASC;"
+		  
+		  
+		  If SortColumns = "" Then
+		    sql = sql + "ORDER BY DATE(physics_tasking.plans.completion_date) DESC, physics_tasking.patients.mrn ASC;"
+		    
+		  Else
+		    
+		    sql = sql + "ORDER BY " + SortColumns + " "
+		    
+		    
+		  End If
+		  
+		  sql = sql + " LIMIT " + RowCount.ToString + " OFFSET " + RowOffset.ToString
 		  
 		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
@@ -568,61 +580,6 @@ End
 		  
 		  
 		  Return rows
-		  
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function SortedPrimaryKeys(sortColumns as String) As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function UnsortedPrimaryKeys() As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  
-		  
-		  Var keys() As Integer 
-		  If Sites_PopupMenu.SelectedRowIndex = -1 Then Return keys
-		  
-		  Var sql As String = "SELECT physics_tasking.plans.plan_id As plan_id " _
-		  + "FROM physics_tasking.plans " _
-		  + "INNER JOIN physics_tasking.patients USING (patient_id) " _
-		  + "INNER JOIN physics_tasking.plan_types USING (plan_type_id) " _
-		  + "INNER JOIN physics_tasking.sites USING (site_id) " _
-		  
-		  If Sites_PopupMenu.RowTagAt( Sites_PopupMenu.SelectedRowIndex) = 0 Then
-		    
-		    sql = sql + "WHERE is_completed = TRUE " 
-		    
-		  ElseIf Plan_Type_PopupMenu.RowTagAt( Plan_Type_PopupMenu.SelectedRowIndex) = 0 Then
-		    
-		    sql = sql + "WHERE is_completed = TRUE " _
-		    + "AND site_id = " +Str(Sites_PopupMenu.RowTagAt( Sites_PopupMenu.SelectedRowIndex)) + " " _
-		    
-		  Else
-		    
-		    sql = sql + "WHERE is_completed = TRUE " _
-		    + "AND plan_type_id = " +Str(Plan_Type_PopupMenu.RowTagAt( Plan_Type_PopupMenu.SelectedRowIndex)) + " " _
-		    
-		  End If
-		  
-		  sql = sql + "ORDER BY DATE(physics_tasking.plans.completion_date) DESC, physics_tasking.patients.mrn ASC;"
-		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
-		  
-		  While Not rs.AfterLastRow
-		    keys.Append( rs.Column("plan_id").IntegerValue)
-		    
-		    rs.MoveToNextRow
-		  Wend
-		  Return keys// Part of the WebDataSource interface.
-		  
 		  
 		  
 		  

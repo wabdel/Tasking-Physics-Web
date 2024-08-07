@@ -138,7 +138,7 @@ Begin WebContainer WEBCONTAINER_Search_Patients Implements WebDataSource
       Scope           =   2
       _mPanelIndex    =   -1
    End
-   Begin WEBCONTAINER_Search_Patients_Plans WEBCONTAINER_Search_Patients_Plans1 Implements WebDataSource
+   Begin WEBCONTAINER_Search_Patients_Plans WEBCONTAINER_Search_Patients_Plans1
       ControlCount    =   0
       ControlID       =   ""
       Enabled         =   True
@@ -272,9 +272,18 @@ End
 		    + "OR mrn LIKE '%"+Patients_SearchField.Text + "%' "
 		  End If
 		  
-		  sql = sql + "GROUP BY patient_id " _
-		  + "ORDER BY no_of_plans DESC; "
+		  sql = sql + "GROUP BY patient_id " 
 		  
+		  If SortColumns = "" Then
+		    
+		    sql = sql + "ORDER BY no_of_plans DESC "
+		  Else
+		    
+		    sql = sql + "ORDER BY " + SortColumns
+		    
+		  End If
+		  
+		  sql = sql + " LIMIT " + RowCount.ToString + " OFFSET " + RowOffset.ToString
 		  
 		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
@@ -311,50 +320,6 @@ End
 		  
 		  
 		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function SortedPrimaryKeys(sortColumns as String) As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function UnsortedPrimaryKeys() As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  Var keys() As Integer 
-		  
-		  Var sql As String = "SELECT physics_tasking.plans.patient_id as patient_id, " _
-		  + "COUNT(patient_id) AS no_of_plans, " _
-		  + "physics_tasking.patients.mrn AS mrn, " _
-		  + "physics_tasking.patients.first_name AS first_name, " _
-		  + "physics_tasking.patients.family_name AS family_name " _
-		  + "FROM physics_tasking.plans " _
-		  + "INNER JOIN physics_tasking.patients USING(patient_id) " 
-		  
-		  If Not Patients_SearchField.Text.IsEmpty Then
-		    
-		    sql = sql _
-		    + "WHERE first_name LIKE '%" + Patients_SearchField.Text + "%' " _
-		    + "OR family_name LIKE '%"+Patients_SearchField.Text + "%' " _
-		    + "OR mrn LIKE '%"+Patients_SearchField.Text + "%' "
-		  End If
-		  
-		  sql = sql + "GROUP BY patient_id " _
-		  + "ORDER BY no_of_plans DESC; "
-		  
-		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
-		  
-		  While Not rs.AfterLastRow
-		    keys.Append( rs.Column("patient_id").IntegerValue)
-		    
-		    rs.MoveToNextRow
-		  Wend
-		  Return keys
 		End Function
 	#tag EndMethod
 
