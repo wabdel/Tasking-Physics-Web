@@ -23,7 +23,7 @@ Implements WebDataSource
 		  col = New WebListboxColumnData
 		  col.DatabaseColumnName = "completion_date" // the name of the field in your database or data source
 		  col.Heading = "Completed on" // the name that appears above the column
-		  col.Sortable = False // Whether or not the column is sortable
+		  col.Sortable = True // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
 		  col.Width = "250"
 		  cols.Add(col)
@@ -62,11 +62,10 @@ Implements WebDataSource
 		  Var d As DateTime = DateTime.Now
 		  Var d_min As DateTime = New DateTime( d.Year, d.Month, d.Day)
 		  
-		  Var sql As String = "SELECT SUM(physics_tasking.tasks.multiplier) as c " _
+		  Var sql As String = "SELECT COUNT(*) as c " _
 		  + "FROM physics_tasking.tasks " _
 		  + "WHERE physics_tasking.tasks.completion_date >= '" _
-		  + DateTime.Now.SubtractInterval( 0, 0, Physics_Tasking.Population_period_days).SQLDate  + "' " _
-		  + "ORDER BY physics_tasking.tasks.completion_date DESC"
+		  + DateTime.Now.SubtractInterval( 0, 0, Physics_Tasking.Population_period_days).SQLDate  + "' " 
 		  
 		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
@@ -107,11 +106,19 @@ Implements WebDataSource
 		  + "INNER JOIN physics_tasking.users ON " _
 		  + "physics_tasking.tasks.user_id = physics_tasking.users.user_id " _
 		  + "WHERE physics_tasking.tasks.completion_date >= '" _
-		  + DateTime.Now.SubtractInterval( 0, 0, Physics_Tasking.Population_period_days).SQLDate  + "' " _
-		  + "ORDER BY DATE(physics_tasking.tasks.completion_date) DESC, " _
-		  + "physics_tasking.tasks.task_id DESC "
+		  + DateTime.Now.SubtractInterval( 0, 0, Physics_Tasking.Population_period_days).SQLDate  + "' " 
 		  
-		  sql = sql + " LIMIT " + rowOffset.ToString + ", " + rowCount.ToString
+		  If SortColumns = "" Then
+		    sql = sql + "ORDER BY completion_date DESC "
+		    
+		  Else
+		    
+		    sql = sql + "ORDER BY " + SortColumns + " "
+		    
+		    
+		  End If
+		  
+		  sql = sql + " LIMIT " + RowCount.ToString + " OFFSET " + RowOffset.ToString
 		  
 		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
@@ -164,69 +171,6 @@ Implements WebDataSource
 		  
 		  
 		  
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function SortedPrimaryKeys(sortColumns as String) As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  
-		  Var keys() As Integer 
-		  
-		  Var sql As String = "SELECT physics_tasking.tasks.task_id As task_id, " _
-		  + "physics_tasking.task_types.name As task_type_name, " _
-		  + "physics_tasking.tasks.multiplier As multiplier, " _
-		  + "physics_tasking.users.first_name As first_name, " _
-		  + "physics_tasking.users.family_name As family_name, " _
-		  + "physics_tasking.users.initials As initials, " _
-		  + "physics_tasking.task_types.weight As weight, " _
-		  + "physics_tasking.tasks.completion_date As completion_date " _
-		  + "FROM physics_tasking.tasks " _
-		  + "INNER JOIN physics_tasking.task_types ON " _
-		  + "physics_tasking.tasks.task_type_id = physics_tasking.task_types.task_type_id " _
-		  + "INNER JOIN physics_tasking.users ON " _
-		  + "physics_tasking.tasks.user_id = physics_tasking.users.user_id " _
-		  + "WHERE physics_tasking.tasks.completion_date >= '" _
-		  + DateTime.Now.SubtractInterval( 0, 0, Physics_Tasking.Population_period_days).SQLDate  + "' " _
-		  + "ORDER BY physics_tasking.tasks.completion_date DESC"
-		  
-		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
-		  
-		  While Not rs.AfterLastRow
-		    keys.Append( rs.Column("task_id").IntegerValue)
-		    
-		    rs.MoveToNextRow
-		  Wend
-		  Return keys
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function UnsortedPrimaryKeys() As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  
-		  Var keys() As Integer 
-		  
-		  Var sql As String = "SELECT physics_tasking.tasks.task_id As task_id " _
-		  + "FROM physics_tasking.tasks " _
-		  + "WHERE physics_tasking.tasks.completion_date >= '" _
-		  + DateTime.Now.SubtractInterval( 0, 0, Physics_Tasking.Population_period_days).SQLDate  + "' " _
-		  + "ORDER BY physics_tasking.tasks.completion_date DESC"
-		  
-		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
-		  
-		  While Not rs.AfterLastRow
-		    keys.Append( rs.Column("task_id").IntegerValue)
-		    
-		    rs.MoveToNextRow
-		  Wend
-		  Return keys
 		  
 		  
 		End Function

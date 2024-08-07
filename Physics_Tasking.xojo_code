@@ -1536,7 +1536,24 @@ Protected Module Physics_Tasking
 		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
 		  
+		  //Add indexes
 		  
+		  sql = "SELECT COUNT(1) IndexIsThere FROM INFORMATION_SCHEMA.STATISTICS " _
+		  + "WHERE table_schema='physics_tasking' AND table_name='tasks' AND index_name='idx_completion_date';"
+		  
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
+		  
+		  If rs.Column( "IndexIsThere").IntegerValue = 0 Then
+		    
+		    sql = "CREATE INDEX idx_completion_date " _
+		    + "ON physics_tasking.tasks (completion_date);"
+		    
+		    Physics_Tasking.EXECUTE_Statement( sql)
+		    
+		    
+		    
+		    
+		  End If
 		  
 		  
 		  
