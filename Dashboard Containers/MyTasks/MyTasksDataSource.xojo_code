@@ -113,9 +113,22 @@ Implements WebDataSource
 		  + "INNER JOIN physics_tasking.users USING(user_id) " _
 		  + "WHERE physics_tasking.tasks.completion_date >= '" _
 		  + DateTime.Now.SubtractInterval( 0, 0, Physics_Tasking.Population_period_days).SQLDate  + "' " _
-		  + "AND physics_tasking.tasks.user_id = " + Session.Logged_in_User.id.ToString + "  " _
-		  + "ORDER BY DATE(physics_tasking.tasks.completion_date) DESC, " _
-		  + "physics_tasking.tasks.task_id DESC;"
+		  + "AND physics_tasking.tasks.user_id = " + Session.Logged_in_User.id.ToString + "  " 
+		  
+		  
+		  If SortColumns = "" Then
+		    
+		    sql = sql + "ORDER BY completion_date DESC "
+		    
+		  Else
+		    
+		    sql = sql + "ORDER BY " + SortColumns
+		    
+		  End If
+		  
+		  
+		  sql = sql + " LIMIT " + RowCount.ToString + " OFFSET " + RowOffset.ToString
+		  
 		  
 		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
@@ -165,43 +178,6 @@ Implements WebDataSource
 		  
 		  
 		  
-		  
-		  // Part of the WebDataSource interface.
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function SortedPrimaryKeys(sortColumns as String) As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function UnsortedPrimaryKeys() As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  
-		  Var keys() As Integer 
-		  
-		  Var sql As String = "SELECT physics_tasking.tasks.task_id As task_id " _
-		  + "FROM physics_tasking.tasks " _
-		  + "WHERE physics_tasking.tasks.completion_date >= '" _
-		  + DateTime.Now.SubtractInterval( 0, 0, Physics_Tasking.Population_period_days).SQLDate  + "' " _
-		  + "AND physics_tasking.tasks.user_id = " + Session.Logged_in_User.id.ToString + "  " _
-		  + "ORDER BY physics_tasking.tasks.completion_date DESC"
-		  
-		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
-		  
-		  While Not rs.AfterLastRow
-		    keys.Append( rs.Column("task_id").IntegerValue)
-		    
-		    rs.MoveToNextRow
-		  Wend
-		  Return keys
 		  
 		  // Part of the WebDataSource interface.
 		  

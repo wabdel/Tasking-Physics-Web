@@ -23,6 +23,7 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
    Width           =   1300
    _mDesignHeight  =   0
    _mDesignWidth   =   0
+   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Reset_Button
       AllowAutoDisable=   False
@@ -807,8 +808,7 @@ End
 		  
 		  
 		  Assign_Button.Enabled = True
-		  Assign_Button.Indicator = Indicators.Success
-		  Assign_Button.Style.ForegroundColor = Color.White
+		  
 		End Sub
 	#tag EndMethod
 
@@ -971,17 +971,13 @@ End
 		  Start_DatePicker.SelectedDate = DateTime.Now
 		  
 		  Plan_Type_PopupMenu.RemoveAllRows
-		  Plan_Type_PopupMenu.Style = Design_Palette.STYLE_POPUPMENU_Emply
 		  
-		  Planner_PopupMenu.Style = Design_Palette.STYLE_POPUPMENU_Emply
 		  Planner_PopupMenu.RemoveAllRows
 		  
-		  Site_PopupMenu.Style = Design_Palette.STYLE_POPUPMENU_Emply
 		  POPULATE_Site_PopupMenu
 		  Planner_PopupMenu.Visible = False
 		  
 		  POPULATE_Physician_POPUPMENU
-		  Physician_PopupMenu.Style = Design_Palette.STYLE_POPUPMENU_Emply
 		  
 		  
 		  Is_replan_Checkbox.Value = False

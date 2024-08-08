@@ -121,8 +121,24 @@ Implements WebDataSource
 		  + "INNER JOIN physics_tasking.sites USING (site_id) " _
 		  + "WHERE physics_tasking.plans.is_completed = 1 " _
 		  + "AND DATE(completion_date) > '" + d_min.SubtractInterval( 0, 0, Physics_Tasking.Population_period_days).SQLDate  + "' " _
-		  + "AND user_id = " + Session.Logged_in_User.id.ToString + " " _
-		  + "ORDER BY DATE(physics_tasking.plans.completion_date) DESC, physics_tasking.patients.mrn ASC;"
+		  + "AND user_id = " + Session.Logged_in_User.id.ToString + " " 
+		  
+		  
+		  
+		  If SortColumns = "" Then
+		    
+		    sql = sql + "ORDER BY completion_date DESC "
+		    
+		  Else
+		    
+		    sql = sql + "ORDER BY " + SortColumns
+		    
+		  End If
+		  
+		  
+		  sql = sql + " LIMIT " + RowCount.ToString + " OFFSET " + RowOffset.ToString
+		  
+		  
 		  
 		  
 		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
@@ -195,42 +211,6 @@ Implements WebDataSource
 		  
 		  
 		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function SortedPrimaryKeys(sortColumns as String) As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function UnsortedPrimaryKeys() As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  
-		  Var keys() As Integer 
-		  
-		  Var d As DateTime = DateTime.Now
-		  Var d_min As DateTime = New DateTime( d.Year, d.Month, d.Day)
-		  Var sql As String = "SELECT physics_tasking.plans.plan_id As plan_id " _
-		  + "FROM physics_tasking.plans " _
-		  + "INNER JOIN physics_tasking.patients USING (patient_id) " _
-		  + "WHERE physics_tasking.plans.is_completed = 1 " _
-		  + "AND DATE(completion_date) > '" + d_min.SubtractInterval( 0, 0, Physics_Tasking.Population_period_days).SQLDate  + "' " _
-		  + "AND user_id = " + Session.Logged_in_User.id.ToString + " " _
-		  + "ORDER BY DATE(physics_tasking.plans.completion_date) DESC, physics_tasking.patients.mrn ASC;"
-		  
-		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
-		  
-		  While Not rs.AfterLastRow
-		    keys.Append( rs.Column("plan_id").IntegerValue)
-		    
-		    rs.MoveToNextRow
-		  Wend
-		  Return keys// Part of the WebDataSource interface.
 		End Function
 	#tag EndMethod
 

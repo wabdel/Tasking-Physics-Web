@@ -106,9 +106,22 @@ Implements WebDataSource
 		  + "INNER Join physics_tasking.task_groups Using(task_group_id) " _
 		  + "INNER Join physics_tasking.users Using(user_id) " _
 		  + "WHERE physics_tasking.scheduled_tasks.is_completed = FALSE " _
-		  + "AND physics_tasking.scheduled_tasks.user_id = " + Session.Logged_in_User.id.ToString + "  " _
-		  + "ORDER BY DATE(physics_tasking.scheduled_tasks.due_date) ASC, " _
-		  + "physics_tasking.scheduled_tasks.scheduled_task_id DESC;"
+		  + "AND physics_tasking.scheduled_tasks.user_id = " + Session.Logged_in_User.id.ToString + "  " 
+		  
+		  
+		  If SortColumns = "" Then
+		    
+		    sql = sql + "ORDER BY due_date "
+		    
+		  Else
+		    
+		    sql = sql + "ORDER BY " + SortColumns
+		    
+		  End If
+		  
+		  
+		  sql = sql + " LIMIT " + RowCount.ToString + " OFFSET " + RowOffset.ToString
+		  
 		  
 		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
@@ -171,40 +184,6 @@ Implements WebDataSource
 		  
 		  // Part of the WebDataSource interface.
 		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function SortedPrimaryKeys(sortColumns as String) As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function UnsortedPrimaryKeys() As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  Var keys() As Integer 
-		  
-		  
-		  Var sql As String = "SELECT physics_tasking.scheduled_tasks.scheduled_task_id As scheduled_task_id " _
-		  + "FROM physics_tasking.scheduled_tasks " _
-		  + "WHERE physics_tasking.scheduled_tasks.is_completed = FALSE " _
-		  + "AND physics_tasking.scheduled_tasks.user_id = " + Session.Logged_in_User.id.ToString + "  " _
-		  + "ORDER BY DATE(physics_tasking.scheduled_tasks.due_date) ASC, " _
-		  + "physics_tasking.scheduled_tasks.scheduled_task_id DESC;"
-		  
-		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
-		  
-		  While Not rs.AfterLastRow
-		    keys.Append( rs.Column("scheduled_task_id").IntegerValue)
-		    
-		    rs.MoveToNextRow
-		  Wend
-		  Return keys
 		  
 		End Function
 	#tag EndMethod

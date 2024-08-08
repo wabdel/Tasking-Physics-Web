@@ -120,8 +120,20 @@ Implements WebDataSource
 		  + "INNER JOIN physics_tasking.plan_types USING (plan_type_id) " _
 		  + "INNER JOIN physics_tasking.sites USING (site_id) " _
 		  + "WHERE physics_tasking.plans.is_completed = 0 " _
-		  + "AND user_id = " + Session.Logged_in_User.id.ToString + " " _
-		  + "ORDER BY physics_tasking.plans.due_date, physics_tasking.patients.mrn ASC;"
+		  + "AND user_id = " + Session.Logged_in_User.id.ToString + " " 
+		  
+		  If SortColumns = "" Then
+		    
+		    sql = sql + "ORDER BY due_date "
+		    
+		  Else
+		    
+		    sql = sql + "ORDER BY " + SortColumns
+		    
+		  End If
+		  
+		  
+		  sql = sql + " LIMIT " + RowCount.ToString + " OFFSET " + RowOffset.ToString
 		  
 		  
 		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
@@ -216,37 +228,6 @@ Implements WebDataSource
 		  
 		  
 		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function SortedPrimaryKeys(sortColumns as String) As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function UnsortedPrimaryKeys() As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  Var keys() As Integer 
-		  
-		  Var sql As String = "SELECT physics_tasking.plans.plan_id As plan_id " _
-		  + "FROM physics_tasking.plans " _
-		  + "WHERE physics_tasking.plans.is_completed = 0 " _
-		  + "AND user_id = " + Session.Logged_in_User.id.ToString + " " _
-		  + "ORDER BY physics_tasking.plans.due_date"
-		  
-		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
-		  
-		  While Not rs.AfterLastRow
-		    keys.Append( rs.Column("plan_id").IntegerValue)
-		    
-		    rs.MoveToNextRow
-		  Wend
-		  Return keys
 		End Function
 	#tag EndMethod
 
