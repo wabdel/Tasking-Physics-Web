@@ -121,63 +121,20 @@ Implements WebDataSource
 		  + "INNER JOIN physics_tasking.plan_types USING (plan_type_id) " _
 		  + "INNER JOIN physics_tasking.sites USING (site_id) " _
 		  + "INNER JOIN physics_tasking.users USING (user_id) " _
-		  + "WHERE physics_tasking.plans.is_completed = 0 " _
-		  + "ORDER BY "
+		  + "WHERE physics_tasking.plans.is_completed = 0 " 
 		  
-		  Select Case SortColumns
-		  Case ""
+		  If SortColumns = "" Then
 		    
-		    sql =sql + "DATE(physics_tasking.plans.due_date) ASC, physics_tasking.patients.mrn ASC"
+		    sql = sql + "ORDER BY due_date "
 		    
-		  Case "initials asc"
+		  Else
 		    
-		    sql = sql + "physics_tasking.users.initials ASC, DATE(physics_tasking.plans.due_date) ASC, physics_tasking.patients.mrn ASC"
+		    sql = sql + "ORDER BY " + SortColumns
 		    
-		  Case "initials desc"
-		    
-		    sql = sql + "physics_tasking.users.initials DESC, DATE(physics_tasking.plans.due_date) DESC, physics_tasking.patients.mrn ASC"
-		    
-		  Case "physician_initials asc"
-		    
-		    sql = sql + "physician_initials ASC, DATE(physics_tasking.plans.due_date) ASC, physics_tasking.patients.mrn ASC"
-		    
-		  Case "physician_initials desc"
-		    
-		    sql = sql + "physician_initials DESC, DATE(physics_tasking.plans.due_date) DESC, physics_tasking.patients.mrn ASC"
-		    
-		  Case "due_date asc"
-		    
-		    sql = sql + "DATE(physics_tasking.plans.due_date) ASC, physics_tasking.patients.mrn ASC"
-		    
-		  Case "due_date desc"
-		    
-		    sql = sql + "DATE(physics_tasking.plans.due_date DESC), physics_tasking.patients.mrn ASC"
-		    
-		  Case "mrn asc"
-		    
-		    sql = sql + "physics_tasking.patients.mrn ASC, DATE(physics_tasking.plans.due_date ASC)"
-		    
-		  Case "mrn desc"
-		    
-		    sql = sql + "physics_tasking.patients.mrn DESC, DATE(physics_tasking.plans.due_date DESC)"
-		    
-		  Case "full_name asc"
-		    
-		    sql = sql + "physics_tasking.patients.first_name ASC, physics_tasking.patients.family_name ASC, DATE(physics_tasking.plans.due_date ASC)"
-		    
-		  Case "full_name desc"
-		    
-		    sql = sql + "physics_tasking.patients.first_name DESC, physics_tasking.patients.family_name DESC, DATE(physics_tasking.plans.due_date DESC)"
-		    
-		  Case "site asc"
-		    
-		    sql = sql + "physics_tasking.sites.name ASC, DATE(physics_tasking.plans.due_date) ASC, physics_tasking.patients.mrn ASC"
-		    
-		  Case "site desc"
-		    
-		    sql = sql + "physics_tasking.sites.name DESC, DATE(physics_tasking.plans.due_date) DESC, physics_tasking.patients.mrn ASC"
-		    
-		  End Select
+		  End If
+		  
+		  
+		  sql = sql + " LIMIT " + RowCount.ToString + " OFFSET " + RowOffset.ToString
 		  
 		  
 		  
@@ -270,137 +227,6 @@ Implements WebDataSource
 		  
 		  
 		  
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function SortedPrimaryKeys(sortColumns as String) As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  // This method is used for maintaining the selected rows list on the client
-		  
-		  Static lastSortOrder As String = ""
-		  Static lastFilter As String = ""
-		  
-		  // If the sort order has changed, reset the array so the data is re-pulled
-		  If lastSortOrder <> sortColumns Then
-		    lastSortOrder = sortColumns
-		    
-		    Redim mSortedKeys(-1)
-		  End If
-		  
-		  If mSortedKeys = Nil Or UBound(mSortedKeys) = -1 Then
-		    
-		    Var keys() As Integer
-		    
-		    Var sql As String = "SELECT physics_tasking.plans.plan_id AS plan_id, " _
-		    + "(" _
-		    + "SELECT physics_tasking.users.initials " _
-		    + "FROM physics_tasking.users " _
-		    + "WHERE physics_tasking.plans.physician_id = physics_tasking.users.user_id" _
-		    +") As physician_initials " _
-		    + "FROM physics_tasking.plans " _
-		    + "INNER JOIN physics_tasking.patients USING(patient_id) " _
-		    + "INNER JOIN physics_tasking.plan_types USING(plan_type_id) " _
-		    + "INNER JOIN physics_tasking.sites USING(site_id) " _
-		    + "INNER JOIN physics_tasking.users USING(user_id) " _
-		    + "WHERE physics_tasking.plans.is_completed = 0 " _
-		    + "ORDER BY " 
-		    
-		    Select Case sortColumns
-		    Case "initials asc"
-		      
-		      sql = sql + "initials ASC, due_date ASC, physics_tasking.patients.mrn ASC"
-		      
-		    Case "initials desc"
-		      
-		      sql = sql + "initials DESC, due_date DESC, physics_tasking.patients.mrn ASC"
-		      
-		    Case "physician_initials asc"
-		      
-		      sql = sql + "physician_initials ASC, physics_tasking.plans.due_date ASC, physics_tasking.patients.mrn ASC"
-		      
-		    Case "physician_initials desc"
-		      
-		      sql = sql + "physician_initials DESC, physics_tasking.plans.due_date DESC, physics_tasking.patients.mrn ASC"
-		      
-		    Case "due_date asc"
-		      
-		      sql = sql + "due_date ASC, physics_tasking.patients.mrn ASC"
-		      
-		    Case "due_date desc"
-		      
-		      sql = sql + "due_date DESC, physics_tasking.patients.mrn ASC"
-		      
-		    Case "mrn asc"
-		      
-		      sql = sql + "mrn ASC, due_date ASC"
-		      
-		    Case "mrn desc"
-		      
-		      sql = sql + "mrn DESC, due_date DESC"
-		      
-		    Case "full_name asc"
-		      
-		      sql = sql + "physics_tasking.patients.first_name ASC, physics_tasking.patients.family_name ASC, due_date ASC"
-		      
-		    Case "full_name desc"
-		      
-		      sql = sql + "physics_tasking.patients.first_name DESC, physics_tasking.patients.family_name DESC, due_date DESC"
-		      
-		    Case "site asc"
-		      
-		      sql = sql + "physics_tasking.sites.name ASC, due_date ASC, physics_tasking.patients.mrn ASC"
-		      
-		    Case "site desc"
-		      
-		      sql = sql + "physics_tasking.sites.name DESC, due_date DESC, physics_tasking.patients.mrn ASC"
-		      
-		    End Select
-		    
-		    Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
-		    
-		    While Not rs.AfterLastRow
-		      keys.Append( rs.Column("plan_id").IntegerValue)
-		      
-		      rs.MoveToNextRow
-		    Wend
-		    
-		    rs.Close
-		    
-		    mSortedKeys = keys
-		  End If
-		  
-		  Return mSortedKeys
-		  
-		  
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function UnsortedPrimaryKeys() As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  Var keys() As Integer 
-		  
-		  Var sql As String = "SELECT physics_tasking.plans.plan_id As plan_id " _
-		  + "FROM physics_tasking.plans " _
-		  + "INNER JOIN physics_tasking.patients USING (patient_id) " _
-		  + "WHERE physics_tasking.plans.is_completed = 0 " _
-		  + "ORDER BY DATE(physics_tasking.plans.due_date) ASC, physics_tasking.patients.mrn ASC;"
-		  
-		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
-		  
-		  While Not rs.AfterLastRow
-		    keys.Append( rs.Column("plan_id").IntegerValue)
-		    
-		    rs.MoveToNextRow
-		  Wend
-		  Return keys
 		  
 		  
 		End Function

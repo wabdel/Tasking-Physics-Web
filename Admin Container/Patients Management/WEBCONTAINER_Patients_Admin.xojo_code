@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Patients_Admin Implements WebDataSource
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,12 +20,12 @@ Begin WebContainer WEBCONTAINER_Patients_Admin Implements WebDataSource
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   1220
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
    Begin WebListBox Patients_ListBox
-      ColumnCount     =   1
+      ColumnCount     =   0
       ColumnWidths    =   ""
       ControlID       =   ""
       DefaultRowHeight=   49
@@ -34,7 +34,7 @@ Begin WebContainer WEBCONTAINER_Patients_Admin Implements WebDataSource
       HasBorder       =   True
       HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   437
+      Height          =   654
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   ""
@@ -62,9 +62,9 @@ Begin WebContainer WEBCONTAINER_Patients_Admin Implements WebDataSource
       TabIndex        =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   78
+      Top             =   112
       Visible         =   True
-      Width           =   722
+      Width           =   1180
       _mPanelIndex    =   -1
    End
    Begin WebSearchField Patients_SearchField
@@ -74,7 +74,7 @@ Begin WebContainer WEBCONTAINER_Patients_Admin Implements WebDataSource
       Hint            =   "Search"
       Index           =   -2147483648
       Indicator       =   ""
-      Left            =   266
+      Left            =   410
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -103,7 +103,7 @@ Begin WebContainer WEBCONTAINER_Patients_Admin Implements WebDataSource
       Index           =   -2147483648
       Indicator       =   ""
       Italic          =   False
-      Left            =   520
+      Left            =   1054
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -120,7 +120,7 @@ Begin WebContainer WEBCONTAINER_Patients_Admin Implements WebDataSource
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   542
+      Top             =   66
       Underline       =   False
       Visible         =   True
       Width           =   146
@@ -148,7 +148,7 @@ Begin WebContainer WEBCONTAINER_Patients_Admin Implements WebDataSource
       Index           =   -2147483648
       Indicator       =   ""
       Italic          =   False
-      Left            =   20
+      Left            =   90
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -165,7 +165,7 @@ Begin WebContainer WEBCONTAINER_Patients_Admin Implements WebDataSource
       TextAlignment   =   1
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   542
+      Top             =   66
       Underline       =   False
       Visible         =   True
       Width           =   338
@@ -175,6 +175,13 @@ End
 #tag EndWebContainerControl
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		End Sub
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h21
 		Private Function ColumnData() As WebListboxColumnData()
 		  // Part of the WebDataSource interface.
@@ -189,7 +196,7 @@ End
 		  col = New WebListboxColumnData
 		  col.DatabaseColumnName = "mrn" // the name of the field in your database or data source
 		  col.Heading = "MRN" // the name that appears above the column
-		  col.Sortable = False // Whether or not the column is sortable
+		  col.Sortable = True // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
 		  col.Width = "50"
 		  cols.Add(col)
@@ -205,7 +212,7 @@ End
 		  col = New WebListboxColumnData
 		  col.DatabaseColumnName = "no_of_plans" // the name of the field in your database or data source
 		  col.Heading = "No of Plans" // the name that appears above the column
-		  col.Sortable = False // Whether or not the column is sortable
+		  col.Sortable = True // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
 		  col.Width = "100"
 		  cols.Add(col)
@@ -272,8 +279,19 @@ End
 		    + "OR mrn LIKE '%"+Patients_SearchField.Text + "%' "
 		  End If
 		  
-		  sql = sql + "GROUP BY patient_id " _
-		  + "ORDER BY no_of_plans DESC; "
+		  sql = sql + "GROUP BY patient_id "
+		  
+		  If SortColumns = "" Then
+		    sql = sql + "ORDER BY no_of_plans DESC "
+		    
+		  Else
+		    
+		    sql = sql + "ORDER BY " + SortColumns
+		    
+		  End If
+		  
+		  sql = sql + " LIMIT " + RowCount.ToString + " OFFSET " + RowOffset.ToString
+		  
 		  
 		  
 		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
@@ -322,51 +340,6 @@ End
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h21
-		Private Function SortedPrimaryKeys(sortColumns as String) As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function UnsortedPrimaryKeys() As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  Var keys() As Integer 
-		  
-		  Var sql As String = "SELECT physics_tasking.plans.patient_id as patient_id, " _
-		  + "COUNT(patient_id) AS no_of_plans, " _
-		  + "physics_tasking.patients.mrn AS mrn, " _
-		  + "physics_tasking.patients.first_name AS first_name, " _
-		  + "physics_tasking.patients.family_name AS family_name, " _
-		  + "MAX(due_date) As latest_due_date " _
-		  + "FROM physics_tasking.plans " _
-		  + "INNER JOIN physics_tasking.patients USING(patient_id) " 
-		  
-		  If Not Patients_SearchField.Text.IsEmpty Then
-		    
-		    sql = sql _
-		    + "WHERE first_name LIKE '%" + Patients_SearchField.Text + "%' " _
-		    + "OR family_name LIKE '%"+Patients_SearchField.Text + "%' " _
-		    + "OR mrn LIKE '%"+Patients_SearchField.Text + "%' "
-		  End If
-		  
-		  sql = sql + "GROUP BY patient_id " _
-		  + "ORDER BY no_of_plans DESC; "
-		  
-		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
-		  
-		  While Not rs.AfterLastRow
-		    keys.Append( rs.Column("patient_id").IntegerValue)
-		    
-		    rs.MoveToNextRow
-		  Wend
-		  Return keys
-		End Function
-	#tag EndMethod
-
 
 	#tag Property, Flags = &h21
 		Private Latest_Update As DateTime
@@ -378,6 +351,7 @@ End
 #tag Events Patients_ListBox
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Secondary
 		  Me.HasHeader = True
 		  Me.RowSelectionType = WebListBox.RowSelectionTypes.None
 		  Me.DataSource = Self
@@ -410,7 +384,7 @@ End
 #tag Events Patients_Label
 	#tag Event
 		Sub Shown()
-		  Me.Style = Session.WEBSTYLE_Label
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -433,6 +407,11 @@ End
 		Sub Shown()
 		  Me.Style.ForegroundColor = &cFC666500
 		  Me.Style.Italic = True
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Note
 		End Sub
 	#tag EndEvent
 #tag EndEvents
