@@ -610,7 +610,7 @@ End
 #tag Events Sites_PopupMenu
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  
 		  Me.RemoveAllRows
 		  
@@ -647,7 +647,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  POPULATE_Plan_Types_POPUPMENU
 		End Sub
 	#tag EndEvent

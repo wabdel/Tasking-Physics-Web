@@ -845,7 +845,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_BUTTON_Close
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -918,7 +918,7 @@ End
 #tag Events Label1
 	#tag Event
 		Sub Opening(index as Integer)
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Primary
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -959,14 +959,18 @@ End
 		  If Me.SelectedRowIndex >= 0 Then
 		    
 		    Modify_Button.Enabled = True
-		    Modify_Button.Indicator = WebUIControl.Indicators.Primary
 		    
 		  Else
 		    
 		    Modify_Button.Enabled = False
-		    Modify_Button.Indicator = WebUIControl.Indicators.Light
 		    
 		  End If
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  
 		End Sub
 	#tag EndEvent
@@ -974,7 +978,8 @@ End
 #tag Events Site_PopupMenu
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  
 		  Me.RemoveAllRows
 		  
@@ -1005,7 +1010,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  POPULATE_Plan_Type_PopupMenu
 		End Sub
 	#tag EndEvent
@@ -1013,7 +1018,7 @@ End
 #tag Events Title_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Secondary
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -1023,12 +1028,10 @@ End
 		  
 		  
 		  If Plan_Type_PopupMenu.SelectedRowIndex >= 0 Then
-		    Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		    Modify_Button.Enabled = True
 		    
 		    
 		  Else
-		    Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
 		    Modify_Button.Enabled = False
 		    
 		  End If
@@ -1036,7 +1039,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  
 		End Sub
 	#tag EndEvent
@@ -1054,12 +1057,10 @@ End
 		  
 		  
 		  If Plan_Type_PopupMenu.SelectedRowIndex >= 0 Then
-		    Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
 		    Modify_Button.Enabled = True
 		    
 		  Else
 		    
-		    Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
 		    Modify_Button.Enabled = False
 		    
 		  End If
@@ -1067,7 +1068,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  
 		End Sub
 	#tag EndEvent

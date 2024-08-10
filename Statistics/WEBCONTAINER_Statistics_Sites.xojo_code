@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Sites
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   687
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -62,7 +62,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Sites
       GridColor       =   &c000000AA
       HasAnimation    =   False
       HasLegend       =   False
-      Height          =   601
+      Height          =   700
       Index           =   -2147483648
       Indicator       =   0
       IsGridVisible   =   False
@@ -253,7 +253,7 @@ End
 		  
 		  
 		  
-		  Var mySet As New WebChartLinearDataset("Bar Data", &cFF0000, True, data)
+		  Var mySet As New WebChartLinearDataset("Bar Data", Design_Palette.COLOR_Primary, True, data)
 		  mySet.ChartType = WebChartLinearDataset.ChartTypes.Bar
 		  Site_Statistics_WebChart.AddDataset(mySet)
 		  Site_Statistics_WebChart.AddLabels(labels)
@@ -279,7 +279,7 @@ End
 #tag Events Site_Statistics_WebChart
 	#tag Event
 		Sub Opening()
-		  ME.Style.BackgroundColor = Color.White
+		  ME.Style.BackgroundColor = Design_Palette.COLOR_Background
 		End Sub
 	#tag EndEvent
 	#tag Event

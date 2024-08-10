@@ -23,7 +23,6 @@ Begin WebContainer WEBCONTAINER_Assign_Plan
    Width           =   1300
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebButton Reset_Button
       AllowAutoDisable=   False
@@ -1103,7 +1102,7 @@ End
 #tag Events Site_PopupMenu
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  POPULATE_Site_PopupMenu
 		End Sub
 	#tag EndEvent
@@ -1118,7 +1117,7 @@ End
 #tag Events Plan_Type_PopupMenu
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  
 		  POPULATE_Site_PopupMenu
 		  ENABLE_ASSIGN_Button
@@ -1257,7 +1256,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  
 		End Sub
 	#tag EndEvent
@@ -1281,7 +1280,7 @@ End
 #tag Events Physician_PopupMenu
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  POPULATE_Physician_POPUPMENU
 		  
 		  

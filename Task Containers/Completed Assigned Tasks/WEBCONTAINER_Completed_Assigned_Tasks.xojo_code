@@ -935,7 +935,7 @@ End
 #tag Events Task_Type_PopupMenu
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  Completed_Assigned_Tasks_ListBox.ReloadData
 		  Completed_Assigned_Tasks_Label.Text = "Tasks = " + Completed_Assigned_Tasks_ListBox.DataSource.RowCount.ToString
 		  
@@ -944,14 +944,14 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Machine_PopupMenu
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  Completed_Assigned_Tasks_ListBox.ReloadData
 		  Completed_Assigned_Tasks_Label.Text = "Tasks = " + Completed_Assigned_Tasks_ListBox.DataSource.RowCount.ToString
 		  
@@ -960,14 +960,14 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Due_Date_PopupMenu
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  Completed_Assigned_Tasks_ListBox.ReloadData
 		  Completed_Assigned_Tasks_Label.Text = "Tasks = " + Completed_Assigned_Tasks_ListBox.DataSource.RowCount.ToString
 		  
@@ -976,7 +976,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		End Sub
 	#tag EndEvent
 #tag EndEvents

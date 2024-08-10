@@ -120,19 +120,7 @@ Protected Module Design_Palette
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function STYLE_POPUPMENU_Emply() As WebStyle
-		  Var s As New WebStyle
-		  
-		  s.BackgroundColor = Design_Palette.COLOR_Error
-		  s.ForegroundColor = Design_Palette.COLOR_On_Error
-		  
-		  
-		  Return s
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function STYLE_POPUPMENU_Selected() As WebStyle
+		Function STYLE_POPUPMENU() As WebStyle
 		  Var s As New WebStyle
 		  
 		  s.BackgroundColor = Design_Palette.COLOR_Primary

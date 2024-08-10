@@ -1,10 +1,10 @@
 #tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Statistics_Plans
+Begin WebContainer WEBCONTAINER_Statistics_Plans_old
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   786
+   Height          =   600
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1220
+   Width           =   1240
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -29,9 +29,9 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans
       ControlID       =   ""
       Enabled         =   True
       HasBorder       =   True
-      Height          =   746
+      Height          =   560
       Index           =   -2147483648
-      Indicator       =   ""
+      Indicator       =   0
       LayoutDirection =   0
       LayoutType      =   0
       Left            =   20
@@ -52,69 +52,206 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
-      Width           =   1180
+      Width           =   1200
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
+      Begin WebListBox WebListBox_All_Planners
+         ColumnCount     =   1
+         ColumnWidths    =   ""
+         ControlID       =   ""
+         DefaultRowHeight=   49
+         Enabled         =   True
+         GridLineStyle   =   3
+         HasBorder       =   True
+         HasHeader       =   True
+         HeaderHeight    =   0
+         Height          =   486
+         HighlightSortedColumn=   True
+         Index           =   -2147483648
+         Indicator       =   0
+         InitialParent   =   "WebTabPanel_Statistics_Plans"
+         InitialValue    =   ""
+         LastAddedRowIndex=   0
+         LastColumnIndex =   0
+         LastRowIndex    =   0
+         Left            =   40
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         NoRowsMessage   =   ""
+         PanelIndex      =   0
+         Parent          =   "WebTabPanel_Statistics_Plans"
+         ProcessingMessage=   ""
+         RowCount        =   0
+         RowSelectionType=   1
+         Scope           =   2
+         SearchCriteria  =   ""
+         SelectedRowColor=   &c0d6efd
+         SelectedRowIndex=   0
+         TabIndex        =   1
+         TabPanelIndex   =   -1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   74
+         Visible         =   True
+         Width           =   1160
+         _mPanelIndex    =   -1
+      End
+      Begin WebProgressWheel ProgressWheel1
+         Colorize        =   True
+         ControlID       =   ""
+         Enabled         =   True
+         Height          =   250
+         Index           =   -2147483648
+         Indicator       =   0
+         Left            =   457
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         PanelIndex      =   0
+         Parent          =   "WebTabPanel_Statistics_Plans"
+         Scope           =   2
+         SVGColor        =   &cFFD47900
+         SVGData         =   ""
+         TabIndex        =   2
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   292
+         Visible         =   True
+         Width           =   250
+         _mPanelIndex    =   -1
+      End
    End
 End
 #tag EndWebContainerControl
 
 #tag WindowCode
-	#tag Event
-		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
-		  LOAD_WebTabPanel_Statistics_Plans( 0)
-		End Sub
-	#tag EndEvent
-
-
 	#tag Method, Flags = &h21
-		Private Sub LOAD_WebTabPanel_Statistics_Plans(index as Integer)
-		  Var left_position As Integer = WebTabPanel_Statistics_Plans.Left + 10
-		  Var top_position As Integer = WebTabPanel_Statistics_Plans.Top + 50
+		Private Sub POPULATE_WebListBox_All_Planners()
+		  ProgressWheel1.Visible = True
+		  Var d As DateTime = DateTime.Now.SubtractInterval(1,0.0)
 		  
-		  If Panel_Container <> Nil Then
+		  For row As Integer = 0 To WebListBox_All_Planners.LastRowIndex
 		    
-		    Panel_Container.Close
+		    For column As Integer= 1 To WebListBox_All_Planners.LastColumnIndex
+		      
+		      Var sql As String = "SELECT SUM( " _
+		      + App.Points_Plans_Condition + ") " _
+		      + "AS sum FROM physics_tasking.plans " _
+		      + "INNER JOIN physics_tasking.plan_types USING(plan_type_id) " _
+		      + "INNER JOIN physics_tasking.sites USING(site_id) " _
+		      + "WHERE user_id = " + WebListBox_All_Planners.ColumnTagAt( column) + " " _
+		      + "AND site_id = " + WebListBox_All_Planners.RowTagAt( row) + " " _
+		      + "AND DATE(physics_tasking.plans.assignment_date) >=  '"  + d.SQLDate + "';"
+		      
+		      Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
+		      
+		      WebListBox_All_Planners.CellTextAt( row, column ) = Format( rs.Column("SUM").DoubleValue, "#0.00")
+		      
+		    Next
 		    
-		  End If
+		  Next
 		  
-		  Select Case index
-		  Case 0
-		    
-		    Panel_Container = New WebContainer_Statistics_All_Planners
-		    
-		  Case 1
-		    
-		    Panel_Container = New WebContainer_Statistics_Per_Planner
-		    
-		  End
-		  
-		  Panel_Container.EmbedWithin( WebTabPanel_Statistics_Plans, _
-		  left_position, top_position, _
-		  Panel_Container.Width, Panel_Container.Height)
+		  ProgressWheel1.Visible = False
 		End Sub
 	#tag EndMethod
 
 
-	#tag Property, Flags = &h21
-		Private Panel_Container As WebContainer
-	#tag EndProperty
-
-
 #tag EndWindowCode
 
-#tag Events WebTabPanel_Statistics_Plans
+#tag Events WebListBox_All_Planners
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
+		  Me.RemoveAllRows
+		  
+		  Var d As DateTime = DateTime.Now.SubtractInterval(1,0.0)
+		  
+		  Var sql As String = "SELECT users.user_id, initials FROM physics_tasking.plans " _
+		  + "INNER JOIN physics_tasking.users USING(user_id) "_
+		  + "WHERE DATE(physics_tasking.plans.assignment_date) >= '"  + d.SQLDate + "' " _
+		  + "GROUP BY user_id "  _
+		  + "ORDER BY initials"
+		  
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
+		  
+		  
+		  Me.ColumnCount = rs.RowCount + 1
+		  
+		  Var column As Integer = 0
+		  
+		  Me.HeaderAt( column) = "Site"
+		  
+		  While Not rs.AfterLastRow
+		    
+		    column = column + 1
+		    
+		    Me.HeaderAt( column) = rs.Column("initials").StringValue.Trim.Uppercase
+		    Me.ColumnTagAt( column) = rs.Column("user_id").IntegerValue
+		    
+		    rs.MoveToNextRow
+		    
+		  Wend
+		  
+		  
+		  sql = "SELECT site_id, sites.name AS name, is_uppercase FROM physics_tasking.plans " _
+		  + "INNER JOIN physics_tasking.plan_types USING(plan_type_id) "_
+		  + "INNER JOIN physics_tasking.sites USING(site_id) "_
+		  + "WHERE DATE(physics_tasking.plans.assignment_date) >= '"  + d.SQLDate + "' " _
+		  + "GROUP BY sites.name " _
+		  + "ORDER BY sites.name;"
+		  rs = Physics_Tasking.SELECT_Statement(sql)
+		  
+		  While Not rs.AfterLastRow
+		    
+		    Me.AddRow( )
+		    
+		    Select Case rs.Column("is_uppercase").BooleanValue
+		    Case True
+		      
+		      Me.CellTextAt( Me.LastAddedRowIndex, 0) = rs.Column("name").StringValue.Trim.Uppercase
+		    Else
+		      
+		      Me.CellTextAt( Me.LastAddedRowIndex, 0) = rs.Column("name").StringValue.Trim.Titlecase
+		      
+		      
+		    End Select
+		    Me.RowTagAt( Me.LastAddedRowIndex) = rs.Column("site_id").IntegerValue
+		    
+		    
+		    rs.MoveToNextRow
+		    
+		  Wend
+		  
+		  
+		  
 		  
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub PanelChanged()
-		  LOAD_WebTabPanel_Statistics_Plans( Me.SelectedPanelIndex)
+		Sub Pressed(row As Integer, column As Integer)
+		  If column < 1 Or column > Me.LastColumnIndex Then Return
+		  If row < 0 Or row > Me.LastRowIndex Then Return
+		  
+		  Var thedialog As New WebDialog_User_Plans
+		  thedialog.user_id = Me.ColumnTagAt( column)
+		  thedialog.site_id = Me.RowTagAt(row)
+		  thedialog.POPULATE
+		  thedialog.show
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Shown()
+		  POPULATE_WebListBox_All_Planners
 		End Sub
 	#tag EndEvent
 #tag EndEvents

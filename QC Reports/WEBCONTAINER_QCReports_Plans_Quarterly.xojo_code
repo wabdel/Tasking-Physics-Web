@@ -740,7 +740,7 @@ End
 #tag Events PopupMenu_Year
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  Me.RemoveAllRows
 		  
 		  Var d As DateTime = DateTime.Now
@@ -787,7 +787,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  LOAD_RadioGroup_Quarters
 		End Sub
 	#tag EndEvent

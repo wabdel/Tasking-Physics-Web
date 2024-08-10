@@ -403,7 +403,7 @@ End
 #tag Events PopupMenu_Planners
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  Me.RemoveAllRows
 		  
 		  Var sql as string = "SELECT user_id, first_name, family_name FROM physics_tasking.users " _
@@ -425,7 +425,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  WebThread_Populate_WebChart_User_Points.Stop
 		  
 		  WebChart_User_Points.RemoveAllDatasets

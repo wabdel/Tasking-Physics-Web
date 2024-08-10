@@ -1,10 +1,10 @@
 #tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Statistics_Plans
+Begin WebContainer WebContainer_Statistics_All_Planners
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   786
+   Height          =   672
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,20 +20,28 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1220
+   Width           =   1140
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin WebTabPanel WebTabPanel_Statistics_Plans
-      ControlCount    =   0
+   Begin WebListBox ListBox1
+      ColumnCount     =   1
+      ColumnWidths    =   ""
       ControlID       =   ""
+      DefaultRowHeight=   49
       Enabled         =   True
+      GridLineStyle   =   3
       HasBorder       =   True
-      Height          =   746
+      HasHeader       =   True
+      HeaderHeight    =   0
+      Height          =   632
+      HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   ""
-      LayoutDirection =   0
-      LayoutType      =   0
+      InitialValue    =   ""
+      LastAddedRowIndex=   0
+      LastColumnIndex =   0
+      LastRowIndex    =   0
       Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
@@ -42,19 +50,21 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans
       LockRight       =   False
       LockTop         =   True
       LockVertical    =   False
-      PanelCount      =   2
+      NoRowsMessage   =   ""
       PanelIndex      =   0
+      ProcessingMessage=   ""
+      RowCount        =   0
+      RowSelectionType=   1
       Scope           =   2
-      SelectedPanelIndex=   0
-      TabDefinition   =   "All planners\rPer planner"
+      SearchCriteria  =   ""
+      SelectedRowColor=   &c0d6efd
+      SelectedRowIndex=   0
       TabIndex        =   0
       TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
-      Width           =   1180
-      _mDesignHeight  =   0
-      _mDesignWidth   =   0
+      Width           =   1100
       _mPanelIndex    =   -1
    End
 End
@@ -64,57 +74,21 @@ End
 	#tag Event
 		Sub Opening()
 		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
-		  LOAD_WebTabPanel_Statistics_Plans( 0)
 		End Sub
 	#tag EndEvent
-
-
-	#tag Method, Flags = &h21
-		Private Sub LOAD_WebTabPanel_Statistics_Plans(index as Integer)
-		  Var left_position As Integer = WebTabPanel_Statistics_Plans.Left + 10
-		  Var top_position As Integer = WebTabPanel_Statistics_Plans.Top + 50
-		  
-		  If Panel_Container <> Nil Then
-		    
-		    Panel_Container.Close
-		    
-		  End If
-		  
-		  Select Case index
-		  Case 0
-		    
-		    Panel_Container = New WebContainer_Statistics_All_Planners
-		    
-		  Case 1
-		    
-		    Panel_Container = New WebContainer_Statistics_Per_Planner
-		    
-		  End
-		  
-		  Panel_Container.EmbedWithin( WebTabPanel_Statistics_Plans, _
-		  left_position, top_position, _
-		  Panel_Container.Width, Panel_Container.Height)
-		End Sub
-	#tag EndMethod
-
-
-	#tag Property, Flags = &h21
-		Private Panel_Container As WebContainer
-	#tag EndProperty
 
 
 #tag EndWindowCode
 
-#tag Events WebTabPanel_Statistics_Plans
+#tag Events ListBox1
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
-		  
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub PanelChanged()
-		  LOAD_WebTabPanel_Statistics_Plans( Me.SelectedPanelIndex)
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Secondary
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		  Me.HasHeader = True
+		  Me.RowSelectionType = WebListBox.RowSelectionTypes.None
+		  Me.DataSource = New Statistics_All_Planners_DataSource
+		  Me.ReloadData
 		End Sub
 	#tag EndEvent
 #tag EndEvents

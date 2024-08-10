@@ -766,14 +766,14 @@ End
 #tag Events Task_Groups_PopupMenu
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  
 		  POPULATE_Task_Types_PopupMenu
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  Task_Groups_PopupMenu.RemoveAllRows
 		  Var sql As String = "SELECT * FROM physics_tasking.task_groups " _
 		  + "ORDER BY name"
@@ -802,13 +802,13 @@ End
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
 		  If Me.SelectedRowIndex >= 0 Then
-		    Me.Style = Design_Palette.STYLE_POPUPMENU_Selected
+		    Me.Style = Design_Palette.STYLE_POPUPMENU
 		    
 		    Modify_Button.Enabled = True
 		    
 		  Else
 		    
-		    Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		    Me.Style = Design_Palette.STYLE_POPUPMENU
 		    
 		    Modify_Button.Enabled = False
 		    
@@ -817,7 +817,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_POPUPMENU_Emply
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		  
 		End Sub
 	#tag EndEvent

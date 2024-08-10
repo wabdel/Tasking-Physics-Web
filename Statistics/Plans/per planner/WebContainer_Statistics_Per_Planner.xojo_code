@@ -1,10 +1,10 @@
 #tag WebContainerControl
-Begin WebContainer WEBCONTAINER_Statistics_Plans
+Begin WebContainer WebContainer_Statistics_Per_Planner
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   786
+   Height          =   672
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,43 +20,10 @@ Begin WebContainer WEBCONTAINER_Statistics_Plans
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1220
+   Width           =   1140
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin WebTabPanel WebTabPanel_Statistics_Plans
-      ControlCount    =   0
-      ControlID       =   ""
-      Enabled         =   True
-      HasBorder       =   True
-      Height          =   746
-      Index           =   -2147483648
-      Indicator       =   ""
-      LayoutDirection =   0
-      LayoutType      =   0
-      Left            =   20
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      PanelCount      =   2
-      PanelIndex      =   0
-      Scope           =   2
-      SelectedPanelIndex=   0
-      TabDefinition   =   "All planners\rPer planner"
-      TabIndex        =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   20
-      Visible         =   True
-      Width           =   1180
-      _mDesignHeight  =   0
-      _mDesignWidth   =   0
-      _mPanelIndex    =   -1
-   End
 End
 #tag EndWebContainerControl
 
@@ -64,60 +31,12 @@ End
 	#tag Event
 		Sub Opening()
 		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
-		  LOAD_WebTabPanel_Statistics_Plans( 0)
 		End Sub
 	#tag EndEvent
-
-
-	#tag Method, Flags = &h21
-		Private Sub LOAD_WebTabPanel_Statistics_Plans(index as Integer)
-		  Var left_position As Integer = WebTabPanel_Statistics_Plans.Left + 10
-		  Var top_position As Integer = WebTabPanel_Statistics_Plans.Top + 50
-		  
-		  If Panel_Container <> Nil Then
-		    
-		    Panel_Container.Close
-		    
-		  End If
-		  
-		  Select Case index
-		  Case 0
-		    
-		    Panel_Container = New WebContainer_Statistics_All_Planners
-		    
-		  Case 1
-		    
-		    Panel_Container = New WebContainer_Statistics_Per_Planner
-		    
-		  End
-		  
-		  Panel_Container.EmbedWithin( WebTabPanel_Statistics_Plans, _
-		  left_position, top_position, _
-		  Panel_Container.Width, Panel_Container.Height)
-		End Sub
-	#tag EndMethod
-
-
-	#tag Property, Flags = &h21
-		Private Panel_Container As WebContainer
-	#tag EndProperty
 
 
 #tag EndWindowCode
 
-#tag Events WebTabPanel_Statistics_Plans
-	#tag Event
-		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
-		  
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub PanelChanged()
-		  LOAD_WebTabPanel_Statistics_Plans( Me.SelectedPanelIndex)
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
 		Name="PanelIndex"
