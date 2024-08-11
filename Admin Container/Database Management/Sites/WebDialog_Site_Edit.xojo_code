@@ -246,6 +246,14 @@ End
 #tag EndWebPage
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.ModalBackgroundColor = "#" +Design_Palette.COLOR_Background.ToString.Right(6)
+		  
+		End Sub
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h0
 		Sub ENABLE_Modify_Button()
 		  Modify_Button.Indicator = WebUIControl.Indicators.Light

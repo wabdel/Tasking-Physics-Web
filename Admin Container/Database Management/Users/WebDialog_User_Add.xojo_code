@@ -25,14 +25,14 @@ Begin WebDialog WebDialog_User_Add
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin WebLabel Login_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   0
       Indicator       =   0
       Italic          =   False
       Left            =   37
@@ -58,14 +58,14 @@ Begin WebDialog WebDialog_User_Add
       Width           =   130
       _mPanelIndex    =   -1
    End
-   Begin WebLabel First_Name_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   1
       Indicator       =   0
       Italic          =   False
       Left            =   37
@@ -91,14 +91,14 @@ Begin WebDialog WebDialog_User_Add
       Width           =   130
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Family_Name_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   2
       Indicator       =   0
       Italic          =   False
       Left            =   37
@@ -124,14 +124,14 @@ Begin WebDialog WebDialog_User_Add
       Width           =   130
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Initials_Name_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   4
       Indicator       =   0
       Italic          =   False
       Left            =   37
@@ -157,14 +157,14 @@ Begin WebDialog WebDialog_User_Add
       Width           =   130
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Mobile_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   6
       Indicator       =   0
       Italic          =   False
       Left            =   37
@@ -190,14 +190,14 @@ Begin WebDialog WebDialog_User_Add
       Width           =   130
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Email_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   7
       Indicator       =   0
       Italic          =   False
       Left            =   37
@@ -223,14 +223,14 @@ Begin WebDialog WebDialog_User_Add
       Width           =   130
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Extension_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   8
       Indicator       =   0
       Italic          =   False
       Left            =   37
@@ -256,14 +256,14 @@ Begin WebDialog WebDialog_User_Add
       Width           =   130
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Hospital_ID_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   5
       Indicator       =   0
       Italic          =   False
       Left            =   37
@@ -636,7 +636,7 @@ Begin WebDialog WebDialog_User_Add
       TabStop         =   True
       Text            =   "Add User"
       TextAlignment   =   2
-      TextColor       =   &cFF7E7900
+      TextColor       =   &c000000FF
       Tooltip         =   ""
       Top             =   20
       Underline       =   False
@@ -677,14 +677,14 @@ Begin WebDialog WebDialog_User_Add
       Width           =   100
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Group_Name_Label
+   Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
       Height          =   38
-      Index           =   -2147483648
+      Index           =   3
       Indicator       =   0
       Italic          =   False
       Left            =   37
@@ -744,6 +744,14 @@ End
 #tag EndWebPage
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.ModalBackgroundColor = "#" +Design_Palette.COLOR_Background.ToString.Right(6)
+		  
+		End Sub
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h0
 		Sub ENABLE_Add_Button()
 		  Add_Button.Enabled = False
@@ -776,6 +784,13 @@ End
 
 #tag EndWindowCode
 
+#tag Events Label1
+	#tag Event
+		Sub Opening(index as Integer)
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events Login_TextField
 	#tag Event
 		Sub TextChanged()
@@ -840,14 +855,13 @@ End
 		  Self.Close
 		End Sub
 	#tag EndEvent
-#tag EndEvents
-#tag Events Add_Button
 	#tag Event
-		Sub Shown()
-		  Me.Enabled = False
-		  Me.Indicator = WebUIControl.Indicators.Light
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
 		End Sub
 	#tag EndEvent
+#tag EndEvents
+#tag Events Add_Button
 	#tag Event
 		Sub Pressed()
 		  
@@ -880,6 +894,25 @@ End
 		  
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Title_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Primary
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Notes_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Error
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Group_PopupMenu
 	#tag Event
@@ -909,6 +942,11 @@ End
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
 		  ENABLE_Add_Button
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
 		End Sub
 	#tag EndEvent
 #tag EndEvents

@@ -306,7 +306,7 @@ Begin WebDialog Modify_Patient_WebDialog
       TabStop         =   True
       Text            =   "Modify Patient"
       TextAlignment   =   2
-      TextColor       =   &cFF7E7900
+      TextColor       =   &c000000FF
       Tooltip         =   ""
       Top             =   20
       Underline       =   False
@@ -444,6 +444,13 @@ End
 	#tag Event
 		Sub TextChanged()
 		  Modify_Button.Enabled = True
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Title_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Primary
 		End Sub
 	#tag EndEvent
 #tag EndEvents

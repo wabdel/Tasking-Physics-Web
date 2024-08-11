@@ -174,10 +174,10 @@ Begin WebDialog WebDialog_Group_Add
       TabStop         =   True
       Text            =   "Add group"
       TextAlignment   =   2
-      TextColor       =   &cFF7E7900
+      TextColor       =   &c000000FF
       Tooltip         =   ""
       Top             =   20
-      Underline       =   True
+      Underline       =   False
       Visible         =   True
       Width           =   478
       _mPanelIndex    =   -1
@@ -219,6 +219,14 @@ End
 #tag EndWebPage
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.ModalBackgroundColor = "#" +Design_Palette.COLOR_Background.ToString.Right(6)
+		  
+		End Sub
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h0
 		Sub ENABLE_Add_Button()
 		  Add_Button.Indicator = WebUIControl.Indicators.Light
@@ -311,6 +319,13 @@ End
 		  End Try
 		  
 		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Title_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Primary
 		End Sub
 	#tag EndEvent
 #tag EndEvents

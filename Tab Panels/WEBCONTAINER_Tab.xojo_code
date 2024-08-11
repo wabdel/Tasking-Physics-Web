@@ -60,7 +60,7 @@ End
 	#tag Event
 		Sub Opening()
 		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
-		  
+		  Me.ExecuteJavaScript("$('#" + Me.ControlID + "').addClass('example-class');")
 		End Sub
 	#tag EndEvent
 
