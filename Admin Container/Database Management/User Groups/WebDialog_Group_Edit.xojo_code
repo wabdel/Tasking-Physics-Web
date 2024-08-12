@@ -288,6 +288,13 @@ End
 
 #tag EndWindowCode
 
+#tag Events Group_Name_Label
+	#tag Event
+		Sub Opening()
+		  ME.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events Group_Name_TextField
 	#tag Event
 		Sub TextChanged()
@@ -299,6 +306,11 @@ End
 	#tag Event
 		Sub Pressed()
 		  Self.Close
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  ME.Style = Design_Palette.STYLE_BUTTON_Unpressed
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -354,16 +366,28 @@ End
 		  
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  ME.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Title_Label
 	#tag Event
 		Sub Opening()
-		  
+		  ME.Style.ForegroundColor = Design_Palette.COLOR_Primary
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub Shown()
 		  Me.Style.ForegroundColor = Design_Palette.COLOR_Primary
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Notes_Label
+	#tag Event
+		Sub Opening()
+		  ME.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents

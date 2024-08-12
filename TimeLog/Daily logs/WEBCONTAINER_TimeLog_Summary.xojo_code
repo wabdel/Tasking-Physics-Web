@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -48,7 +48,7 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       TabIndex        =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   542
+      Top             =   20
       Visible         =   True
       Width           =   130
       _mPanelIndex    =   -1
@@ -63,7 +63,7 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       HasBorder       =   True
       HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   496
+      Height          =   700
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   ""
@@ -91,7 +91,7 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       TabIndex        =   1
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   20
+      Top             =   66
       Visible         =   True
       Width           =   1200
       _mPanelIndex    =   -1
@@ -135,7 +135,7 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       TextAlignment   =   0
       TextColor       =   &cFF7E7900
       Tooltip         =   ""
-      Top             =   524
+      Top             =   20
       Underline       =   False
       Visible         =   True
       Width           =   397
@@ -168,43 +168,10 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   524
+      Top             =   20
       Underline       =   False
       Visible         =   True
       Width           =   289
-      _mPanelIndex    =   -1
-   End
-   Begin WebLabel Note_Label1
-      Bold            =   False
-      ControlID       =   ""
-      Enabled         =   True
-      FontName        =   ""
-      FontSize        =   15.0
-      Height          =   38
-      Index           =   -2147483648
-      Indicator       =   0
-      Italic          =   True
-      Left            =   20
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Multiline       =   False
-      PanelIndex      =   0
-      Scope           =   2
-      TabIndex        =   4
-      TabStop         =   True
-      Text            =   "Data listed is for the past 30 enteries."
-      TextAlignment   =   0
-      TextColor       =   &cFF7E7900
-      Tooltip         =   ""
-      Top             =   562
-      Underline       =   False
-      Visible         =   True
-      Width           =   397
       _mPanelIndex    =   -1
    End
    Begin WebButton Download_Button
@@ -217,7 +184,7 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       Height          =   38
       Index           =   -2147483648
       Indicator       =   1
-      Left            =   840
+      Left            =   781
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -231,7 +198,7 @@ Begin WebContainer WEBCONTAINER_TimeLog_Summary Implements WebDataSource
       TabIndex        =   5
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   542
+      Top             =   20
       Visible         =   True
       Width           =   126
       _mPanelIndex    =   -1
@@ -240,6 +207,13 @@ End
 #tag EndWebContainerControl
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary
+		End Sub
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h21
 		Private Function ColumnData() As WebListboxColumnData()
 		  // Part of the WebDataSource interface.
@@ -486,7 +460,8 @@ End
 		  Var rows() As WebListboxRowData
 		  Var sql As String = "SELECT * FROM physics_tasking.timelogs " _
 		  + "WHERE user_id = " + Session.Logged_in_User.id.ToString + " " _
-		  + "ORDER BY physics_tasking.timelogs.time_in DESC LIMIT 30"
+		  + "ORDER BY physics_tasking.timelogs.time_in DESC " _
+		  + "LIMIT " + RowCount.ToString + " OFFSET " + RowOffset.ToString + ";"
 		  
 		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
@@ -533,16 +508,21 @@ End
 		      Case 6, 7
 		        
 		        s.BackgroundColor = Design_Palette.COLOR_Primary
+		        s.ForegroundColor = Design_Palette.COLOR_On_Primary
 		        
 		      Else
 		        
 		        If h < 9 Then
 		          
 		          s.BackgroundColor = Design_Palette.COLOR_Error
+		          s.ForegroundColor = Design_Palette.COLOR_On_Error
+		          
 		          
 		        Else
 		          
 		          s.BackgroundColor = Design_Palette.COLOR_Primary
+		          s.ForegroundColor = Design_Palette.COLOR_On_Primary
+		          
 		          
 		        End If
 		        
@@ -598,34 +578,6 @@ End
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h21
-		Private Function SortedPrimaryKeys(sortColumns as String) As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function UnsortedPrimaryKeys() As Integer()
-		  Var keys() As Integer 
-		  
-		  Var sql As String = "SELECT physics_tasking.timelogs.timelog_id " _
-		  + "FROM physics_tasking.timelogs " _
-		  + "WHERE user_id = " + Session.Logged_in_User.id.ToString + " " _
-		  + "ORDER BY physics_tasking.timelogs.time_in DESC LIMIT 30"
-		  
-		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
-		  
-		  While Not rs.AfterLastRow
-		    keys.Append( rs.Column("timelog_id").IntegerValue)
-		    
-		    rs.MoveToNextRow
-		  Wend
-		  Return keys// Part of the WebDataSource interface.
-		End Function
-	#tag EndMethod
-
 
 	#tag Property, Flags = &h21
 		Private Latest_Update As DateTime
@@ -641,10 +593,16 @@ End
 		  theDialog.Show
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events TimeLog_ListBox
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Secondary
 		  Me.HasHeader = True
 		  Me.RowSelectionType = WebListBox.RowSelectionTypes.Single
 		  Me.DataSource = Self
@@ -678,10 +636,17 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events Note_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Note
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events Minutes_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style = Session.WEBSTYLE_Label
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -707,6 +672,11 @@ End
 		  Session.WebFile_Download.ForceDownload = False
 		  
 		  Download_Button.Enabled = False
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
 		End Sub
 	#tag EndEvent
 #tag EndEvents
