@@ -11,7 +11,7 @@ Inherits WebSession
 #tag EndSession
 	#tag Event
 		Sub Opening()
-		  Design_Palette.SET_COLOR_THEME("Dark")
+		  Design_Palette.SET_COLOR_THEME("Wamied")
 		  DEFINE_WebStyles
 		  Self.UserTimeout = 0
 		  

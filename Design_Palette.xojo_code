@@ -53,23 +53,103 @@ Protected Module Design_Palette
 		    COLOR_Background = &c12121200
 		    COLOR_On_Background = &cFFFFFF00
 		    
+		    COLOR_Primary = &cBB86FC00
+		    COLOR_On_Primary = &c00000000
 		    
+		    COLOR_Secondary = &CE56A6A
+		    COLOR_On_Secondary = &c333333
 		    
+		    COLOR_Primary_Variant = &c3700B300
+		    COLOR_On_Primary_Variant = &cFFFFFF00
 		    
+		    COLOR_Secondary_Variant = &c03DAC6
+		    COLOR_On_Secondary_Variant = &c333333
 		    
+		    COLOR_Warning = &cF8D153
+		    COLOR_On_Warning = &c3B3B3B
+		    
+		    COLOR_Pass = &c018786
+		    COLOR_Error = &cCF667900
+		    COLOR_On_Error = &c00000000
+		    
+		    COLOR_Note = &cE0F000
+		    COLOR_On_Primary = &c00000000
 		    
 		  Case "Light"
 		    
 		    COLOR_Background = &cFFFFFF00
 		    COLOR_On_Background = &c00000000
 		    
+		    COLOR_Primary = &c6200EE00
+		    COLOR_On_Primary = &cFFFFFF00
 		    
+		    COLOR_Secondary = &c03DAC600
+		    COLOR_On_Secondary = &c333333
 		    
+		    COLOR_Primary_Variant = &c3700B300
+		    COLOR_On_Primary_Variant = &c00000000
 		    
+		    COLOR_Secondary_Variant = &c018786
+		    COLOR_On_Secondary_Variant = &cFFFFFF
 		    
+		    COLOR_Warning = &cF8D153
+		    COLOR_On_Warning = &c3B3B3B
 		    
+		    COLOR_Pass = &c018786
+		    COLOR_Error = &cCF667900
+		    COLOR_On_Error = &cFFFFFF00
+		    
+		    COLOR_Note = &c565C00
+		    
+		  Case "Wamied"
+		    
+		    COLOR_Background = &c12121200
+		    COLOR_On_Background = &cFFFFFF00
+		    
+		    COLOR_Primary = &cBB86FC00
+		    COLOR_On_Primary = &c00000000
+		    
+		    COLOR_Secondary = &c03DAC600
+		    COLOR_On_Secondary = &c00000000
+		    
+		    COLOR_Primary_Variant = &c3700B300
+		    COLOR_On_Primary_Variant = &c00000000
+		    
+		    COLOR_Secondary_Variant = &c03DAC600
+		    COLOR_On_Secondary_Variant = &c00000000
+		    
+		    COLOR_Warning = &cF8D153
+		    COLOR_On_Warning = &c3B3B3B
+		    
+		    COLOR_Pass = &c018786
+		    
+		    COLOR_Error = &cCF667900
+		    COLOR_On_Error = &cFFFFFF00
+		    
+		    COLOR_Note = &c565C00
 		    
 		  End Select
+		  
+		  
+		  
+		  
+		  
+		  
+		  COLOR_Surface_Primary = Blend_Colors( COLOR_Background, 0.08, COLOR_Primary)
+		  COLOR_Surface_Primary_2 = Blend_Colors( COLOR_Background, 0.16, COLOR_Primary)
+		  
+		  COLOR_Surface_Secondary = Blend_Colors( COLOR_Background, 0.08, COLOR_Secondary)
+		  COLOR_Surface_Secondary_2 = Blend_Colors( COLOR_Background, 0.16, COLOR_Secondary)
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -201,535 +281,88 @@ Protected Module Design_Palette
 		COLOR_Date_Weekend As Color = &c54545400
 	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  If Session.darkmode Then
-			    
-			    mCOLOR_Error = &cCF667900
-			    
-			  Else
-			    
-			    mCOLOR_Error = &cB0002000
-			    
-			  End If
-			  Return mCOLOR_Error
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_Error = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_Error As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		COLOR_Foreground As Color = &cFFFEFE00
 	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  If Session.darkmode Then
-			    
-			    mCOLOR_Note = &cE0F000
-			    
-			    
-			  Else
-			    
-			    mCOLOR_Note = &c565C00
-			    
-			  End If
-			  
-			  Return mCOLOR_Note
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_Note = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_Note As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		COLOR_On_Background As Color
 	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  If Session.darkmode Then
-			    
-			    
-			    mCOLOR_On_Primary = &c00000000
-			  Else
-			    
-			    mCOLOR_On_Primary = &cFFFFFF00
-			    
-			  End If
-			  Return mCOLOR_On_Primary
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_On_Error = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_On_Error As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  If Session.darkmode Then
-			    
-			    
-			    mCOLOR_On_Primary = &c00000000
-			    
-			    
-			  Else
-			    
-			    mCOLOR_On_Primary = &cFFFFFF00
-			    
-			  End If
-			  Return mCOLOR_On_Primary
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_On_Primary = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_On_Primary As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  If Session.darkmode Then
-			    
-			    'mCOLOR_On_Primary_Variant = &cFFFFFF00
-			    mCOLOR_Primary_Variant = &c5d6af6
-			  Else
-			    
-			    mCOLOR_On_Primary_Variant = &c00000000
-			    
-			  End If
-			  Return mCOLOR_On_Primary_Variant
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_On_Primary_Variant = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_On_Primary_Variant As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  If Session.darkmode Then
-			    
-			    mCOLOR_On_Secondary = &c333333
-			    
-			  Else
-			    
-			    
-			    mCOLOR_On_Secondary = &c333333
-			    
-			  End If
-			  
-			  
-			  Return mCOLOR_On_Secondary
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_On_Secondary = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_On_Secondary As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  If Session.darkmode Then
-			    
-			    mCOLOR_On_Secondary_Variant = &c333333
-			    
-			  Else
-			    
-			    mCOLOR_On_Secondary_Variant = &cFFFFFF
-			    
-			    
-			    
-			  End If
-			  
-			  Return mCOLOR_On_Secondary_Variant
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_On_Secondary_Variant = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_On_Secondary_Variant As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  If Session.darkmode Then
-			    
-			    
-			    mCOLOR_On_Warning = &c3B3B3B
-			    
-			  Else
-			    
-			    mCOLOR_On_Warning = &c3B3B3B
-			    
-			  End If
-			  Return mCOLOR_On_Warning
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_On_Warning = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_On_Warning As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  If Session.darkmode Then
-			    
-			    mCOLOR_Pass = &c018786
-			    
-			  Else
-			    
-			    mCOLOR_Pass = &c018786
-			    
-			  End If
-			  
-			  Return mCOLOR_Pass
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_Pass = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_Pass As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  If Session.darkmode Then
-			    
-			    'mCOLOR_Primary = &cBB86FC00
-			    mCOLOR_Primary = &c5ad3ff
-			  Else
-			    
-			    mCOLOR_Primary = &c6200EE00
-			    
-			  End If
-			  Return mCOLOR_Primary
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_Primary = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_Primary As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  If Session.darkmode Then
-			    
-			    mCOLOR_Primary_Variant = &c3700B300
-			    
-			  Else
-			    
-			    mCOLOR_Primary_Variant = &c3700B300
-			    
-			  End If
-			  Return mCOLOR_Primary_Variant
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_Primary_Variant = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_Primary_Variant As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  If Session.darkmode Then
-			    
-			    'mCOLOR_Secondary = &c03DAC600
-			    mCOLOR_Secondary = &CE56A6A
-			  Else
-			    
-			    mCOLOR_Secondary = &c03DAC600
-			    
-			    
-			  End If
-			  Return mCOLOR_Secondary
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_Secondary = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_Secondary As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  If Session.darkmode Then
-			    
-			    mCOLOR_Secondary_Variant = &c03DAC6
-			    
-			  Else
-			    
-			    
-			    mCOLOR_Secondary_Variant = &c018786
-			    
-			  End If
-			  
-			  
-			  Return mCOLOR_Secondary_Variant
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_Secondary_Variant = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_Secondary_Variant As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  'If Session.darkmode Then
-			  '
-			  ''mCOLOR_Surface = &c12121200
-			  'mCOLOR_Surface_Primary = &c211D2700
-			  ''mCOLOR_Surface = &c40325200
-			  'Else
-			  '
-			  'mCOLOR_Surface_Primary = &cFFFFFF
-			  '
-			  'End If
-			  
-			  mCOLOR_Surface_Primary = Blend_Colors( COLOR_Background, 0.08, COLOR_Primary)
-			  
-			  Return mCOLOR_Surface_Primary
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_Surface_Primary = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_Surface_Primary As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  'If Session.darkmode Then
-			  '
-			  'mCOLOR_Surface_3 = &c403252
-			  '
-			  'Else
-			  '
-			  '
-			  'End If
-			  
-			  mCOLOR_Surface_Primary_2 = Blend_Colors( COLOR_Background, 0.16, COLOR_Primary)
-			  
-			  Return mCOLOR_Surface_Primary_2
-			  
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_Surface_Primary_2 = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_Surface_Primary_2 As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  '
-			  'If Session.darkmode Then
-			  '
-			  'mCOLOR_Surface_Secondary = &c112422
-			  '
-			  'Else
-			  '
-			  '
-			  'End If
-			  
-			  mCOLOR_Surface_Secondary = Blend_Colors( COLOR_Background, 0.08, COLOR_Secondary)
-			  Return mCOLOR_Surface_Secondary
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_Surface_Secondary = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_Surface_Secondary As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  'If Session.darkmode Then
-			  '
-			  'mCOLOR_Surface_3 = &c403252
-			  '
-			  'Else
-			  '
-			  '
-			  'End If
-			  
-			  mCOLOR_Surface_Secondary_2 = Blend_Colors( COLOR_Background, 0.16, COLOR_Secondary)
-			  
-			  Return mCOLOR_Surface_Secondary_2
-			  
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_Surface_Secondary = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_Surface_Secondary_2 As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  If Session.darkmode Then
-			    
-			    'mCOLOR_Warning = &cD1840000
-			    mCOLOR_Warning = &cF8D153
-			  Else
-			    
-			    'mCOLOR_Warning = &cFFC56100
-			    mCOLOR_Warning = &cF8D153
-			    
-			  End If
-			  Return mCOLOR_Warning
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCOLOR_Warning = value
-			End Set
-		#tag EndSetter
+	#tag Property, Flags = &h0
 		COLOR_Warning As Color
-	#tag EndComputedProperty
+	#tag EndProperty
 
 	#tag Property, Flags = &h21
 		Private mCOLOR_Border As Color
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_Error As Color = &c35353500
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_Note As Color = &c00CAED
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_On_Background As Color = &c35353500
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_On_Error As Color = &c54545400
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_On_Primary As Color = &c35353500
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_On_Primary_Variant As Color = &cFFFEFE00
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_On_Secondary As Color = &c006EF8
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_On_Secondary_Variant As Color = &c54545400
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_On_Warning As Color = &cFFFEFE00
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_Pass As Color = &c2E3136
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_Primary As Color = &c2E3136
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_Primary_Variant As Color = &c55966A
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_Secondary As Color = &c35353500
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_Secondary_Variant As Color = &c35353500
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_Surface_Primary As Color
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_Surface_Primary_2 As Color = &cFFFEFE00
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_Surface_Secondary As Color = &cFFFEFE00
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_Surface_Secondary_2 As Color = &cFFFEFE00
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCOLOR_Warning As Color = &c55966A
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -859,14 +492,6 @@ Protected Module Design_Palette
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="COLOR_Surface_Primary"
-			Visible=false
-			Group="Behavior"
-			InitialValue="&c000000"
-			Type="Color"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="COLOR_Border"
 			Visible=false
 			Group="Behavior"
@@ -878,15 +503,7 @@ Protected Module Design_Palette
 			Name="COLOR_Primary"
 			Visible=false
 			Group="Behavior"
-			InitialValue="&c000000"
-			Type="Color"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="COLOR_Primary_Variant"
-			Visible=false
-			Group="Behavior"
-			InitialValue="&c000000"
+			InitialValue="&c55966A"
 			Type="Color"
 			EditorType=""
 		#tag EndViewProperty
@@ -894,7 +511,31 @@ Protected Module Design_Palette
 			Name="COLOR_On_Primary"
 			Visible=false
 			Group="Behavior"
-			InitialValue="&c000000"
+			InitialValue="&c55966A"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_Secondary"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_On_Secondary"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_Primary_Variant"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&"
 			Type="Color"
 			EditorType=""
 		#tag EndViewProperty
@@ -902,12 +543,28 @@ Protected Module Design_Palette
 			Name="COLOR_On_Primary_Variant"
 			Visible=false
 			Group="Behavior"
-			InitialValue="&c000000"
+			InitialValue="&"
 			Type="Color"
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="COLOR_Error"
+			Name="COLOR_Secondary_Variant"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_Surface_Primary"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_Surface_Secondary"
 			Visible=false
 			Group="Behavior"
 			InitialValue="&c000000"
@@ -915,7 +572,47 @@ Protected Module Design_Palette
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="COLOR_Secondary"
+			Name="COLOR_Surface_Primary_2"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c000000"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_Surface_Secondary_2"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c000000"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_Warning"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_On_Warning"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_Pass"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_Error"
 			Visible=false
 			Group="Behavior"
 			InitialValue="&c000000"
@@ -932,78 +629,6 @@ Protected Module Design_Palette
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="COLOR_On_Error"
-			Visible=false
-			Group="Behavior"
-			InitialValue="&c000000"
-			Type="Color"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="COLOR_On_Warning"
-			Visible=false
-			Group="Behavior"
-			InitialValue="&c000000"
-			Type="Color"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="COLOR_Pass"
-			Visible=false
-			Group="Behavior"
-			InitialValue="&c000000"
-			Type="Color"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="COLOR_Surface_Primary_2"
-			Visible=false
-			Group="Behavior"
-			InitialValue="&c000000"
-			Type="Color"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="COLOR_Surface_Secondary"
-			Visible=false
-			Group="Behavior"
-			InitialValue="&c000000"
-			Type="Color"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="COLOR_Warning"
-			Visible=false
-			Group="Behavior"
-			InitialValue="&c000000"
-			Type="Color"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="COLOR_On_Secondary"
-			Visible=false
-			Group="Behavior"
-			InitialValue="&c000000"
-			Type="Color"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="COLOR_On_Secondary_Variant"
-			Visible=false
-			Group="Behavior"
-			InitialValue="&c000000"
-			Type="Color"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="COLOR_Secondary_Variant"
-			Visible=false
-			Group="Behavior"
-			InitialValue="&c000000"
-			Type="Color"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="COLOR_Surface_Secondary_2"
 			Visible=false
 			Group="Behavior"
 			InitialValue="&c000000"
