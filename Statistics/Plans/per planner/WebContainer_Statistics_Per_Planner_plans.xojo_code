@@ -1,5 +1,5 @@
 #tag WebContainerControl
-Begin WebContainer WebContainer_Statistics_All_Planners
+Begin WebContainer WebContainer_Statistics_Per_Planner_plans
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
@@ -24,49 +24,6 @@ Begin WebContainer WebContainer_Statistics_All_Planners
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
-   Begin WebListBox ListBox1
-      ColumnCount     =   1
-      ColumnWidths    =   ""
-      ControlID       =   ""
-      DefaultRowHeight=   49
-      Enabled         =   True
-      GridLineStyle   =   3
-      HasBorder       =   True
-      HasHeader       =   True
-      HeaderHeight    =   0
-      Height          =   632
-      HighlightSortedColumn=   True
-      Index           =   -2147483648
-      Indicator       =   ""
-      InitialValue    =   ""
-      LastAddedRowIndex=   0
-      LastColumnIndex =   0
-      LastRowIndex    =   0
-      Left            =   20
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      NoRowsMessage   =   ""
-      PanelIndex      =   0
-      ProcessingMessage=   ""
-      RowCount        =   0
-      RowSelectionType=   1
-      Scope           =   2
-      SearchCriteria  =   ""
-      SelectedRowColor=   &c0d6efd
-      SelectedRowIndex=   0
-      TabIndex        =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   20
-      Visible         =   True
-      Width           =   1100
-      _mPanelIndex    =   -1
-   End
 End
 #tag EndWebContainerControl
 
@@ -80,18 +37,6 @@ End
 
 #tag EndWindowCode
 
-#tag Events ListBox1
-	#tag Event
-		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Secondary
-		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
-		  Me.HasHeader = True
-		  Me.RowSelectionType = WebListBox.RowSelectionTypes.None
-		  Me.DataSource = New Statistics_All_Planners_DataSource
-		  Me.ReloadData
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
 		Name="PanelIndex"

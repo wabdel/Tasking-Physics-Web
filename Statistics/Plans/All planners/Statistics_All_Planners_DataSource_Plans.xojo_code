@@ -1,5 +1,5 @@
 #tag Class
-Protected Class Statistics_All_Planners_DataSource
+Protected Class Statistics_All_Planners_DataSource_Plans
 Implements WebDataSource
 	#tag Method, Flags = &h21
 		Private Function ColumnData() As WebListboxColumnData()
@@ -141,7 +141,7 @@ Implements WebDataSource
 		      Var n As String = rs_ini.Column("initials").StringValue.Uppercase.Trim
 		      
 		      cellRenderer = New WebListBoxStyleRenderer(s, _
-		      Format(rs.Column(n).DoubleValue, "#0.00"))
+		      Format(rs.Column(n).DoubleValue, "#0.0"))
 		      row.Value(n) = cellRenderer
 		      
 		      rs_ini.MoveToNextRow

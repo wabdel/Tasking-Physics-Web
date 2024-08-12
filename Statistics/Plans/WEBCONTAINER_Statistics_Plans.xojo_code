@@ -83,11 +83,11 @@ End
 		  Select Case index
 		  Case 0
 		    
-		    Panel_Container = New WebContainer_Statistics_All_Planners
+		    Panel_Container = New WebContainer_Statistics_All_Planners_plans
 		    
 		  Case 1
 		    
-		    Panel_Container = New WebContainer_Statistics_Per_Planner
+		    Panel_Container = New WebContainer_Statistics_Per_Planner_plans
 		    
 		  End
 		  

@@ -129,7 +129,7 @@ Begin WebDialog WebDialog_Task_Group_Add
       Enabled         =   False
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   7
+      Indicator       =   0
       Left            =   250
       LockBottom      =   False
       LockedInPosition=   False
@@ -174,10 +174,10 @@ Begin WebDialog WebDialog_Task_Group_Add
       TabStop         =   True
       Text            =   "Add task group"
       TextAlignment   =   2
-      TextColor       =   &cFF7E7900
+      TextColor       =   &c000000FF
       Tooltip         =   ""
       Top             =   20
-      Underline       =   True
+      Underline       =   False
       Visible         =   True
       Width           =   478
       _mPanelIndex    =   -1
@@ -219,6 +219,14 @@ End
 #tag EndWebPage
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.ModalBackgroundColor = "#" +Design_Palette.COLOR_Background.ToString.Right(6)
+		  
+		End Sub
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h21
 		Private Sub ENABLE_Add_Button()
 		  Add_Button.Indicator = WebUIControl.Indicators.Light
@@ -251,6 +259,13 @@ End
 
 #tag EndWindowCode
 
+#tag Events Task_Group_Name_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events Task_Group_Name_TextField
 	#tag Event
 		Sub TextChanged()
@@ -263,6 +278,11 @@ End
 	#tag Event
 		Sub Pressed()
 		  Self.Close
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -315,6 +335,25 @@ End
 		  End Try
 		  
 		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Title_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Primary
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Notes_Label
+	#tag Event
+		Sub Opening()
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Primary
 		End Sub
 	#tag EndEvent
 #tag EndEvents
