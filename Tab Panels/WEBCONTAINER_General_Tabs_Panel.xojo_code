@@ -55,15 +55,15 @@ End
 		  
 		  Tab_Container.Append( New WEBCONTAINER_Tab)
 		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
-		  "Plans"
+		  "Plans Management"
 		  
 		  Tab_Container.Append( New WEBCONTAINER_Tab)
 		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
-		  "Assigned Tasks"
+		  "Assigned Tasks Management"
 		  
 		  Tab_Container.Append( New WEBCONTAINER_Tab)
 		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
-		  "Patients"
+		  "Patients Management"
 		  
 		  Tab_Container.Append( New WEBCONTAINER_Tab)
 		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
@@ -242,7 +242,7 @@ End
 		    MainWebPage.Header_Container.Top + MainWebPage.Header_Container.Height, _
 		    Central_Container.Width, Central_Container.Height)
 		    
-		  Case "Plans"
+		  Case "Plans Management"
 		    
 		    
 		    Central_Container = New WEBCONTAINER_Plans_Management
@@ -253,7 +253,7 @@ End
 		    MainWebPage.Header_Container.Top + MainWebPage.Header_Container.Height, _
 		    Central_Container.Width, Central_Container.Height)
 		    
-		  Case "Assigned Tasks"
+		  Case "Assigned Tasks Management"
 		    
 		    
 		    Central_Container = New WEBCONTAINER_Assigned_Tasks_Management
@@ -264,7 +264,7 @@ End
 		    MainWebPage.Header_Container.Top + MainWebPage.Header_Container.Height, _
 		    Central_Container.Width, Central_Container.Height)
 		    
-		  Case "Patients"
+		  Case "Patients Management"
 		    
 		    
 		    Central_Container = New WEBCONTAINER_Patients_Management

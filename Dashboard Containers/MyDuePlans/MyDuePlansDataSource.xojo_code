@@ -124,7 +124,7 @@ Implements WebDataSource
 		  
 		  If SortColumns = "" Then
 		    
-		    sql = sql + "ORDER BY due_date "
+		    sql = sql + "ORDER BY due_date DESC "
 		    
 		  Else
 		    

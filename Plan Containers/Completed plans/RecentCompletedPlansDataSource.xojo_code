@@ -132,7 +132,7 @@ Implements WebDataSource
 		  
 		  If SortColumns = "" Then
 		    
-		    sql = sql + "ORDER BY completion_date "
+		    sql = sql + "ORDER BY completion_date DESC "
 		    
 		  Else
 		    

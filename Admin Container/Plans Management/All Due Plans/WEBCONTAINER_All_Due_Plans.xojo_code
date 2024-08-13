@@ -4,7 +4,7 @@ Begin WebContainer WEBCONTAINER_All_Due_Plans Implements WebDataSource
    ControlCount    =   0
    ControlID       =   ""
    Enabled         =   True
-   Height          =   600
+   Height          =   786
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -20,7 +20,7 @@ Begin WebContainer WEBCONTAINER_All_Due_Plans Implements WebDataSource
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   1240
+   Width           =   1220
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -34,7 +34,7 @@ Begin WebContainer WEBCONTAINER_All_Due_Plans Implements WebDataSource
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   1120
+      Left            =   1100
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -51,14 +51,14 @@ Begin WebContainer WEBCONTAINER_All_Due_Plans Implements WebDataSource
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   542
+      Top             =   20
       Underline       =   False
       Visible         =   True
       Width           =   100
       _mPanelIndex    =   -1
    End
    Begin WebListBox My_Due_Plans_ListBox
-      ColumnCount     =   6
+      ColumnCount     =   0
       ColumnWidths    =   ""
       ControlID       =   ""
       DefaultRowHeight=   49
@@ -67,7 +67,7 @@ Begin WebContainer WEBCONTAINER_All_Due_Plans Implements WebDataSource
       HasBorder       =   True
       HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   514
+      Height          =   700
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
@@ -95,9 +95,9 @@ Begin WebContainer WEBCONTAINER_All_Due_Plans Implements WebDataSource
       TabIndex        =   1
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   20
+      Top             =   66
       Visible         =   True
-      Width           =   1200
+      Width           =   1180
       _mPanelIndex    =   -1
    End
    Begin WebTimer Update_Timer
@@ -139,10 +139,10 @@ Begin WebContainer WEBCONTAINER_All_Due_Plans Implements WebDataSource
       TextAlignment   =   1
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   542
+      Top             =   20
       Underline       =   False
       Visible         =   True
-      Width           =   650
+      Width           =   272
       _mPanelIndex    =   -1
    End
 End
@@ -282,12 +282,24 @@ End
 		  + "INNER JOIN physics_tasking.plan_types USING (plan_type_id) " _
 		  + "INNER JOIN physics_tasking.sites USING (site_id) " _
 		  + "INNER JOIN physics_tasking.users USING (user_id) " _
-		  + "WHERE physics_tasking.plans.is_completed = 0 " _
-		  + "ORDER BY physics_tasking.plans.due_date, physics_tasking.patients.mrn ASC;"
+		  + "WHERE physics_tasking.plans.is_completed = 0 " 
+		  
+		  If SortColumns = "" Then
+		    
+		    sql = sql + "ORDER BY due_date ASC "
+		    
+		  Else
+		    
+		    sql = sql + "ORDER BY " + SortColumns
+		    
+		  End If
+		  
+		  sql = sql + " LIMIT " + RowCount.ToString + " OFFSET " + RowOffset.ToString
 		  
 		  
 		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
-		  
+		  Var actionButtons() As GroupButtonItem
+		  actionButtons.Add(New GroupButtonItem("done", "Done"))
 		  While Not rs.AfterLastRow
 		    
 		    Var s As New WebStyle
@@ -358,8 +370,9 @@ End
 		    row.Value("physician_initials") = cellRenderer
 		    
 		    
-		    cellRenderer = New WebListBoxStyleRenderer(s, "☐")
-		    row.Value("done") = cellRenderer
+		    row.Value("done") = New GroupButtonsCellRenderer( actionButtons)
+		    rows.Add(row)
+		    
 		    rows.Add(row)
 		    
 		    rs.MoveToNextRow
@@ -375,36 +388,6 @@ End
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h21
-		Private Function SortedPrimaryKeys(sortColumns as String) As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function UnsortedPrimaryKeys() As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  Var keys() As Integer 
-		  
-		  Var sql As String = "SELECT physics_tasking.plans.plan_id As plan_id " _
-		  + "FROM physics_tasking.plans " _
-		  + "WHERE physics_tasking.plans.is_completed = 0 " _
-		  + "ORDER BY physics_tasking.plans.due_date"
-		  
-		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
-		  
-		  While Not rs.AfterLastRow
-		    keys.Append( rs.Column("plan_id").IntegerValue)
-		    
-		    rs.MoveToNextRow
-		  Wend
-		  Return keys
-		End Function
-	#tag EndMethod
-
 
 	#tag Property, Flags = &h21
 		Private Latest_Update As DateTime
@@ -416,13 +399,8 @@ End
 #tag Events My_Plans_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.BackgroundColor = Design_Palette.COLOR_On_Background
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		  
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub Shown()
-		  Me.Text = "Plans = " + self.RowCount.ToString
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -439,10 +417,70 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Pressed(row As Integer, column As Integer)
+		  'If row > Me.RowCount - 1 Then Return
+		  '
+		  'Select Case column
+		  'Case 7
+		  '
+		  'Var db As New MySQLCommunityServer
+		  'db.Host = Physics_Tasking.db_host
+		  'db.Port = Physics_Tasking.db_port
+		  'db.DatabaseName = Physics_Tasking.db_name
+		  'db.UserName = Physics_Tasking.db_username
+		  'db.Password = Physics_Tasking.db_password
+		  '
+		  'Try
+		  '
+		  'If db.Connect Then
+		  '
+		  'Var sql As String = "UPDATE  physics_tasking.plans " _
+		  '+ "SET is_completed = TRUE, " _
+		  '+ "completion_Date = '" + DateTime.Now.SQLDate + "' " _
+		  '+ "WHERE plan_id = " + Me.RowTagAt( row)
+		  '
+		  'db.ExecuteSQL(sql)
+		  '
+		  'App.last_database_update = DateTime.Now
+		  'Latest_Update = App.last_database_update
+		  '
+		  'My_Due_Plans_ListBox.ReloadData
+		  'My_Plans_Label.Text = "Plans = " + My_Due_Plans_ListBox.DataSource.RowCount.ToString
+		  '
+		  'End If
+		  '
+		  'db.close
+		  '
+		  'End Try
+		  '
+		  'End Select
+		  '
+		  '
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub DoublePressed(row As Integer, column As Integer)
 		  If row > Me.RowCount - 1 Then Return
 		  
 		  Select Case column
-		  Case 7
+		    
+		  Case 0 To 5
+		    
+		    Var theDialog As New Modify_Plan_WebDialog
+		    theDialog.plan_id = Me.RowTagAt( row)
+		    theDialog.Show
+		    
+		  End Select
+		  
+		  
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub CustomCellAction(row As Integer, column As Integer, identifier As String, value As Variant)
+		  If identifier = "GroupButtonPressed" Then
+		    
+		    
 		    
 		    Var db As New MySQLCommunityServer
 		    db.Host = Physics_Tasking.db_host
@@ -470,31 +508,11 @@ End
 		        
 		      End If
 		      
-		      db.close
+		      db.Close
 		      
 		    End Try
 		    
-		  End Select
-		  
-		  
-		  
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub DoublePressed(row As Integer, column As Integer)
-		  If row > Me.RowCount - 1 Then Return
-		  
-		  Select Case column
-		    
-		  Case 0 To 5
-		    
-		    Var theDialog As New Modify_Plan_WebDialog
-		    theDialog.plan_id = Me.RowTagAt( row)
-		    theDialog.Show
-		    
-		  End Select
-		  
-		  
+		  End If
 		  
 		End Sub
 	#tag EndEvent
