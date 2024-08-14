@@ -316,7 +316,7 @@ End
 		      
 		    End If
 		    
-		    Var c1 As String = "#" +Design_Palette.COLOR_Primary.ToString.Right(6)
+		    Var c1 As String = "#" +Design_Palette.COLOR_Pass.ToString.Right(6)
 		    Var c2 As String = "#" +Design_Palette.COLOR_Error.ToString.Right(6)
 		    Var c3 As String = "#" +Design_Palette.COLOR_Warning.ToString.Right(6)
 		    
@@ -417,7 +417,7 @@ End
 		      
 		    End If
 		    
-		    Var c1 As String = "#" +Design_Palette.COLOR_Primary.ToString.Right(6)
+		    Var c1 As String = "#" +Design_Palette.COLOR_Pass.ToString.Right(6)
 		    Var c2 As String = "#" +Design_Palette.COLOR_Error.ToString.Right(6)
 		    Var c3 As String = "#" +Design_Palette.COLOR_Warning.ToString.Right(6)
 		    

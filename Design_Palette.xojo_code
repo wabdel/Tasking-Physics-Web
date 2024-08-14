@@ -128,6 +128,35 @@ Protected Module Design_Palette
 		    
 		    COLOR_Note = &c565C00
 		    
+		    
+		  Case "Old"
+		    
+		    COLOR_Background = &c12121200
+		    COLOR_On_Background = &cFFFFFF00
+		    
+		    COLOR_Primary = &c8BD4FE00
+		    COLOR_On_Primary = &c00000000
+		    
+		    COLOR_Secondary = &c03DAC600
+		    COLOR_On_Secondary = &c00000000
+		    
+		    COLOR_Primary_Variant = &c2E02B000
+		    COLOR_On_Primary_Variant = &cEDEDED00
+		    
+		    COLOR_Secondary_Variant = &c03DAC600
+		    COLOR_On_Secondary_Variant = &c00000000
+		    
+		    COLOR_Warning = &cF8D153
+		    COLOR_On_Warning = &c3B3B3B
+		    
+		    COLOR_Pass = &c00915500
+		    COLOR_Fail = &c9A0E0C00
+		    
+		    COLOR_Error = &cCF667900
+		    COLOR_On_Error = &cFFFFFF00
+		    
+		    COLOR_Note = &c565C00
+		    
 		  End Select
 		  
 		  
@@ -283,6 +312,10 @@ Protected Module Design_Palette
 
 	#tag Property, Flags = &h0
 		COLOR_Error As Color
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		COLOR_Fail As Color
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -629,6 +662,14 @@ Protected Module Design_Palette
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="COLOR_On_Error"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c000000"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="COLOR_On_Secondary_Variant"
 			Visible=false
 			Group="Behavior"
 			InitialValue="&c000000"

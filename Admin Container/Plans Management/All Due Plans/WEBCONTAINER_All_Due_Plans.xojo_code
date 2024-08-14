@@ -371,7 +371,6 @@ End
 		    
 		    
 		    row.Value("done") = New GroupButtonsCellRenderer( actionButtons)
-		    rows.Add(row)
 		    
 		    rows.Add(row)
 		    

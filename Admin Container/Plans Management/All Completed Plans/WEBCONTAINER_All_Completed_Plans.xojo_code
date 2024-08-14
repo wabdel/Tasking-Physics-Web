@@ -34,7 +34,7 @@ Begin WebContainer WEBCONTAINER_All_Completed_Plans Implements WebDataSource
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   1079
+      Left            =   1100
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -51,7 +51,7 @@ Begin WebContainer WEBCONTAINER_All_Completed_Plans Implements WebDataSource
       TextAlignment   =   3
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   -59
+      Top             =   20
       Underline       =   False
       Visible         =   True
       Width           =   100
@@ -67,7 +67,7 @@ Begin WebContainer WEBCONTAINER_All_Completed_Plans Implements WebDataSource
       HasBorder       =   True
       HasHeader       =   True
       HeaderHeight    =   0
-      Height          =   514
+      Height          =   700
       HighlightSortedColumn=   True
       Index           =   -2147483648
       Indicator       =   0
@@ -95,7 +95,7 @@ Begin WebContainer WEBCONTAINER_All_Completed_Plans Implements WebDataSource
       TabIndex        =   1
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   252
+      Top             =   66
       Visible         =   True
       Width           =   1180
       _mPanelIndex    =   -1
@@ -110,7 +110,7 @@ Begin WebContainer WEBCONTAINER_All_Completed_Plans Implements WebDataSource
       Index           =   -2147483648
       Indicator       =   0
       Italic          =   False
-      Left            =   136
+      Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -127,7 +127,7 @@ Begin WebContainer WEBCONTAINER_All_Completed_Plans Implements WebDataSource
       TextAlignment   =   1
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   -59
+      Top             =   20
       Underline       =   False
       Visible         =   True
       Width           =   650
@@ -172,7 +172,7 @@ End
 		  col.Heading = "MRN" // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "50"
+		  col.Width = "80"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
@@ -180,7 +180,7 @@ End
 		  col.Heading = "Full Name" // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "100"
+		  col.Width = "200"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
@@ -196,7 +196,7 @@ End
 		  col.Heading = "Plan Type" // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "100"
+		  col.Width = "280"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
@@ -204,7 +204,23 @@ End
 		  col.Heading = "Completion Date" // the name that appears above the column
 		  col.Sortable = False // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
-		  col.Width = "100"
+		  col.Width = "250"
+		  cols.Add(col)
+		  
+		  col = New WebListboxColumnData
+		  col.DatabaseColumnName = "initials" // the name of the field in your database or data source
+		  col.Heading = "Planner" // the name that appears above the column
+		  col.Sortable = False // Whether or not the column is sortable
+		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
+		  col.Width = "75"
+		  cols.Add(col)
+		  
+		  col = New WebListboxColumnData
+		  col.DatabaseColumnName = "physician_initials" // the name of the field in your database or data source
+		  col.Heading = "Physician" // the name that appears above the column
+		  col.Sortable = False // Whether or not the column is sortable
+		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
+		  col.Width = "75"
 		  cols.Add(col)
 		  
 		  col = New WebListboxColumnData
@@ -251,20 +267,28 @@ End
 		  + "physics_tasking.patients.mrn As mrn, " _
 		  + "physics_tasking.patients.first_name As first_name, " _
 		  + "physics_tasking.patients.family_name As family_name, " _
+		  + "physics_tasking.users.initials As initials, " _
 		  + "physics_tasking.plan_types.name As plan_type_name, " _
 		  + "physics_tasking.sites.name As site, " _
 		  + "physics_tasking.sites.is_uppercase As is_uppercase, " _
-		  + "physics_tasking.plans.completion_date as completion_date " _
+		  + "physics_tasking.plans.completion_date as completion_date, " _
+		  + "physics_tasking.plans.is_replan as is_replan, " _
+		  + "(" _
+		  + "SELECT physics_tasking.users.initials " _
+		  + "FROM physics_tasking.users " _
+		  + "WHERE physics_tasking.plans.physician_id = physics_tasking.users.user_id" _
+		  +") As physician_initials " _
 		  + "FROM physics_tasking.plans " _
 		  + "INNER JOIN physics_tasking.patients USING (patient_id) " _
 		  + "INNER JOIN physics_tasking.plan_types USING (plan_type_id) " _
+		  + "INNER JOIN physics_tasking.users USING (user_id) " _
 		  + "INNER JOIN physics_tasking.sites USING (site_id) " _
 		  + "WHERE physics_tasking.plans.is_completed = 1 " _
 		  + "AND completion_date > '" + d_min.SubtractInterval( 0, 0, Physics_Tasking.Population_period_days).SQLDate  + "' " 
 		  
 		  If SortColumns = "" Then
 		    
-		    sql = sql + "ORDER BY due_date DSEC "
+		    sql = sql + "ORDER BY completion_date DESC "
 		    
 		  Else
 		    
@@ -276,6 +300,9 @@ End
 		  sql = sql + " LIMIT " + RowCount.ToString + " OFFSET " + RowOffset.ToString
 		  
 		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
+		  
+		  Var actionButtons() As GroupButtonItem
+		  actionButtons.Add(New GroupButtonItem("undo", "Undo"))
 		  
 		  While Not rs.AfterLastRow
 		    
@@ -306,7 +333,15 @@ End
 		    
 		    row.Value("site") = cellRenderer
 		    
-		    cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("plan_type_name").StringValue.Trim)
+		    If rs.Column("is_replan").BooleanValue Then
+		      
+		      cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("plan_type_name").StringValue.Trim + " (R)") 
+		      
+		    Else
+		      
+		      cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("plan_type_name").StringValue.Trim) 
+		      
+		    End If
 		    row.Value("plan_type") = cellRenderer
 		    
 		    Var completion_date As DateTime = rs.Column("completion_date").DateValue
@@ -315,9 +350,14 @@ End
 		    
 		    row.Value("completion_date") = cellRenderer
 		    
+		    cellRenderer = New WebListBoxStyleRenderer(s, _
+		    rs.Column("initials").StringValue.Trim.Uppercase)
+		    row.Value("initials") = cellRenderer
 		    
-		    cellRenderer = New WebListBoxStyleRenderer(s, "☐")
-		    row.Value("undo") = cellRenderer
+		    cellRenderer = New WebListBoxStyleRenderer(s, rs.Column("physician_initials").StringValue.Trim.Uppercase)
+		    row.Value("physician_initials") = cellRenderer
+		    
+		    row.Value("undo") = New GroupButtonsCellRenderer( actionButtons)
 		    rows.Add(row)
 		    
 		    rs.MoveToNextRow
@@ -344,7 +384,7 @@ End
 #tag Events My_Completed_Plans_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style = Session.WEBSTYLE_Label
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		  Me.Text = "Plans = " + Self.RowCount.ToString
 		End Sub
 	#tag EndEvent
@@ -402,11 +442,51 @@ End
 		  
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub CustomCellAction(row As Integer, column As Integer, identifier As String, value As Variant)
+		  If identifier = "GroupButtonPressed" Then
+		    
+		    
+		    
+		    Var db As New MySQLCommunityServer
+		    db.Host = Physics_Tasking.db_host
+		    db.Port = Physics_Tasking.db_port
+		    db.DatabaseName = Physics_Tasking.db_name
+		    db.UserName = Physics_Tasking.db_username
+		    db.Password = Physics_Tasking.db_password
+		    
+		    Try
+		      
+		      If db.Connect Then
+		        
+		        Var sql As String = "UPDATE  physics_tasking.plans " _
+		        + "SET is_completed = FALSE, " _
+		        + "completion_Date = NULL " _
+		        + "WHERE plan_id = " + Me.RowTagAt( row)
+		        
+		        db.ExecuteSQL(sql)
+		        
+		        App.last_database_update = DateTime.Now
+		        Latest_Update = App.last_database_update
+		        
+		        My_Completed_Plans_ListBox.ReloadData
+		        My_Completed_Plans_Label.Text = "Plans = " + My_Completed_Plans_ListBox.DataSource.RowCount.ToString
+		        
+		      End If
+		      
+		      db.Close
+		      
+		    End Try
+		    
+		  End If
+		  
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Note_Label
 	#tag Event
 		Sub Opening()
-		  Me.Style.ForegroundColor = Color.White
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_Note
 		  Me.Text = "Completed plans within the past " + Physics_Tasking.Population_period_days.ToString +" days."
 		End Sub
 	#tag EndEvent
