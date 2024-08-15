@@ -64,7 +64,7 @@ Begin WebDialog WebDialog_Assign_On_Call_Period
       Enabled         =   True
       Height          =   38
       Index           =   -2147483648
-      Indicator       =   5
+      Indicator       =   0
       Left            =   480
       LockBottom      =   False
       LockedInPosition=   False
@@ -272,6 +272,14 @@ End
 #tag EndWebPage
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.ModalBackgroundColor = "#" +Design_Palette.COLOR_Background.ToString.Right(6)
+		  
+		End Sub
+	#tag EndEvent
+
+
 	#tag Property, Flags = &h0
 		d As DateTime
 	#tag EndProperty
@@ -284,13 +292,15 @@ End
 		Sub SelectionChanged(item As WebMenuItem)
 		  If Me.SelectedRowIndex = -1 Then Return
 		  
-		  Me.Indicator = WebUIControl.Indicators.Success
 		  Button_Assign.Enabled = True
-		  Button_Assign.Indicator = WebUIControl.Indicators.Primary
+		  
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub Shown()
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_POPUPMENU
+		  Me.RemoveAllRows
+		  
 		  Var sql As String = "SELECT user_id, first_name, family_name FROM physics_tasking.users " _
 		  + "WHERE category_id IN (2,3) " _
 		  + "AND is_retired = FALSE " _
@@ -311,7 +321,6 @@ End
 		    
 		  Wend
 		  
-		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -319,6 +328,11 @@ End
 	#tag Event
 		Sub Pressed()
 		  Self.Close
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -365,6 +379,11 @@ End
 		  App.last_database_update = DateTime.Now
 		  
 		  Self.Close
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
 		End Sub
 	#tag EndEvent
 #tag EndEvents

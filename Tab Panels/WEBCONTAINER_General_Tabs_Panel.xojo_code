@@ -69,6 +69,12 @@ End
 		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
 		  "On-Calls"
 		  
+		  Tab_Container.Append( New WEBCONTAINER_Tab)
+		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
+		  "Vacations"
+		  
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -139,28 +145,25 @@ End
 		  Tab_Container.Append( New WEBCONTAINER_Tab)
 		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
 		  "Assign Plan"
-		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Indicator = _
-		  WebUIControl.Indicators.Info
 		  
 		  Tab_Container.Append( New WEBCONTAINER_Tab)
 		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
 		  "Assign Task"
-		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Indicator = _
-		  WebUIControl.Indicators.Info
 		  
 		  Tab_Container.Append( New WEBCONTAINER_Tab)
 		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
 		  "Add Completed Task"
-		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Style.FontSize = 10
-		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Indicator = _
-		  WebUIControl.Indicators.Link
+		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Style.FontSize = 9
+		  
+		  
+		  Tab_Container.Append( New WEBCONTAINER_Tab)
+		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
+		  "Vacations"
 		  
 		  Tab_Container.Append( New WEBCONTAINER_Tab)
 		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Caption = _
 		  "Time log"
-		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Style.FontSize = 10
-		  Tab_Container(Tab_Container.LastIndex).Tab_Button.Indicator = _
-		  WebUIControl.Indicators.Link
+		  
 		  
 		  
 		End Sub
@@ -375,6 +378,18 @@ End
 		    MainWebPage.General_Tabs_Panel_Container.Width, _
 		    MainWebPage.Header_Container.Top + MainWebPage.Header_Container.Height, _
 		    Central_Container.Width, Central_Container.Height)
+		    
+		  Case "Vacations"
+		    
+		    Central_Container = New WEBCONTAINER_Vacation_Calendar
+		    Central_Container.LockLeft = True
+		    Central_Container.LockTop = True
+		    Central_Container.EmbedWithin( MainWebPage, _
+		    MainWebPage.General_Tabs_Panel_Container.Width, _
+		    MainWebPage.Header_Container.Top + MainWebPage.Header_Container.Height, _
+		    Central_Container.Width, Central_Container.Height)
+		    
+		    
 		    
 		  End Select
 		End Sub

@@ -1,5 +1,5 @@
 #tag WebContainerControl
-Begin WebContainer WebContainer_On_Call_Date
+Begin WebContainer WebContainer_Vacation_Date
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
@@ -90,35 +90,6 @@ Begin WebContainer WebContainer_On_Call_Date
       Width           =   30
       _mPanelIndex    =   -1
    End
-   Begin WebButton Button_Action
-      AllowAutoDisable=   False
-      Cancel          =   False
-      Caption         =   "Assign"
-      ControlID       =   ""
-      Default         =   True
-      Enabled         =   True
-      Height          =   29
-      Index           =   -2147483648
-      Indicator       =   5
-      Left            =   44
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Outlined        =   False
-      PanelIndex      =   0
-      Scope           =   2
-      TabIndex        =   2
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   46
-      Visible         =   True
-      Width           =   100
-      _mPanelIndex    =   -1
-   End
    Begin WebTimer Timer_UPDATE
       ControlID       =   ""
       Enabled         =   True
@@ -151,33 +122,9 @@ End
 
 
 	#tag Method, Flags = &h0
-		Sub DRAW_Buttom()
-		  
-		  
-		  Var sql As String = "SELECT user_id, users.initials as initials FROM physics_tasking.on_calls " _
-		  + "INNER JOIN physics_tasking.users USING(user_id) " _
-		  + "WHERE on_call_date = '" + mmy_date.SQLDate + "';"
-		  Var rs As Rowset = Physics_Tasking.SELECT_Statement( sql)
-		  
-		  If rs.RowCount = 0 Then
-		    
-		    Button_Action.Style = Design_Palette.STYLE_BUTTON_Disabled
-		    Button_Action.Caption = "Assign"
-		    
-		  Else
-		    
-		    Button_Action.Style = Design_Palette.STYLE_BUTTON_Unpressed
-		    Button_Action.Caption = rs.Column("initials").StringValue.Trim.Uppercase
-		    
-		  End If
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Sub DRAW_Date()
 		  
 		  
-		  DRAW_Buttom
 		  
 		  If is_Calinder_Month Then 
 		    Date_Label.Style.ForegroundColor = Design_Palette.COLOR_Foreground
@@ -290,27 +237,13 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Button_Action
-	#tag Event
-		Sub Pressed()
-		  Var thedialog As New WebDialog_Assign_On_Call
-		  thedialog.d = mmy_date
-		  thedialog.Show
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub Opening()
-		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events Timer_UPDATE
 	#tag Event
 		Sub Run()
 		  If LATEST_UPDATE <> APP.last_database_update Then
 		    
 		    
-		    DRAW_Buttom
+		    'DRAW_Buttom
 		    
 		    LATEST_UPDATE = App.last_database_update
 		    

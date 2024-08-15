@@ -523,34 +523,6 @@ End
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h21
-		Private Function SortedPrimaryKeys(sortColumns as String) As Integer()
-		  // Part of the WebDataSource interface.
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function UnsortedPrimaryKeys() As Integer()
-		  Var keys() As Integer 
-		  
-		  Var sql As String = "SELECT physics_tasking.users.user_id AS user_id " _
-		  + "FROM physics_tasking.users " _
-		  + "WHERE user_id NOT IN (1) " _
-		  + "ORDER BY first_name, family_name;"
-		  
-		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
-		  
-		  While Not rs.AfterLastRow
-		    keys.Append( rs.Column("user_id").IntegerValue)
-		    
-		    rs.MoveToNextRow
-		  Wend
-		  Return keys// Part of the WebDataSource interface.
-		End Function
-	#tag EndMethod
-
 
 	#tag Property, Flags = &h21
 		Private Latest_UPDATE As DateTime

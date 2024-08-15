@@ -998,7 +998,9 @@ Protected Module Physics_Tasking
 		Sub UPDATE_Database_Tables()
 		  
 		  UPDATE_General_Information
+		  UPDATE_Vacations_Types
 		  UPDATE_Vacations
+		  
 		  UPDATE_Groups
 		  UPDATE_Users
 		  UPDATE_Machines
@@ -1114,7 +1116,7 @@ Protected Module Physics_Tasking
 	#tag Method, Flags = &h21
 		Private Sub UPDATE_Machines()
 		  // Create machines Table
-		  Var sql As String = "CREATE TABLE IF NOT EXISTS machines (" _
+		  Var sql As String = "CREATE TABLE IF NOT EXISTS physics_tasking.machines (" _
 		  +"machine_id INT AUTO_INCREMENT, " _
 		  +"name VARCHAR(50) NOT NULL UNIQUE, " _
 		  +"PRIMARY KEY (machine_id));"
@@ -1844,11 +1846,22 @@ Protected Module Physics_Tasking
 		Private Sub UPDATE_Vacations()
 		  // Create General Information table
 		  
+		  'Var sql As String = "CREATE TABLE IF NOT EXISTS physics_tasking.vacations (" _
+		  '+"vacation_date DATE NOT NULL, " _
+		  '+"users_list VARCHAR(100) NOT NULL, "_
+		  '+"PRIMARY KEY (vacation_date));"
 		  
 		  Var sql As String = "CREATE TABLE IF NOT EXISTS physics_tasking.vacations (" _
-		  +"vacation_date DATE NOT NULL, " _
-		  +"users_list VARCHAR(100) NOT NULL, "_
-		  +"PRIMARY KEY (vacation_date));"
+		  + "vacation_id INT AUTO_INCREMENT, " _
+		  + "user_id INT NOT NULL, " _
+		  + "start_date DATE NOT NULL, " _
+		  + "end_date DATE NOT NULL, " _
+		  + "vacation_type_id INTEGER NOT NULL, " _
+		  + "PRIMARY KEY (vacation_id), " _
+		  + "FOREIGN KEY (user_id) REFERENCES users(user_id) " _
+		  + "ON UPDATE NO ACTION ON DELETE NO ACTION, " _
+		  + "FOREIGN KEY (vacation_type_id) REFERENCES vacation_types(vacation_type_id) " _
+		  + "ON UPDATE NO ACTION ON DELETE NO ACTION);"
 		  
 		  Physics_Tasking.EXECUTE_Statement( sql)
 		  
@@ -1856,6 +1869,55 @@ Protected Module Physics_Tasking
 		  
 		  
 		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub UPDATE_Vacations_Types()
+		  // Create machines Table
+		  Var sql As String = "CREATE TABLE IF NOT EXISTS physics_tasking.vacation_types (" _
+		  +"vacation_type_id INT AUTO_INCREMENT, " _
+		  +"vacation_type_name VARCHAR(50) NOT NULL UNIQUE, " _
+		  +"PRIMARY KEY (vacation_type_id));"
+		  Physics_Tasking.EXECUTE_Statement( sql)
+		  
+		  sql = "INSERT INTO physics_tasking.vacation_types (vacation_type_name) " _
+		  +"SELECT * FROM (SELECT 'Annual') AS tmp " _
+		  +"WHERE NOT EXISTS (SELECT vacation_type_name FROM physics_tasking.vacation_types " _
+		  +"WHERE vacation_type_name = 'Annual') LIMIT 1"
+		  
+		  Physics_Tasking.EXECUTE_Statement( sql)
+		  
+		  
+		  sql = "INSERT INTO physics_tasking.vacation_types (vacation_type_name) " _
+		  +"SELECT * FROM (SELECT 'Sick') AS tmp " _
+		  +"WHERE NOT EXISTS (SELECT vacation_type_name FROM physics_tasking.vacation_types " _
+		  +"WHERE vacation_type_name = 'Sick') LIMIT 1"
+		  
+		  Physics_Tasking.EXECUTE_Statement( sql)
+		  
+		  
+		  
+		  sql = "INSERT INTO physics_tasking.vacation_types (vacation_type_name) " _
+		  +"SELECT * FROM (SELECT 'Emergency') AS tmp " _
+		  +"WHERE NOT EXISTS (SELECT vacation_type_name FROM physics_tasking.vacation_types " _
+		  +"WHERE vacation_type_name = 'Emergency') LIMIT 1"
+		  
+		  Physics_Tasking.EXECUTE_Statement( sql)
+		  
+		  sql = "INSERT INTO physics_tasking.vacation_types (vacation_type_name) " _
+		  +"SELECT * FROM (SELECT 'Educational') AS tmp " _
+		  +"WHERE NOT EXISTS (SELECT vacation_type_name FROM physics_tasking.vacation_types " _
+		  +"WHERE vacation_type_name = 'Educational') LIMIT 1"
+		  
+		  Physics_Tasking.EXECUTE_Statement( sql)
+		  
+		  sql = "INSERT INTO physics_tasking.vacation_types (vacation_type_name) " _
+		  +"SELECT * FROM (SELECT 'Eid') AS tmp " _
+		  +"WHERE NOT EXISTS (SELECT vacation_type_name FROM physics_tasking.vacation_types " _
+		  +"WHERE vacation_type_name = 'Eid') LIMIT 1"
+		  
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		End Sub
 	#tag EndMethod
 
