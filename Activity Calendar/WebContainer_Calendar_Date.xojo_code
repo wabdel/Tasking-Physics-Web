@@ -102,39 +102,6 @@ Begin WebContainer WebContainer_Calendar_Date
       Scope           =   2
       _mPanelIndex    =   -1
    End
-   Begin WebLabel Label_On_Call
-      Bold            =   False
-      ControlID       =   ""
-      Enabled         =   True
-      FontName        =   ""
-      FontSize        =   12.0
-      Height          =   25
-      Index           =   -2147483648
-      Indicator       =   ""
-      Italic          =   False
-      Left            =   2
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      LockVertical    =   False
-      Multiline       =   False
-      PanelIndex      =   0
-      Scope           =   0
-      TabIndex        =   2
-      TabStop         =   True
-      Text            =   "IAD"
-      TextAlignment   =   2
-      TextColor       =   &c000000FF
-      Tooltip         =   ""
-      Top             =   2
-      Underline       =   False
-      Visible         =   True
-      Width           =   25
-      _mPanelIndex    =   -1
-   End
 End
 #tag EndWebContainerControl
 
@@ -221,14 +188,13 @@ End
 		  DRAW_On_Call
 		  DRAW_Plans
 		  DRAW_Tasks
-		  
-		  
+		  DRAW_Vacations
 		  
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Sub DRAW_On_Call()
+	#tag Method, Flags = &h21
+		Private Sub DRAW_On_Call()
 		  
 		  
 		  Var sql As String = "SELECT user_id, users.initials as initials FROM physics_tasking.on_calls " _
@@ -236,31 +202,65 @@ End
 		  + "WHERE on_call_date = '" + mmy_date.SQLDate + "';"
 		  Var rs As Rowset = Physics_Tasking.SELECT_Statement( sql)
 		  
-		  If rs.RowCount = 0 Then
-		    
-		    Label_On_Call.Style.BorderColor = Self.Style.BackgroundColor
-		    Label_On_Call.Style.BackgroundColor = Self.Style.BackgroundColor
-		    
-		    Label_On_Call.Text = ""
-		    
-		  Else
-		    
-		    Label_On_Call.Text = rs.Column("initials").StringValue.Trim.Uppercase
-		    
-		    Label_On_Call.Style.BorderColor = &c76D6FF00
-		    Label_On_Call.Style.BorderThickness = 1
-		    Label_On_Call.Style.ForegroundColor = &c76D6FF00
-		    Label_On_Call.Style.BackgroundColor = Self.Style.BackgroundColor
-		    
-		    
-		  End If
+		  
+		  If rs.RowCount = 0 Then Return
+		  
+		  
+		  status_left_position = 5
+		  status_top_position = 5
+		  
+		  If OnCall_Status_WEBCONTAINER <> Nil Then OnCall_Status_WEBCONTAINER = Nil
+		  
+		  OnCall_Status_WEBCONTAINER = New WEBCONTAINER_OnCall_Status
+		  
+		  OnCall_Status_WEBCONTAINER.EmbedWithin( Self, _
+		  status_left_position, status_top_position, _
+		  OnCall_Status_WEBCONTAINER.Width, _
+		  OnCall_Status_WEBCONTAINER.Height)
+		  
+		  OnCall_Status_WEBCONTAINER.user_id = _
+		  rs.Column("user_id").IntegerValue
+		  
+		  OnCall_Status_WEBCONTAINER.date = _
+		  mmy_date
+		  
+		  
+		  
+		  OnCall_Status_WEBCONTAINER.Initials_Label.Text = _
+		  rs.Column("initials").StringValue.Trim.Uppercase
+		  
+		  OnCall_Status_WEBCONTAINER.Initials_Label.Style.Value("text-align") = "center;"
+		  OnCall_Status_WEBCONTAINER.Initials_Label.Style.Value("font-size") = "12px;"
+		  OnCall_Status_WEBCONTAINER.Initials_Label.Style.Value("color") = "white" //"#212121" //"white"
+		  OnCall_Status_WEBCONTAINER.Initials_Label.Style.Value("text-shadow") =  "2px 2px 4px #000000;"
+		  
+		  
+		  
+		  
+		  Var c1 As String = "#" +Design_Palette.COLOR_Primary_Variant.ToString.Right(6)
+		  Var c2 As String = "#" +Design_Palette.COLOR_Error.ToString.Right(6)
+		  Var c3 As String = "#" +Design_Palette.COLOR_Warning.ToString.Right(6)
+		  
+		  OnCall_Status_WEBCONTAINER.Style.Value("background") = c1
+		  OnCall_Status_WEBCONTAINER.Style.Value("box-shadow") =  "1px 1px 1px white"
+		  
+		  OnCall_Status_WEBCONTAINER.Style.Value("border-radius") =  "50px 50px;"
+		  
+		  
 		  
 		  
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Sub DRAW_Plans()
+	#tag Method, Flags = &h21
+		Private Sub DRAW_Plans()
+		  For i As Integer = Plan_Status_WEBCONTAINER.LastIndex To 0 Step -1
+		    
+		    Plan_Status_WEBCONTAINER(i).Close
+		    Plan_Status_WEBCONTAINER(i).UpdateBrowser
+		    
+		  Next
+		  
 		  Var sql As String = "SELECT user_id, initials, COUNT(*) as total, SUM(is_completed) as completed, is_active " _
 		  + "FROM plans " _
 		  + "INNER JOIN users USING(user_id) " _
@@ -269,14 +269,9 @@ End
 		  
 		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
 		  
+		  If rs.RowCount = 0 Then Return
 		  
 		  
-		  For i As Integer = Plan_Status_WEBCONTAINER.LastIndex To 0 Step -1
-		    
-		    Plan_Status_WEBCONTAINER(i).Close
-		    Plan_Status_WEBCONTAINER(i).UpdateBrowser
-		    
-		  Next
 		  
 		  Plan_Status_WEBCONTAINER.ResizeTo(-1)
 		  
@@ -362,8 +357,8 @@ End
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Sub DRAW_Tasks()
+	#tag Method, Flags = &h21
+		Private Sub DRAW_Tasks()
 		  status_left_position = 7
 		  For i As Integer = Task_Status_WEBCONTAINER.LastIndex To 0 Step -1
 		    
@@ -434,6 +429,88 @@ End
 		    
 		  Wend
 		  
+		  status_left_position = 5
+		  
+		  If Plan_Status_WEBCONTAINER.LastIndex > -1 Then
+		    
+		    status_top_position = status_top_position + Plan_Status_WEBCONTAINER( Plan_Status_WEBCONTAINER.LastIndex).Height + 5
+		    
+		  End If
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub DRAW_Vacations()
+		  
+		  
+		  For i As Integer = Vacation_Status_WEBCONTAINER.LastIndex To 0 Step -1
+		    
+		    Vacation_Status_WEBCONTAINER(i).Close
+		    Vacation_Status_WEBCONTAINER(i).UpdateBrowser
+		    
+		  Next
+		  
+		  Var sql As String = "SELECT user_id, initials " _
+		  + "FROM physics_tasking.vacations " _
+		  + "INNER JOIN physics_tasking.users USING (user_id) " _
+		  + "WHERE start_date <= '" + mmy_date.SQLDate + "' " _
+		  + "AND end_date >= '" + mmy_date.SQLDate + "';"
+		  
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement( sql)
+		  
+		  If rs.RowCount = 0 Then Return
+		  
+		  Vacation_Status_WEBCONTAINER.ResizeTo(-1)
+		  
+		  status_left_position = Self.Width  - 35
+		  status_top_position = Self.Height - 30
+		  
+		  
+		  
+		  While Not rs.AfterLastRow
+		    
+		    Vacation_Status_WEBCONTAINER.Add (New WEBCONTAINER_Vacation_Status)
+		    
+		    Vacation_Status_WEBCONTAINER( Vacation_Status_WEBCONTAINER.LastIndex).EmbedWithin( Self, _
+		    status_left_position, status_top_position, _
+		    Vacation_Status_WEBCONTAINER( Vacation_Status_WEBCONTAINER.LastIndex).Width, _
+		    Vacation_Status_WEBCONTAINER( Vacation_Status_WEBCONTAINER.LastIndex).Height)
+		    
+		    Vacation_Status_WEBCONTAINER( Vacation_Status_WEBCONTAINER.LastIndex).user_id = _
+		    rs.Column("user_id").IntegerValue
+		    
+		    Vacation_Status_WEBCONTAINER( Vacation_Status_WEBCONTAINER.LastIndex).date = _
+		    mmy_date
+		    
+		    
+		    
+		    Vacation_Status_WEBCONTAINER( Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Text = _
+		    rs.Column("initials").StringValue.Trim.Uppercase
+		    
+		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("text-align") = "center;"
+		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("font-size") = "12px;"
+		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("color") = "white" //"#212121" //"white"
+		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("text-shadow") =  "2px 2px 4px #000000;"
+		    
+		    
+		    
+		    
+		    Var c1 As String = "#" +Design_Palette.COLOR_Primary_Variant.ToString.Right(6)
+		    Var c2 As String = "#" +Design_Palette.COLOR_Error.ToString.Right(6)
+		    Var c3 As String = "#" +Design_Palette.COLOR_Warning.ToString.Right(6)
+		    
+		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Style.Value("background") = c1
+		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Style.Value("box-shadow") =  "1px 1px 1px white"
+		    
+		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Style.Value("border-radius") =  "50px 50px;"
+		    
+		    status_left_position = status_left_position - _
+		    Vacation_Status_WEBCONTAINER( Vacation_Status_WEBCONTAINER.LastIndex).Width - 5
+		    
+		    rs.MoveToNextRow
+		    
+		  Wend 
 		End Sub
 	#tag EndMethod
 
@@ -472,6 +549,10 @@ End
 	#tag EndComputedProperty
 
 	#tag Property, Flags = &h21
+		Private OnCall_Status_WEBCONTAINER As WEBCONTAINER_OnCall_Status
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private Plan_Status_WEBCONTAINER() As WEBCONTAINER_Plan_Status
 	#tag EndProperty
 
@@ -485,6 +566,10 @@ End
 
 	#tag Property, Flags = &h21
 		Private Task_Status_WEBCONTAINER() As WEBCONTAINER_Task_Status
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private Vacation_Status_WEBCONTAINER() As WEBCONTAINER_Vacation_Status
 	#tag EndProperty
 
 

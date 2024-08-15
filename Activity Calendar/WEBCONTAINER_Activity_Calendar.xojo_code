@@ -1748,6 +1748,262 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
+   Begin WEBCONTAINER_Plan_Status WEBCONTAINER_Plan_Status1
+      ControlCount    =   0
+      ControlID       =   ""
+      Enabled         =   True
+      Height          =   20
+      Index           =   -2147483648
+      Indicator       =   0
+      LayoutDirection =   0
+      LayoutType      =   0
+      Left            =   40
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      PanelIndex      =   0
+      Scope           =   2
+      ScrollDirection =   0
+      TabIndex        =   54
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   44
+      user_id         =   0
+      Visible         =   True
+      Width           =   25
+      _mDesignHeight  =   0
+      _mDesignWidth   =   0
+      _mPanelIndex    =   -1
+   End
+   Begin WEBCONTAINER_Task_Status WEBCONTAINER_Task_Status1
+      ControlCount    =   0
+      ControlID       =   ""
+      Enabled         =   True
+      Height          =   20
+      Index           =   -2147483648
+      Indicator       =   0
+      LayoutDirection =   0
+      LayoutType      =   0
+      Left            =   151
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      PanelIndex      =   0
+      Scope           =   2
+      ScrollDirection =   0
+      TabIndex        =   55
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   44
+      user_id         =   0
+      Visible         =   True
+      Width           =   25
+      _mDesignHeight  =   0
+      _mDesignWidth   =   0
+      _mPanelIndex    =   -1
+   End
+   Begin WEBCONTAINER_OnCall_Status WEBCONTAINER_OnCall_Status1
+      ControlCount    =   0
+      ControlID       =   ""
+      Enabled         =   True
+      Height          =   20
+      Index           =   -2147483648
+      Indicator       =   0
+      LayoutDirection =   0
+      LayoutType      =   0
+      Left            =   262
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      PanelIndex      =   0
+      Scope           =   2
+      ScrollDirection =   0
+      TabIndex        =   56
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   44
+      user_id         =   0
+      Visible         =   True
+      Width           =   25
+      _mDesignHeight  =   0
+      _mDesignWidth   =   0
+      _mPanelIndex    =   -1
+   End
+   Begin WEBCONTAINER_Vacation_Status WEBCONTAINER_Vacation_Status1
+      ControlCount    =   0
+      ControlID       =   ""
+      Enabled         =   True
+      Height          =   20
+      Index           =   -2147483648
+      Indicator       =   0
+      LayoutDirection =   0
+      LayoutType      =   0
+      Left            =   373
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      PanelIndex      =   0
+      Scope           =   2
+      ScrollDirection =   0
+      TabIndex        =   57
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   44
+      user_id         =   0
+      Visible         =   True
+      Width           =   25
+      _mDesignHeight  =   0
+      _mDesignWidth   =   0
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Label2
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   12.0
+      Height          =   38
+      Index           =   0
+      Indicator       =   ""
+      Italic          =   False
+      Left            =   406
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      PanelIndex      =   0
+      Scope           =   2
+      TabIndex        =   58
+      TabStop         =   True
+      Text            =   "vacation"
+      TextAlignment   =   0
+      TextColor       =   &c000000FF
+      Tooltip         =   ""
+      Top             =   37
+      Underline       =   False
+      Visible         =   True
+      Width           =   70
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Label2
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   12.0
+      Height          =   38
+      Index           =   3
+      indicator       =   0
+      Italic          =   False
+      Left            =   295
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      PanelIndex      =   0
+      Scope           =   2
+      TabIndex        =   59
+      TabStop         =   True
+      Text            =   "On-call"
+      TextAlignment   =   0
+      TextColor       =   &c000000FF
+      Tooltip         =   ""
+      Top             =   37
+      Underline       =   False
+      Visible         =   True
+      Width           =   70
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Label2
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   12.0
+      Height          =   38
+      Index           =   1
+      indicator       =   0
+      Italic          =   False
+      Left            =   73
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      PanelIndex      =   0
+      Scope           =   2
+      TabIndex        =   60
+      TabStop         =   True
+      Text            =   "Plans"
+      TextAlignment   =   0
+      TextColor       =   &c000000FF
+      Tooltip         =   ""
+      Top             =   37
+      Underline       =   False
+      Visible         =   True
+      Width           =   70
+      _mPanelIndex    =   -1
+   End
+   Begin WebLabel Label2
+      Bold            =   False
+      ControlID       =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   12.0
+      Height          =   38
+      Index           =   2
+      indicator       =   0
+      Italic          =   False
+      Left            =   184
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      PanelIndex      =   0
+      Scope           =   2
+      TabIndex        =   61
+      TabStop         =   True
+      Text            =   "Tasks"
+      TextAlignment   =   0
+      TextColor       =   &c000000FF
+      Tooltip         =   ""
+      Top             =   37
+      Underline       =   False
+      Visible         =   True
+      Width           =   70
+      _mPanelIndex    =   -1
+   End
 End
 #tag EndWebContainerControl
 
@@ -1758,6 +2014,7 @@ End
 		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  Calendar_Month = New DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
 		  
+		  POPULATE_Legend
 		  POPULATE_Calendar
 		  
 		End Sub
@@ -1853,6 +2110,57 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Sub POPULATE_Legend()
+		  Var c1 As String = "#" +Design_Palette.COLOR_Pass.ToString.Right(6)
+		  Var c2 As String = "#" +Design_Palette.COLOR_Error.ToString.Right(6)
+		  Var c3 As String = "#" +Design_Palette.COLOR_Warning.ToString.Right(6)
+		  
+		  
+		  WEBCONTAINER_Plan_Status1.Style.Value("background") = _
+		  "linear-gradient(to right, " + c1 + " 0%, " _
+		  + c1 + " 50% , " _
+		  + c2 + " 50%, " _
+		  + c2 + " 100%);"
+		  
+		  WEBCONTAINER_Plan_Status1.Style.Value("box-shadow") =  "1px 1px 1px lightblue;"
+		  
+		  
+		  
+		  
+		  
+		  
+		  WEBCONTAINER_Task_Status1.Style.Value("background") = _
+		  "linear-gradient(to right, " + c1 + " 0%, " _
+		  + c1 + " 50%, " _
+		  + c2 + " 50%, " _
+		  + c2 + " 0 100%);"
+		  WEBCONTAINER_Task_Status1.Style.Value("box-shadow") =  "1px 1px 1px lightblue;"
+		  WEBCONTAINER_Task_Status1.Style.Value("border-radius") =  "50px 50px;"
+		  
+		  
+		  
+		  
+		  c1 =  "#" +Design_Palette.COLOR_Primary_Variant.ToString.Right(6)
+		  
+		  
+		  WEBCONTAINER_OnCall_Status1.Style.Value("background") = c1
+		  WEBCONTAINER_OnCall_Status1.Style.Value("box-shadow") =  "1px 1px 1px white"
+		  
+		  WEBCONTAINER_OnCall_Status1.Style.Value("border-radius") =  "50px 50px;"
+		  
+		  
+		  
+		  
+		  
+		  c1 = "#" +Design_Palette.COLOR_Primary_Variant.ToString.Right(6)
+		  
+		  WEBCONTAINER_Vacation_Status1.Style.Value("background") = c1
+		  WEBCONTAINER_Vacation_Status1.Style.Value("box-shadow") =  "1px 1px 1px white"
+		  WEBCONTAINER_Vacation_Status1.Style.Value("border-radius") =  "50px 50px;"
+		End Sub
+	#tag EndMethod
+
 
 	#tag Property, Flags = &h21
 		Private Calendar_Month As DateTime
@@ -1935,6 +2243,13 @@ End
 	#tag Event
 		Sub Opening(index as Integer)
 		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Label2
+	#tag Event
+		Sub Opening(index as Integer)
+		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
 		End Sub
 	#tag EndEvent
 #tag EndEvents

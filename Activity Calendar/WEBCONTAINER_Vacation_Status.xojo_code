@@ -23,7 +23,6 @@ Begin WebContainer WEBCONTAINER_Vacation_Status
    Width           =   25
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebLabel Initials_Label
       Bold            =   False
@@ -81,14 +80,6 @@ End
 #tag EndWindowCode
 
 #tag Events Initials_Label
-	#tag Event
-		Sub Pressed()
-		  Var thedialog As New Task_Status_WebDialog
-		  
-		  thedialog.show
-		  thedialog.POPULATE_Assigned_Tasks_ListBox( user_id, Date)
-		End Sub
-	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty

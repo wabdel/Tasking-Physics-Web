@@ -449,8 +449,6 @@ Begin WebDialog WebDialog_Manage_Vacations Implements WebDataSource
       Period          =   1000
       RunMode         =   2
       Scope           =   2
-      TabIndex        =   13
-      TabStop         =   True
       _mPanelIndex    =   -1
    End
 End
@@ -547,6 +545,8 @@ End
 		  
 		  
 		  Var rows() As WebListboxRowData
+		  
+		  If PopupMenu_Users_List.SelectedRowIndex < 0 Then Return rows
 		  Var sql As String = "SELECT vacation_id, vacation_type_name, start_date, " _ 
 		  + "end_date, DATEDIFF( end_date, start_date) AS days_diff " _
 		  + "FROM physics_tasking.vacations " _
@@ -637,7 +637,7 @@ End
 	#tag Event
 		Sub SelectionChanged(item As WebMenuItem)
 		  If Me.SelectedRowIndex = -1 Then Return
-		  
+		  ListBox_Vacations.ReloadData
 		  ENABLE_Book_Button
 		  
 		End Sub
