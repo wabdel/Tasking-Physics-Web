@@ -34,7 +34,7 @@ Begin WebContainer WEBCONTAINER_QCReports_Plans_Quarterly Implements WebDataSour
       Height          =   38
       Index           =   -2147483648
       Indicator       =   6
-      Left            =   534
+      Left            =   665
       LockBottom      =   False
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -228,7 +228,7 @@ Begin WebContainer WEBCONTAINER_QCReports_Plans_Quarterly Implements WebDataSour
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
-      Width           =   216
+      Width           =   252
       _mInitialValue  =   "Option 1\rOption 2"
       _mPanelIndex    =   -1
    End

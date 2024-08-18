@@ -1913,7 +1913,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       FontSize        =   12.0
       Height          =   38
       Index           =   3
-      indicator       =   0
+      Indicator       =   0
       Italic          =   False
       Left            =   295
       LockBottom      =   False
@@ -1946,7 +1946,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       FontSize        =   12.0
       Height          =   38
       Index           =   1
-      indicator       =   0
+      Indicator       =   0
       Italic          =   False
       Left            =   73
       LockBottom      =   False
@@ -1979,7 +1979,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       FontSize        =   12.0
       Height          =   38
       Index           =   2
-      indicator       =   0
+      Indicator       =   0
       Italic          =   False
       Left            =   184
       LockBottom      =   False
@@ -2124,7 +2124,7 @@ End
 		  + c2 + " 100%);"
 		  
 		  WEBCONTAINER_Plan_Status1.Style.Value("box-shadow") =  "1px 1px 1px lightblue;"
-		  
+		  WEBCONTAINER_Plan_Status1.Initials_Label.Text = ""
 		  
 		  
 		  
@@ -2138,26 +2138,42 @@ End
 		  WEBCONTAINER_Task_Status1.Style.Value("box-shadow") =  "1px 1px 1px lightblue;"
 		  WEBCONTAINER_Task_Status1.Style.Value("border-radius") =  "50px 50px;"
 		  
+		  WEBCONTAINER_Task_Status1.Initials_Label.Text = ""
+		  
+		  
+		  WEBCONTAINER_OnCall_Status1.Initials_Label.Style.ForegroundColor = Design_Palette.COLOR_Secondary
+		  Var c_group_oncall As New ColorGroup( Design_Palette.COLOR_Secondary)
+		  WEBCONTAINER_OnCall_Status1.Initials_Label.Text = ""
+		  
+		  WEBCONTAINER_OnCall_Status1.Initials_Label.Style.BorderColor = c_group_oncall
+		  WEBCONTAINER_OnCall_Status1.Initials_Label.Style.BorderThickness = 1
+		  WEBCONTAINER_OnCall_Status1.Initials_Label.Style.FontSize = 12
+		  WEBCONTAINER_OnCall_Status1.Initials_Label.Style.Value("border-radius") =  "50px 50px;"
+		  '
+		  'c1 =  "#" +Design_Palette.COLOR_Primary_Variant.ToString.Right(6)
+		  '
+		  '
+		  'WEBCONTAINER_OnCall_Status1.Style.Value("background") = c1
+		  'WEBCONTAINER_OnCall_Status1.Style.Value("box-shadow") =  "1px 1px 1px white"
+		  '
+		  'WEBCONTAINER_OnCall_Status1.Style.Value("border-radius") =  "50px 50px;"
 		  
 		  
 		  
-		  c1 =  "#" +Design_Palette.COLOR_Primary_Variant.ToString.Right(6)
 		  
-		  
-		  WEBCONTAINER_OnCall_Status1.Style.Value("background") = c1
-		  WEBCONTAINER_OnCall_Status1.Style.Value("box-shadow") =  "1px 1px 1px white"
-		  
-		  WEBCONTAINER_OnCall_Status1.Style.Value("border-radius") =  "50px 50px;"
-		  
-		  
-		  
-		  
-		  
-		  c1 = "#" +Design_Palette.COLOR_Primary_Variant.ToString.Right(6)
-		  
-		  WEBCONTAINER_Vacation_Status1.Style.Value("background") = c1
-		  WEBCONTAINER_Vacation_Status1.Style.Value("box-shadow") =  "1px 1px 1px white"
-		  WEBCONTAINER_Vacation_Status1.Style.Value("border-radius") =  "50px 50px;"
+		  '
+		  'c1 = "#" +Design_Palette.COLOR_Primary_Variant.ToString.Right(6)
+		  '
+		  'WEBCONTAINER_Vacation_Status1.Style.Value("background") = c1
+		  'WEBCONTAINER_Vacation_Status1.Style.Value("box-shadow") =  "1px 1px 1px white"
+		  'WEBCONTAINER_Vacation_Status1.Style.Value("border-radius") =  "50px 50px;"
+		  WEBCONTAINER_Vacation_Status1.Initials_Label.Text = ""
+		  Var c_group As New ColorGroup( Design_Palette.COLOR_Warning)
+		  WEBCONTAINER_Vacation_Status1.Initials_Label.Style.ForegroundColor = Design_Palette.COLOR_Warning
+		  WEBCONTAINER_Vacation_Status1.Initials_Label.Style.BorderColor = c_group
+		  WEBCONTAINER_Vacation_Status1.Initials_Label.Style.BorderThickness = 1
+		  WEBCONTAINER_Vacation_Status1.Initials_Label.Style.FontSize = 12
+		  WEBCONTAINER_Vacation_Status1.Initials_Label.Style.Value("border-radius") =  "50px 50px;"
 		End Sub
 	#tag EndMethod
 

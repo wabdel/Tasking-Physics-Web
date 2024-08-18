@@ -756,6 +756,7 @@ End
 #tag Events DatePicker_Start
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary_2
 		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		  Me.MinimumDate = DateTime.Now
 		  Me.SelectedDate = DateTime.Now
@@ -776,6 +777,7 @@ End
 #tag Events DatePicker_End
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = Design_Palette.COLOR_Surface_Primary_2
 		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
 		  Me.MinimumDate = DateTime.Now
 		  me.SelectedDate = DateTime.Now

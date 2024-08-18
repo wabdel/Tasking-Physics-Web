@@ -89,7 +89,6 @@ End
 		    
 		  Next
 		  
-		  UpdateBrowser
 		  
 		  
 		  

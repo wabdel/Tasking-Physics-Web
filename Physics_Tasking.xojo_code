@@ -1918,6 +1918,13 @@ Protected Module Physics_Tasking
 		  +"WHERE vacation_type_name = 'Eid') LIMIT 1"
 		  
 		  Physics_Tasking.EXECUTE_Statement( sql)
+		  
+		  sql = "INSERT INTO physics_tasking.vacation_types (vacation_type_name) " _
+		  +"SELECT * FROM (SELECT 'National Day') AS tmp " _
+		  +"WHERE NOT EXISTS (SELECT vacation_type_name FROM physics_tasking.vacation_types " _
+		  +"WHERE vacation_type_name = 'National Day') LIMIT 1"
+		  
+		  Physics_Tasking.EXECUTE_Statement( sql)
 		End Sub
 	#tag EndMethod
 

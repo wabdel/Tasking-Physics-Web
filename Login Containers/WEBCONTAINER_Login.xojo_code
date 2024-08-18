@@ -222,7 +222,7 @@ End
 		  
 		  
 		  
-		  'Me.UpdateBrowser
+		  
 		End Sub
 	#tag EndMethod
 

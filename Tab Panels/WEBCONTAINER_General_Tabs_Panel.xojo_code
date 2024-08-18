@@ -405,7 +405,6 @@ End
 		  Next i
 		  
 		  Self.Height = 0
-		  Self.UpdateBrowser
 		  
 		  'Me.Style.BackgroundColor = Color.White 
 		  If Session.Logged_in_User <> Nil Then
@@ -454,7 +453,6 @@ End
 		    
 		  Next i
 		  
-		  Self.UpdateBrowser
 		  
 		  
 		  LOAD_Central_Panal( Tab_Container(0).Tab_Button.Caption)

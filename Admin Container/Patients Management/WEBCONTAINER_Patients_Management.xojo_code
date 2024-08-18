@@ -93,7 +93,7 @@ End
 		  Panel_Container.EmbedWithin( WebTabPanel_Patients_Management, _
 		  left_position, top_position, _
 		  Panel_Container.Width, Panel_Container.Height)
-		  UpdateBrowser
+		  
 		End Sub
 	#tag EndMethod
 

@@ -185,6 +185,14 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub Draw_Vacations()
+		  
+		  
+		  For i As Integer = Vacation_Status_WEBCONTAINER.LastIndex To 0 Step -1
+		    
+		    Vacation_Status_WEBCONTAINER(i).Close
+		    
+		  Next
+		  
 		  Var sql As String = "SELECT user_id, initials " _
 		  + "FROM physics_tasking.vacations " _
 		  + "INNER JOIN physics_tasking.users USING (user_id) " _
@@ -197,8 +205,9 @@ End
 		  
 		  Vacation_Status_WEBCONTAINER.ResizeTo(-1)
 		  
-		  status_left_position = Me.Width  - 35
-		  status_top_position = Me.Height - 30
+		  status_left_position = Self.Width  - 35
+		  status_top_position = Self.Height - 30
+		  
 		  
 		  
 		  While Not rs.AfterLastRow
@@ -216,28 +225,39 @@ End
 		    Vacation_Status_WEBCONTAINER( Vacation_Status_WEBCONTAINER.LastIndex).date = _
 		    mmy_date
 		    
+		    
+		    
 		    Vacation_Status_WEBCONTAINER( Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Text = _
 		    rs.Column("initials").StringValue.Trim.Uppercase
 		    
-		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("text-align") = "center;"
-		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("font-size") = "12px;"
-		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("color") = "white" //"#212121" //"white"
-		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("text-shadow") =  "2px 2px 4px #000000;"
+		    Var c_group As New ColorGroup( Design_Palette.COLOR_Warning)
+		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.ForegroundColor = Design_Palette.COLOR_Warning
+		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.BorderColor = c_group
+		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.BorderThickness = 1
+		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.FontSize = 12
+		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("border-radius") =  "50px 50px;"
+		    Var c1 As String = "#" +Design_Palette.COLOR_Secondary.ToString.Right(6)
+		    Var c2 As String = "#" +Design_Palette.COLOR_On_Secondary.ToString.Right(6)
 		    
-		    
-		    
-		    
-		    Var c1 As String = "#" +Design_Palette.COLOR_Primary_Variant.ToString.Right(6)
-		    Var c2 As String = "#" +Design_Palette.COLOR_Error.ToString.Right(6)
-		    Var c3 As String = "#" +Design_Palette.COLOR_Warning.ToString.Right(6)
-		    
-		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Style.Value("background") = c1
-		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Style.Value("box-shadow") =  "1px 1px 1px white"
-		    
-		    Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Style.Value("border-radius") =  "50px 50px;"
+		    'Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("text-align") = "center;"
+		    'Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("font-size") = "12px;"
+		    'Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("color") = "white" //"#212121" //"white"
+		    'Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Initials_Label.Style.Value("text-shadow") =  "2px 2px 4px #000000;"
+		    '
+		    '
+		    '
+		    '
+		    'Var c1 As String = "#" +Design_Palette.COLOR_Primary_Variant.ToString.Right(6)
+		    'Var c2 As String = "#" +Design_Palette.COLOR_Error.ToString.Right(6)
+		    'Var c3 As String = "#" +Design_Palette.COLOR_Warning.ToString.Right(6)
+		    '
+		    'Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Style.Value("background") = c1
+		    'Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Style.Value("box-shadow") =  "1px 1px 1px white"
+		    '
+		    'Vacation_Status_WEBCONTAINER(Vacation_Status_WEBCONTAINER.LastIndex).Style.Value("border-radius") =  "50px 50px;"
 		    
 		    status_left_position = status_left_position - _
-		    Vacation_Status_WEBCONTAINER( Vacation_Status_WEBCONTAINER.LastIndex).Width - 50
+		    Vacation_Status_WEBCONTAINER( Vacation_Status_WEBCONTAINER.LastIndex).Width - 5
 		    
 		    rs.MoveToNextRow
 		    
