@@ -152,18 +152,6 @@ Begin WebContainer WEBCONTAINER_Logout
       Width           =   140
       _mPanelIndex    =   -1
    End
-   Begin WebTimer Points_Timer
-      ControlID       =   ""
-      Enabled         =   True
-      Index           =   -2147483648
-      Location        =   0
-      LockedInPosition=   False
-      PanelIndex      =   0
-      Period          =   1000
-      RunMode         =   2
-      Scope           =   2
-      _mPanelIndex    =   -1
-   End
    Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
@@ -523,7 +511,7 @@ Begin WebContainer WEBCONTAINER_Logout
       Width           =   289
       _mPanelIndex    =   -1
    End
-   Begin WebTimer Assigned_Tasks_Timer
+   Begin WebTimer Timer_Update
       ControlID       =   ""
       Enabled         =   True
       Index           =   -2147483648
@@ -531,8 +519,10 @@ Begin WebContainer WEBCONTAINER_Logout
       LockedInPosition=   False
       PanelIndex      =   0
       Period          =   1000
-      RunMode         =   0
+      RunMode         =   2
       Scope           =   2
+      TabIndex        =   15
+      TabStop         =   True
       _mPanelIndex    =   -1
    End
 End
@@ -555,9 +545,12 @@ End
 		  Self.Logout_Button.Indicator = _
 		  WebUIControl.Indicators.Success
 		  
+		  If Session.Logged_in_User.id = 1 Then Timer_Update.RunMode = WebTimer.RunModes.Off
+		  
 		  
 		  POPULATE_Points
-		  
+		  POPULATE_Assigned_Tasks
+		  Self.LATEST_UPDATE = App.last_database_update
 		  
 		  
 		End Sub
@@ -671,6 +664,11 @@ End
 	#tag EndMethod
 
 
+	#tag Property, Flags = &h21
+		Private LATEST_UPDATE As DateTime
+	#tag EndProperty
+
+
 #tag EndWindowCode
 
 #tag Events Logout_Button
@@ -708,22 +706,6 @@ End
 		  Me.Style.ForegroundColor = Design_Palette.COLOR_Note
 		  Me.Style.Bold = True
 		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Points_Timer
-	#tag Event
-		Sub Run()
-		  If Session.Logged_in_User <> Nil Then
-		    
-		    POPULATE_Points
-		    POPULATE_Assigned_Tasks
-		    
-		  Else
-		    
-		    Points_Label.Visible = False
-		    
-		  End If
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -804,12 +786,19 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Assigned_Tasks_Timer
+#tag Events Timer_Update
 	#tag Event
 		Sub Run()
-		  Assigned_Tasks_Label.Visible = Not Assigned_Tasks_Label.Visible
-		  
-		  
+		  If Self.LATEST_UPDATE <> App.last_database_update Then
+		    
+		    
+		    POPULATE_Points
+		    POPULATE_Assigned_Tasks
+		    
+		    
+		    Self.LATEST_UPDATE  = App.last_database_update
+		    
+		  End If
 		End Sub
 	#tag EndEvent
 #tag EndEvents

@@ -90,18 +90,6 @@ Begin WebContainer WebContainer_Calendar_Date
       Width           =   30
       _mPanelIndex    =   -1
    End
-   Begin WebTimer Timer_Update
-      ControlID       =   ""
-      Enabled         =   True
-      Index           =   -2147483648
-      Location        =   0
-      LockedInPosition=   False
-      PanelIndex      =   0
-      Period          =   1000
-      RunMode         =   2
-      Scope           =   2
-      _mPanelIndex    =   -1
-   End
 End
 #tag EndWebContainerControl
 
@@ -556,10 +544,6 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private LATEST_UPDATE As DateTime
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
 		Private mmy_date As DateTime
 	#tag EndProperty
 
@@ -607,21 +591,6 @@ End
 
 #tag EndWindowCode
 
-#tag Events Timer_Update
-	#tag Event
-		Sub Run()
-		  If LATEST_UPDATE <> app.last_database_update Then
-		    
-		    DRAW_On_Call
-		    DRAW_Plans
-		    DRAW_Tasks
-		    LATEST_UPDATE = app.last_database_update
-		    
-		    
-		  End If
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
 		Name="PanelIndex"

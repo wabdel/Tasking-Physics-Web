@@ -90,18 +90,6 @@ Begin WebContainer WebContainer_Vacation_Date
       Width           =   30
       _mPanelIndex    =   -1
    End
-   Begin WebTimer Timer_UPDATE
-      ControlID       =   ""
-      Enabled         =   True
-      Index           =   -2147483648
-      Location        =   0
-      LockedInPosition=   False
-      PanelIndex      =   0
-      Period          =   1000
-      RunMode         =   2
-      Scope           =   0
-      _mPanelIndex    =   -1
-   End
 End
 #tag EndWebContainerControl
 
@@ -275,10 +263,6 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private LATEST_UPDATE As DateTime
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
 		Private mmy_date As DateTime
 	#tag EndProperty
 
@@ -328,20 +312,6 @@ End
 	#tag Event
 		Sub Opening()
 		  Me.Style.ForegroundColor = Design_Palette.COLOR_Foreground
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Timer_UPDATE
-	#tag Event
-		Sub Run()
-		  If LATEST_UPDATE <> APP.last_database_update Then
-		    
-		    
-		    'DRAW_Buttom
-		    
-		    LATEST_UPDATE = App.last_database_update
-		    
-		  End If
 		End Sub
 	#tag EndEvent
 #tag EndEvents

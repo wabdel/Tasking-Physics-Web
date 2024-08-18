@@ -1735,12 +1735,27 @@ Begin WebContainer WEBCONTAINER_Vacation_Calendar
       Width           =   201
       _mPanelIndex    =   -1
    End
+   Begin WebTimer Timer_Update
+      ControlID       =   ""
+      Enabled         =   True
+      Index           =   -2147483648
+      Location        =   0
+      LockedInPosition=   False
+      PanelIndex      =   0
+      Period          =   1000
+      RunMode         =   2
+      Scope           =   2
+      TabIndex        =   55
+      TabStop         =   True
+      _mPanelIndex    =   -1
+   End
 End
 #tag EndWebContainerControl
 
 #tag WindowCode
 	#tag Event
 		Sub Opening()
+		  GET_LATEST_VACATION
 		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  Calendar_Month = New DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
 		  
@@ -1785,6 +1800,17 @@ End
 		  Me.SetFocus
 		  
 		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub GET_LATEST_VACATION()
+		  Var sql as String = "SELECT MAX(end_date) as d FROM physics_tasking.vacations "
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
+		  
+		  
+		  Latest_Vacation = DateTime.Now
+		  If rs.Column("d").DateTimeValue > Latest_Vacation Then Latest_Vacation = rs.Column("d").DateTimeValue
 		End Sub
 	#tag EndMethod
 
@@ -1862,6 +1888,10 @@ End
 
 	#tag Property, Flags = &h21
 		Private Latest_UPDATE As DateTime
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private Latest_Vacation As datetime
 	#tag EndProperty
 
 
@@ -1953,6 +1983,27 @@ End
 	#tag Event
 		Sub Opening()
 		  Me.Style = Design_Palette.STYLE_BUTTON_Unpressed
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Timer_Update
+	#tag Event
+		Sub Run()
+		  If Self.Latest_UPDATE <> App.last_database_update Then
+		    GET_LATEST_VACATION
+		    
+		    For i As Integer = 0 To 41
+		      
+		      On_Call_Date_Container(i).DRAW_Date
+		      
+		      
+		    Next
+		    
+		    Self.Latest_UPDATE = App.last_database_update
+		    
+		    
+		    
+		  End If
 		End Sub
 	#tag EndEvent
 #tag EndEvents

@@ -31,7 +31,7 @@ Implements WebDataSource
 		  col = New WebListboxColumnData
 		  col.DatabaseColumnName = "site" // the name of the field in your database or data source
 		  col.Heading = "Site" // the name that appears above the column
-		  col.Sortable = False // Whether or not the column is sortable
+		  col.Sortable = True // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
 		  col.Width = "80"
 		  cols.Add(col)
@@ -47,7 +47,7 @@ Implements WebDataSource
 		  col = New WebListboxColumnData
 		  col.DatabaseColumnName = "due_date" // the name of the field in your database or data source
 		  col.Heading = "Due Date" // the name that appears above the column
-		  col.Sortable = False // Whether or not the column is sortable
+		  col.Sortable = True // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
 		  col.Width = "210"
 		  cols.Add(col)
@@ -55,7 +55,7 @@ Implements WebDataSource
 		  col = New WebListboxColumnData
 		  col.DatabaseColumnName = "physician_initials" // the name of the field in your database or data source
 		  col.Heading = "Physician" // the name that appears above the column
-		  col.Sortable = False // Whether or not the column is sortable
+		  col.Sortable = True // Whether or not the column is sortable
 		  'col.SortDirection = Weblistbox.SortDirections.Ascending // The default sort direction for the column
 		  col.Width = "80"
 		  cols.Add(col)
@@ -124,7 +124,7 @@ Implements WebDataSource
 		  
 		  If SortColumns = "" Then
 		    
-		    sql = sql + "ORDER BY due_date DESC "
+		    sql = sql + "ORDER BY due_date ASC "
 		    
 		  Else
 		    

@@ -2004,13 +2004,27 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Width           =   70
       _mPanelIndex    =   -1
    End
+   Begin WebTimer Timer_Update
+      ControlID       =   ""
+      Enabled         =   True
+      Index           =   -2147483648
+      Location        =   0
+      LockedInPosition=   False
+      PanelIndex      =   0
+      Period          =   2000
+      RunMode         =   2
+      Scope           =   2
+      TabIndex        =   62
+      TabStop         =   True
+      _mPanelIndex    =   -1
+   End
 End
 #tag EndWebContainerControl
 
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  
+		  GET_LATEST_VACATION
 		  Me.Style.BackgroundColor = Design_Palette.COLOR_Background
 		  Calendar_Month = New DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
 		  
@@ -2029,8 +2043,8 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub ENABLE_Arrows()
-		  If Calendar_Month.Month = DateTime.Now.Month + 1 _
-		    And Calendar_Month.Year = DateTime.Now.Year Then
+		  If Calendar_Month.Month = Latest_Vacation.Month + 1 _
+		    And Calendar_Month.Year = Latest_Vacation.Year Then
 		    
 		    Forward_Month_Button.Enabled = False
 		    Forward_Month_Button.Visible = False
@@ -2062,10 +2076,19 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub GET_LATEST_VACATION()
+		  Var sql as String = "SELECT MAX(end_date) as d FROM physics_tasking.vacations "
+		  Var rs As RowSet = Physics_Tasking.SELECT_Statement(sql)
+		  
+		  
+		  Latest_Vacation = DateTime.Now
+		  If rs.Column("d").DateTimeValue > Latest_Vacation Then Latest_Vacation = rs.Column("d").DateTimeValue
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub POPULATE_Calendar()
 		  Month_Label.Text = Date_Module.Get_Month_Abbr( Calendar_Month.Month) + " " + Calendar_Month.Year.ToText
-		  
-		  
 		  
 		  Var d As DateTime = Calendar_Month
 		  Var month As Integer = Calendar_Month.Month
@@ -2103,6 +2126,8 @@ End
 		    
 		  Next
 		  
+		  
+		  Self.LATEST_UPDATE = app.last_database_update
 		  ENABLE_Arrows
 		  
 		  
@@ -2149,24 +2174,7 @@ End
 		  WEBCONTAINER_OnCall_Status1.Initials_Label.Style.BorderThickness = 1
 		  WEBCONTAINER_OnCall_Status1.Initials_Label.Style.FontSize = 12
 		  WEBCONTAINER_OnCall_Status1.Initials_Label.Style.Value("border-radius") =  "50px 50px;"
-		  '
-		  'c1 =  "#" +Design_Palette.COLOR_Primary_Variant.ToString.Right(6)
-		  '
-		  '
-		  'WEBCONTAINER_OnCall_Status1.Style.Value("background") = c1
-		  'WEBCONTAINER_OnCall_Status1.Style.Value("box-shadow") =  "1px 1px 1px white"
-		  '
-		  'WEBCONTAINER_OnCall_Status1.Style.Value("border-radius") =  "50px 50px;"
 		  
-		  
-		  
-		  
-		  '
-		  'c1 = "#" +Design_Palette.COLOR_Primary_Variant.ToString.Right(6)
-		  '
-		  'WEBCONTAINER_Vacation_Status1.Style.Value("background") = c1
-		  'WEBCONTAINER_Vacation_Status1.Style.Value("box-shadow") =  "1px 1px 1px white"
-		  'WEBCONTAINER_Vacation_Status1.Style.Value("border-radius") =  "50px 50px;"
 		  WEBCONTAINER_Vacation_Status1.Initials_Label.Text = ""
 		  Var c_group As New ColorGroup( Design_Palette.COLOR_Warning)
 		  WEBCONTAINER_Vacation_Status1.Initials_Label.Style.ForegroundColor = Design_Palette.COLOR_Warning
@@ -2180,6 +2188,14 @@ End
 
 	#tag Property, Flags = &h21
 		Private Calendar_Month As DateTime
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private LATEST_UPDATE As DateTime
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private Latest_Vacation As datetime
 	#tag EndProperty
 
 
@@ -2203,9 +2219,9 @@ End
 	#tag Event
 		Sub Pressed()
 		  Calendar_Month = Calendar_Month.AddInterval(1, 0, 0)
-		  If Calendar_Month.SecondsFrom1970 > DateTime.Now.SecondsFrom1970 Then
+		  If Calendar_Month > Latest_Vacation Then
 		    
-		    Calendar_Month = New DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
+		    Calendar_Month = New DateTime(Latest_Vacation.Year, Latest_Vacation.Month, 1)
 		    
 		  End If
 		  
@@ -2266,6 +2282,29 @@ End
 	#tag Event
 		Sub Opening(index as Integer)
 		  Me.Style.ForegroundColor = Design_Palette.COLOR_On_Background
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Timer_Update
+	#tag Event
+		Sub Run()
+		  If Self.LATEST_UPDATE <> App.last_database_update Then
+		    GET_LATEST_VACATION
+		    
+		    For i As Integer = 0 To 41
+		      
+		      
+		      Calendar_Date_Container(i).DRAW_Date
+		      
+		    Next
+		    
+		    
+		    Self.LATEST_UPDATE = App.last_database_update
+		    
+		    
+		    
+		    
+		  End If
 		End Sub
 	#tag EndEvent
 #tag EndEvents
