@@ -324,49 +324,6 @@ End
 		  End Try
 		  
 		  
-		  'Var sql As  String = "SELECT user_id, password
-		  '
-		  'For Each item As Physics_Tasking.CLASS_User_Record In Physics_Tasking.Users
-		  '
-		  '
-		  'If item.login = User_TextField.Text _
-		  'And item.resetPassword _
-		  'and Password_TextField.Text = "12345678" Then
-		  '
-		  'Var theDialog As New WebDialog_Reset_Password
-		  '
-		  'theDialog.user_id = item.id
-		  'theDialog.Show
-		  '
-		  '
-		  'Return
-		  '
-		  'End If
-		  'Next item
-		  '
-		  '
-		  '
-		  '
-		  'Var id As Integer = Physics_Tasking.RETURN_Login_User_ID( User_TextField.Text, Password_TextField.Text)
-		  '
-		  'If id = 0 Then
-		  '// Create an instance of the dialog
-		  'Var theDialog As New MessageWebDialog
-		  '
-		  'theDialog.Message_Label.Text = "Login is invalid"
-		  'theDialog.Show
-		  '
-		  'Else
-		  '
-		  '
-		  '
-		  '
-		  '
-		  '
-		  'Session.LOGIN_User(id)
-		  '
-		  '
-		  'End If
 		  
 		End Sub
 	#tag EndEvent
