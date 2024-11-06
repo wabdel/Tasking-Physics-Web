@@ -999,7 +999,6 @@ Protected Module Physics_Tasking
 		  
 		  UPDATE_General_Information
 		  UPDATE_Vacations_Types
-		  UPDATE_Vacations
 		  
 		  UPDATE_Groups
 		  UPDATE_Users
@@ -1020,6 +1019,7 @@ Protected Module Physics_Tasking
 		  UPDATE_Plans
 		  
 		  
+		  UPDATE_Vacations
 		  
 		  
 		  UPDATE_TimeLogs

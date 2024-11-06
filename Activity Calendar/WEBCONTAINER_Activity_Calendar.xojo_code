@@ -3,6 +3,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
+   CSSClasses      =   ""
    Enabled         =   True
    Height          =   900
    Indicator       =   0
@@ -29,6 +30,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Cancel          =   False
       Caption         =   ">"
       ControlID       =   ""
+      CSSClasses      =   ""
       Default         =   False
       Enabled         =   True
       Height          =   38
@@ -58,6 +60,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Cancel          =   False
       Caption         =   ">>"
       ControlID       =   ""
+      CSSClasses      =   ""
       Default         =   False
       Enabled         =   True
       Height          =   38
@@ -87,6 +90,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Cancel          =   False
       Caption         =   "<"
       ControlID       =   ""
+      CSSClasses      =   ""
       Default         =   False
       Enabled         =   True
       Height          =   38
@@ -116,6 +120,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Cancel          =   False
       Caption         =   "<<"
       ControlID       =   ""
+      CSSClasses      =   ""
       Default         =   False
       Enabled         =   True
       Height          =   38
@@ -143,6 +148,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebLabel Month_Label
       Bold            =   False
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
@@ -176,6 +182,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
@@ -209,6 +216,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
@@ -242,6 +250,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
@@ -275,6 +284,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
@@ -308,6 +318,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
@@ -341,6 +352,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
@@ -374,6 +386,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebLabel Label1
       Bold            =   False
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   0.0
@@ -407,6 +420,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   0
@@ -439,6 +453,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   1
@@ -471,6 +486,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   2
@@ -503,6 +519,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   3
@@ -535,6 +552,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   4
@@ -567,6 +585,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   5
@@ -599,6 +618,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   6
@@ -631,6 +651,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   7
@@ -663,6 +684,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   8
@@ -695,6 +717,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   9
@@ -727,6 +750,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   10
@@ -759,6 +783,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   11
@@ -791,6 +816,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   12
@@ -823,6 +849,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   13
@@ -855,6 +882,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   14
@@ -887,6 +915,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   15
@@ -919,6 +948,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   16
@@ -951,6 +981,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   17
@@ -983,6 +1014,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   18
@@ -1015,6 +1047,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   19
@@ -1047,6 +1080,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   20
@@ -1079,6 +1113,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   21
@@ -1111,6 +1146,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   22
@@ -1143,6 +1179,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   23
@@ -1175,6 +1212,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   24
@@ -1207,6 +1245,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   25
@@ -1239,6 +1278,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   26
@@ -1271,6 +1311,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   27
@@ -1303,6 +1344,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   28
@@ -1335,6 +1377,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   29
@@ -1367,6 +1410,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   30
@@ -1399,6 +1443,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   31
@@ -1431,6 +1476,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   32
@@ -1463,6 +1509,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   33
@@ -1495,6 +1542,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   34
@@ -1527,6 +1575,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   35
@@ -1559,6 +1608,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   36
@@ -1591,6 +1641,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   37
@@ -1623,6 +1674,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   38
@@ -1655,6 +1707,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   39
@@ -1687,6 +1740,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   40
@@ -1719,6 +1773,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebContainer_Calendar_Date Calendar_Date_Container
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   120
       Index           =   41
@@ -1751,6 +1806,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WEBCONTAINER_Plan_Status WEBCONTAINER_Plan_Status1
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   20
       Index           =   -2147483648
@@ -1782,6 +1838,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WEBCONTAINER_Task_Status WEBCONTAINER_Task_Status1
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   20
       Index           =   -2147483648
@@ -1813,6 +1870,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WEBCONTAINER_OnCall_Status WEBCONTAINER_OnCall_Status1
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   20
       Index           =   -2147483648
@@ -1844,6 +1902,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WEBCONTAINER_Vacation_Status WEBCONTAINER_Vacation_Status1
       ControlCount    =   0
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       Height          =   20
       Index           =   -2147483648
@@ -1875,6 +1934,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebLabel Label2
       Bold            =   False
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   12.0
@@ -1908,6 +1968,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebLabel Label2
       Bold            =   False
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   12.0
@@ -1941,6 +2002,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebLabel Label2
       Bold            =   False
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   12.0
@@ -1974,6 +2036,7 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
    Begin WebLabel Label2
       Bold            =   False
       ControlID       =   ""
+      CSSClasses      =   ""
       Enabled         =   True
       FontName        =   ""
       FontSize        =   12.0
@@ -2014,8 +2077,6 @@ Begin WebContainer WEBCONTAINER_Activity_Calendar
       Period          =   2000
       RunMode         =   2
       Scope           =   2
-      TabIndex        =   62
-      TabStop         =   True
       _mPanelIndex    =   -1
    End
 End
@@ -2082,6 +2143,7 @@ End
 		  
 		  
 		  Latest_Vacation = DateTime.Now
+		  If rs.Column("d").DateTimeValue = Nil Then Return
 		  If rs.Column("d").DateTimeValue > Latest_Vacation Then Latest_Vacation = rs.Column("d").DateTimeValue
 		End Sub
 	#tag EndMethod

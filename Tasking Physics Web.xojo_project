@@ -1,5 +1,5 @@
 Type=Web2
-RBProjectVersion=2024.021
+RBProjectVersion=2024.031
 MinIDEVersion=20200200
 OrigIDEVersion=20220302
 FileTypeSet=FileTypes;FileTypes.xojo_filetypeset;&h000000005622BFFF;&h0000000000000000;false
@@ -300,6 +300,7 @@ IncludePDB=False
 WinUIFramework=False
 IsWebProject=True
 WebDebugPort=9090
+WebLaunchBrowser=True
 WebLivePort=80
 WebSecurePort=-1
 WebProtocol=1
